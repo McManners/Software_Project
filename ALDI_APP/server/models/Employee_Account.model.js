@@ -5,7 +5,7 @@ module.exports = model;
 function model(sequelize) {
     const attributes = {
         employee_id: { type: DataTypes.INTEGER, allowNull: false },
-        password: { type: DataTypes.STRING, allowNull: false }
+        password: { type: DataTypes.STRING, allowNull: false },
     };
 
     const options = {
@@ -23,5 +23,8 @@ function model(sequelize) {
     Employee_Account.hasOne(Employee);
     Employee.belongsTo(Employee_Account);
 
-    return sequelize.define('Employee_Account', attributes, options);
+    const Employee_Account = sequelize.define('Employee_Account', attributes, options);
+    Employee_Account 
+    return Employee_Account;
+    
 }

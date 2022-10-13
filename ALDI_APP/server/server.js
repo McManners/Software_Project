@@ -1,14 +1,41 @@
-// server/index.js
-
+require('dotenv').config();
 const express = require("express");
+const app = express();
 const path = require("path");
-
+const cors = require('cors');
+const corsOptions = require('./config/corsOptions');
+const { logger } = require('./middleware/logEvents');
+const errorHandler = require('./middleware/errorHandler');
+const credentials = require('./middleware/credentials');
+const mysql = require('mysql');
+const db = require('./config/db');
 const PORT = process.env.PORT || 3001;
 
-const app = express();
-// var sql = require('mysql');
-var mysql = require('mysql');
-const { stringify } = require("querystring");
+// Connect to db
+// db();
+
+// custom middleware logger
+app.use(logger);
+
+// Handle options credentials check - before CORS!
+// and feetch cookies credentials requirement
+app.use(credentials);
+
+// Cross Origin Resource Sharing
+app.use(cors(corsOptions));
+
+// built-in middleware to handle urlencorded form data
+// ie form data: 'content-type: application/x-www-form-url-encoded'
+app.use(express.urlencoded({ extended: false }));
+
+// built-in middleware for json
+app.use(express.json());
+
+app.use(errorHandler);
+
+// routes
+app.use('/logout', require('./routes/logout'));
+app.use('/register', require('./routes/register'));
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -43,7 +70,16 @@ app.get("/api", (req, res) => {
 //     });
 // });
 const employeeController = require('./controllers/employeeController');
-app.get("/api/employees", (req, res) => {
+const logEvents = require("./middleware/logEvents");
+const Employee = require('./models/Employee');
+app.get("/api/test"), (req, res) => {
+    console.log("test");
+    Employee.findOne( { employee_id: { employee_id: "1" } })
+    .then((e) => {
+        res.json(e);
+    });
+}
+app.get("/api/employe", (req, res) => {
     employeeController.getAll()
     .then((employees) => {
         res.json(employees);

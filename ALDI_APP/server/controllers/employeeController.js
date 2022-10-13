@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
-const Employee = require('../models/Employee.model');
+const Employee = require('../models/Employee');
 module.exports = {
     getAll,
     getById,

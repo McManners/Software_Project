@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 
 const verifyJWT = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -11,7 +10,8 @@ const verifyJWT = (req, res, next) => {
         process.env.ACCESS_TOKEN_SECRET,
         (err, decoded) => {
             if (err) return res.sendStatus(403); // recieved token but something wasnt right.. (tampered etc)
-            req.user = decoded.username;
+            req.user = decoded.UserInfo.username;
+            req.roles = decoded.UserInfo.roles;
             next();
         }
     );
