@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
 const Employee_Account = require('../models/Employee_Account');
+const { Console } = require('console');
 
 module.exports = {
     getAll,
@@ -41,10 +42,13 @@ async function update(email, params) {
     if (employee_accountChanged && await db.Employee_Account.findOne({ where: { email: params.email } })) {
         throw 'Employee_Account ' + params.email + ' is already taken';
     }
-
+    console.log("Updated!");
+    console.log(employee_account);
     // copy params to employee_account and save
-    Object.assign(employee_account, params);
-    await employee_account.save();
+    // Object.assign(employee_account, params);
+    // await employee_account.save();
+    db.Employee_Account.update({ refresh_token: params.refresh_token }, { where: { email: email } });
+    console.log(employee_account);
 }
 
 async function _delete(email) {

@@ -36,6 +36,8 @@ app.use(errorHandler);
 // routes
 app.use('/logout', require('./routes/logout'));
 app.use('/register', require('./routes/register'));
+app.use('/auth', require('./routes/auth'));
+app.use('/refresh', require('./routes/refresh'));
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -72,20 +74,21 @@ app.get("/api", (req, res) => {
 const employeeController = require('./controllers/employeeController');
 const logEvents = require("./middleware/logEvents");
 const Employee = require('./models/Employee');
+const employeeAccountController = require('./controllers/employeeAccountController');
 app.get("/api/test"), (req, res) => {
     console.log("test");
     Employee.findOne( { employee_id: { employee_id: "1" } })
     .then((e) => {
         res.json(e);
     });
-}
-app.get("/api/employe", (req, res) => {
+};
+app.get("/api/employee/all", (req, res) => {
     employeeController.getAll()
     .then((employees) => {
         res.json(employees);
     });
 });
-app.get("/api/employees/:employee_id", (req, res) => {
+app.get("/api/employee/:employee_id", (req, res) => {
     employeeController.getById(req.params.employee_id)
     .then((employee) => {
         res.json(employee);
