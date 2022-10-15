@@ -30,8 +30,8 @@ const handleLogin = async (req, res) => {
         employeeAccountController.update(email, { refresh_token: refreshToken });
 
         // if cookie is set to httpOnly, its not available to javascript
-        res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000});
-        
+        res.cookie('jwt', refreshToken, { httpOnly: false, sameSite: 'None', /*secure: true,*/ maxAge: 24 * 60 * 60 * 1000});
+        console.log(res.cookie);
         res.json({ accessToken }); // store in memory not cookie
     } else {
         res.sendStatus(401);
