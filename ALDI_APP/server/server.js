@@ -33,6 +33,10 @@ app.use(express.json());
 
 app.use(errorHandler);
 
+// testing cookies
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 // routes
 app.use('/logout', require('./routes/logout'));
 app.use('/register', require('./routes/register'));
@@ -49,15 +53,23 @@ var con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-  con.query("SELECT * FROM employee", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-    return result;
-  });
+//   con.query("SELECT * FROM employee", function (err, result, fields) {
+//     if (err) throw err;
+//     // console.log(result);
+//     return result;
+//   });
 });
 
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+// app.get('/', function (req, res) {
+//     console.log("hey / path");
+//     res.sendFile(path.join(__dirname, '..client/build', 'index.html'));
+// });
+// app.use('/', express.static(path.join(__dirname, 'public')));
+
+// app.use('/', require('./routes/root'));
 
 // Handle GET requests to /api route
 app.get("/api", (req, res) => {
@@ -75,6 +87,7 @@ const employeeController = require('./controllers/employeeController');
 const logEvents = require("./middleware/logEvents");
 const Employee = require('./models/Employee');
 const employeeAccountController = require('./controllers/employeeAccountController');
+// const cookieParser = require('cookie-parser');
 app.get("/api/test"), (req, res) => {
     console.log("test");
     Employee.findOne( { employee_id: { employee_id: "1" } })
@@ -120,9 +133,13 @@ app.put("/api/employees/create", (req, res) => {
     });
 
 // All other GET requests not handled before will return our React app
+// app.get('*', (req, res) => {
+//     console.log("hey");
+//   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+// });
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-});
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+  });
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

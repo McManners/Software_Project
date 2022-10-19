@@ -1,17 +1,18 @@
 const employeeAccountController = require('./employeeAccountController');
 
 const jwt = require('jsonwebtoken');
+const db = require('../config/db');
 const Employee_Account = require('../models/Employee_Account');
 require('dotenv').config();
 
 const handleRefreshToken = async (req, res) => {
     const cookies = req.cookies;
-    console.log(cookies);
+    console.log(cookies?.jwt);
     if (!cookies?.jwt) return res.sendStatus(401);
-    console.log(cookies.jwt);
     const refreshToken = cookies.jwt;
 
-    const foundUser = await Employee_Account.findOne({ where: { refresh_token: refreshToken } });
+    // const foundUser = await Employee_Account.findOne({ where: { refresh_token: refreshToken } });
+    const foundUser = await employeeAccountController.getByRefreshToken(refreshToken);
     if (!foundUser) return res.sendStatus(403); // Forbidden
 
     // evaluate jwt
