@@ -12,6 +12,7 @@ import Welcome from './features/auth/Welcome';
 // import EditPTORequest from './features/pto/EditPTORequest';
 // import NewPTORequest from './features/pto/NewPTORequest';
 import RequireAuth from './simple/RequireAuth';
+import RememberLogin from './simple/RememberLogin';
 
 function App() {
 
@@ -20,25 +21,13 @@ function App() {
             <Route path='/' element={<Layout />}>
                 <Route index element={<Public />} />
                 <Route path='login' element={<Login />} />
-
-                <Route element={<RequireAuth />}>
-                    <Route path="dashboard" element={<Dashboard />}>
-                        <Route index element={<Welcome />} />
+                <Route element={<RememberLogin />}>
+                    <Route element={<RequireAuth />}>
+                        <Route path="dashboard" element={<Dashboard />}>
+                            <Route index element={<Welcome />} />
+                        </Route>
                     </Route>
                 </Route>
-
-                    {/* <Route path="users">
-                        <Route index element={<UsersList />} />
-                        <Route path=":id" element={<EditUser />} />
-                        <Route path="new" element={<NewUserForm />} />
-                    </Route>
-
-                    <Route path="ptorequests">
-                        <Route index element={<PTORequests />} />
-                        <Route path=":id" element={<EditPTORequest />} />
-                        <Route path="new" element={<NewPTORequest />} />
-                    </Route> */}
-
             </Route>
         </Routes>
     )

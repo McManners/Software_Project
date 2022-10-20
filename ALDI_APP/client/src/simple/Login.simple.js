@@ -3,22 +3,23 @@
 import React, { useEffect, useRef, useContext } from "react";
 // import logo from "./logo.svg";
 // import "./App.css";
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { Navigate, Link, useNavigate, useLocation } from "react-router-dom";
-import useAuth from "./useAuth";
+import useAuth from "./useAuth";    
 import { setCredentials } from "../features/auth/authSlice";
 import { UserContext } from "./UserContext";
 
 const Login = () => {
-    const [token, setToken] = useContext(UserContext);
+    // const [token, setToken] = useContext(UserContext);
+    const { setAuth, remember, setRemember } = useAuth();
 
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [errMsg, setErrMsg] = React.useState("");
 
-    const credentials = useSelector((state) => state.credentials.value);
+    // const credentials = useSelector((state) => state.credentials.value);
 
-    const { setAuth } = useAuth();
+    
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -27,9 +28,13 @@ const Login = () => {
     const emailRef = useRef();
     const errRef = useRef();
 
-    // useEffect(() => {
-    //     emailRef.current.focus();
-    // })
+    useEffect(() => {
+        emailRef.current.focus();
+    }, []);
+    useEffect(() => {
+        setErrMsg("");
+        // dont want to show the error message after its been seen
+    }, []);
 
     useEffect(() => {
         setErrMsg('');
@@ -39,8 +44,12 @@ const Login = () => {
         setEmail(event.target.value)
     };
     const handlePasswordChange = event => {
-    setPassword(event.target.value)
+        setPassword(event.target.value)
     };
+
+    useEffect(() => {
+        localStorage.setItem("remember", remember);
+    }, [remember])
 
     const handleRefresh = event => {
         event.preventDefault();
@@ -72,34 +81,29 @@ const Login = () => {
     const handleSubmit = async event => {
         event.preventDefault();
         const url = 'http://localhost:3001/auth';
-        // try {
+        try {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
                 body: JSON.stringify({ email, password })
             };
-            let response = await fetch(url, requestOptions)
+            let response = await fetch(url, requestOptions);
             // console.log('Submitted successfully');
             // console.log(response?.status);
             // .then((res) => res.json())
             console.log(response);
             console.log(response.status);
             if (response.ok) {
-                let x = await response.json();
-                console.log(x);
-                const accessToken = x?.accessToken;
+                console.log("response is good");
+                let res = await response.json();
+                const accessToken = res.accessToken;
                 //     // console.log(response?.data);
-                    console.log("Token: " + token)
-                    setAuth({ email, password, token });
-                    
+                    // console.log("Token: " + accessToken);
+                    setAuth({ email, password, accessToken });
                     setEmail("");
                     setPassword("");
-
-                    // dispatch(setCredentials({ email, accessToken }))
-                    console.log(credentials);
-
-                    console.log("dispatched");
+                    console.log("submitted");
                     navigate(from, { replace: true });
             }
             // .then((response) => {
@@ -144,18 +148,18 @@ const Login = () => {
             // });
         
             
-        // } catch (err) {
-        //     if (!err?.response) {
-        //         setErrMsg('No Server Response');
-        //     } else if (err.response?.status === 400) {
-        //         setErrMsg('Missing Username or Password');
-        //     } else if (err.response?.status === 401) {
-        //         setErrMsg('Unauthorized');
-        //     } else {
-        //         setErrMsg('Login Failed');
-        //     }
-        //     errRef.current.focus();
-        // }  
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('No Server Response');
+            } else if (err.response?.status === 400) {
+                setErrMsg('Missing Username or Password');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else {
+                setErrMsg('Login Failed');
+            }
+            errRef.current.focus();
+        }  
     }
 
   return (

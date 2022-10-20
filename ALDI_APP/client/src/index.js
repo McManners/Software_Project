@@ -11,9 +11,11 @@ import { Provider } from 'react-redux';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-        <Routes>
-          <Route path="/*" element={<App />} />
-        </Routes>
+        <AuthProvider>
+            <Routes>
+                <Route path="/*" element={<App />} />
+            </Routes>
+        </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

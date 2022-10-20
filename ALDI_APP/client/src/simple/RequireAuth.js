@@ -4,16 +4,14 @@ import useAuth from "./useAuth";
 const RequireAuth = () => {
     const { auth } = useAuth();
     const location = useLocation();
-    console.log(auth);
-    console.log(auth?.email);
-    if (auth === undefined) console.log("yeah its undefined");
+    if (auth.email === undefined) console.log("yeah its undefined");
     else {
         console.log("yeah its defined: " + JSON.stringify(auth));
-        console.log(auth.email);
+        console.log(auth);
     }
 
     return (
-        auth.email === "" || auth.email === undefined
+        (auth.email === undefined || auth.email === "")
                 ? <Navigate to="/login" state={{ from: location }} replace />
                 : <Outlet />
     );
