@@ -53,11 +53,6 @@ var con = mysql.createConnection({
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-//   con.query("SELECT * FROM employee", function (err, result, fields) {
-//     if (err) throw err;
-//     // console.log(result);
-//     return result;
-//   });
 });
 
 // Have Node serve the files for our built React app
@@ -120,17 +115,17 @@ app.get("/api/employee/:employee_id", (req, res) => {
 //         res.json(result);
 //     });
 // });
-app.put("/api/employees/create", (req, res) => {
-    employeeController.create({ 
-        employee_id: 12, 
-        first_name: "Frankie", 
-        last_name: "Salerno", 
-        email: "frankiesalerno@gmail.com",
-        hire_date: 11162003,
-        supervisor_id: 11,
-        employee_type_id: 2
-    });
-    });
+// app.put("/api/employees/create", (req, res) => {
+//     employeeController.create({ 
+//         employee_id: 12, 
+//         first_name: "Frankie", 
+//         last_name: "Salerno", 
+//         email: "frankiesalerno@gmail.com",
+//         hire_date: 11162003,
+//         supervisor_id: 11,
+//         employee_type_id: 2
+//     });
+//     });
 
 // All other GET requests not handled before will return our React app
 // app.get('*', (req, res) => {

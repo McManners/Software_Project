@@ -12,7 +12,9 @@ const handleRefreshToken = async (req, res) => {
     const refreshToken = cookies.jwt;
 
     // const foundUser = await Employee_Account.findOne({ where: { refresh_token: refreshToken } });
+    console.log("------------LOOKING FOR TOK: " + refreshToken);
     const foundUser = await employeeAccountController.getByRefreshToken(refreshToken);
+    // console.log("found user: " + foundUser);
     if (!foundUser) return res.sendStatus(403); // Forbidden
 
     // evaluate jwt
@@ -24,7 +26,7 @@ const handleRefreshToken = async (req, res) => {
             const accessToken = jwt.sign(
                 { "email": decoded.email },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '30s' } // set longer
+                { expiresIn: '10s' } // set longer
             );
             res.json({ accessToken });
         }

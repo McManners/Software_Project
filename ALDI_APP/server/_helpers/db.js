@@ -17,8 +17,8 @@ async function initialize() {
     const sequelize = new Sequelize("aldi", "root", "", { dialect: 'mysql' });
 
     // init models and add them to the exported db object
-    db.Employee = require('../models/Employee.model.js')(sequelize, Sequelize);
-
+    db.Employee = require('../models/Employee.js')(sequelize, Sequelize);
+    db.Employee_Account = require('../models/Employee_Account.js')(sequelize, Sequelize);
     // sync all models with database
     await sequelize.sync({ alter: false });
 }

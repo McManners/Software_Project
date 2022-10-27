@@ -7,6 +7,8 @@ module.exports = {
     getAll,
     getByEmail,
     getByRefreshToken,
+    updateRefreshToken,
+    deleteRefreshToken,
     create,
     update,
     delete: _delete
@@ -35,21 +37,14 @@ async function create(params) {
     await employee_account.save();
 }
 
-async function update(email, params) {
+async function update(email, refresh_token) {
+    console.log("updating " + email);
     const employee_account = await getEmployee_Account(email);
-
-    // validate
-    const employee_accountChanged = params.email && employee_account.email !== params.email;
-    if (employee_accountChanged && await db.Employee_Account.findOne({ where: { email: params.email } })) {
-        throw 'Employee_Account ' + params.email + ' is already taken';
+    if (!employee_account) {
+        console.log(`No employee matches ID ${email}.`);
     }
-    console.log("Updated!");
-    // console.log(employee_account);
-    // copy params to employee_account and save
-    // Object.assign(employee_account, params);
-    // await employee_account.save();
-    db.Employee_Account.update({ refresh_token: params.refresh_token }, { where: { email: email } });
-    // console.log(employee_account);
+    console.log("using refresh token: " + refresh_token);
+    const result = await db.Employee_Account.update({ refresh_token: refresh_token }, { where: { email: email } });
 }
 
 async function _delete(email) {
@@ -57,6 +52,19 @@ async function _delete(email) {
     await employee_account.destroy();
 }
 
+async function updateRefreshToken(email, refreshToken) {
+    const employee_account = getEmployee_Account(email);
+    const newTokArray = employee_account.refresh_token + "," + refreshToken;
+    employee_account.refresh_token = newTokArray;
+    employee_account.save();
+}
+async function deleteRefreshToken(email, refreshToken) {
+    const employee_account = getEmployee_Account(email);
+    console.log(employee_account.refresh_token);
+    const x = employee_account.refresh_token.split(",");
+    employee_account.refresh_token = x.filter(r => r !== refreshToken);
+    employee_account.save();
+}
 // helper functions
 async function getByRefreshToken(refreshToken) {
     const employee_account = await db.Employee_Account.findOne({ where: { refresh_token: refreshToken } });

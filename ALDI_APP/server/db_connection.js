@@ -4,14 +4,10 @@ var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "laravel"
+  database: "aldi"
 });
 
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-  con.query("SELECT * FROM employee", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-  });
 });

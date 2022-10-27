@@ -1,3 +1,5 @@
 20221013	11:48:52	45c71396-4bbe-46a5-bb72-53671f1f118a	TypeError: allowedOrigins.includes is not a function
 20221013	11:51:37	87641e5b-ebe9-44fd-8a0f-49b63769b604	ReferenceError: whitelist is not defined
 20221017	17:23:17	3a62cfeb-e47e-424c-a300-40e9f54f8937	Error: Not allowed by CORS
+20221024	10:45:37	78cee086-d057-405b-8351-af179f7bf093	Error: Not allowed by CORS
+20221024	10:48:14	481ce81a-c199-4611-a4a0-f151bbc48ac9	Error: Not allowed by CORS

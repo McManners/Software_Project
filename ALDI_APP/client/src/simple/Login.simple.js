@@ -171,9 +171,9 @@ const Login = () => {
             <h1>Sign In</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='email'>Email Address:</label><br />
-                <input type='email' id='email-input' name='email-input' defaultValue="name@example.com" ref={emailRef} onChange={handleEmailChange} value={email}/><br /><br />
+                <input type='email' id='email-input' name='email-input' ref={emailRef} onChange={handleEmailChange} value={email}/><br /><br />
                 <label htmlFor='password-input'>Password:</label><br /><br />
-                <input type='password' id='password-input' name='password-input' onChange={handlePasswordChange} value={password} defaultValue="123456"/><br /><br />
+                <input type='password' id='password-input' name='password-input' onChange={handlePasswordChange} value={password}/><br /><br />
                 <label htmlFor='remember-me-input'>Remember Me: </label>
                 <input type='checkbox' name='remember-me-input' id='remember-me-input'/><br /><br />
                 <button type='submit' name='submit' id='submit'>Submit</button>
