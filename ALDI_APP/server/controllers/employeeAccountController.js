@@ -9,6 +9,7 @@ module.exports = {
     getByRefreshToken,
     updateRefreshToken,
     deleteRefreshToken,
+    getEmailWithRefreshToken,
     create,
     update,
     delete: _delete
@@ -50,6 +51,10 @@ async function update(email, refresh_token) {
 async function _delete(email) {
     const employee_account = await getEmployee_Account(email);
     await employee_account.destroy();
+}
+async function getEmailWithRefreshToken(email) {
+    const employee_account = await getEmployee_Account(email);
+    return employee_account.email;
 }
 
 async function updateRefreshToken(email, refreshToken) {

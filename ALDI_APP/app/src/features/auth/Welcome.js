@@ -5,10 +5,7 @@ const Welcome = () => {
     const date = new Date();
     const today = new Intl.DateTimeFormat('en-US', { dataStyle: 'full', timeStyle: 'long' }).format(date);
     const { auth } = useAuth();
-    const email = "";
-    if (auth.email === undefined) {
-        const 
-    }
+    
     const content = (
         <section className="welcome">
             <p>{today}</p>
