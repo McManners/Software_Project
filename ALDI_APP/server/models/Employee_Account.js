@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const Employee = require('./Employee');
 module.exports = (sequelize, DataTypes) => {
   class Employee_Account extends Model {
     /**
@@ -14,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Employee_Account.init({
-    employee_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
+    employee_account_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
+    employee_id: { type: DataTypes.INTEGER, allowNull: false },
     email: { type: DataTypes.STRING, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
     refresh_token: { type: DataTypes.STRING, allowNull: true },
@@ -24,5 +26,27 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true,
     freezeTableName: true,
   });
+  Employee_Account.associate = function (models) {
+    Employee_Account.hasOne(models.Employee, {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        foreignKey: {
+          name: 'employee_id',
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+      });
+    };
+
+  // Add a custom `addScopes` function to call after initializing all models in `index.js`
+  Employee_Account.addScopes = function (models) {
+    Employee_Account.addScope('defaultScope', {
+      include: [
+        {
+          model: models.Employee,
+        },
+      ],
+    });
+}
   return Employee_Account;
 };

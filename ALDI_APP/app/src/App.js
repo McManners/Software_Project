@@ -6,6 +6,9 @@ import Dashboard from './components/Dashboard';
 import Welcome from './features/auth/Welcome';
 import RequireAuth from './simple/RequireAuth';
 import RememberLogin from './simple/RememberLogin';
+import Requests from './simple/ticket/Requests';
+import NewTicket from './simple/ticket/NewTicket';
+import Register from './simple/Register';
 
 function App() {
 
@@ -14,10 +17,14 @@ function App() {
             <Route path='/' element={<Layout />}>
                 <Route index element={<Public />} />
                 <Route path='login' element={<Login />} />
+                <Route path="register" element={<Register />} />
+
                 <Route element={<RememberLogin />}>
                     <Route element={<RequireAuth />}>
                         <Route path="dashboard" element={<Dashboard />}>
                             <Route index element={<Welcome />} />
+                            <Route path="requests" element={<Requests />}/>
+                            <Route path="newticket" element={<NewTicket />}/>
                         </Route>
                     </Route>
                 </Route>

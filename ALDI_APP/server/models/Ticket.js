@@ -18,13 +18,45 @@ module.exports = (sequelize, DataTypes) => {
     employee_id: { type: DataTypes.INTEGER, allowNull: false },
     supervisor_id: { type: DataTypes.INTEGER, allowNull: false },
     status: { type: DataTypes.BOOLEAN, allowNull: false },
-    request_note: { type: DataTypes.STRING, allowNull: true },
-    response_note: { type: DataTypes.STRING, allowNull: true },
+    request_note: { type: DataTypes.TEXT, allowNull: true },
+    response_note: { type: DataTypes.TEXT, allowNull: true },
   }, {
     sequelize,
     modelName: 'Ticket',
     underscored: true,
-    freezeTableName: true,
+    freezeTableName: true
   });
+  Ticket.associate = function (models) {
+    Ticket.hasMany(models.Ticket_Date_Range, {
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+      foreignKey: {
+        name: 'ticket_id',
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+    });
+    Ticket.hasOne(models.Employee, {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        foreignKey: {
+          name: 'employee_id',
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+      });
+    }
+
+  // Add a custom `addScopes` function to call after initializing all models in `index.js`
+  Ticket.addScopes = function (models) {
+    Ticket.addScope('defaultScope', {
+      include: [
+        {
+          model: models.Ticket_Date_Range,
+        },
+      ],
+    });
+  };
+
   return Ticket;
 };

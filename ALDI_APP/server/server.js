@@ -8,7 +8,7 @@ const { logger } = require('./middleware/logEvents');
 const errorHandler = require('./middleware/errorHandler');
 const credentials = require('./middleware/credentials');
 const mysql = require('mysql');
-const db = require('./config/db');
+const db = require('./models/index');
 const PORT = process.env.PORT || 3001;
 
 // Connect to db
@@ -42,6 +42,7 @@ app.use('/logout', require('./routes/logout'));
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
+app.use('/ticket', require('./routes/ticket'));
 
 var con = mysql.createConnection({
   host: "localhost",

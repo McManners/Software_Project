@@ -5,7 +5,7 @@ const DashHeader = () => {
         <header style={{ backgroundColor: "orange" }}>
             <div>
                 <h1>headies</h1>
-                <Link to="/">
+                <Link to="/dashboard">
                     <h1>ALDI</h1>
                 </Link>
                 <nav>

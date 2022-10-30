@@ -1,9 +1,6 @@
 // client/src/App.js
 
 import React, { useEffect, useRef, useContext } from "react";
-// import logo from "./logo.svg";
-// import "./App.css";
-// import { useSelector } from 'react-redux';
 import { Navigate, Link, useNavigate, useLocation } from "react-router-dom";
 import useAuth from "./useAuth";
 
@@ -11,23 +8,22 @@ import axios from 'axios';
 
 
 const Login = () => {
-    // const [token, setToken] = useContext(UserContext);
     const { setAuth, remember, setRemember } = useAuth();
 
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [errMsg, setErrMsg] = React.useState("");
-
-    // const credentials = useSelector((state) => state.credentials.value);
-
     
 
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathName || "/dashboard";
 
-    // const emailRef = useRef();
-    // const errRef = useRef();
+    if (location.state?.from?.pathName === "/dashboard") {
+        // TODO: notify user that they need to log in
+    }
+    const emailRef = useRef();
+    const errRef = useRef();
 
     // useEffect(() => {
     //     emailRef.current.focus();
@@ -115,19 +111,21 @@ const Login = () => {
                 setErrMsg('Login Failed');
             }
         });
-        // errRef.current.focus();
+        errRef.current.focus();
     }
 
   return (
     <div className="App">
       <header className="App-header">
         <div>
-        <p /*ref={errRef}*/ style={{color: "red",fontWeight: "bold"}}>{errMsg}</p>
+        <div ref={errRef} style={{color: "red", fontWeight: "bold"}}>{errMsg}</div>
 
             <h1>Sign In</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='email'>Email Address:</label><br />
-                <input type='email' id='email-input' name='email-input' /*ref={emailRef}*/ onChange={handleEmailChange} value={email}/><br /><br />
+                {/*https://stackoverflow.com/questions/37609049/how-to-correctly-catch-change-focusout-event-on-text-input-in-react-js*/}
+
+                <input type='email' id='email-input' name='email-input' ref={emailRef} /*onBlur={handleEmailChange} value={email}*/ onChange={handleEmailChange} value={email} /><br /><br />
                 <label htmlFor='password-input'>Password:</label><br /><br />
                 <input type='password' id='password-input' name='password-input' onChange={handlePasswordChange} value={password}/><br /><br />
                 <label htmlFor='remember-me-input'>Remember Me: </label>
@@ -135,7 +133,7 @@ const Login = () => {
                 <button type='submit' name='submit' id='submit'>Submit</button>
             </form>
             <br /><br />
-            <button type='button' onClick={handleRefresh}>Refresh Token</button>
+            <button type="button" onClick={() => navigate("/register")}>CreateAccount</button>
             <button type='button' onClick={handleLogout}>Logout</button>
         </div>
       </header>

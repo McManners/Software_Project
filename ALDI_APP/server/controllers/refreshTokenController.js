@@ -1,7 +1,7 @@
 const employeeAccountController = require('./employeeAccountController');
 
 const jwt = require('jsonwebtoken');
-const db = require('../config/db');
+const db = require('../models/index');
 const Employee_Account = require('../models/Employee_Account');
 require('dotenv').config();
 

@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
-const db = require('../_helpers/db');
+const db = require('../models/index');
 const Employee = require('../models/Employee');
+
 module.exports = {
     getAll,
     getById,
@@ -51,7 +52,8 @@ async function _delete(employee_id) {
 // helper functions
 
 async function getEmployee(employee_id) {
-    const employee = await db.Employee.findByPk(employee_id);
+    const employee = await db.Employee.findOne({ where: { employee_id: employee_id } });
+    console.log(employee);
     if (!employee) throw 'Employee not found';
     return employee;
 }

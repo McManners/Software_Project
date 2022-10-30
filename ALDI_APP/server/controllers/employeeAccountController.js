@@ -1,11 +1,11 @@
 const bcrypt = require('bcryptjs');
-const db = require('../_helpers/db');
+const db = require('../models/index');
 const Employee_Account = require('../models/Employee_Account');
-const { Console } = require('console');
 
 module.exports = {
     getAll,
     getByEmail,
+    getById,
     getByRefreshToken,
     updateRefreshToken,
     deleteRefreshToken,
@@ -22,6 +22,10 @@ async function getAll() {
 async function getByEmail(email) {
     console.log("searching for ");
     return await getEmployee_Account(email);
+}
+
+async function getById(employee_id) {
+    return await db.Employee_Account.findOne({ where: { employee_id: employee_id }});
 }
 
 async function create(params) {
