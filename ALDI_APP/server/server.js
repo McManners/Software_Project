@@ -11,29 +11,18 @@ const mysql = require('mysql');
 const db = require('./models/index');
 const PORT = process.env.PORT || 3001;
 
-// Connect to db
-// db();
-
-// custom middleware logger
 app.use(logger);
 
-// Handle options credentials check - before CORS!
-// and feetch cookies credentials requirement
 app.use(credentials);
 
-// Cross Origin Resource Sharing
 app.use(cors(corsOptions));
 
-// built-in middleware to handle urlencorded form data
-// ie form data: 'content-type: application/x-www-form-url-encoded'
 app.use(express.urlencoded({ extended: false }));
 
-// built-in middleware for json
 app.use(express.json());
 
 app.use(errorHandler);
 
-// testing cookies
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
@@ -45,10 +34,10 @@ app.use('/refresh', require('./routes/refresh'));
 app.use('/ticket', require('./routes/ticket'));
 
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "aldi"
+  host: "45.55.136.114",
+  user: "dynaF2020",
+  password: "b0mbsAway",
+  database: "dynaF2020"
 });
 
 con.connect(function(err) {
@@ -56,83 +45,12 @@ con.connect(function(err) {
   console.log("Connected!");
 });
 
-// Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-// app.get('/', function (req, res) {
-//     console.log("hey / path");
-//     res.sendFile(path.join(__dirname, '..client/build', 'index.html'));
-// });
-// app.use('/', express.static(path.join(__dirname, 'public')));
-
-// app.use('/', require('./routes/root'));
-
-// Handle GET requests to /api route
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-// THIS WORKS!
-// app.get("/api/employee", (req, res) => {
-//     con.query("SELECT * FROM employee", function (err, result, fields) {
-//         console.log(result);
-//         res.json(result);
-//     });
-// });
-const employeeController = require('./controllers/employeeController');
-const logEvents = require("./middleware/logEvents");
-const Employee = require('./models/Employee');
-const employeeAccountController = require('./controllers/employeeAccountController');
-// const cookieParser = require('cookie-parser');
-app.get("/api/test"), (req, res) => {
-    console.log("test");
-    Employee.findOne( { employee_id: { employee_id: "1" } })
-    .then((e) => {
-        res.json(e);
-    });
-};
-app.get("/api/employee/all", (req, res) => {
-    employeeController.getAll()
-    .then((employees) => {
-        res.json(employees);
-    });
-});
-app.get("/api/employee/:employee_id", (req, res) => {
-    employeeController.getById(req.params.employee_id)
-    .then((employee) => {
-        res.json(employee);
-    });
-});
-// GET API
-// app.get("/api/employee/:id", (req, res) => {
-//     con.query("SELECT * FROM employee WHERE employee_id = " + req.params.id, function (err, result, fields) {
-//         console.log(result);
-//         res.json(result);
-//     });
-// });
-// app.put("/api/employee/create", (req, res) => {
-//     con.query("INSERT INTO title(title, vacation_days, sick_days, personal_days) VALUES ('test', 10, 10, 10)", function (err, result, fields) {
-//         console.log("cool");
-//         res.json(result);
-//     });
-// });
-// app.put("/api/employees/create", (req, res) => {
-//     employeeController.create({ 
-//         employee_id: 12, 
-//         first_name: "Frankie", 
-//         last_name: "Salerno", 
-//         email: "frankiesalerno@gmail.com",
-//         hire_date: 11162003,
-//         supervisor_id: 11,
-//         employee_type_id: 2
-//     });
-//     });
-
-// All other GET requests not handled before will return our React app
-// app.get('*', (req, res) => {
-//     console.log("hey");
-//   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-// });
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
   });

@@ -26,29 +26,30 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Employee',
     underscored: true,
     freezeTableName: true,
+    tableName: 'employee'
   });
 
-  Employee.associate = function (models) {
-    Employee.hasMany(models.Ticket, {
-      through: 'employee_id',
-      onDelete: 'CASCADE', // default for belongsToMany
-      onUpdate: 'CASCADE', // default for belongsToMany
-      foreignKey: {
-        name: 'employee_id',
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-    });
-  }
-    // Add a custom `addScopes` function to call after initializing all models in `index.js`
-    Employee.addScopes = function (models) {
-        Employee.addScope('defaultScope', {
-          include: [
-            {
-              model: models.Ticket,
-            },
-          ],
-        });
-      };
+//   Employee.associate = function (models) {
+//     Employee.belongsToMany(models.Ticket, {
+//       through: 'employee_id',
+//       onDelete: 'CASCADE', // default for belongsToMany
+//       onUpdate: 'CASCADE', // default for belongsToMany
+//       foreignKey: {
+//         name: 'employee_id',
+//         type: DataTypes.INTEGER,
+//         allowNull: false,
+//       },
+//     });
+//   }
+//     // Add a custom `addScopes` function to call after initializing all models in `index.js`
+//     Employee.addScopes = function (models) {
+//         Employee.addScope('defaultScope', {
+//           include: [
+//             {
+//               model: models.Ticket,
+//             },
+//           ],
+//         });
+//       };
   return Employee;
 };

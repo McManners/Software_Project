@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'PTO_Balance',
     underscored: true,
     freezeTableName: true,
+    tableName: 'pto_balance'
   });
   return PTO_Balance;
 };

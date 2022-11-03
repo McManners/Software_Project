@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const employeeAccountController = require('../controllers/employeeAccountController');
+const accountController = require('../controllers/accountController');
 
-router.get('/', employeeAccountController.getEmailByRefreshToken);
+router.get('/', accountController.getEmailByRefreshToken);
 
 module.exports = router;

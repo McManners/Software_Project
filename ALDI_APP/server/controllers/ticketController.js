@@ -1,34 +1,54 @@
 const db = require('../models/index');
 
-module.exports = {
-    getAll,
-    getTicketsByEmail,
-    create
-};
+const getAllForRefreshToken = async (req, res) => {
+    console.log("hey");
+    const refresh_token = req?.cookies?.jwt;
+    console.log(req);
+    console.log(req?.cookies);
+    // use refresh token to find tickets, works as auth
+    const account = await db.Account.findOne({ where: { refresh_token: refresh_token }});
+    if (!account) return res.sendStatus(401); // unauthorized
+    const tickets = await db.Ticket.findAll({ where: { employee_id: account.employee_id } });
 
-async function getAll() {
-    return await db.Ticket.findAll();
+    res.status(201).json({ tickets });
 }
 
-async function getTicketsByEmail(email) {;
-    const employee_id = db.Employee.findOne({ where: { email: email }});
+const createTicketForRefreshToken = async (req, res) => {
+    // create for refresh token because account must be authorized, otherwise it cant create ticket
+    const refresh_token = req?.cookies?.jwt;
+    console.log("create ticket request:" + req);
+    console.log("create ticket request cookies: " + req?.cookies);
+    const date_from = req?.body?.date_from;
+    const date_to = req?.body?.date_to;
+    const request_note = req?.body?.request_note;
+    console.log(req.body);
+    const account = await db.Account.findOne({ where: { refresh_token: refresh_token }});
+    if (!account) return res.sendStatus(401); // unauthorized
+    
+    try {
+        const new_ticket = new db.Ticket({ 
+                                            employee_id: account.employee_id, 
+                                            supervisor_id: account.supervisor_id, 
+                                            date_from: date_from,
+                                            date_to: date_to,
+                                            request_note: request_note
+                                        });
+        console.log(new_ticket);
+        new_ticket.save();
+        
+        res.status(201).json({ 'success': `New ticket created for ${account.email}!` });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ 'message': err });
+    }
 
-    return await db.Ticket.findAll({ where: { employee_id: employee_id}});
 }
 
-async function create(req, res) {
-    // validate
-    const refreshToken = req.cookies.jwt;
-    console.log(refreshToken);
-    if (refreshToken === undefined) return res.sendStatus(403); // forbidden. Dont have a refresh token!
-    console.log("creating ticket for token: " + refreshToken);
-    // if (await getByEmail( params.email )) {
-    //     // console.log("exists");
-    //     throw 'Employee_Account ' + params.email + ' already exists';
-    // }
-    console.log("creating...");
-    const employee_account = new db.Employee_Account(params);
-    console.log("created");
-    // save employee
-    await employee_account.save();
-}
+// const getById = async (req, res) => {
+//     console.log(req);
+//     let tickets = await db.Ticket.findAll({ where: { employee_id: req.query.employee_id }});
+//     // tickets = JSON.stringify(tickets);
+//     res.json({ tickets });
+// }
+
+module.exports = { getAllForRefreshToken, createTicketForRefreshToken }

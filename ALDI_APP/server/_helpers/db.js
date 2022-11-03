@@ -18,7 +18,7 @@
 
 //     // init models and add them to the exported db object
 //     db.Employee = require('../models/Employee.js')(sequelize, Sequelize);
-//     db.Employee_Account = require('../models/Employee_Account.js')(sequelize, Sequelize);
+//     db.Account = require('../models/Account.js')(sequelize, Sequelize);
 //     db.Ticket = require('../models/Ticket');
 //     // sync all models with database
 //     await sequelize.sync({ alter: false });

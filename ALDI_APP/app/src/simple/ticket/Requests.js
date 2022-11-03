@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-// import Calendar from 'react-calendar';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Requests = () => {
     const [tickets, setTickets] = useState([]); // change to null, creating loading component until got response
-
+    const navigate = useNavigate();
 
     const getTickets = () => { 
         axios({
@@ -16,14 +16,14 @@ const Requests = () => {
             https://stackoverflow.com/questions/62964902/axios-post-extracting-data-from-response
         */
         .then(function(res) {
-            console.log("auth response is good");
-            console.log(res);
+            console.log("response: " + JSON.stringify(res.data.tickets));
             setTickets(res.data.tickets);
         })
         .catch(err => {
             console.log(err);
         });
     };
+
 
     useEffect(() => {
         getTickets();
@@ -62,8 +62,7 @@ const Requests = () => {
                             })}
                         </tbody>
                     </table>
-                    {/* <Calendar />
-                    https://www.npmjs.com/package/react-calendar */}
+                    <button type="button" onClick={() => navigate("/dashboard/newticket")}>Create New Ticket</button>
                 </div>
             </div>
         </div>

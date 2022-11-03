@@ -4,7 +4,7 @@ const {
 } = require('sequelize');
 const Employee = require('./Employee');
 module.exports = (sequelize, DataTypes) => {
-  class Employee_Account extends Model {
+  class Account extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -14,20 +14,21 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Employee_Account.init({
-    employee_account_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
+  Account.init({
+    account_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
     employee_id: { type: DataTypes.INTEGER, allowNull: false },
     email: { type: DataTypes.STRING, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
     refresh_token: { type: DataTypes.STRING, allowNull: true },
   }, {
     sequelize,
-    modelName: 'Employee_Account',
+    modelName: 'Account',
     underscored: true,
     freezeTableName: true,
+    tableName: "account"
   });
-  Employee_Account.associate = function (models) {
-    Employee_Account.hasOne(models.Employee, {
+  Account.associate = function (models) {
+    Account.hasOne(models.Employee, {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
         foreignKey: {
@@ -35,18 +36,15 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        sourceKey: 'employee_id'
       });
     };
 
   // Add a custom `addScopes` function to call after initializing all models in `index.js`
-  Employee_Account.addScopes = function (models) {
-    Employee_Account.addScope('defaultScope', {
-      include: [
-        {
-          model: models.Employee,
-        },
-      ],
+  Account.addScopes = function (models) {
+    Account.addScope('defaultScope', {
+      include: models.Employee
     });
 }
-  return Employee_Account;
+  return Account;
 };

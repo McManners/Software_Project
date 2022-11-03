@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const ticketControllerReturn = require('../controllers/ticketControllerReturn');
 const ticketController = require('../controllers/ticketController');
 
-router.get('/', ticketControllerReturn.getAll);
-router.get('/email', ticketControllerReturn.getByRefreshToken);
-router.post('/create', ticketController.create);
+router.get('/', ticketController.getAllForRefreshToken);
+// router.get('/email', ticketController.getByRefreshToken);
+router.post('/create', ticketController.createTicketForRefreshToken); // this needs to be fixed to route /create
 
 module.exports = router;

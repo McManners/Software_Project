@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'PTO_Type',
     underscored: true,
     freezeTableName: true,
+    tableName: 'pto_type'
   });
   return PTO_Type;
 };

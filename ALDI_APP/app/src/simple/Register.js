@@ -57,6 +57,7 @@ const Register = () => {
                 setErrMsg('No Server Response');
             }
             setErrMsg(err.response.data.message);
+            console.log(err.response.data.message);
         });
         errRef.current.focus();
 

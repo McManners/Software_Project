@@ -5,8 +5,9 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const db = {};
-
-const sequelize = new Sequelize("aldi", "root", "", { dialect: 'mysql' });
+console.log("test");
+// const sequelize = new Sequelize( "dynaF2020", "dynaF2020", "b0mbsAway", { dialect: 'mysql' });
+const sequelize = new Sequelize("mysql:45.55.136.114", { database: "dynaF2020", username: "dynaF2020", password: "b0mbsAway", dialect: 'mysql' })
 
 console.log("hey how yall doing from index.js model")
 /**

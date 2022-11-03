@@ -1,17 +1,227 @@
-import React from 'react';
-import Calendar from 'react-calendar';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './newticket.css';
+import axios from 'axios';
 
 const NewTicket = () => {
+    const navigate = useNavigate();
+    const [requestNote, setRequestNote] = useState("test");
 
-    const createTicket = () => {
-
+    const handleRequestNoteChange = event => {
+        event.preventDefault();
+        setRequestNote(event.target.value);
     }
 
+    const createTicket = async event => {
+        event.preventDefault();
+        
+        console.log("clicked");
+        axios({
+        method: 'POST',
+        url: 'http://localhost:3001/ticket/create',
+        withCredentials: true,
+        data: {
+            date_from: selectedDate.from.year.toString() + "-" +
+                        ((selectedDate.from.month < 10) ? 
+                            ("0" + selectedDate.from.month.toString()) : 
+                            (selectedDate.from.month.toString())) + "-" +
+                            ((selectedDate.from.day < 10) ? 
+                            ("0" + selectedDate.from.day.toString()) : 
+                            (selectedDate.from.day.toString())),
+            date_to: selectedDate.to.year.toString() + "-" +
+                        ((selectedDate.to.month < 10) ? 
+                            ("0" + selectedDate.to.month.toString()) : 
+                            (selectedDate.to.month.toString())) + "-" +
+                            ((selectedDate.to.day < 10) ? 
+                            ("0" + selectedDate.to.day.toString()) : 
+                            (selectedDate.to.day.toString())),
+            request_note: requestNote
+        }
+        })
+        /*
+            https://stackoverflow.com/questions/62964902/axios-post-extracting-data-from-response
+        */
+        .then(function(res) {
+            console.log(res);
+            // navigate("/dashboard/requests", { replace: true });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    };
+
+    const [requestTypes, setRequestTypes] = useState([
+            { "pto_type_id": 1, "pto_type": "Vacation" },
+            { "pto_type_id": 2, "pto_type": "Personal" },
+            { "pto_type_id": 3, "pto_type": "Sick" }
+        ]);
+
+    const [selectedType, setSelectedType] = useState(null);
+
+    const handlePTOTypeSelect = event => {
+        event.preventDefault();
+        setSelectedType(event.target.value);
+    }
+    const handleDayChange = event => {
+        event.preventDefault();
+
+        if (event.target.id === "date-from-day") {
+            var a = Object.assign({}, selectedDate.from);
+            a.month = event.target.value;
+            setSelectedDate(prev => ({ ...prev, from: a })) // cool code
+        } else if (event.target.id === "date-to-day") {
+            var a = Object.assign({}, selectedDate.to);
+            a.month = event.target.value;
+            setSelectedDate(prev => ({ ...prev, to: a }))
+        }
+    }
+    const handleMonthChange = event => {
+        event.preventDefault();
+
+        if (event.target.id === "date-from-month") {
+            var a = Object.assign({}, selectedDate.from);
+            a.month = event.target.value;
+            setSelectedDate(prev => ({ ...prev, from: a })) // cool code
+        } else if (event.target.id === "date-to-month") {
+            var a = Object.assign({}, selectedDate.to);
+            a.month = event.target.value;
+            setSelectedDate(prev => ({ ...prev, to: a }))
+        }
+    }
+    // useEffect(() => {
+    //     axios({
+    //         method: "GET",
+    //         url: "http://localhost:3001/api/ptotype",
+    //         withCredentials: true
+    //     })
+    //     .then(res => {
+    //         setRequestTypes(res.data);
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //     })
+    // }, []);
+
+    // TODO: Verify date day exists...
+
+    const date = new Date();
+    const handleYearChange = event => {
+        event.preventDefault();
+
+        if (event.target.id === "date-from-year") {
+            var a = Object.assign({}, selectedDate.from);
+            a.year = event.target.value;
+            setSelectedDate(prev => ({ ...prev, from: a })) // cool code
+        } else if (event.target.id === "date-to-year") {
+            var a = Object.assign({}, selectedDate.to);
+            a.year = event.target.value;
+            setSelectedDate(prev => ({ ...prev, to: a }))
+        }
+    }
+    const [selectedDate, setSelectedDate] = useState({ 
+            from: { month: 1, day: 1, year: date.getFullYear()},
+            to: { month: 1, day: 1, year: date.getFullYear() }
+        });
+
+    const dateDay = (type) => {
+        let days = [];
+        const thirty_one = [1, 3, 5, 7, 8, 10, 12];
+        const thirty = [4, 6, 9, 11];
+        const month = (type === "from") ? selectedDate.from.month : selectedDate.to.month;
+        const year = (type === "from") ? selectedDate.from.year : selectedDate.to.year;
+        for (let i = 1; i <= (thirty_one.includes(month) ? 31 : (thirty.includes(month) ? 30 : (year % 4 === 0) ? 29 : 28)); i++) {
+            days.push(i);
+        }
+
+        return (
+            <select type="dropdown" id={ (type === "from") ? "date-from-day" : "date-to-day" } onChange={handleDayChange}>
+                {days.map((day, key) => {
+                    return (
+                        <option key={key} value={day}>{day}</option>
+                    )
+                })}
+            </select>
+        )
+    }
+    const dateMonth = (type) => {
+        return (
+            <select type="dropdown" id={ (type === "from") ? "date-from-month" : "date-to-month" } onChange={handleMonthChange}>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+            </select>
+        )
+    }
+    const dateYear = (type) => {
+        let date = new Date();
+        const current_year = date.getFullYear();
+
+        return (
+            <select type="dropdown" id={ (type = "from") ? "date-from-year" : "date-to-year" } onChange={handleYearChange}>
+                <option value={current_year}>{current_year}</option>
+                <option value={current_year + 1}>{current_year + 1}</option>
+                <option value={current_year + 2}>{current_year + 2}</option>
+            </select>
+        )
+    }
 
     return (
         <div>
-            <Calendar />
+            <form onSubmit={createTicket} style={{ width: "50%", transform: "translateX(50%)", position: "relative" }}>
+                <label htmlFor="request-type">Request Type: </label>
+                <select type="dropdown" id="request-type" defaultValue={'DEFAULT'} onChange={handlePTOTypeSelect}>
+                    <option value="DEFAULT" disabled={true} hidden={true}>Choose a salutation ...</option>
+                    {requestTypes.map((type, key) => {
+                        return (
+                            <option key={key} value={type.pto_type_id} onSelect={() => handlePTOTypeSelect}>{type.pto_type}</option>
+                        );
+                    })}
+                </select>
+                <br/><br/>
+                <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>From:</div>
+                <label htmlFor="date-from-month">Month:</label>
+                {dateMonth("from")}
+                <label htmlFor="date-from-day">Day:</label>
+                {dateDay("from")}
+                <label htmlFor="date-from-year">Year: </label>
+                {dateYear("from")}
+                <br/><br/>
+                <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>To:</div>
+                <label htmlFor="date-to-month">Month:</label>
+                {dateMonth("to")}
+                <label htmlFor="date-to-day">Day:</label>
+                {dateDay("to")}
+                <label htmlFor="date-to-year">Year: </label>
+                {dateYear("to")}
+                <br/><br/>
+                <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>
+                    <label htmlFor="request-note-input">Request Note: </label>
+                </div>
+                <textarea rows="2" cols="50" id="request-note-input" placeholder="Add an optional note..." onChange={handleRequestNoteChange} /><br/>
+                <br/>
+                <button type="submit" name='submit' id='submit'>Create Ticket</button>
+            </form>
+            <button type="button" onClick={createTicket}>Create Test Ticket</button>
+            <button type="button" onClick={() => {
+                let x = selectedDate.from.year.toString() + 
+                ((selectedDate.from.month < 10) ? 
+                    ("0" + selectedDate.from.month.toString()) : 
+                    (selectedDate.from.month.toString())) +
+                    ((selectedDate.from.day < 10) ? 
+                    ("0" + selectedDate.from.day.toString()) : 
+                    (selectedDate.from.day.toString()));
+                console.log(x);
+                console.log(selectedDate.from.year.toString() + "0");
+            }}>Check Date</button>
         </div>
     )
 }

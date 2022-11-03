@@ -28,19 +28,20 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Ticket_Date_Range',
     underscored: true,
-    freezeTableName: true
+    freezeTableName: true,
+    tableName: 'ticket_date_range'
   });
-  Ticket_Date_Range.associate = function (models) {
-    Ticket_Date_Range.belongsToMany(models.Ticket, {
-      through: 'ticket_id',
-      onDelete: 'CASCADE', // default for belongsToMany
-      onUpdate: 'CASCADE', // default for belongsToMany
-      foreignKey: {
-        name: 'ticket_id',
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-    });
-  }
+//   Ticket_Date_Range.associate = function (models) {
+//     Ticket_Date_Range.belongsToMany(models.Ticket, {
+//       through: 'ticket_id',
+//       onDelete: 'CASCADE', // default for belongsToMany
+//       onUpdate: 'CASCADE', // default for belongsToMany
+//       foreignKey: {
+//         name: 'ticket_id',
+//         type: DataTypes.INTEGER,
+//         allowNull: false,
+//       },
+//     });
+//   }
   return Ticket_Date_Range;
 };
