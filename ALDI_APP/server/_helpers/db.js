@@ -1,7 +1,7 @@
 // // const config = require('../config.js');
 // const mysql = require('mysql');
 // const { Sequelize } = require('sequelize');
-// const db = require('../models/index.js');
+// // const db = require('../models/index.js');
 
 // module.exports = db = {};
 

@@ -106,7 +106,7 @@ const Login = () => {
             } else if (err.response?.status === 400) {
                 setErrMsg('Missing Username or Password');
             } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
+                setErrMsg('No account matches this email');
             } else {
                 setErrMsg('Login Failed');
             }

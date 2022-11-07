@@ -1,0 +1,78 @@
+Date : 2022-11-04 13:26:19
+Directory : c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server
+Total : 41 files,  6737 codes, 183 comments, 109 blanks, all 7029 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          5 |      5,766 |          0 |          4 |      5,770 |
+| JavaScript |         35 |        970 |        183 |        105 |      1,258 |
+| HTML       |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                   | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                      |         41 |      6,737 |        183 |        109 |      7,029 |
+| _helpers                                                                                                               |          1 |          0 |         20 |          5 |         25 |
+| config                                                                                                                 |          3 |         22 |          1 |          4 |         27 |
+| controllers                                                                                                            |          8 |        276 |         31 |         47 |        354 |
+| middleware                                                                                                             |          4 |         60 |          3 |         12 |         75 |
+| migrations                                                                                                             |          7 |        273 |          7 |          0 |        280 |
+| models                                                                                                                 |          8 |        221 |        114 |         10 |        345 |
+| other                                                                                                                  |          1 |         22 |          0 |          0 |         22 |
+| public                                                                                                                 |          4 |         35 |          0 |          2 |         37 |
+| public\static                                                                                                          |          1 |          0 |          0 |          1 |          1 |
+| public\static\js                                                                                                       |          1 |          0 |          0 |          1 |          1 |
+| services                                                                                                               |          1 |         40 |          5 |         12 |         57 |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                               | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\_helpers\db.js                                        | JavaScript |          0 |         20 |          5 |         25 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\config.js                                             | JavaScript |         10 |          1 |          1 |         12 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\config\allowedOrigins.js                              | JavaScript |          6 |          0 |          1 |          7 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\config\config.json                                    | JSON       |          0 |          0 |          1 |          1 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\config\corsOptions.js                                 | JavaScript |         16 |          1 |          2 |         19 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\controllers\accountController.js                      | JavaScript |         71 |         11 |          8 |         90 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\controllers\authController.js                         | JavaScript |         29 |          3 |          5 |         37 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\controllers\employeeController.js                     | JavaScript |         42 |          5 |         12 |         59 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\controllers\logoutController.js                       | JavaScript |         18 |          1 |          3 |         22 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\controllers\ptoController.js                          | JavaScript |         12 |          0 |          3 |         15 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\controllers\refreshTokenController.js                 | JavaScript |         27 |          2 |          5 |         34 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\controllers\registerController.js                     | JavaScript |         39 |          1 |          3 |         43 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\controllers\ticketController.js                       | JavaScript |         38 |          8 |          8 |         54 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\middleware\credentials.js                             | JavaScript |         14 |          1 |          2 |         17 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\middleware\errorHandler.js                            | JavaScript |          6 |          1 |          2 |          9 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\middleware\logEvents.js                               | JavaScript |         23 |          0 |          6 |         29 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\middleware\verifyJWT.js                               | JavaScript |         17 |          1 |          2 |         20 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\migrations\20221013005237-create-employee.js          | JavaScript |         48 |          1 |          0 |         49 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\migrations\20221013011115-create-employee-account.js  | JavaScript |         37 |          1 |          0 |         38 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\migrations\20221013012356-create-ticket-date-range.js | JavaScript |         40 |          1 |          0 |         41 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\migrations\20221013012415-create-ticket.js            | JavaScript |         44 |          1 |          0 |         45 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\migrations\20221013012448-create-pto-balance.js       | JavaScript |         36 |          1 |          0 |         37 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\migrations\20221013012515-create-pto-type.js          | JavaScript |         28 |          1 |          0 |         29 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\migrations\20221013012808-create-employee-type.js     | JavaScript |         40 |          1 |          0 |         41 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\models\Account.js                                     | JavaScript |         42 |          7 |          1 |         50 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\models\Employee.js                                    | JavaScript |         26 |         28 |          1 |         55 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\models\Employee_Type.js                               | JavaScript |         24 |          6 |          0 |         30 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\models\PTO_Balance.js                                 | JavaScript |         24 |          6 |          0 |         30 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\models\PTO_Type.js                                    | JavaScript |         21 |          6 |          0 |         27 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\models\Ticket.js                                      | JavaScript |         27 |         36 |          2 |         65 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\models\Ticket_Date_Range.js                           | JavaScript |         29 |         18 |          0 |         47 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\models\index.js                                       | JavaScript |         28 |          7 |          6 |         41 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\other\main.js                                         | JavaScript |         22 |          0 |          0 |         22 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\package-lock.json                                     | JSON       |      5,702 |          0 |          1 |      5,703 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\package.json                                          | JSON       |         30 |          0 |          1 |         31 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\public\asset-manifest.json                            | JSON       |          9 |          0 |          0 |          9 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\public\index.html                                     | HTML       |          1 |          0 |          0 |          1 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\public\manifest.json                                  | JSON       |         25 |          0 |          1 |         26 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\public\static\js\main.31d6cfe0.js                     | JavaScript |          0 |          0 |          1 |          1 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\server.js                                             | JavaScript |         46 |          1 |         14 |         61 |
+| c:\Users\antho\Documents\GitHub\Software_Project\ALDI_APP\server\services\employee.service.js                          | JavaScript |         40 |          5 |         12 |         57 |
+| Total                                                                                                                  |            |      6,737 |        183 |        109 |      7,029 |
++------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

@@ -11,17 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Ticket, { foreignKey: 'ticket_id' });
+    //   this.belongsTo(models.Ticket, { foreignKey: 'ticket_id' });
     }
   }
   Ticket_Date_Range.init({
     ticket_date_range_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
-    ticket_id: { 
-        type: DataTypes.INTEGER, 
-        allowNull: false,
-        references: 'Ticket',
-        referencesKey: 'ticket_id'
-    },
+    ticket_id: { type: DataTypes.INTEGER, allowNull: false },
     start_date: { type: DataTypes.DATE, allowNull: false },
     end_date: { type: DataTypes.DATE, allowNull: false },
   }, {

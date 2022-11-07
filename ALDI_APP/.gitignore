@@ -11,7 +11,7 @@ client/coverage
 
 # production
 client/build
-
+client
 # misc
 client/.DS_Store
 client/.env.local
@@ -29,3 +29,5 @@ server/.env
 
 #app
 app/node_modules
+node_modules
+app/package-lock.json

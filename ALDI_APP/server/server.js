@@ -1,3 +1,7 @@
+// https://stackoverflow.com/questions/51025903/hosting-react-app-on-godaddy
+// https://stackoverflow.com/questions/58425708/how-to-deploy-react-app-to-godaddy-server
+// https://v5.reactrouter.com/web/api/BrowserRouter/basename-string
+
 require('dotenv').config();
 const express = require("express");
 const app = express();
@@ -8,7 +12,8 @@ const { logger } = require('./middleware/logEvents');
 const errorHandler = require('./middleware/errorHandler');
 const credentials = require('./middleware/credentials');
 const mysql = require('mysql');
-const db = require('./models/index');
+// const db = require('./models/index');
+const db = require('./_helpers/db');
 const PORT = process.env.PORT || 3001;
 
 app.use(logger);
@@ -32,6 +37,7 @@ app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/ticket', require('./routes/ticket'));
+app.use('/pto', require('./routes/pto'));
 
 var con = mysql.createConnection({
   host: "45.55.136.114",

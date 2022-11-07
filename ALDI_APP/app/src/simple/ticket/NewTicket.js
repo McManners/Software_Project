@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './newticket.css';
 import axios from 'axios';
@@ -6,6 +6,34 @@ import axios from 'axios';
 const NewTicket = () => {
     const navigate = useNavigate();
     const [requestNote, setRequestNote] = useState("test");
+    const [availablePTO, setAvailablePTO] = useState({ vacation: 0, sick: 0, personal: 0 });
+    const [errMsg, setErrMsg] = useState("");
+    const [selectedType, setSelectedType] = useState(-1);
+
+    const errRef = useRef();
+    const testRef = useRef();
+
+    useEffect(() => {
+        setErrMsg("");
+    }, [selectedType]);
+
+    useEffect(() => {
+        axios({
+            method: 'GET',
+            url: 'http://localhost:3001/pto',
+            withCredentials: true,
+        })
+        .then(res => {
+            setAvailablePTO({
+                vacation: res.data.foundPTO.vacation_available,
+                sick: res.data.foundPTO.sick_available,
+                personal: res.data.foundPTO.personal_available
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }, []);
 
     const handleRequestNoteChange = event => {
         event.preventDefault();
@@ -51,16 +79,20 @@ const NewTicket = () => {
     };
 
     const [requestTypes, setRequestTypes] = useState([
-            { "pto_type_id": 1, "pto_type": "Vacation" },
-            { "pto_type_id": 2, "pto_type": "Personal" },
-            { "pto_type_id": 3, "pto_type": "Sick" }
+            { "pto_type_id": 0, "pto_type": "Vacation" },
+            { "pto_type_id": 1, "pto_type": "Personal" },
+            { "pto_type_id": 2, "pto_type": "Sick" }
         ]);
-
-    const [selectedType, setSelectedType] = useState(null);
 
     const handlePTOTypeSelect = event => {
         event.preventDefault();
-        setSelectedType(event.target.value);
+        console.log(Object.values(availablePTO)[event.target.value]);
+        if (Object.values(availablePTO)[event.target.value] === 0) {
+            console.log("no");
+            setErrMsg("No available PTO for type " + requestTypes[event.target.value].pto_type)
+            errRef.current.focus();
+        } else 
+            setSelectedType(event.target.value);
     }
     const handleDayChange = event => {
         event.preventDefault();
@@ -134,7 +166,7 @@ const NewTicket = () => {
         }
 
         return (
-            <select type="dropdown" id={ (type === "from") ? "date-from-day" : "date-to-day" } onChange={handleDayChange}>
+            <select disabled={errMsg !== ""} type="dropdown" id={ (type === "from") ? "date-from-day" : "date-to-day" } onChange={handleDayChange}>
                 {days.map((day, key) => {
                     return (
                         <option key={key} value={day}>{day}</option>
@@ -145,7 +177,7 @@ const NewTicket = () => {
     }
     const dateMonth = (type) => {
         return (
-            <select type="dropdown" id={ (type === "from") ? "date-from-month" : "date-to-month" } onChange={handleMonthChange}>
+            <select disabled={errMsg !== ""} type="dropdown" id={ (type === "from") ? "date-from-month" : "date-to-month" } onChange={handleMonthChange}>
                 <option value="1">January</option>
                 <option value="2">February</option>
                 <option value="3">March</option>
@@ -166,7 +198,7 @@ const NewTicket = () => {
         const current_year = date.getFullYear();
 
         return (
-            <select type="dropdown" id={ (type = "from") ? "date-from-year" : "date-to-year" } onChange={handleYearChange}>
+            <select disabled={errMsg !== ""} type="dropdown" id={ (type = "from") ? "date-from-year" : "date-to-year" } onChange={handleYearChange}>
                 <option value={current_year}>{current_year}</option>
                 <option value={current_year + 1}>{current_year + 1}</option>
                 <option value={current_year + 2}>{current_year + 2}</option>
@@ -179,29 +211,33 @@ const NewTicket = () => {
             <form onSubmit={createTicket} style={{ width: "50%", transform: "translateX(50%)", position: "relative" }}>
                 <label htmlFor="request-type">Request Type: </label>
                 <select type="dropdown" id="request-type" defaultValue={'DEFAULT'} onChange={handlePTOTypeSelect}>
-                    <option value="DEFAULT" disabled={true} hidden={true}>Choose a salutation ...</option>
+                    <option value="DEFAULT" disabled={true} hidden={true}>Choose a type ...</option>
                     {requestTypes.map((type, key) => {
                         return (
                             <option key={key} value={type.pto_type_id} onSelect={() => handlePTOTypeSelect}>{type.pto_type}</option>
                         );
                     })}
                 </select>
-                <br/><br/>
+
+                <div ref={errRef} style={{color: "red", fontWeight: "bold"}}>{errMsg === "" ? <br /> : errMsg}</div>
+                
                 <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>From:</div>
-                <label htmlFor="date-from-month">Month:</label>
+                <label disabled={errMsg !== ""} htmlFor="date-from-month">Month:</label>
                 {dateMonth("from")}
-                <label htmlFor="date-from-day">Day:</label>
+                <label disabled={errMsg !== ""} htmlFor="date-from-day">Day:</label>
                 {dateDay("from")}
-                <label htmlFor="date-from-year">Year: </label>
+                <label disabled={errMsg !== ""} htmlFor="date-from-year">Year: </label>
                 {dateYear("from")}
                 <br/><br/>
                 <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>To:</div>
-                <label htmlFor="date-to-month">Month:</label>
+                <div ref={testRef}>
+                <label disabled={errMsg !== ""} htmlFor="date-to-month">Month:</label>
                 {dateMonth("to")}
-                <label htmlFor="date-to-day">Day:</label>
+                <label disabled={errMsg !== ""} htmlFor="date-to-day">Day:</label>
                 {dateDay("to")}
-                <label htmlFor="date-to-year">Year: </label>
+                <label disabled={errMsg !== ""} htmlFor="date-to-year">Year: </label>
                 {dateYear("to")}
+                </div>
                 <br/><br/>
                 <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>
                     <label htmlFor="request-note-input">Request Note: </label>
