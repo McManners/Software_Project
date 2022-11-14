@@ -3,9 +3,9 @@
 import React, { useEffect, useRef, useContext } from "react";
 import { Navigate, Link, useNavigate, useLocation } from "react-router-dom";
 import useAuth from "./useAuth";
-
+import './css/login.css';
 import axios from 'axios';
-
+import aldi_logo from './imgs/ASG_SER_MC_RGB.png';
 
 const Login = () => {
     const { setAuth, remember, setRemember } = useAuth();
@@ -80,7 +80,7 @@ const Login = () => {
         event.preventDefault();
 
         axios({
-            method: 'post',
+            method: 'POST',
             url: 'http://localhost:3001/auth',
             data: {
                 email: email,
@@ -93,9 +93,10 @@ const Login = () => {
         */
         .then(function(res) {
             console.log("auth response is good");
-            console.log(res.data);
-            const accessToken = res.data.accessToken;
-            setAuth({ email, password, accessToken });
+            const access_token = res?.data?.access_token;
+            console.log(access_token);
+            const employee_type = res?.data?.employee_type;
+            setAuth({ email, password, employee_type, access_token });
             setEmail("");
             setPassword("");
             navigate(from, { replace: true });
@@ -107,6 +108,8 @@ const Login = () => {
                 setErrMsg('Missing Username or Password');
             } else if (err.response?.status === 401) {
                 setErrMsg('No account matches this email');
+            } else if (err.response?.status === 404) {
+                setErrMsg(err.response.data.message);
             } else {
                 setErrMsg('Login Failed');
             }
@@ -116,27 +119,34 @@ const Login = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <div>
-        <div ref={errRef} style={{color: "red", fontWeight: "bold"}}>{errMsg}</div>
+        <div className='login-form'>
+            <div id='form-page-container'>
+                <div id='form-left'>
+                    <div>
+                        <img id='aldi_logo' src={aldi_logo}/><br/>
+                        <h3 style={{margin: 0}}>Sign In</h3>
+                        <div ref={errRef} style={{color: "red", fontWeight: "bold"}}>{errMsg}</div>
+                    <form onSubmit={handleSubmit}>
+                        <label id='email-label' htmlFor='email'>Employee ID:</label><br />
+                        {/*https://stackoverflow.com/questions/37609049/how-to-correctly-catch-change-focusout-event-on-text-input-in-react-js*/}
 
-            <h1>Sign In</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor='email'>Email Address:</label><br />
-                {/*https://stackoverflow.com/questions/37609049/how-to-correctly-catch-change-focusout-event-on-text-input-in-react-js*/}
-
-                <input type='email' id='email-input' name='email-input' ref={emailRef} /*onBlur={handleEmailChange} value={email}*/ onChange={handleEmailChange} value={email} /><br /><br />
-                <label htmlFor='password-input'>Password:</label><br /><br />
-                <input type='password' id='password-input' name='password-input' onChange={handlePasswordChange} value={password}/><br /><br />
-                <label htmlFor='remember-me-input'>Remember Me: </label>
-                <input type='checkbox' name='remember-me-input' id='remember-me-input'/><br /><br />
-                <button type='submit' name='submit' id='submit'>Submit</button>
-            </form>
-            <br /><br />
-            <button type="button" onClick={() => navigate("/register")}>CreateAccount</button>
-            <button type='button' onClick={handleLogout}>Logout</button>
+                        <input type='email' id='email-input' name='email-input' ref={emailRef} /*onBlur={handleEmailChange} value={email}*/ onChange={handleEmailChange} value={email} /><br />
+                        <label id='password-label' htmlFor='password-input'>Password:</label><br />
+                        <input type='password' id='password-input' name='password-input' onChange={handlePasswordChange} value={password}/><br />
+                        <label htmlFor='remember-me-input'>Remember Me: </label>
+                        <input type='checkbox' name='remember-me-input' id='remember-me-input'/><br />
+                        <button type='submit' name='submit' id='login-button'>Submit</button>
+                    </form>
+                    <br />
+                    <button type="button" onClick={() => navigate("/register")}>CreateAccount</button>
+                    </div>
+                    </div>
+                <div id='form-right'>
+                    <div id='aldi-building'>
+                    </div>
+                </div>
+            </div>
         </div>
-      </header>
     </div>
   );
 }

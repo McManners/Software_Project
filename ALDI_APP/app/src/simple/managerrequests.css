@@ -1,0 +1,35 @@
+#manager-container {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid black;
+    display: flex;
+    background-color: blue;
+    justify-content: center;
+}
+#manager-main-requests {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.request {
+    padding: 20px 0;
+    margin: 10px;
+    border: 2px solid orange;
+    border-radius: 5px;
+}
+.manager-request-grid-container {
+    display: grid;
+    row-gap: 10px;
+    padding: 5px;
+}
+#pending-requests-manager td {
+    text-align: left;
+}
+.manager-button::hover {
+    background-color: orange;
+}

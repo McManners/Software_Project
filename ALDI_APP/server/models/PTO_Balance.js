@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   PTO_Balance.init({
     pto_balance_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
-    employee_id: { type: DataTypes.INTEGER, allowNull: false },
+    eid: { type: DataTypes.INTEGER, allowNull: false },
     vacation_available: { type: DataTypes.INTEGER, allowNull: false },
     personal_available: { type: DataTypes.INTEGER, allowNull: false },
     sick_available: { type: DataTypes.INTEGER, allowNull: false },

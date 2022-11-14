@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('employee', {
-        employee_id: {
+        eid: {
         allowNull: false,
         autoIncrement: false,
         primaryKey: true,
@@ -25,7 +25,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      supervisor_id: {
+      leader_id: {
         allowNull: false,
         type: Sequelize.INTEGER
       },

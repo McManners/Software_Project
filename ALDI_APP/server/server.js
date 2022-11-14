@@ -38,6 +38,8 @@ app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/ticket', require('./routes/ticket'));
 app.use('/pto', require('./routes/pto'));
+app.use('/status', require('./routes/status'));
+app.use('/ticketresponse', require('./routes/ticketresponse'));
 
 var con = mysql.createConnection({
   host: "45.55.136.114",

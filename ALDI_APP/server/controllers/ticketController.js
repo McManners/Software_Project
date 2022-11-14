@@ -1,14 +1,17 @@
 const db = require('../models/index');
 
 const getAllForRefreshToken = async (req, res) => {
+    console.log(req.email);
     console.log("hey");
+    console.log("ticket controller req: " + req);
     const refresh_token = req?.cookies?.jwt;
-    console.log(req);
-    console.log(req?.cookies);
+    if (!refresh_token) return res.sendStatus(401);
+    // console.log(req);
+    // console.log(req?.cookies);
     // use refresh token to find tickets, works as auth
     const account = await db.Account.findOne({ where: { refresh_token: refresh_token }});
     if (!account) return res.sendStatus(401); // unauthorized
-    const tickets = await db.Ticket.findAll({ where: { employee_id: account.employee_id } });
+    const tickets = await db.Ticket.findAll({ where: { eid: account.eid } });
 
     res.status(201).json({ tickets });
 }
@@ -16,6 +19,7 @@ const getAllForRefreshToken = async (req, res) => {
 const createTicketForRefreshToken = async (req, res) => {
     // create for refresh token because account must be authorized, otherwise it cant create ticket
     const refresh_token = req?.cookies?.jwt;
+    if (!refresh_token) return res.sendStatus(401);
     console.log("create ticket request:" + req);
     console.log("create ticket request cookies: " + req?.cookies);
     const date_from = req?.body?.date_from;
@@ -27,8 +31,8 @@ const createTicketForRefreshToken = async (req, res) => {
     
     try {
         const new_ticket = new db.Ticket({ 
-                                            employee_id: account.employee_id, 
-                                            supervisor_id: account.supervisor_id, 
+                                            eid: account.eid, 
+                                            leader_id: account.leader_id, 
                                             date_from: date_from,
                                             date_to: date_to,
                                             request_note: request_note
@@ -46,7 +50,7 @@ const createTicketForRefreshToken = async (req, res) => {
 
 // const getById = async (req, res) => {
 //     console.log(req);
-//     let tickets = await db.Ticket.findAll({ where: { employee_id: req.query.employee_id }});
+//     let tickets = await db.Ticket.findAll({ where: { eid: req.query.eid }});
 //     // tickets = JSON.stringify(tickets);
 //     res.json({ tickets });
 // }

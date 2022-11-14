@@ -1,16 +1,31 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Navigate } from 'react-router-dom';
+import useAuth from '../useAuth';
+import useLogout from '../useLogout';
 
 const Requests = () => {
     const [tickets, setTickets] = useState([]); // change to null, creating loading component until got response
     const navigate = useNavigate();
+    const location = useLocation();
+    const { auth, setAuth } = useAuth();
+    const [isLoading, setIsLoading] = useState(true);
+    const logout = useLogout();
 
-    const getTickets = () => { 
+    const getTickets = () => {
+        axios.interceptors.request.use(req => {
+            console.log("logging request sent: ");
+            console.log(req);
+            return req;
+        });
+
         axios({
-        method: 'GET',
-        url: 'http://localhost:3001/ticket',
-        withCredentials: true
+            method: 'GET',
+            url: 'http://localhost:3001/ticket',
+            withCredentials: true,
+            headers: {
+                'Authorization': `Bearer ${auth.access_token}`
+            }
         })
         /*
             https://stackoverflow.com/questions/62964902/axios-post-extracting-data-from-response
@@ -18,9 +33,10 @@ const Requests = () => {
         .then(function(res) {
             console.log("response: " + JSON.stringify(res.data.tickets));
             setTickets(res.data.tickets);
+            setIsLoading(false);
         })
         .catch(err => {
-            console.log(err);
+            logout();
         });
     };
 
@@ -29,7 +45,9 @@ const Requests = () => {
         getTickets();
     }, []);
 
+    
     return (
+        isLoading ? <div>Loading...</div> :
         <div>
             <div className='container-grid'>
                 <div className='grid-item'>
@@ -53,8 +71,8 @@ const Requests = () => {
                                 return (
                                     <tr key={key}>
                                         <td>{ticket.ticket_id}</td>
-                                        <td>{ticket.employee_id}</td>
-                                        <td>{ticket.supervisor_id}</td>
+                                        <td>{ticket.eid}</td>
+                                        <td>{ticket.leader_id}</td>
                                         <td>{(ticket.status === true) ? "Open" : "Closed"}</td>
                                         <td>{ticket.request_note}</td>
                                     </tr>

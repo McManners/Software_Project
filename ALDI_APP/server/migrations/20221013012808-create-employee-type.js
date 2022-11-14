@@ -2,28 +2,32 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('employee_type', {
-      employee_type_id: {
+    await queryInterface.createTable('ticket_response', {
+      ticket_response_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      employee_type: {
+      ticket_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      eid: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      leader_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      response_type: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      default_vacation: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      default_personal: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      default_sick: {
-        allowNull: false,
-        type: Sequelize.INTEGER
+      response: {
+        allowNull: true,
+        type: Sequelize.STRING
       },
       created_at: {
         allowNull: false,

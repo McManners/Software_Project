@@ -24,8 +24,8 @@ async function getByEmail(email) {
     return await getAccount(email);
 }
 
-async function getById(employee_id) {
-    return await db.Account.findOne({ where: { employee_id: employee_id }});
+async function getById(eid) {
+    return await db.Account.findOne({ where: { eid: eid }});
 }
 
 async function create(params) {

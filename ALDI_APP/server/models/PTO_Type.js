@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'PTO_Type',
     underscored: true,
+    timestamps: true,
     freezeTableName: true,
     tableName: 'pto_type'
   });

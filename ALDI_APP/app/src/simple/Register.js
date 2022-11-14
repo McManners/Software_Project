@@ -6,7 +6,7 @@ const Register = () => {
     const location = useLocation();
 
     const [email, setEmail] = useState("");
-    const [employee_id, setEmployee_ID] = useState("");
+    const [eid, setEmployee_ID] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirm_Password] = useState("");
 
@@ -31,27 +31,11 @@ const Register = () => {
             url: 'http://localhost:3001/register',
             data: {
                 email: email,
-                employee_id: employee_id,
+                eid: eid,
                 password: password
             },
             withCredentials: true
         })
-        /*
-            https://stackoverflow.com/questions/62964902/axios-post-extracting-data-from-response
-        */
-        // .then(function(res) {
-        //     console.log("auth response is good");
-        //     console.log(res.data);
-        //     const accessToken = res.data.accessToken;
-        //     setAuth({ email, password, accessToken });
-        //     setEmail("");
-        //     setPassword("");
-        //     navigate(from, { replace: true });
-        // })
-        .then(res => {
-            console.log(res);
-        }
-        )
         .catch(err => {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -61,18 +45,7 @@ const Register = () => {
         });
         errRef.current.focus();
 
-        // const response = await axios.post('http://localhost:3001/register',
-        // JSON.stringify({ email, password, employee_id }),
-        // // { email: email, password: password, employee_id: "1" },
-        // {
-        //     headers: { 'Content-Type': 'application/json' },
-        //     withCredentials: false
-        // }
-        // );
-        // console.log(JSON.stringify(response?.data));
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        
     }
 
     const handleEmailChange = event => { setEmail(event.target.value); }
@@ -90,8 +63,8 @@ const Register = () => {
                     <form onSubmit={createAccount}>
                         <label htmlFor="email">Email</label><br/>
                         <input type="textbox" id="email" value={email} onChange={handleEmailChange} /><br/>
-                        <label htmlFor="employee_id">Employee ID</label><br/>
-                        <input type="textbox" id="employee_id" onChange={handleEmployee_IDChange} /><br/>
+                        <label htmlFor="eid">Employee ID</label><br/>
+                        <input type="textbox" id="eid" onChange={handleEmployee_IDChange} /><br/>
                         <label htmlFor="password">Password</label><br/>
                         <input type="password" id="password" onChange={handlePasswordChange} /><br/>
                         <label htmlFor="confirm_password">Confirm Password</label><br/>
