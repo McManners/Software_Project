@@ -1,0 +1,10 @@
+.react-calendar {
+    width: 25%;
+}
+.react-calendar__month-view {
+    width: 100%;
+}
+.react-calendar__month-view__days button {
+    background-color: white;
+    border: 0;
+}
