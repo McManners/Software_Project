@@ -15,18 +15,19 @@ module.exports = (sequelize, DataTypes) => {
   }
   Ticket.init({
     ticket_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
-    employee_id: { type: DataTypes.INTEGER, allowNull: false },
-    supervisor_id: { type: DataTypes.INTEGER, allowNull: true },
+    eid: { type: DataTypes.INTEGER, allowNull: false },
+    leader_id: { type: DataTypes.INTEGER, allowNull: true },
     date_from: { type: DataTypes.DATE, allowNull: true },
     date_to: { type: DataTypes.DATE, allowNull: true },
     status: { type: DataTypes.BOOLEAN, defaultValue: false },
-    request_note: { type: DataTypes.TEXT, allowNull: true },
-    response_note: { type: DataTypes.TEXT, allowNull: true },
+    request_note: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
+    response_note: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
   }, {
     sequelize,
     modelName: 'Ticket',
     underscored: true,
     freezeTableName: true,
+    timestamps: true,
     tableName: 'ticket'
   });
 //   Ticket.associate = function (models) {
@@ -43,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     //     onDelete: 'CASCADE',
     //     onUpdate: 'CASCADE',
     //     foreignKey: {
-    //       name: 'employee_id',
+    //       name: 'eid',
     //       type: DataTypes.INTEGER,
     //       allowNull: false,
     //     },

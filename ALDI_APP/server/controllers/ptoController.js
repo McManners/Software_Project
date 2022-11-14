@@ -7,7 +7,7 @@ const getPTOByRefreshToken = async (req, res) => {
     const refresh_token = cookies.jwt;
     const foundAccount = await db.Account.findOne({ where: { refresh_token: refresh_token }});
     if (!foundAccount) return res.sendStatus(402) // Unauthorized
-    const foundPTO = await db.PTO_Balance.findOne({ where: { employee_id: foundAccount.employee_id }});
+    const foundPTO = await db.PTO_Balance.findOne({ where: { eid: foundAccount.eid }});
     if (!foundPTO) return res.status(404).json({ "message": "Cannot find PTO entry!" });
     res.status(201).json({ foundPTO });
 }

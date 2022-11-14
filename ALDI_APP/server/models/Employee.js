@@ -32,11 +32,11 @@ module.exports = (sequelize, DataTypes) => {
 
 //   Employee.associate = function (models) {
 //     Employee.belongsToMany(models.Ticket, {
-//       through: 'employee_id',
+//       through: 'eid',
 //       onDelete: 'CASCADE', // default for belongsToMany
 //       onUpdate: 'CASCADE', // default for belongsToMany
 //       foreignKey: {
-//         name: 'employee_id',
+//         name: 'eid',
 //         type: DataTypes.INTEGER,
 //         allowNull: false,
 //       },

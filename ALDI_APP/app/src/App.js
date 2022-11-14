@@ -9,6 +9,11 @@ import RememberLogin from './simple/RememberLogin';
 import Requests from './simple/ticket/Requests';
 import NewTicket from './simple/ticket/NewTicket';
 import Register from './simple/Register';
+import Unauthorized from './simple/Unauthorized';
+import Status from './simple/Status';
+import SessionExpired from './simple/SessionExpired'; // should protect this route somehow...
+import ManagerRequests from './simple/ManagerRequests';
+import SIgnIn from './src/new/Pages/SIgnIn';
 
 function App() {
 
@@ -18,13 +23,27 @@ function App() {
                 <Route index element={<Public />} />
                 <Route path='login' element={<Login />} />
                 <Route path="register" element={<Register />} />
-
+                <Route path="unauthorized" element={<Unauthorized />} />
+                <Route path="sessionexpired" element={<SessionExpired />}/>
+                
+                <Route path="test/login" element={<SIgnIn />}/>
+                
                 <Route element={<RememberLogin />}>
-                    <Route element={<RequireAuth />}>
-                        <Route path="dashboard" element={<Dashboard />}>
-                            <Route index element={<Welcome />} />
-                            <Route path="requests" element={<Requests />}/>
-                            <Route path="newticket" element={<NewTicket />}/>
+                    <Route element={<Status />}>
+                        <Route element={<RequireAuth allowedEmployeeType={["Employee", "Manager"]}/>}>
+                            <Route path="dashboard" element={<Dashboard />}>
+                                <Route index element={<Welcome />} />
+                                <Route path="requests" element={<Requests />}/>
+                                <Route path="newticket" element={<NewTicket />}/>
+                            </Route>
+                        </Route>
+                        <Route element={<RequireAuth allowedEmployeeType={["Manager"]}/>}>
+                            <Route path="dashboard" element={<Dashboard />}>
+                                <Route index element={<Welcome />} />
+                                <Route path="requests" element={<Requests />}/>
+                                <Route path="newticket" element={<NewTicket />}/>
+                                <Route path="manager" element={<ManagerRequests />}/>
+                            </Route>
                         </Route>
                     </Route>
                 </Route>

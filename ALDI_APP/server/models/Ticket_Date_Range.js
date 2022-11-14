@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Ticket_Date_Range',
     underscored: true,
     freezeTableName: true,
+    timestamps: true,
     tableName: 'ticket_date_range'
   });
 //   Ticket_Date_Range.associate = function (models) {

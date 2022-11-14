@@ -7,6 +7,7 @@ import { useContext } from "react";
 import AuthContext from "../simple/AuthProvider";
 
 const Dashboard = () => {
+    console.log("dashboardin");
     const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
 

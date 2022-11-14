@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Account.init({
     account_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
-    employee_id: { type: DataTypes.INTEGER, allowNull: false },
+    eid: { type: DataTypes.INTEGER, allowNull: false },
     email: { type: DataTypes.STRING, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
     refresh_token: { type: DataTypes.STRING, allowNull: true },
@@ -32,11 +32,11 @@ module.exports = (sequelize, DataTypes) => {
 //         onDelete: 'CASCADE',
 //         onUpdate: 'CASCADE',
 //         foreignKey: {
-//           name: 'employee_id',
+//           name: 'eid',
 //           type: DataTypes.INTEGER,
 //           allowNull: false,
 //         },
-//         sourceKey: 'employee_id'
+//         sourceKey: 'eid'
 //       });
 //     };
 

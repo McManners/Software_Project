@@ -14,7 +14,7 @@ router.route('/')
 router.route('/api/employee')
     .get(employeeController.getAll());
     
-router.route('/:employee_id')
+router.route('/:eid')
     .get(employeeController.getEmployees);
 
 module.exports = router;
