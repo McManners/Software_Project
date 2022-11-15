@@ -1,47 +1,11 @@
-import React from "react";
-import "./CSS/Styles.css";
-import Navbar from "./Components/Navbar";
-import { createRoot } from "react-dom/client";
-import {
-    createBrowserRouter,
-    RouterProvider,
-    Route,
-    Link,
-} from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import "../CSS/Styles.css";
+import Navbar from '../Components/Navbar';
 
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: (
-            <div>
-                <body className="sign-in-page">
-                <div className="container">
-                    <div className="form-container sign-in-container">
-                        <form action="#">
-                            <img src="./Images/ASG_SER_MC_RGB.png"/>
-                            <h3>Sign In</h3>
-                            <span>Employee ID</span>
-                            <input type="EmployeeID" placeholder="Employee ID"/>
-                            <span>Password</span>
-                            <input type="password" placeholder="Password"/>
-                            <Link to="/homepage">
-                                <button className="continue-button">Continue</button>
-                            </Link>
-                        </form>
-                    </div>
-                    <div className="overlay-container">
-                        <div className="picture-align">
-                            <img className="imgLogo2" src="https://miro.medium.com/max/828/1*JLM_9XM6yqsWaMfMTSTEAg.jpeg"/>
-                        </div>
-                    </div>
-                </div>
-                </body>
-            </div>
-        ),
-    },
-    {
-        path: "homepage",
-        element: 
+const Home = () => {
+
+    return (
         <div>
             <body className="homepage-body">
             <Navbar/>
@@ -59,21 +23,21 @@ const router = createBrowserRouter([
                             <div className="calendar">
                                 <button className="calendar-button">
                                     <img src="https://cdn-icons-png.flaticon.com/128/55/55281.png"
-                                         className="calendar-picture" height="30px" width="30px"/>
+                                            className="calendar-picture" height="30px" width="30px"/>
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div className="card-container">
                         <div className="card-row">
-                            <Link to="/requestPTO">
+                            <Link to="/requesttest">
                             <div className="card">
                                 <img src="https://cdn-icons-png.flaticon.com/512/2117/2117251.png" className="card-picture" />
                                 <br/>
                                 <h4>        Request Time Off     </h4>
                             </div>
                             </Link>
-                            <Link to="/statsPage">
+                            <Link to="/statstest">
                             <div className="card">
                                 <img src="https://cdn-icons-png.flaticon.com/512/7174/7174337.png" className="card-picture" />
                                 <br/>
@@ -94,23 +58,8 @@ const router = createBrowserRouter([
 
             </main>
             </body>
-        </div>,
-    },
-    {
-        path: "statsPage",
-        element: <div>
-            <h3>Stats Page</h3>
         </div>
-    },
-    {
-        path: "requestPTO",
-        element: <div>
-            <h3>PTO PAGE</h3>
-        </div>
-    },
+    );
+}
 
-]);
-
-createRoot(document.getElementById("root")).render(
-    <RouterProvider router={router} />
-);
+export default Home;

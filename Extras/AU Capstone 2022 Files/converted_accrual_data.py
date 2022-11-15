@@ -12,9 +12,9 @@ try:
             count += 1
             line = f.readline()
             if (line.__contains__('},')):
-                stra = stra[:-2] + '),\n'
+                stra = stra[:-1] + '),\n'
                 break
-            elif line.__contains__(']') == False and line.__contains__('[') == False and line.__contains__('{') == False and line.__contains__('}') == False and line.__contains__('Vacation') == False and line.__contains__('Personal') == False and line.__contains__('Sick') == False:
+            elif line.__contains__(']') == False and line.__contains__('[') == False and line.__contains__('{') == False and line.__contains__('}') == False:
                 s = line.split(': ')
                 stra += s[1].strip() + ' '
         w.write(stra)
