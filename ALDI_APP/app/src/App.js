@@ -14,6 +14,9 @@ import Status from './simple/Status';
 import SessionExpired from './simple/SessionExpired'; // should protect this route somehow...
 import ManagerRequests from './simple/ManagerRequests';
 import SIgnIn from './src/new/Pages/SIgnIn';
+import PendingRequests from './simple/PendingRequests';
+import CompletedRequests from './simple/CompletedRequests';
+import NewRequest from './simple/NewRequest';
 
 function App() {
 
@@ -25,7 +28,9 @@ function App() {
                 <Route path="register" element={<Register />} />
                 <Route path="unauthorized" element={<Unauthorized />} />
                 <Route path="sessionexpired" element={<SessionExpired />}/>
-                
+                <Route path="request/pending" element={<PendingRequests />}/>
+                <Route path="request/completed" element={<CompletedRequests />}/>
+                <Route path="request/create" element={<NewRequest />}/>
                 <Route path="test/login" element={<SIgnIn />}/>
                 
                 <Route element={<RememberLogin />}>

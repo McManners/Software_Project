@@ -1,0 +1,55 @@
+.request-main {
+    background: linear-gradient(45deg, #FFB428 0%,
+    #FA8214 45%, #FA8214 100%);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.request-container {
+    height: 75%;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+}
+.request-pending {
+    border: 2px solid purple;
+    position: relative;
+    background-color: white;
+    z-index: 1;
+    float: left;
+}
+.request-pending-item {
+    border: 1px solid black;
+    padding: 25px 25px;
+    margin: 5px;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    background-color: yellow;
+}
+.request-header-buttons {
+    position: relative;
+    display: flex;
+    float: left;
+    bottom: -2px;
+}
+.request-header-buttons button {
+    padding: 6px;
+    border-radius: 5px 5px 0 0;
+}
+.request-current-button {
+    pointer-events: none;
+    background-color: white;
+    border: 2px solid purple;
+    border-bottom: none;
+    position: relative;
+    z-index: 2;
+}
+.request-non-current-button {
+    background-color: gray;
+    border: 1px solid black;
+    position: relative;
+    pointer-events: all;
+}
