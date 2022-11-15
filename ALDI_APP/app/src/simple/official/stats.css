@@ -1,0 +1,107 @@
+#app {
+    background: linear-gradient(45deg, #FFB428 0%,
+    #FA8214 45%, #FA8214 100%);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#stats-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 65%;
+    background-color: white;
+    width: 75%;
+}
+.stats-sick-container, .stats-personal-container, .stats-vacation-container {
+    border: 1px solid black;
+    flex: 50%;
+}
+
+#test {
+    font-size: 60px;
+    font-family: Impact;
+    stroke: blue;
+    stroke-width: 10px;
+}
+.stroke-text{
+    --stroke-color:red;
+    --stroke-width:5px;
+    color:white;
+    text-shadow: var(--stroke-width)  0 0 var(--stroke-color),
+      calc(var(--stroke-width) * -1) 0 0 var(--stroke-color),
+      0 var(--stroke-width) 0 var(--stroke-color),
+      0 calc(var(--stroke-width) * -1) 0 var(--stroke-color);
+  }
+
+  .smooth-16 {
+  text-shadow: calc(var(--stroke-width) * 1) calc(var(--stroke-width) * 0) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.9239) calc(var(--stroke-width) * 0.3827) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.7071) calc(var(--stroke-width) * 0.7071) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.3827) calc(var(--stroke-width) * 0.9239) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0) calc(var(--stroke-width) * 1) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.3827) calc(var(--stroke-width) * 0.9239) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.7071) calc(var(--stroke-width) * 0.7071) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.9239) calc(var(--stroke-width) * 0.3827) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -1) calc(var(--stroke-width) * 0) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.9239) calc(var(--stroke-width) * -0.3827) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.7071) calc(var(--stroke-width) * -0.7071) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * -0.3827) calc(var(--stroke-width) * -0.9239) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0) calc(var(--stroke-width) * -1) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.3827) calc(var(--stroke-width) * -0.9239) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.7071) calc(var(--stroke-width) * -0.7071) 0
+      var(--stroke-color),
+    calc(var(--stroke-width) * 0.9239) calc(var(--stroke-width) * -0.3827) 0
+      var(--stroke-color);
+}
+
+.smooth-16 {
+    text-shadow: calc(var(--stroke-width) * 1) calc(var(--stroke-width) * 0) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * 0.9239) calc(var(--stroke-width) * 0.3827) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * 0.7071) calc(var(--stroke-width) * 0.7071) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * 0.3827) calc(var(--stroke-width) * 0.9239) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * 0) calc(var(--stroke-width) * 1) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * -0.3827) calc(var(--stroke-width) * 0.9239) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * -0.7071) calc(var(--stroke-width) * 0.7071) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * -0.9239) calc(var(--stroke-width) * 0.3827) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * -1) calc(var(--stroke-width) * 0) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * -0.9239) calc(var(--stroke-width) * -0.3827) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * -0.7071) calc(var(--stroke-width) * -0.7071) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * -0.3827) calc(var(--stroke-width) * -0.9239) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * 0) calc(var(--stroke-width) * -1) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * 0.3827) calc(var(--stroke-width) * -0.9239) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * 0.7071) calc(var(--stroke-width) * -0.7071) 0
+        var(--stroke-color),
+      calc(var(--stroke-width) * 0.9239) calc(var(--stroke-width) * -0.3827) 0
+        var(--stroke-color);
+  }

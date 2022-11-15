@@ -13,7 +13,12 @@ import Unauthorized from './simple/Unauthorized';
 import Status from './simple/Status';
 import SessionExpired from './simple/SessionExpired'; // should protect this route somehow...
 import ManagerRequests from './simple/ManagerRequests';
-import SIgnIn from './src/new/Pages/SIgnIn';
+
+import LoginTest from './src/new/Pages/Login';
+import Home from './src/new/Pages/Home';
+import StatsTest from './src/new/Pages/Stats';
+import RequestPTO from './src/new/Pages/RequestPTO';
+import Stats from './simple/official/Stats';
 
 function App() {
 
@@ -26,8 +31,12 @@ function App() {
                 <Route path="unauthorized" element={<Unauthorized />} />
                 <Route path="sessionexpired" element={<SessionExpired />}/>
                 
-                <Route path="test/login" element={<SIgnIn />}/>
-                
+                <Route path="logintest" element={<LoginTest />}/>
+                <Route path="hometest" element={<Home />}/>
+                <Route path="statstest" element={<StatsTest />}/>
+                <Route path="requesttest" element={<RequestPTO />}/>
+                <Route path="stats" element={<Stats />}/>
+
                 <Route element={<RememberLogin />}>
                     <Route element={<Status />}>
                         <Route element={<RequireAuth allowedEmployeeType={["Employee", "Manager"]}/>}>
