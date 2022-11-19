@@ -1,0 +1,88 @@
+#pending-request-main {
+    background: linear-gradient(45deg, #FFB428 0%,
+    #FA8214 45%, #FA8214 100%);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#pending-request-container {
+    width: 50%;
+    height: 50%;
+}
+#pending-request-body {
+    border: 2px solid black;
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    display: flex;
+    float: left;
+    width: 100%;
+    flex-direction: column;
+    justify-content: stretch;
+}
+.pending-request-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: stretch;
+    padding: 20px;
+}
+.pending-request-item-data {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.bold {
+    font-weight: bold;
+}
+.pending-textbox {
+    width: 100%;
+    border: 2px solid black;
+    text-align: left;
+    padding: 5px 10px;
+    background-color: lightgray;
+}
+#pending-buttons {
+    position: relative;
+    z-index: 1;
+}
+.pending-button-current {
+    border: 2px solid black;
+    padding: 8px;
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+    pointer-events: none;
+    color: black;
+    font-weight: bold;
+    background-color: white;
+    position: relative;
+    float: left;
+    z-index: 3;
+    bottom: -2px;
+}
+.pending-button-non-current {
+    border: 2px solid black;
+    padding: 8px;
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+    float: left;
+    z-index: 0;
+    position: relative;
+    bottom: -2px;
+    background-color: lightgray;
+    cursor: pointer;
+}
+.pending-button-non-current:hover {
+    background-color: gray;
+    color: white;
+}
+#non {
+    width: 100%;
+    flex-grow: 1;
+}
+.pending-request-item-data {
+    text-align: left;
+    padding: 10px;
+}

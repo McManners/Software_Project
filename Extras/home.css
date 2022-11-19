@@ -1,0 +1,27 @@
+.main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100vw;
+	background-color: orange;
+}
+.body {
+	text-align: center;
+	border: 5px solid blue;
+	border-radius: 10px;
+	height: 50%;
+	width: 50%;
+	display: grid;
+	align-items: center;
+	color: yellow;
+	font-weight: bold;
+	font-size: 2rem;
+	background-color: red;
+	box-shadow: 1px 1px 10px 10px black inset, 10px 10px white inset;
+	
+}
+.page {
+	display: flex;
+	background-color: red;
+}

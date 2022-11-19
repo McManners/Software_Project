@@ -53,3 +53,5 @@ so that if I cannot get October 12 off, I do not want October 8, October 9, Octo
 As a manager, I want to select a specific day from a range of days that the employee cannot request off,
 so that the employee will know what day(s) are unavailable to request off. I want the employee to know that 
 they CAN request off these other days, just not this specific day in the range of days.
+
+Fix employee email to be a unique sql data column
