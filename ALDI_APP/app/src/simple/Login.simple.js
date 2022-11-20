@@ -6,17 +6,23 @@ import useAuth from "./useAuth";
 import './css/login.css';
 import axios from 'axios';
 import aldi_logo from './imgs/ASG_SER_MC_RGB.png';
+import useRefreshToken from "./useRefreshToken";
 
 const Login = () => {
-    const { setAuth, remember, setRemember } = useAuth();
+    const { auth, setAuth, remember, setRemember } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    
 
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [errMsg, setErrMsg] = React.useState("");
     
 
-    const navigate = useNavigate();
-    const location = useLocation();
+    
+    
+    
     const from = location.state?.from?.pathName || "/dashboard";
 
     if (location.state?.from?.pathName === "/dashboard") {

@@ -27,7 +27,7 @@ const handleRefreshToken = async (req, res) => {
                     "employee_type": decoded.employee_type
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '15m' } // set longer
+                { expiresIn: '10s' } // set longer
             );
             res.json({ access_token, employee_type });
         }

@@ -3,14 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 import useAuth from '../useAuth';
 import useLogout from '../useLogout';
+import useRefreshToken from '../useRefreshToken';
 
 const Requests = () => {
     const [tickets, setTickets] = useState([]); // change to null, creating loading component until got response
     const navigate = useNavigate();
     const location = useLocation();
     const { auth, setAuth } = useAuth();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const logout = useLogout();
+    const refresh = useRefreshToken();
 
     const getTickets = () => {
         axios.interceptors.request.use(req => {
@@ -33,10 +35,10 @@ const Requests = () => {
         .then(function(res) {
             console.log("response: " + JSON.stringify(res.data.tickets));
             setTickets(res.data.tickets);
-            setIsLoading(false);
+            
         })
         .catch(err => {
-            logout();
+            console.log(err);
         });
     };
 
@@ -46,8 +48,9 @@ const Requests = () => {
     }, []);
 
     
+
+    
     return (
-        isLoading ? <div>Loading...</div> :
         <div>
             <div className='container-grid'>
                 <div className='grid-item'>

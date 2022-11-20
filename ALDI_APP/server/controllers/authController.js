@@ -25,7 +25,7 @@ const handleLogin = async (req, res) => {
                 "employee_type": foundEmployee_Type.employee_type
             },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '15m' } // 5min/15min whatever
+            { expiresIn: '10s' } // 5min/15min whatever
         );
         const refresh_token = jwt.sign(
             { 

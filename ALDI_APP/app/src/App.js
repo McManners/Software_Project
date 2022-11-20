@@ -13,10 +13,17 @@ import Unauthorized from './simple/Unauthorized';
 import Status from './simple/Status';
 import SessionExpired from './simple/SessionExpired'; // should protect this route somehow...
 import ManagerRequests from './simple/ManagerRequests';
-import SIgnIn from './src/new/Pages/SIgnIn';
-import PendingRequests from './simple/PendingRequests';
-import CompletedRequests from './simple/CompletedRequests';
-import NewRequest from './simple/NewRequest';
+
+import LoginTest from './src/new/Pages/Login';
+import Home from './src/new/Pages/Home';
+import StatsTest from './src/new/Pages/Stats';
+import RequestPTO from './src/new/Pages/RequestPTO';
+import Stats from './simple/official/Stats';
+import PendingRequests from './simple/Requests/PendingRequests';
+import CompleteRequests from './simple/Requests/CompleteRequests';
+import CreateRequest from './simple/Requests/CreateRequest';
+
+import CalendarTest from './simple/Requests/CalendarTest';
 
 function App() {
 
@@ -28,10 +35,17 @@ function App() {
                 <Route path="register" element={<Register />} />
                 <Route path="unauthorized" element={<Unauthorized />} />
                 <Route path="sessionexpired" element={<SessionExpired />}/>
+                
+                <Route path="logintest" element={<LoginTest />}/>
+                <Route path="hometest" element={<Home />}/>
+                <Route path="statstest" element={<StatsTest />}/>
+                <Route path="requesttest" element={<RequestPTO />}/>
+                <Route path="stats" element={<Stats />}/>
+
                 <Route path="request/pending" element={<PendingRequests />}/>
-                <Route path="request/completed" element={<CompletedRequests />}/>
-                <Route path="request/create" element={<NewRequest />}/>
-                <Route path="test/login" element={<SIgnIn />}/>
+                <Route path="request/complete" element={<CompleteRequests />}/>
+                <Route path="request/create" element={<CreateRequest />}/>
+                <Route path="calendartest" element={<CalendarTest />}/>
                 
                 <Route element={<RememberLogin />}>
                     <Route element={<Status />}>
