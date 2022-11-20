@@ -1,17 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './createrequest.css';
+import './createrequest copy.css';
 import axios from 'axios';
 import CalendarTest from './CalendarTest';
 
-const CreateRequest = () => {
+const CreateRequestWithCalendar = () => {
     const navigate = useNavigate();
     const [requestNote, setRequestNote] = useState("test");
     // const [availablePTO, setAvailablePTO] = useState({ vacation: 0, sick: 0, personal: 0 });
     const [availablePTO, setAvailablePTO] = useState({ vacation: 2, sick: 0, personal: 0 });
     const [errMsg, setErrMsg] = useState("");
     const [selectedType, setSelectedType] = useState(-1);
-
+    const date = new Date();
     const errRef = useRef();
     const testRef = useRef();
 
@@ -36,9 +36,26 @@ const CreateRequest = () => {
     //         console.log(err);
     //     })
     // }, []);
+    const [selectedDays, setSelectedDays] = useState([]);
+    const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
+    const [selectedYear, setSelectedYear] = useState(date.getFullYear());
+    const handleDayClickParent = event => {
+        console.log(selectedDays)
+        if (!selectedDays.includes(event.target.id)) {
+            console.log(event.target.parentElement);
+            console.log("clicked");
+            setSelectedDays(prev => [...prev, event.target.id]);
+            event.target.parentElement.style.backgroundColor = "#f0fff0";
+            
+        } else {
+            setSelectedDays(prev => prev.filter(e => e !== event.target.id));
+            event.target.parentElement.style.backgroundColor = "transparent";
+        }
+        
+    }
 
     const handleRequestNoteChange = event => {
-        event.preventDefault();
+        console.log("blur triggered");
         setRequestNote(event.target.value);
     }
 
@@ -140,7 +157,6 @@ const CreateRequest = () => {
 
     // TODO: Verify date day exists...
 
-    const date = new Date();
     const handleYearChange = event => {
         event.preventDefault();
 
@@ -209,55 +225,49 @@ const CreateRequest = () => {
             </select>
         )
     }
-
-    const GetForm = () => {
+    const renderSelectedDays = () => {
+        let days = "";
+        selectedDays.forEach(e => {
+            days += (`${e}, `);
+        })
         return (
             <div>
-                <div className='pending-request-item'>
-                    <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>From:</div>
-                    <div>
-                        <label disabled={errMsg !== ""} htmlFor="date-from-month">Month:</label>
-                        {dateMonth("from")}
-                        <label disabled={errMsg !== ""} htmlFor="date-from-day">Day:</label>
-                        {dateDay("from")}
-                        <label disabled={errMsg !== ""} htmlFor="date-from-year">Year: </label>
-                        {dateYear("from")}
+                Selected Days: {days}
+            </div>
+        )
+    }
+    const GetForm = () => {
+        return (
+            <div className='req-cont'>
+                    <div className='cal-container'>
+                        <CalendarTest 
+                            setSelectedDays={setSelectedDays} 
+                            selectedDays={selectedDays} 
+                            setSelectedMonth={setSelectedMonth}
+                            selectedMonth={selectedMonth}
+                            setSelectedYear={setSelectedYear}
+                            selectedYear={selectedYear}
+                        />
                     </div>
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+                <div className='create-request-item'>
+                    {renderSelectedDays()}
                 </div>
-                
-                <div className='pending-request-item'>
-                    <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>To:</div>
-                    
-                    <div ref={testRef}>
-                        <label disabled={errMsg !== ""} htmlFor="date-to-month">Month:</label>
-                        {dateMonth("to")}
-                        <label disabled={errMsg !== ""} htmlFor="date-to-day">Day:</label>
-                        {dateDay("to")}
-                        <label disabled={errMsg !== ""} htmlFor="date-to-year">Year: </label>
-                        {dateYear("to")}
-                    </div>
-                </div>
-                <div className='pending-request-item'>
+                <div className='create-request-item'>
                     <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>
                         <label htmlFor="request-note-input">Request Note: </label>
                     </div>
                     <textarea rows="2" cols="50" id="request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
                 </div>
                 <button type="button" onClick={createTicket} id='create-ticket-button'>Create Ticket</button>
-                {/* <button type="button" onClick={() => {
-                    let x = selectedDate.from.year.toString() + 
-                    ((selectedDate.from.month < 10) ? 
-                    ("0" + selectedDate.from.month.toString()) : 
-                    (selectedDate.from.month.toString())) +
-                    ((selectedDate.from.day < 10) ? 
-                    ("0" + selectedDate.from.day.toString()) : 
-                    (selectedDate.from.day.toString()));
-                    console.log(x);
-                    console.log(selectedDate.from.year.toString() + "0");
-                }}>Check Date</button> */}
+                </div>
+                
+                
             </div>
         )
     }
+
+
 
     return (
         <div id='create-request-main'>
@@ -289,4 +299,4 @@ const CreateRequest = () => {
     )
 }
 
-export default CreateRequest;
+export default CreateRequestWithCalendar;
