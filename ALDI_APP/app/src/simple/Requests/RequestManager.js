@@ -1,17 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './createrequest.css';
+import './requestmanager.css';
 import axios from 'axios';
 import CalendarTest from './CalendarTest';
 
-const CreateRequest = () => {
+const RequestManager = () => {
     const navigate = useNavigate();
     const [requestNote, setRequestNote] = useState("test");
     // const [availablePTO, setAvailablePTO] = useState({ vacation: 0, sick: 0, personal: 0 });
     const [availablePTO, setAvailablePTO] = useState({ vacation: 2, sick: 0, personal: 0 });
     const [errMsg, setErrMsg] = useState("");
     const [selectedType, setSelectedType] = useState(-1);
-
+    const date = new Date();
     const errRef = useRef();
     const testRef = useRef();
 
@@ -36,9 +36,26 @@ const CreateRequest = () => {
     //         console.log(err);
     //     })
     // }, []);
+    const [selectedDays, setSelectedDays] = useState([]);
+    const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
+    const [selectedYear, setSelectedYear] = useState(date.getFullYear());
+    const handleDayClickParent = event => {
+        console.log(selectedDays)
+        if (!selectedDays.includes(event.target.id)) {
+            console.log(event.target.parentElement);
+            console.log("clicked");
+            setSelectedDays(prev => [...prev, event.target.id]);
+            event.target.parentElement.style.backgroundColor = "#f0fff0";
+            
+        } else {
+            setSelectedDays(prev => prev.filter(e => e !== event.target.id));
+            event.target.parentElement.style.backgroundColor = "transparent";
+        }
+        
+    }
 
     const handleRequestNoteChange = event => {
-        event.preventDefault();
+        console.log("blur triggered");
         setRequestNote(event.target.value);
     }
 
@@ -140,7 +157,6 @@ const CreateRequest = () => {
 
     // TODO: Verify date day exists...
 
-    const date = new Date();
     const handleYearChange = event => {
         event.preventDefault();
 
@@ -209,55 +225,38 @@ const CreateRequest = () => {
             </select>
         )
     }
-
+    const renderSelectedDays = () => {
+        let days = "";
+        selectedDays.forEach(e => {
+            days += (`${e}, `);
+        })
+        return (
+            <div>
+                Selected Days: {days}
+            </div>
+        )
+    }
     const GetForm = () => {
         return (
             <div>
                 <div className='pending-request-item'>
-                    <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>From:</div>
-                    <div>
-                        <label disabled={errMsg !== ""} htmlFor="date-from-month">Month:</label>
-                        {dateMonth("from")}
-                        <label disabled={errMsg !== ""} htmlFor="date-from-day">Day:</label>
-                        {dateDay("from")}
-                        <label disabled={errMsg !== ""} htmlFor="date-from-year">Year: </label>
-                        {dateYear("from")}
+                    <div>hey</div>
+                    <div className='cal-container'>
+                        <CalendarTest 
+                            setSelectedDays={setSelectedDays} 
+                            selectedDays={selectedDays} 
+                            setSelectedMonth={setSelectedMonth}
+                            selectedMonth={selectedMonth}
+                            setSelectedYear={setSelectedYear}
+                            selectedYear={selectedYear}
+                        />
                     </div>
                 </div>
-                
-                <div className='pending-request-item'>
-                    <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>To:</div>
-                    
-                    <div ref={testRef}>
-                        <label disabled={errMsg !== ""} htmlFor="date-to-month">Month:</label>
-                        {dateMonth("to")}
-                        <label disabled={errMsg !== ""} htmlFor="date-to-day">Day:</label>
-                        {dateDay("to")}
-                        <label disabled={errMsg !== ""} htmlFor="date-to-year">Year: </label>
-                        {dateYear("to")}
-                    </div>
-                </div>
-                <div className='pending-request-item'>
-                    <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>
-                        <label htmlFor="request-note-input">Request Note: </label>
-                    </div>
-                    <textarea rows="2" cols="50" id="request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
-                </div>
-                <button type="button" onClick={createTicket} id='create-ticket-button'>Create Ticket</button>
-                {/* <button type="button" onClick={() => {
-                    let x = selectedDate.from.year.toString() + 
-                    ((selectedDate.from.month < 10) ? 
-                    ("0" + selectedDate.from.month.toString()) : 
-                    (selectedDate.from.month.toString())) +
-                    ((selectedDate.from.day < 10) ? 
-                    ("0" + selectedDate.from.day.toString()) : 
-                    (selectedDate.from.day.toString()));
-                    console.log(x);
-                    console.log(selectedDate.from.year.toString() + "0");
-                }}>Check Date</button> */}
             </div>
         )
     }
+
+
 
     return (
         <div id='create-request-main'>
@@ -267,26 +266,12 @@ const CreateRequest = () => {
                 <div id='create-new-button' className='pending-button-current'>Create New</div>
                 
                 <div id='pending-request-body'>          
-                    {/* <form onSubmit={createTicket} style={{ width: "50%", transform: "translateX(50%)", position: "relative" }}> */}
-                    <div>
-                        <label htmlFor="request-type">Request Type: </label>
-                        <select type="dropdown" id="request-type" defaultValue={'DEFAULT'} onChange={handlePTOTypeSelect}>
-                            <option value="DEFAULT" disabled={true} hidden={true}>Choose a type ...</option>
-                            {requestTypes.map((type, key) => {
-                                return (
-                                    <option key={key} value={type.pto_type_id} onSelect={() => handlePTOTypeSelect}>{type.pto_type}</option>
-                                );
-                            })}
-                        </select>
-
-                        <div ref={errRef} style={{color: "red", fontWeight: "bold"}}>{errMsg === "" ? <br /> : errMsg}</div>
-                        
-                    </div>
-                    {(selectedType !== -1 && errMsg === "") ? <GetForm /> : <></>}
+                    
+                    <GetForm />
                 </div>
             </div>   
         </div>
     )
 }
 
-export default CreateRequest;
+export default RequestManager;

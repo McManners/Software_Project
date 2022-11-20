@@ -4,7 +4,7 @@ import IconBxsLeftArrow from './Icons/IconBxsLeftArrow.tsx';
 import IconBxsRightArrow from './Icons/IconBxsRightArrow.tsx';
 import IconHalloween from './Icons/IconHalloween.tsx';
 
-const CalendarTest = () => {
+const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMonth, setSelectedYear, selectedYear}) => {
     const monthEnum = {
         JANUARY: { days: 31, day: 'January', firstDayOfMonth: 1},
         FEBRUARY: { days: 28, day: 'February', firstDayOfMonth: 1},
@@ -20,7 +20,7 @@ const CalendarTest = () => {
         DECEMBER: { days: 31, day: 'December', firstDayOfMonth: 1}
     }
     const date = new Date();
-    const [selectedYear, setSelectedYear] = useState(date.getFullYear());
+    // const [selectedYear, setSelectedYear] = useState(date.getFullYear());
     // Object.freeze(monthEnum);
 
     const gridContainerRef = useRef();
@@ -41,7 +41,7 @@ const CalendarTest = () => {
         }
     }
 
-    const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
+    // const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
     // console.log(Object.entries(monthEnum)[selectedMonth]);
     // console.log(Object.keys(monthEnum))
     const handleMonthChangeDecrease = () => {
@@ -63,7 +63,7 @@ const CalendarTest = () => {
             setSelectedMonth(prev => prev + 1);
         }
     }
-    const [selectedDays, setSelectedDays] = useState([])
+    // const [selectedDays, setSelectedDays] = useState([]);
     const [aspectRatio, setAspectRatio] = useState("7/5");
     const handleDayClick = event => {
         if (!selectedDays.includes(event.target.id)) {
@@ -76,7 +76,6 @@ const CalendarTest = () => {
             setSelectedDays(prev => prev.filter(e => e !== event.target.id));
             event.target.parentElement.style.backgroundColor = "transparent";
         }
-        
     }
     const renderSelectedDays = () => {
         let days = "";
@@ -155,30 +154,47 @@ const CalendarTest = () => {
                 count += 1;
             }
         }
+        if (month.length < 42) {
+            // hmm this keeps the 7/6 ratio on 5 week grids
+            month.push(
+                <div className='day aspect-ratio disabled-day' key={"extra-row"} style={{border: 'none', backgroundColor: 'transparent'}}>
+                        <div className='day-header'></div>
+                    </div>
+            )
+        }
         // console.log(month);
         
         
         return (
-            <div style={{aspectRatio: month_grid_count === 35 ? "7/5" : "7/6"}} className='grid-container'>
+            <div className='grid-container'>
                 {month}
             </div>
         );
     }
     return (
-        <div className='main'>
-            <div className='test'>Total Days: {selectedDays.length}</div>
-            {renderSelectedDays()}
-            <button type="button" onClick={() => console.log("selecteddays: " + selectedDays)}>Check Sel Days</button>
+        // <div className='main'>
+        //     <div className='test'>Total Days: {selectedDays.length}</div>
+            // {renderSelectedDays()}
+            // <button type="button" onClick={() => console.log("selecteddays: " + selectedDays)}>Check Sel Days</button>
             <div className='calendar-container disable-select'>
                 <div className='calendar-header'>
                     <IconBxsLeftArrow onClick={handleMonthChangeDecrease} width='25px' height='50%' />
                     <span style={{ width: '100px' }}>{Object.entries(monthEnum)[selectedMonth][1].day}</span>
                     <IconBxsRightArrow onClick={handleMonthChangeIncrease} width='25px'height='50%' />
                 </div>
+                <div className='calendar-day-header-container'>
+                    <div className='calendar-day-header'>Sunday</div>
+                    <div className='calendar-day-header'>Monday</div>
+                    <div className='calendar-day-header'>Tuesday</div>
+                    <div className='calendar-day-header'>Wednesday</div>
+                    <div className='calendar-day-header'>Thursday</div>
+                    <div className='calendar-day-header'>Friday</div>
+                    <div className='calendar-day-header'>Saturday</div>
+                </div>
                 {renderMonth(Object.entries(monthEnum)[selectedMonth][1].days)}
                 
             </div>
-        </div>
+        // </div>
     )
 }
 

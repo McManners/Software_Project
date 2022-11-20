@@ -24,6 +24,8 @@ import CompleteRequests from './simple/Requests/CompleteRequests';
 import CreateRequest from './simple/Requests/CreateRequest';
 
 import CalendarTest from './simple/Requests/CalendarTest';
+import CreateRequestWithCalendar from './simple/Requests/CreateRequestWithCalendar';
+import RequestManager from './simple/Requests/RequestManager';
 
 function App() {
 
@@ -46,7 +48,9 @@ function App() {
                 <Route path="request/complete" element={<CompleteRequests />}/>
                 <Route path="request/create" element={<CreateRequest />}/>
                 <Route path="calendartest" element={<CalendarTest />}/>
-                
+                <Route path="request/create/calendar" element={<CreateRequestWithCalendar />}/>
+                <Route path="request/manager" element={<RequestManager />}/>
+
                 <Route element={<RememberLogin />}>
                     <Route element={<Status />}>
                         <Route element={<RequireAuth allowedEmployeeType={["Employee", "Manager"]}/>}>
