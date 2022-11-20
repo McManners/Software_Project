@@ -15,9 +15,13 @@ const Status = () => {
         await logout();
         navigate('/login');
     }
-    return (
-        (document.cookie.match("logged") !== null) ? <Outlet/> : <Navigate to="/login" state={{ from: location }} replace />
-    )
+    if (document.cookie.match("logged") !== null)
+        return ( <Outlet/> )
+    else {
+        console.log("signing out status");
+        signOut();
+        <Navigate to="/" state={{ from: location }} replace />
+    }
 }
 
 export default Status;

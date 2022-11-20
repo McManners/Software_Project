@@ -19,6 +19,11 @@ import Home from './src/new/Pages/Home';
 import StatsTest from './src/new/Pages/Stats';
 import RequestPTO from './src/new/Pages/RequestPTO';
 import Stats from './simple/official/Stats';
+import PendingRequests from './simple/Requests/PendingRequests';
+import CompleteRequests from './simple/Requests/CompleteRequests';
+import CreateRequest from './simple/Requests/CreateRequest';
+
+import CalendarTest from './simple/Requests/CalendarTest';
 
 function App() {
 
@@ -37,6 +42,11 @@ function App() {
                 <Route path="requesttest" element={<RequestPTO />}/>
                 <Route path="stats" element={<Stats />}/>
 
+                <Route path="request/pending" element={<PendingRequests />}/>
+                <Route path="request/complete" element={<CompleteRequests />}/>
+                <Route path="request/create" element={<CreateRequest />}/>
+                <Route path="calendartest" element={<CalendarTest />}/>
+                
                 <Route element={<RememberLogin />}>
                     <Route element={<Status />}>
                         <Route element={<RequireAuth allowedEmployeeType={["Employee", "Manager"]}/>}>
