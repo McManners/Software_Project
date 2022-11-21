@@ -4,7 +4,7 @@ import IconBxsLeftArrow from './Icons/IconBxsLeftArrow.tsx';
 import IconBxsRightArrow from './Icons/IconBxsRightArrow.tsx';
 import IconHalloween from './Icons/IconHalloween.tsx';
 
-const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMonth, setSelectedYear, selectedYear}) => {
+const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMonth, setSelectedYear, selectedYear, calendarType}) => {
     const monthEnum = {
         JANUARY: { days: 31, day: 'January', firstDayOfMonth: 1},
         FEBRUARY: { days: 28, day: 'February', firstDayOfMonth: 1},
@@ -63,32 +63,25 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
             setSelectedMonth(prev => prev + 1);
         }
     }
+    const calendarTypeColor = (calendarType === "Manager") ? "#ff2800" : "#f0fff0"
     // const [selectedDays, setSelectedDays] = useState([]);
     const [aspectRatio, setAspectRatio] = useState("7/5");
     const handleDayClick = event => {
         if (!selectedDays.includes(event.target.id)) {
             setSelectedDays(prev => [...prev, event.target.id]);
-            event.target.parentElement.style.backgroundColor = "#f0fff0";
+            console.log(calendarTypeColor)
+            console.log(calendarType)
+            // event.target.parentElement.style.backgroundColor = calendarTypeColor;
             
             // .currentTarget instead of target to get the listeners element!
             // https://stackoverflow.com/questions/36599473/react-click-on-the-parent-element
         } else {
             setSelectedDays(prev => prev.filter(e => e !== event.target.id));
-            event.target.parentElement.style.backgroundColor = "transparent";
+            // event.target.parentElement.style.backgroundColor = "transparent";
         }
     }
-    const renderSelectedDays = () => {
-        let days = "";
-        selectedDays.forEach(e => {
-            days += (`${e}, `);
-        })
-        return (
-            <div>
-                Selected Days: <br/>
-                {days}
-            </div>
-        )
-    }
+    
+    const employeeDaysTest = ['10/09/2022', '10/11/2022']
     const renderMonth = (currMonth) => {
         
         setStartOfMonth();
@@ -96,9 +89,37 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
         const prev_month_days = Object.entries(monthEnum)[selectedMonth === 0 ? 11 : selectedMonth - 1][1].days;
         const total_days_in_month = Object.entries(monthEnum)[selectedMonth][1].days;
         let month = [];
-        for (let i = 1; i < currMonth + 1; i++) {
+        if (calendarType === "Manager") {
+            console.log("this calendar is for manager");
+            for (let i = 1; i < currMonth + 1; i++) {
                 month.push(
-                    <div className='day aspect-ratio' key={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`} 
+                    <div className={
+                        employeeDaysTest.includes((`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`)) ? 
+                        'day valid-day aspect-ratio' : 'day disabled-day aspect-ratio'
+                    } key={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`} 
+                        style={
+                            selectedDays.includes((`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`)) ?
+                            {backgroundColor: calendarTypeColor} : 
+                                employeeDaysTest.includes((`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`)) ? 
+                                    {backgroundColor: '#f0fff0'} : {}
+                        }>
+                        <div>
+                            <div className='day-header'>{i}</div>
+                        </div>
+                        <div></div>
+                        {
+                            employeeDaysTest.includes((`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`)) ? 
+                            <div className='spread' id={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`} onClick={handleDayClick}></div> :
+                            <div className='spread' id={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`}></div>
+                        }
+                    </div>
+                )
+            }
+        } else {
+            console.log("this calendar is not for manager");
+            for (let i = 1; i < currMonth + 1; i++) {
+                month.push(
+                    <div className='day valid-day aspect-ratio' key={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`} 
                         style={
                             selectedDays.includes((`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`)) ?
                             {backgroundColor: '#f0fff0'} : {}
@@ -106,10 +127,10 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
                         <div>
                             <div className='day-header'>{i}</div>
                         </div>
-                        <div></div>
-                        <div className='spread' id={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`} onClick={handleDayClick}></div>
+                            <div className='spread' id={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`} onClick={handleDayClick}></div>
                     </div>
                 )
+            }
         }
         if (selectedMonth === 9) {
             month[30] = (
@@ -117,10 +138,11 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
                     <div>
                         <div className='day-header'>31</div>
                     </div>
-                    <div>
+                    <div className='spread' id={`10/31/${selectedYear}`}>
+                        {/* // This extra spread div is an overlay div to solve a couple problems.
+                        // It is absolutely positioned over the entire cell... */}
                         <IconHalloween style={{color: "orange"}} width='50px'height='25px' />
                     </div>
-                    <div className='spread' id={`10/31/${selectedYear}`}></div>
                 </div> 
             )
         }

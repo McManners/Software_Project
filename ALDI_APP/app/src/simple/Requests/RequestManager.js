@@ -232,25 +232,177 @@ const RequestManager = () => {
         })
         return (
             <div>
-                Selected Days: {days}
+                Select conflicting days: <div style={{color: 'red', fontWeight: 'bold'}}>{days}</div>
             </div>
         )
+    }
+    const requests = [
+        { name: "Isabella Salerno", type: "Vacation", timeRemaining: "2 days"},
+        { name: "Peanut Salerno", type: "Vacation", timeRemaining: "8 days"},
+        { name: "Sophie Salerno", type: "Sick", timeRemaining: "14 days"},
+        { name: "Francesca Salerno", type: "Personal", timeRemaining: "32 days"}
+    ]
+    const [openRequest, setOpenRequest] = useState(null);
+    const handleOpenRequestClick = event => {
+        console.log(event.target.id);
+        console.log(event.currentTarget.id);
+        setOpenRequest(event.currentTarget.id);
+    }
+    const handleOpenRequestClose = () => {
+        setOpenRequest(null);
+    }
+    const GetTable = () => {
+        let rows = [];
+        requests.map(e => {
+            rows.push(
+                    <tr key={e.name} id={e.name} onClick={handleOpenRequestClick}>
+                        <td value={e.name}>{e.name}</td>
+                        <td>{e.type}</td>
+                        <td>{e.timeRemaining}</td>
+                    </tr>
+            )
+            if (openRequest === e.name) {
+                console.log("open request is " + e.name);
+                rows.push(
+                    <tr key={openRequest + " open"}>
+                        <OpenRequest/>
+                    </tr>
+                )
+            }
+        });
+        console.log(rows);
+        return (
+            <table className='manager-request-table striped'>
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Type</th>
+                        <th>Time Remaining</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows}
+                </tbody>
+            </table>
+        )
+    }
+    const OpenRequest = () => {
+        return (
+                <td align='center' colSpan='3'>
+                    <div className='manager-table-open-request-container'>
+                        <div className='manager-table-open-request-left'>
+                            <button type="button">View Calendar</button>
+                            <div className='manager-request-disputed-days'>
+                                {renderSelectedDays()}
+                                <textarea rows="2" cols="50" id="manager-request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
+                            </div>
+                            <div className='manager-request-response-type'>
+                                <label htmlFor='manager-request-response-type-input'>Response Type:</label>
+                                <select id='manager-request-response-type-input'
+                                    style={{width: '80%', textAlign: 'center'}}>
+                                    <option value='approve'>Approve</option>
+                                    <option value='need more info'>Need More Information</option>
+                                    <option value='deny'>Deny</option>
+                                </select>
+                            </div>
+                            <button type='button' className='manager-request-submit-response-button'>Submit Response</button>
+                            <button type="button" className="open-request-close-button" onClick={handleOpenRequestClose}>Close</button>
+                        </div>
+                        <div className='cal-container'>
+                            <CalendarTest 
+                                setSelectedDays={setSelectedDays} 
+                                selectedDays={selectedDays} 
+                                setSelectedMonth={setSelectedMonth}
+                                selectedMonth={selectedMonth}
+                                setSelectedYear={setSelectedYear}
+                                selectedYear={selectedYear}
+                                calendarType="Manager"
+                            />
+                        </div>
+                    </div>
+                </td>
+        )
+    }
+    const Test = () => {
+        
+    }
+    const filterNavRef = useRef();
+    
+    const filter = () => {
+        console.log(filterNavRef.current.style.width);
+        if (filterNavRef.current.style.width === "0px") {
+            filterNavRef.current.style.width = "10%";
+        } else {
+            filterNavRef.current.style.width = "0px";
+        }
     }
     const GetForm = () => {
         return (
             <div>
-                <div className='pending-request-item'>
-                    <div>hey</div>
-                    <div className='cal-container'>
-                        <CalendarTest 
-                            setSelectedDays={setSelectedDays} 
-                            selectedDays={selectedDays} 
-                            setSelectedMonth={setSelectedMonth}
-                            selectedMonth={selectedMonth}
-                            setSelectedYear={setSelectedYear}
-                            selectedYear={selectedYear}
-                        />
+                <div className='manager-pending-request-item'>
+                    {/* <div style={{fontSize: "100px", fontWeight: "lighter", color: "blue", fontFamily: 'cursive'}}>izzy stinky</div> */}
+                    <div className='manager-requests-body-container'>
+                        
+                        <div className='manager-request-body-header'>
+                            <button type='button' id='manager-filter-button' onClick={filter}>Filter</button>
+                            <div ref={filterNavRef} className='manager-request-filter-nav'>
+                                <div>hsey</div>
+                            </div>
+                        </div>
+                        
+                            <GetTable />
+                        {/* <table className='manager-request-table'>
+                            <thead>
+                                <tr>
+                                    <th>Employee Name</th>
+                                    <th>Type</th>
+                                    <th>Time Remaining</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Isabella Salerno</td>
+                                    <td>Vacation</td>
+                                    <td>2 days</td>
+                                </tr>
+                                <tr>
+                                    <td align='center' colSpan='3'>
+                                        <div className='manager-table-open-request-container'>
+                                            <div className='manager-table-open-request-left'>
+                                                <button type="button">View Calendar</button>
+                                                <div className='manager-request-disputed-days'>
+                                                    {renderSelectedDays()}
+                                                    <textarea rows="2" cols="50" id="manager-request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
+                                                </div>
+                                                <div className='manager-request-response-type'>
+                                                    <label htmlFor='manager-request-response-type-input'>Response Type:</label>
+                                                    <select id='manager-request-response-type-input'
+                                                        style={{width: '80%', textAlign: 'center'}}>
+                                                        <option value='approve'>Approve</option>
+                                                        <option value='need more info'>Need More Information</option>
+                                                        <option value='deny'>Deny</option>
+                                                    </select>
+                                                </div>
+                                                <button type='button' className='manager-request-submit-response-button'>Submit Response</button>
+                                            </div>
+                                            <div className='cal-container'>
+                                                <CalendarTest 
+                                                    setSelectedDays={setSelectedDays} 
+                                                    selectedDays={selectedDays} 
+                                                    setSelectedMonth={setSelectedMonth}
+                                                    selectedMonth={selectedMonth}
+                                                    setSelectedYear={setSelectedYear}
+                                                    selectedYear={selectedYear}
+                                                    calendarType="Manager"
+                                                />
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> */}
                     </div>
+                    
                 </div>
             </div>
         )
@@ -259,13 +411,13 @@ const RequestManager = () => {
 
 
     return (
-        <div id='create-request-main'>
-            <div id='create-request-container'>
+        <div className='manager-request-main'>
+            <div className='manager-request-container'>
                 <div id='pending-button' className='pending-button-non-current' onClick={() => navigate('/request/pending')}>Pending</div>
                 <div id='complete-button' className='pending-button-non-current' onClick={() => navigate('/request/complete')}>Complete</div>
                 <div id='create-new-button' className='pending-button-current'>Create New</div>
                 
-                <div id='pending-request-body'>          
+                <div className='manager-request-body'>          
                     
                     <GetForm />
                 </div>

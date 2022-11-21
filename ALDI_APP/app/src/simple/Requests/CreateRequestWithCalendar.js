@@ -39,20 +39,7 @@ const CreateRequestWithCalendar = () => {
     const [selectedDays, setSelectedDays] = useState([]);
     const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
     const [selectedYear, setSelectedYear] = useState(date.getFullYear());
-    const handleDayClickParent = event => {
-        console.log(selectedDays)
-        if (!selectedDays.includes(event.target.id)) {
-            console.log(event.target.parentElement);
-            console.log("clicked");
-            setSelectedDays(prev => [...prev, event.target.id]);
-            event.target.parentElement.style.backgroundColor = "#f0fff0";
-            
-        } else {
-            setSelectedDays(prev => prev.filter(e => e !== event.target.id));
-            event.target.parentElement.style.backgroundColor = "transparent";
-        }
-        
-    }
+    // These are passed to <CalendarTest/> as props
 
     const handleRequestNoteChange = event => {
         console.log("blur triggered");
@@ -106,14 +93,15 @@ const CreateRequestWithCalendar = () => {
     const handlePTOTypeSelect = event => {
         event.preventDefault();
         console.log(Object.values(availablePTO)[event.target.value]);
-        if (Object.values(availablePTO)[event.target.value] === 0) {
-            console.log("no");
-            setErrMsg("No available PTO for type " + requestTypes[event.target.value].pto_type)
-            errRef.current.focus();
-        } else {
-            setErrMsg(""); // TODO: I added this late...
-            setSelectedType(event.target.value);
-        }
+        // if (Object.values(availablePTO)[event.target.value] === 0) {
+        //     console.log("no");
+        //     setErrMsg("No available PTO for type " + requestTypes[event.target.value].pto_type)
+        //     errRef.current.focus();
+        // } else {
+        //     setErrMsg(""); // TODO: I added this late...
+        //     setSelectedType(event.target.value);
+        // }
+        setSelectedType(event.target.value);
     }
     const handleDayChange = event => {
         event.preventDefault();
@@ -250,16 +238,28 @@ const CreateRequestWithCalendar = () => {
                         />
                     </div>
                 <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-                <div className='create-request-item'>
-                    {renderSelectedDays()}
-                </div>
-                <div className='create-request-item'>
-                    <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>
-                        <label htmlFor="request-note-input">Request Note: </label>
+                    <div>
+                        <label htmlFor="calendar-request-type">Request Type: </label>
+                        <select type="dropdown" id="calendar-request-type" defaultValue={'DEFAULT'} onChange={handlePTOTypeSelect}>
+                            <option value="DEFAULT" disabled={true} hidden={true}>Choose a type ...</option>
+                            {requestTypes.map((type, key) => {
+                                return (
+                                    <option key={key} value={type.pto_type_id} onSelect={() => handlePTOTypeSelect}>{type.pto_type}</option>
+                                );
+                            })}
+                        </select>
+                        <div ref={errRef} style={{color: "red", fontWeight: "bold"}}>{errMsg === "" ? <br /> : errMsg}</div> 
                     </div>
-                    <textarea rows="2" cols="50" id="request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
-                </div>
-                <button type="button" onClick={createTicket} id='create-ticket-button'>Create Ticket</button>
+                    <div className='create-calendar-request-item'>
+                        {renderSelectedDays()}
+                    </div>
+                    <div className='create-calendar-request-item'>
+                        <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>
+                            <label htmlFor="calendar-request-note-input">Request Note: </label>
+                        </div>
+                        <textarea rows="2" cols="50" id="calendar-request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
+                    </div>
+                    <button type="button" onClick={createTicket} id='create-calendar-ticket-button'>Create Ticket</button>
                 </div>
                 
                 
@@ -270,29 +270,14 @@ const CreateRequestWithCalendar = () => {
 
 
     return (
-        <div id='create-request-main'>
-            <div id='create-request-container'>
-                <div id='pending-button' className='pending-button-non-current' onClick={() => navigate('/request/pending')}>Pending</div>
-                <div id='complete-button' className='pending-button-non-current' onClick={() => navigate('/request/complete')}>Complete</div>
-                <div id='create-new-button' className='pending-button-current'>Create New</div>
+        <div id='create-calendar-request-main'>
+            <div id='create-calendar-request-container'>
+                <div id='calendar-pending-button' className='calendar-pending-button-non-current' onClick={() => navigate('/request/pending')}>Pending</div>
+                <div id='calendar-complete-button' className='calendar-pending-button-non-current' onClick={() => navigate('/request/complete')}>Complete</div>
+                <div id='calendar-create-new-button' className='calendar-pending-button-current'>Create New</div>
                 
-                <div id='pending-request-body'>          
-                    {/* <form onSubmit={createTicket} style={{ width: "50%", transform: "translateX(50%)", position: "relative" }}> */}
-                    <div>
-                        <label htmlFor="request-type">Request Type: </label>
-                        <select type="dropdown" id="request-type" defaultValue={'DEFAULT'} onChange={handlePTOTypeSelect}>
-                            <option value="DEFAULT" disabled={true} hidden={true}>Choose a type ...</option>
-                            {requestTypes.map((type, key) => {
-                                return (
-                                    <option key={key} value={type.pto_type_id} onSelect={() => handlePTOTypeSelect}>{type.pto_type}</option>
-                                );
-                            })}
-                        </select>
-
-                        <div ref={errRef} style={{color: "red", fontWeight: "bold"}}>{errMsg === "" ? <br /> : errMsg}</div>
-                        
-                    </div>
-                    {(selectedType !== -1 && errMsg === "") ? <GetForm /> : <></>}
+                <div id='calendar-pending-request-body'>
+                    <GetForm />
                 </div>
             </div>   
         </div>
