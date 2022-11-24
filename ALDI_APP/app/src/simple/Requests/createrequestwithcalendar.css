@@ -1,8 +1,6 @@
 #create-calendar-request-main {
-    background: linear-gradient(45deg, #FFB428 0%,
-    #FA8214 45%, #FA8214 100%);
-    height: 100vh;
-    width: 100vw;
+    height: auto;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,7 +9,7 @@
     width: 90%;
     max-height: 90%;
 }
-.cal-container {
+.create-calendar-cal-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,7 +28,7 @@
     background-color: orange;
     box-shadow:0px 0px 0px 3px darkblue inset;
 }
-#calendar-pending-request-body {
+#create-calendar-request-pending-body {
     border: 2px solid black;
     position: relative;
     z-index: 1;
@@ -42,7 +40,7 @@
     flex-direction: column;
     justify-content: stretch;
 }
-.req-cont {
+.create-calendar-req-cont {
     display: grid;
     grid-template-columns: 50% auto;
     padding: 10px;
@@ -56,7 +54,7 @@
     padding: 20px;
     border: 2px solid black;
 }
-.calendar-pending-request-item-data {
+.create-calendar-request-pending-item-data {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -64,7 +62,7 @@
 .bold {
     font-weight: bold;
 }
-#calendar-request-note-input {
+#create-calendar-request-note-input {
     margin: 10px 0;
     resize: none;
     border: none;
@@ -72,21 +70,21 @@
     height: 3em;       /* height is 2x line-height, so two lines will display */
     overflow: hidden;  /* prevents extra lines from being visible */
 }
-#calendar-request-note-input:focus {
+#create-calendar-request-note-input:focus {
     outline: none;
 }
-.calendar-pending-textbox {
+.create-calendar-request-pending-textbox {
     width: 100%;
     border: 2px solid black;
     text-align: left;
     padding: 5px 10px;
     background-color: lightgray;
 }
-#calendar-pending-buttons {
+#create-calendar-request-pending-buttons {
     position: relative;
     z-index: 1;
 }
-.calendar-pending-button-current {
+.create-calendar-request-pending-button-current {
     border: 2px solid black;
     padding: 8px;
     border-radius: 5px 5px 0 0;
@@ -100,7 +98,7 @@
     z-index: 3;
     bottom: -2px;
 }
-.calendar-pending-button-non-current {
+.create-calendar-request-pending-button-non-current {
     border: 2px solid black;
     padding: 8px;
     border-radius: 5px 5px 0 0;
@@ -112,7 +110,7 @@
     background-color: lightgray;
     cursor: pointer;
 }
-.calendar-pending-button-non-current:hover {
+.create-calendar-request-pending-button-non-current:hover {
     background-color: gray;
     color: white;
 }
@@ -120,7 +118,47 @@
     width: 100%;
     flex-grow: 1;
 }
-.calendar-pending-request-item-data {
+.create-calendar-request-pending-item-data {
     text-align: left;
     padding: 10px;
+}
+.create-calendar-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+}
+
+.create-calendar-hole {
+    width: 75%; height: 75%;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid black;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.create-calendar-donut {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%; height: 75%;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+.create-calendar-donut-item {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.create-calendar-stats {
+    aspect-ratio: 3/1;
+    border: 1px solid black;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }

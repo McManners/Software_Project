@@ -17,8 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     ticket_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
     eid: { type: DataTypes.INTEGER, allowNull: false },
     leader_id: { type: DataTypes.INTEGER, allowNull: true },
-    date_from: { type: DataTypes.DATE, allowNull: true },
-    date_to: { type: DataTypes.DATE, allowNull: true },
+    pto_type_id: { type: DataTypes.DATE, allowNull: true },
     status: { type: DataTypes.BOOLEAN, defaultValue: false },
     request_note: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
     response_note: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
@@ -30,37 +29,54 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     tableName: 'ticket'
   });
-//   Ticket.associate = function (models) {
-    // Ticket.hasMany(models.Ticket_Date_Range, {
-    //   onDelete: 'CASCADE',
-    //   onUpdate: 'CASCADE',
-    //   foreignKey: {
-    //     name: 'ticket_id',
-    //     type: DataTypes.INTEGER,
-    //     allowNull: false,
-    //   },
-    // });
-    // Ticket.hasOne(models.Employee, {
-    //     onDelete: 'CASCADE',
-    //     onUpdate: 'CASCADE',
-    //     foreignKey: {
-    //       name: 'eid',
-    //       type: DataTypes.INTEGER,
-    //       allowNull: false,
-    //     },
-    //   });
-    // }
+  Ticket.associate = function (models) {
+    Ticket.hasMany(models.Ticket_Date_Range, {
+      foreignKey: {
+        name: 'ticket_id',
+      },
+    });
+    Ticket.hasOne(models.Employee, {
+        foreignKey: {
+          name: 'eid'
+        },
+        sourceKey: 'eid'
+    });
+    Ticket.hasOne(models.Employee.scope('employeeName'), {
+        foreignKey: {
+          name: 'eid'
+        },
+        sourceKey: 'eid',
+        as: 'employeeData'
+    });
+    Ticket.hasOne(models.Employee, {
+        foreignKey: {
+          name: 'eid',
+        },
+        sourceKey: 'leader_id'
+    });
+    Ticket.hasOne(models.PTO_Type, {
+        foreignKey: {
+          name: 'pto_type_id',
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+      });
+    }
 
-  // Add a custom `addScopes` function to call after initializing all models in `index.js`
-//   Ticket.addScopes = function (models) {
-    // Ticket.addScope('defaultScope', {
-    //   include: [
-    //     {
-    //       model: models.Ticket_Date_Range,
-    //     },
-    //   ],
-    // });
-//   };
+//   Add a custom `addScopes` function to call after initializing all models in `index.js`
+  Ticket.addScopes = function (models) {
+    Ticket.addScope('defaultScope', {
+      include: [
+        {
+          model: models.Ticket_Date_Range,
+        },
+        {
+            association: 'employeeData',
+        }
+      ],
+      attributes: { exclude: ['updatedAt'] } // lets include createdAt for now, so we know when the ticket was submitted...
+    });
+  };
 
   return Ticket;
 };

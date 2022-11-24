@@ -1,10 +1,13 @@
 .manager-request-main {
-    background: linear-gradient(45deg, #FFB428 0%,
-    #FA8214 45%, #FA8214 100%);
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
+    background-color: transparent;
+    padding: 25px 0;
+}
+#root {
+    background: linear-gradient(45deg, #FFB428 0%,
+    #FA8214 45%, #FA8214 100%);
 }
 .manager-request-container {
     width: 90%;
@@ -18,14 +21,15 @@
 .manager-request-body {
     border: 2px solid black;
     position: relative;
-    z-index: 1;
     background-color: white;
     display: flex;
     float: left;
     width: 100%;
-    height: 100%;
     flex-direction: column;
-    justify-content: stretch;    
+    justify-content: stretch; 
+}
+.manager-scroll-container {
+    height: 100%;
 }
 .manager-requests-body-container {
     border: 1px solid red;
@@ -36,6 +40,8 @@
     width: 100%;
     padding: 25px;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .manager-table-open-request-container {
     display: flex;
@@ -65,24 +71,6 @@
 }
 .bold {
     font-weight: bold;
-}
-#request-note-input {
-    margin: 10px 0;
-    resize: none;
-    border: none;
-    line-height: 1.5em;
-    height: 3em;       /* height is 2x line-height, so two lines will display */
-    overflow: hidden;  /* prevents extra lines from being visible */
-}
-#request-note-input:focus {
-    outline: none;
-}
-.pending-textbox {
-    width: 100%;
-    border: 2px solid black;
-    text-align: left;
-    padding: 5px 10px;
-    background-color: lightgray;
 }
 #pending-buttons {
     position: relative;
@@ -131,29 +119,27 @@
     border: 1px solid purple;
     flex-grow: 1;
     width: 100%;
-    background-color: yellow;
-    transition: 1s;
+    max-height: 90%;
 }
-.manager-request-table tr {
-    transition: 1s;
+.manager-request-table td {
+    padding: 5px;
+    font-size: 1.1rem;
+    text-align: center;
 }
-.manager-request-table tr:nth-child(even) {
+.manager-request-table-row {
+    cursor: pointer;
+}
+.manager-request-open-request-row {
+    cursor: default;
+}
+.manager-request-table tr:nth-child(even), th {
     background-color: #eae9e9;
 }
 .manager-request-disputed-days {
-    text-align: left;
+    text-align: center;
 }
-.manager-request-filter-nav {
-    z-index: 0;
-    height: auto;
-    width: 0;
-    background-color: aqua;
-    transition: 0.5s;
-}
-.tab-test {
-}
-#manager-request-note-input {
-    margin: 10px 0;
+.manager-request-note-input {
+    width: 100%;
     resize: none;
     border: 1px solid #dcdcdc;
     padding: 0 5px;
@@ -161,10 +147,21 @@
     height: 3em;       /* height is 2x line-height, so two lines will display */
     overflow: hidden;  /* prevents extra lines from being visible */
 }
-#manager-request-note-input:focus {
+.manager-request-note-input:focus {
     outline: none;
 }
-
+.manager-request-response-type {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.manager-request-response-type-button-selected {
+    padding: 3px 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    flex-grow: 1;
+    margin: 0 1px;
+}
 .manager-request-submit-response-button {
     background-color: darkblue;
     color: white;
@@ -177,4 +174,55 @@
 .manager-request-submit-response-button:hover {
     background-color: orange;
     box-shadow:0px 0px 0px 3px darkblue inset;
+}
+
+.manager-filter-input {
+    width: 100%;
+    border-radius: 5px;
+    border-color: lightgray;
+    outline: none;
+}
+.manager-request-table th {
+    padding: 0 10px;
+}
+.manager-request-table tbody {
+    overflow: auto;
+    height: auto;
+}
+
+.manager-filter-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 2px 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.manager-filter-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.manager-filter-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.manager-filter-dropdown-content div {
+    color: black;
+    padding: 2px 2px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+.manager-filter-dropdown-content div:hover {
+    background-color: gray;
+}
+.manager-filter-dropdown:hover .manager-filter-dropdown-content {
+    display: block;
+}
+.manager-filter-dropdown-content div {
+    background-color: #f1f1f1
 }

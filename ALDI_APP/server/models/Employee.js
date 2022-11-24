@@ -30,27 +30,41 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true
   });
 
-//   Employee.associate = function (models) {
-//     Employee.belongsToMany(models.Ticket, {
-//       through: 'eid',
-//       onDelete: 'CASCADE', // default for belongsToMany
-//       onUpdate: 'CASCADE', // default for belongsToMany
-//       foreignKey: {
-//         name: 'eid',
-//         type: DataTypes.INTEGER,
-//         allowNull: false,
-//       },
-//     });
-//   }
-//     // Add a custom `addScopes` function to call after initializing all models in `index.js`
-//     Employee.addScopes = function (models) {
-//         Employee.addScope('defaultScope', {
-//           include: [
-//             {
-//               model: models.Ticket,
-//             },
-//           ],
-//         });
-//       };
+  Employee.associate = function (models) {
+    Employee.hasMany(models.Ticket, {
+      onDelete: 'CASCADE', // default for belongsToMany
+      onUpdate: 'CASCADE', // default for belongsToMany
+      foreignKey: {
+        name: 'eid',
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      as: 'employeeTickets'
+    });
+    Employee.hasMany(models.Ticket, {
+        foreignKey: {
+          name: 'leader_id',
+        },
+        sourceKey: 'eid',
+        as: 'leaderTickets'
+    });
+  }
+    // Add a custom `addScopes` function to call after initializing all models in `index.js`
+    Employee.addScopes = function (models) {
+        Employee.addScope('employeeTicketScope', {
+          include: [
+            {
+              model: models.Ticket
+            },
+          ],
+          attributes: { exclude: ['updatedAt', 'createdAt'] }
+        });
+        Employee.addScope('defaultScope', {
+            attributes: { exclude: ['updatedAt', 'createdAt'] }
+        });
+        Employee.addScope('employeeName', {
+            attributes: { exclude: ['eid', 'email', 'hire_date', 'employee_type_id', 'leader_id', 'updatedAt', 'createdAt'] }
+        });
+      };
   return Employee;
 };

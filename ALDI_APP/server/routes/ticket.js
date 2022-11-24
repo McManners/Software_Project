@@ -5,8 +5,8 @@ const verifyJWT = require('../middleware/verifyJWT');
 
 router.use(verifyJWT);
 
-router.get('/', ticketController.getAllForRefreshToken);
-// router.get('/email', ticketController.getByRefreshToken);
-router.post('/create', ticketController.createTicketForRefreshToken); // this needs to be fixed to route /create
+router.get('/', ticketController.getAll);
+router.post('/create', ticketController.createTicket);
+router.get('/get/leader', ticketController.getAllLeaderTickets);
 
 module.exports = router;

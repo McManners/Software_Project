@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import './requestmanager.css';
 import axios from 'axios';
 import CalendarTest from './CalendarTest';
+import useAuth from '../useAuth';
 
 const RequestManager = () => {
     const navigate = useNavigate();
+    const { auth } = useAuth();
     const [requestNote, setRequestNote] = useState("test");
     // const [availablePTO, setAvailablePTO] = useState({ vacation: 0, sick: 0, personal: 0 });
     const [availablePTO, setAvailablePTO] = useState({ vacation: 2, sick: 0, personal: 0 });
@@ -13,7 +15,8 @@ const RequestManager = () => {
     const [selectedType, setSelectedType] = useState(-1);
     const date = new Date();
     const errRef = useRef();
-    const testRef = useRef();
+    const [tickets, setTickets] = useState([]);
+    const [responseType, setResponseType] = useState(null);
 
     useEffect(() => {
         setErrMsg("");
@@ -39,25 +42,33 @@ const RequestManager = () => {
     const [selectedDays, setSelectedDays] = useState([]);
     const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
     const [selectedYear, setSelectedYear] = useState(date.getFullYear());
-    const handleDayClickParent = event => {
-        console.log(selectedDays)
-        if (!selectedDays.includes(event.target.id)) {
-            console.log(event.target.parentElement);
-            console.log("clicked");
-            setSelectedDays(prev => [...prev, event.target.id]);
-            event.target.parentElement.style.backgroundColor = "#f0fff0";
-            
-        } else {
-            setSelectedDays(prev => prev.filter(e => e !== event.target.id));
-            event.target.parentElement.style.backgroundColor = "transparent";
-        }
-        
-    }
 
     const handleRequestNoteChange = event => {
         console.log("blur triggered");
         setRequestNote(event.target.value);
     }
+
+    useEffect(() => {
+        axios({
+            method: 'GET',
+            url: 'http://localhost:3001/ticket/get/leader',
+            withCredentials: true,
+            headers: {
+                'Authorization': `Bearer ${auth.access_token}`
+            },
+            data: {
+                access_token: auth.access_token
+            }
+        })
+        .then(function(res) {
+            console.log(res.data.tickets);
+            setTickets(res.data.tickets);
+            setRequestsState(res.data.tickets);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }, []);
 
     const createTicket = async event => {
         event.preventDefault();
@@ -175,56 +186,6 @@ const RequestManager = () => {
             to: { month: 1, day: 1, year: date.getFullYear() }
         });
 
-    const dateDay = (type) => {
-        let days = [];
-        const thirty_one = [1, 3, 5, 7, 8, 10, 12];
-        const thirty = [4, 6, 9, 11];
-        const month = (type === "from") ? selectedDate.from.month : selectedDate.to.month;
-        const year = (type === "from") ? selectedDate.from.year : selectedDate.to.year;
-        for (let i = 1; i <= (thirty_one.includes(month) ? 31 : (thirty.includes(month) ? 30 : (year % 4 === 0) ? 29 : 28)); i++) {
-            days.push(i);
-        }
-
-        return (
-            <select disabled={errMsg !== ""} type="dropdown" id={ (type === "from") ? "date-from-day" : "date-to-day" } onChange={handleDayChange}>
-                {days.map((day, key) => {
-                    return (
-                        <option key={key} value={day}>{day}</option>
-                    )
-                })}
-            </select>
-        )
-    }
-    const dateMonth = (type) => {
-        return (
-            <select disabled={errMsg !== ""} type="dropdown" id={ (type === "from") ? "date-from-month" : "date-to-month" } onChange={handleMonthChange}>
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-            </select>
-        )
-    }
-    const dateYear = (type) => {
-        let date = new Date();
-        const current_year = date.getFullYear();
-
-        return (
-            <select disabled={errMsg !== ""} type="dropdown" id={ (type = "from") ? "date-from-year" : "date-to-year" } onChange={handleYearChange}>
-                <option value={current_year}>{current_year}</option>
-                <option value={current_year + 1}>{current_year + 1}</option>
-                <option value={current_year + 2}>{current_year + 2}</option>
-            </select>
-        )
-    }
     const renderSelectedDays = () => {
         let days = "";
         selectedDays.forEach(e => {
@@ -236,74 +197,128 @@ const RequestManager = () => {
             </div>
         )
     }
-    const requests = [
-        { name: "Isabella Salerno", type: "Vacation", timeRemaining: "2 days"},
-        { name: "Peanut Salerno", type: "Vacation", timeRemaining: "8 days"},
-        { name: "Sophie Salerno", type: "Sick", timeRemaining: "14 days"},
-        { name: "Francesca Salerno", type: "Personal", timeRemaining: "32 days"}
-    ]
-    const [openRequest, setOpenRequest] = useState(null);
+
+    const [requestsState, setRequestsState] = useState(tickets);
+    const [openRequestID, setOpenRequestID] = useState(null);
     const handleOpenRequestClick = event => {
         console.log(event.target.id);
         console.log(event.currentTarget.id);
-        setOpenRequest(event.currentTarget.id);
+        if (openRequestID === event.currentTarget.id)
+            setOpenRequestID(null)
+        else
+        setOpenRequestID(event.currentTarget.id);
     }
     const handleOpenRequestClose = () => {
-        setOpenRequest(null);
+        setOpenRequestID(null);
     }
+    console.log(auth);
+    const getTimeRemaining = (d) => {
+        const date = new Date();
+        const dateCreated = new Date(d.split(".",1)[0]);
+        const time_difference = date.getTime() - dateCreated.getTime();
+        const result = time_difference / (1000 * 60 * 60 * 24);
+        return result;
+    }
+    const handleResponseTypeClick = event => {
+        event.preventDefault();
+
+        setResponseType(event.target.value);
+    }
+
     const GetTable = () => {
+        console.log("<GetTable />");
         let rows = [];
-        requests.map(e => {
+        requestsState.map(e => {
+            console.log('requestid: ' + e.requestID);
+            console.log(e.createdAt);
+            const t = getTimeRemaining(e.createdAt);
             rows.push(
-                    <tr key={e.name} id={e.name} onClick={handleOpenRequestClick}>
-                        <td value={e.name}>{e.name}</td>
-                        <td>{e.type}</td>
-                        <td>{e.timeRemaining}</td>
+                    <tr key={e.ticket_id} id={parseInt(e.ticket_id)} onClick={handleOpenRequestClick} className='manager-request-table-row'>
+                        <td>{e.ticket_id}</td>
+                        <td>{e.eid}</td>
+                        <td>{`${e.employeeData.first_name} ${e.employeeData.last_name}`}</td>
+                        <td>{e.pto_type_id}</td>
+                        <td>{e.createdAt.split("T",1)[0]}</td>
+                        <td>{!(t > 7) ? 
+                                (`${t} days`) : 
+                                    ((t % 7) === 0) ? 
+                                        ((t / 7) > 1) ? 
+                                            (`${t / 7} weeks`) : 
+                                                (`${t / 7} week`) :
+                                        (`${(t / 7).toFixed(0)} ${((t / 7).toFixed(0) > 1) ? 'weeks,' : 'week,'} ${((t % 7) > 1) ? `${(t % 7).toFixed(0)} days` : `${(t % 7).toFixed(0)} day`}`)}
+                        </td>
                     </tr>
             )
-            if (openRequest === e.name) {
-                console.log("open request is " + e.name);
+            if (Number(openRequestID) === e.ticket_id) {
+                console.log("open request is " + e.ticket_id);
                 rows.push(
-                    <tr key={openRequest + " open"}>
-                        <OpenRequest/>
+                    <tr key={openRequestID + 'requestID'} className='manager-request-open-request-row'>
+                        <OpenRequestID />
                     </tr>
                 )
             }
         });
-        console.log(rows);
         return (
-            <table className='manager-request-table striped'>
-                <thead>
-                    <tr>
-                        <th>Employee Name</th>
-                        <th>Type</th>
-                        <th>Time Remaining</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows}
-                </tbody>
-            </table>
+                <table className='manager-request-table'>
+                    <thead>
+                        <tr>
+                            <th>
+                                Ticket ID
+                            </th>
+                            <th>
+                                Employee ID
+                            </th>
+                            <th>
+                                Employee Name
+                            </th>
+                            <th>
+                                PTO Type
+                            </th>
+                            <th>
+                                Submit Date {filterDropdown('submitDate')}
+                            </th>
+                            <th>
+                                Time Remaining {filterDropdown('timeRemaining')}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rows}
+                    </tbody>
+                </table>
         )
     }
-    const OpenRequest = () => {
+    const OpenRequestID = () => {
         return (
-                <td align='center' colSpan='3'>
+                <td align='center' colSpan='6'>
                     <div className='manager-table-open-request-container'>
                         <div className='manager-table-open-request-left'>
-                            <button type="button">View Calendar</button>
                             <div className='manager-request-disputed-days'>
                                 {renderSelectedDays()}
-                                <textarea rows="2" cols="50" id="manager-request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
+                                <textarea rows="2" className="manager-request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
                             </div>
                             <div className='manager-request-response-type'>
-                                <label htmlFor='manager-request-response-type-input'>Response Type:</label>
-                                <select id='manager-request-response-type-input'
-                                    style={{width: '80%', textAlign: 'center'}}>
-                                    <option value='approve'>Approve</option>
-                                    <option value='need more info'>Need More Information</option>
-                                    <option value='deny'>Deny</option>
-                                </select>
+                                <button 
+                                    type='button' 
+                                    value='approve'
+                                    style={{backgroundColor: '#76ff7a', padding: responseType === 'approve' ? '10px' : '3px 5px'}} 
+                                    onClick={handleResponseTypeClick}
+                                    className='manager-request-response-type-button-selected'
+                                >Approve</button>
+                                <button 
+                                    type='button' 
+                                    value='more'
+                                    style={{backgroundColor: '#fff700', padding: responseType === 'more' ? '10px' : '5px'}} 
+                                    onClick={handleResponseTypeClick}
+                                    className='manager-request-response-type-button-selected'
+                                >Request More Information</button>
+                                <button 
+                                    type='button' 
+                                    value='deny'
+                                    style={{backgroundColor: '#ff4040', padding: responseType === 'deny' ? '10px' : '5px'}}
+                                    onClick={handleResponseTypeClick}
+                                    className='manager-request-response-type-button-selected'
+                                >Deny</button>
                             </div>
                             <button type='button' className='manager-request-submit-response-button'>Submit Response</button>
                             <button type="button" className="open-request-close-button" onClick={handleOpenRequestClose}>Close</button>
@@ -323,11 +338,50 @@ const RequestManager = () => {
                 </td>
         )
     }
-    const Test = () => {
-        
-    }
     const filterNavRef = useRef();
-    
+    const filterDropdown = (type) => {
+        
+        return (
+            <div className='manager-filter-dropdown'>
+                <button type='button' id={`manager-filter-${type}`} className='manager-filter-button'>Filter</button>
+                <div className='manager-filter-dropdown-content' id={`manager-filter-${type}`}>
+                    {requestsState.map((e, index) => {
+                        return (
+                            <div key={index} 
+                                id={type === 'name' ? e.name : type === 'type' ? e.type : type === 'submitDate' ? e.submitDate : e.timeRemaining} 
+                                onClick={filterRequests}
+                            >
+                                {type == 'name' ? e.name : type == 'type' ? e.type : type === 'submitDate' ? e.submitDate : e.timeRemaining}
+                            </div>
+                        )
+                        })}
+                </div>
+            </div>
+        )
+    }
+    const resetRequestTable = event => {
+        event.preventDefault();
+        setRequestsState(tickets);
+    }
+    const filterRequests = event => {
+        setRequestsState(tickets);
+        console.log(event.target.parentElement);
+        console.log(event.target.parentElement.id);
+        console.log(event.target.id);
+        if (event.target.parentElement.id == 'manager-filter-name') {
+            setRequestsState(prev => prev.filter(e => e.name === event.target.id))
+        } else if (event.target.parentElement.id == 'manager-filter-type') {
+            setRequestsState(prev => prev.filter(e => e.type === event.target.id))
+        } else if (event.target.parentElement.id == 'manager-filter-timeRemaining') {
+            setRequestsState(prev => prev.filter(e => e.timeRemaining === event.target.id))
+        } else if (event.target.parentElement.id == 'manager-filter-submitDate') {
+            setRequestsState(prev => prev.filter(e => e.submitDate === event.target.id))
+        }
+    }
+    const [filterNamePlaceholder, setFilterNamePlaceholder] = useState('Filter by name...');
+    const [filterTypePlaceholder, setFilterTypePlaceholder] = useState('Filter by name...');
+    const [filterTimeRemainingPlaceholder, setFilterTimeRemainingPlaceholder] = useState('Filter by name...');
+
     const filter = () => {
         console.log(filterNavRef.current.style.width);
         if (filterNavRef.current.style.width === "0px") {
@@ -338,72 +392,15 @@ const RequestManager = () => {
     }
     const GetForm = () => {
         return (
-            <div>
-                <div className='manager-pending-request-item'>
-                    {/* <div style={{fontSize: "100px", fontWeight: "lighter", color: "blue", fontFamily: 'cursive'}}>izzy stinky</div> */}
-                    <div className='manager-requests-body-container'>
-                        
-                        <div className='manager-request-body-header'>
-                            <button type='button' id='manager-filter-button' onClick={filter}>Filter</button>
-                            <div ref={filterNavRef} className='manager-request-filter-nav'>
-                                <div>hsey</div>
-                            </div>
-                        </div>
-                        
-                            <GetTable />
-                        {/* <table className='manager-request-table'>
-                            <thead>
-                                <tr>
-                                    <th>Employee Name</th>
-                                    <th>Type</th>
-                                    <th>Time Remaining</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Isabella Salerno</td>
-                                    <td>Vacation</td>
-                                    <td>2 days</td>
-                                </tr>
-                                <tr>
-                                    <td align='center' colSpan='3'>
-                                        <div className='manager-table-open-request-container'>
-                                            <div className='manager-table-open-request-left'>
-                                                <button type="button">View Calendar</button>
-                                                <div className='manager-request-disputed-days'>
-                                                    {renderSelectedDays()}
-                                                    <textarea rows="2" cols="50" id="manager-request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
-                                                </div>
-                                                <div className='manager-request-response-type'>
-                                                    <label htmlFor='manager-request-response-type-input'>Response Type:</label>
-                                                    <select id='manager-request-response-type-input'
-                                                        style={{width: '80%', textAlign: 'center'}}>
-                                                        <option value='approve'>Approve</option>
-                                                        <option value='need more info'>Need More Information</option>
-                                                        <option value='deny'>Deny</option>
-                                                    </select>
-                                                </div>
-                                                <button type='button' className='manager-request-submit-response-button'>Submit Response</button>
-                                            </div>
-                                            <div className='cal-container'>
-                                                <CalendarTest 
-                                                    setSelectedDays={setSelectedDays} 
-                                                    selectedDays={selectedDays} 
-                                                    setSelectedMonth={setSelectedMonth}
-                                                    selectedMonth={selectedMonth}
-                                                    setSelectedYear={setSelectedYear}
-                                                    selectedYear={selectedYear}
-                                                    calendarType="Manager"
-                                                />
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table> */}
+            <div className='manager-pending-request-item'>
+                <div className='manager-requests-body-container'>
+                    <div className='manager-request-body-header'>
+                        <button type='button' id='manager-reset-table-button' onClick={resetRequestTable}>Reset Table</button>
                     </div>
                     
+                    <GetTable />
                 </div>
+                
             </div>
         )
     }
@@ -413,13 +410,14 @@ const RequestManager = () => {
     return (
         <div className='manager-request-main'>
             <div className='manager-request-container'>
-                <div id='pending-button' className='pending-button-non-current' onClick={() => navigate('/request/pending')}>Pending</div>
-                <div id='complete-button' className='pending-button-non-current' onClick={() => navigate('/request/complete')}>Complete</div>
+                <div id='pending-button' className='pending-button-non-current' onClick={() => navigate('/dashboard/pending')}>Pending</div>
+                <div id='complete-button' className='pending-button-non-current' onClick={() => navigate('/dashboard/complete')}>Complete</div>
                 <div id='create-new-button' className='pending-button-current'>Create New</div>
                 
                 <div className='manager-request-body'>          
-                    
-                    <GetForm />
+                    <div className='manager-scroll-container' key={'hey'}>
+                        <GetForm key={'render-test'}/>
+                    </div>
                 </div>
             </div>   
         </div>

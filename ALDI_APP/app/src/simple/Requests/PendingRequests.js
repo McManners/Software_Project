@@ -9,8 +9,8 @@ const PendingRequests = () => {
         <div id='pending-request-main'>
             <div id='pending-request-container'>
                 <div id='pending-button' className='pending-button-current'>Pending</div>
-                <div id='complete-button' className='pending-button-non-current' onClick={() => navigate('/request/complete')}>Complete</div>
-                <div id='create-new-button' className='pending-button-non-current' onClick={() => navigate('/request/create')}>Create New</div>
+                <div id='complete-button' className='pending-button-non-current' onClick={() => navigate('/dashboard/complete')}>Complete</div>
+                <div id='create-new-button' className='pending-button-non-current' onClick={() => navigate('/dashboard/create')}>Create New</div>
                         
                 <div id='pending-request-body'>
                     <div className='pending-request-item'>

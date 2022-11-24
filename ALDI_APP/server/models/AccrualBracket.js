@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: "accrual_bracket"
   });
-
+  
+  Accrual_Bracket.addScopes = function (models) {
+    Accrual_Bracket.addScope('defaultScope', {
+      attributes: { exclude: ['updatedAt', 'createdAt'] }
+    });
+  };
   return Accrual_Bracket;
 };

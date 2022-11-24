@@ -19,8 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     leader_id: { type: DataTypes.INTEGER, allowNull: false },
     response_type:  { type: DataTypes.INTEGER, allowNull: false },
     response:  { type: DataTypes.INTEGER, allowNull: true },
-    // created_at:  { type: DataTypes.INTEGER, allowNull: false },
-    // updated_at:  { type: DataTypes.INTEGER, allowNull: false }
   }, {
     sequelize,
     modelName: 'Ticket_Response',
@@ -29,5 +27,6 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: 'ticket_response'
   });
+  
   return Ticket_Response;
 };

@@ -14,37 +14,34 @@ const handleLogin = async (req, res) => {
     const foundEmployee_Type = await db.Employee_Type.findByPk(foundEmployee.employee_type_id);
     if (!foundEmployee_Type) return res.status(404).json({ 'message': `Cant find emplyee type by pk ${foundEmployee.employee_type_id}` }); // Unauthorized
     // console.log(foundAccount);
-    const employee_type =  foundEmployee_Type.employee_type;
+    const employee_type = await foundEmployee_Type.employee_type;
     // evaluate password
     const match = await bcrypt.compare(password, foundAccount.password);
     if (match) {
         // create JWTs
         const access_token = jwt.sign(
             {
-                "email": foundAccount.email,
+                "eid": foundAccount.eid,
                 "employee_type": foundEmployee_Type.employee_type
             },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: '10s' } // 5min/15min whatever
+            { expiresIn: '1hr' } // 5min/15min whatever
         );
         const refresh_token = jwt.sign(
             { 
-                "email": foundAccount.email,
+                "eid": foundAccount.eid,
             },
             process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: '30m' } // much longer
+            { expiresIn: '24hr' } // much longer
         );
         foundAccount.refresh_token = refresh_token;
         foundAccount.save();
-        console.log("auth access token" + access_token);
+        console.log("auth access token ----" + access_token);
         // if cookie is set to httpOnly, its not available to javascript
-        res.cookie('jwt', refresh_token, { httpOnly: true, sameSite: 'None', secure: true, maxAge: /*24 * 60 * 60 * 1000*/ 30 * 1000 * 1000 });
-        res.cookie('logged', true, { httpOnly: false, sameSite: 'None', secure: true, maxAge: 30 * 1000 * 1000 })
-        // console.log("aaa " + access_token);
+        res.cookie('jwt', refresh_token, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
+        res.cookie('logged', true, { httpOnly: false, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
         res.json( { access_token, employee_type }); // store in memory not cookie
-        console.log("auth is good");
     } else {
-        console.log("auth is bad");
         res.sendStatus(401);
     }
 }

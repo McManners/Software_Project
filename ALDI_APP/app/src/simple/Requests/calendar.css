@@ -6,9 +6,14 @@
     align-items: center;
     flex-direction: column;
 }
+#root {
+    background: linear-gradient(45deg, #FFB428 0%,
+    #FA8214 45%, #FA8214 100%);
+}
 .grid-container {
     min-width: 50%;
     aspect-ratio: 7/6;
+    background-color: white;
     min-height: 50%;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -22,11 +27,6 @@
     position: relative;
     font-size: 0.75rem;
     font-weight: lighter;
-}
-.grid-week {
-    width: 100%;
-    border: 1px solid blue;
-    aspect-ratio: 7/1;
 }
 .day {
     border: 1px solid orange;
@@ -50,7 +50,6 @@
 .disabled-day:hover {
     cursor: auto;
 }
-
 :root {
     --ratio-percent: 100%;
 }
@@ -69,21 +68,12 @@
     height: 100%;
     display: grid;
 }
-
-.aaspect-ratio {
-    content: "";
-    display: inline-block;
-    width: 1px;
-    height: 0;
-    padding-bottom: 100%;
-}
 .day-header {
     text-align: left;
     left: 2px;
     position: relative;
     top: -4px;
     font-weight: lighter;
-    pointer-events: none;
 }
 .day-event {
     position: relative;

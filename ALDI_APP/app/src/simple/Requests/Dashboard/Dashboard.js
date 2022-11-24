@@ -1,24 +1,14 @@
 import { Outlet } from 'react-router-dom';
-import DashHeader from './DashHeader';
-import DashFooter from './DashFooter';
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "../simple/AuthProvider";
+import RequestDashHeader from './RequestDashHeader';
+import RequestDashFooter from './RequestDashFooter';
 
-const Dashboard = () => {
-    const { setAuth } = useContext(AuthContext);
-    const navigate = useNavigate();
+const RequestDashboard = () => {
 
-    const logout = async () => {
-        console.log(AuthContext)
-        setAuth({});
-        navigate('/');
-    }
     return (
         <>
-            <DashHeader />
+            
             <Outlet />
-            <DashFooter />
+            <RequestDashFooter />
             {/* Note that DashHeader is above children in Outlet. So it will always be above the contents
             {/* <div className="dash-container">
                 {/* Wrapped in div so we can have different styles for logged in user/protected. All children will be in this
@@ -30,4 +20,4 @@ const Dashboard = () => {
         </>
     )
 }
-export default Dashboard;
+export default RequestDashboard;

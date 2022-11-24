@@ -20,14 +20,14 @@ const handleRefreshToken = async (req, res) => {
         refresh_token,
         process.env.REFRESH_TOKEN_SECRET,
         (err, decoded) => {
-            if (err || foundAccount.email !== decoded.email) return res.sendStatus(403);
+            if (err || foundAccount.eid !== decoded.eid) return res.sendStatus(403);
             const access_token = jwt.sign(
                 {
-                    "email": decoded.email,
+                    "eid": decoded.eid,
                     "employee_type": decoded.employee_type
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '10s' } // set longer
+                { expiresIn: '1hr' } // set longer
             );
             res.json({ access_token, employee_type });
         }

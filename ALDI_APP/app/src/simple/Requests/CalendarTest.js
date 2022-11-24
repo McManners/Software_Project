@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import './calendar.css';
 import IconBxsLeftArrow from './Icons/IconBxsLeftArrow.tsx';
 import IconBxsRightArrow from './Icons/IconBxsRightArrow.tsx';
@@ -19,31 +19,22 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
         NOVEMBER: { days: 30, day: 'November', firstDayOfMonth: 1},
         DECEMBER: { days: 31, day: 'December', firstDayOfMonth: 1}
     }
-    const date = new Date();
-    // const [selectedYear, setSelectedYear] = useState(date.getFullYear());
-    // Object.freeze(monthEnum);
-
-    const gridContainerRef = useRef();
-
     const setStartOfMonth = () => {
         if (selectedYear >= 2022) {
             monthEnum.JANUARY.firstDayOfMonth = 6;
             for (let i = 1; i < Object.entries(monthEnum).length; i++) {
-                // console.log(Object.entries(monthEnum)[i][1].day)
                 let total_days = 6; // jan 1 2022 starts on the 6th day starting from 0 (saturday)
                 for (let j = 0; j < i; j++) {
                     total_days += Object.entries(monthEnum)[j][1].days;
                 }
-                // console.log(total_days);
-                // console.log(total_days % 7)
                 Object.entries(monthEnum)[i][1].firstDayOfMonth = total_days % 7;
             }
         }
     }
-
-    // const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
-    // console.log(Object.entries(monthEnum)[selectedMonth]);
-    // console.log(Object.keys(monthEnum))
+    // useEffect(() => {
+    //     console.log("use effecting");
+    //     setStartOfMonth();
+    // }, [])
     const handleMonthChangeDecrease = () => {
         if (selectedMonth === 0) {
             setSelectedMonth(11);
@@ -52,25 +43,18 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
             setSelectedMonth(prev => prev - 1);
     }
     const handleMonthChangeIncrease = () => {
-        // console.log("1");
         if (selectedMonth === 11) {
             setSelectedYear(prev => prev + 1);
-            // console.log("2");
             setSelectedMonth(0);
-            // console.log("3");
         } else {
-            // console.log("4");
             setSelectedMonth(prev => prev + 1);
         }
     }
     const calendarTypeColor = (calendarType === "Manager") ? "#ff2800" : "#f0fff0"
-    // const [selectedDays, setSelectedDays] = useState([]);
-    const [aspectRatio, setAspectRatio] = useState("7/5");
     const handleDayClick = event => {
         if (!selectedDays.includes(event.target.id)) {
             setSelectedDays(prev => [...prev, event.target.id]);
             console.log(calendarTypeColor)
-            console.log(calendarType)
             // event.target.parentElement.style.backgroundColor = calendarTypeColor;
             
             // .currentTarget instead of target to get the listeners element!
@@ -81,9 +65,8 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
         }
     }
     
-    const employeeDaysTest = ['10/09/2022', '10/11/2022']
+    const employeeDaysTest = ['2022-10-09', '2022-10-11']
     const renderMonth = (currMonth) => {
-        
         setStartOfMonth();
         const first_day = Object.entries(monthEnum)[selectedMonth][1].firstDayOfMonth;
         const prev_month_days = Object.entries(monthEnum)[selectedMonth === 0 ? 11 : selectedMonth - 1][1].days;
@@ -94,23 +77,22 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
             for (let i = 1; i < currMonth + 1; i++) {
                 month.push(
                     <div className={
-                        employeeDaysTest.includes((`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`)) ? 
+                        employeeDaysTest.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`)) ? 
                         'day valid-day aspect-ratio' : 'day disabled-day aspect-ratio'
-                    } key={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`} 
+                    } key={`${selectedMonth + 1}${(i < 10 ? `0${i}` : i)}${selectedYear}`} 
                         style={
-                            selectedDays.includes((`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`)) ?
+                            selectedDays.includes(`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`) ?
                             {backgroundColor: calendarTypeColor} : 
-                                employeeDaysTest.includes((`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`)) ? 
+                                employeeDaysTest.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`)) ? 
                                     {backgroundColor: '#f0fff0'} : {}
                         }>
-                        <div>
-                            <div className='day-header'>{i}</div>
-                        </div>
-                        <div></div>
+                            <div>
+                                <div className='day-header'>{i}</div>
+                            </div>
                         {
-                            employeeDaysTest.includes((`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`)) ? 
-                            <div className='spread' id={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`} onClick={handleDayClick}></div> :
-                            <div className='spread' id={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`}></div>
+                            employeeDaysTest.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`)) ? 
+                            <div className='spread' id={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`} onClick={handleDayClick}></div> :
+                            <div className='spread' id={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`}></div>
                         }
                     </div>
                 )
@@ -119,26 +101,26 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
             console.log("this calendar is not for manager");
             for (let i = 1; i < currMonth + 1; i++) {
                 month.push(
-                    <div className='day valid-day aspect-ratio' key={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`} 
+                    <div className='day valid-day aspect-ratio' key={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`} 
                         style={
-                            selectedDays.includes((`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`)) ?
+                            selectedDays.includes(`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`) ?
                             {backgroundColor: '#f0fff0'} : {}
                         }>
                         <div>
                             <div className='day-header'>{i}</div>
                         </div>
-                            <div className='spread' id={`${selectedMonth + 1}/${(i < 10 ? `0${i}` : i)}/${selectedYear}`} onClick={handleDayClick}></div>
+                            <div className='spread' id={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`} onClick={handleDayClick}></div>
                     </div>
                 )
             }
         }
         if (selectedMonth === 9) {
             month[30] = (
-                <div key={`10/31/${selectedYear}`} className='day aspect-ratio disabled-day'>
+                <div key={`${selectedYear}-10-31`} className='day aspect-ratio disabled-day'>
                     <div>
                         <div className='day-header'>31</div>
                     </div>
-                    <div className='spread' id={`10/31/${selectedYear}`}>
+                    <div className='spread' id={`1031${selectedYear}`}>
                         {/* // This extra spread div is an overlay div to solve a couple problems.
                         // It is absolutely positioned over the entire cell... */}
                         <IconHalloween style={{color: "orange"}} width='50px'height='25px' />
@@ -146,18 +128,7 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
                 </div> 
             )
         }
-        // console.log(month);
-        let month_grid_count = 35; // 5 total rows
-        // console.log("------------");
-        // console.log("first_day: " + first_day);
-        // console.log("total_days_in_month: " + total_days_in_month);
-        if ((first_day >= 5 && total_days_in_month === 31) || (first_day === 5 && total_days_in_month >= 30)) {
-            // if the first day of the month falls on a friday or saturday and has 31 days, it needs 6 rows
-            // if the first day of the month falls on a saturday and has 30 days, it needs 6 rows
-            
-            month_grid_count = 42;
-            // console.log("yeah");
-        }
+        let month_grid_count = 42;
         if (month.length < month_grid_count) {
             for (let beg = 0; beg < first_day; beg++) {
                 month.unshift(
@@ -176,16 +147,6 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
                 count += 1;
             }
         }
-        if (month.length < 42) {
-            // hmm this keeps the 7/6 ratio on 5 week grids
-            month.push(
-                <div className='day aspect-ratio disabled-day' key={"extra-row"} style={{border: 'none', backgroundColor: 'transparent'}}>
-                        <div className='day-header'></div>
-                    </div>
-            )
-        }
-        // console.log(month);
-        
         
         return (
             <div className='grid-container'>

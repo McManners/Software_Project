@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     ticket_date_range_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
     ticket_id: { type: DataTypes.INTEGER, allowNull: false },
     start_date: { type: DataTypes.DATE, allowNull: false },
-    end_date: { type: DataTypes.DATE, allowNull: false },
   }, {
     sequelize,
     modelName: 'Ticket_Date_Range',
@@ -27,17 +26,19 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     tableName: 'ticket_date_range'
   });
-//   Ticket_Date_Range.associate = function (models) {
-//     Ticket_Date_Range.belongsToMany(models.Ticket, {
-//       through: 'ticket_id',
-//       onDelete: 'CASCADE', // default for belongsToMany
-//       onUpdate: 'CASCADE', // default for belongsToMany
-//       foreignKey: {
-//         name: 'ticket_id',
-//         type: DataTypes.INTEGER,
-//         allowNull: false,
-//       },
-//     });
-//   }
+  Ticket_Date_Range.associate = function (models) {
+    Ticket_Date_Range.belongsTo(models.Ticket, {
+      foreignKey: {
+        name: 'ticket_id',
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+    });
+  }
+  Ticket_Date_Range.addScopes = function (models) {
+    Ticket_Date_Range.addScope('defaultScope', {
+      attributes: { exclude: ['updatedAt', 'createdAt'] }
+    });
+  };
   return Ticket_Date_Range;
 };
