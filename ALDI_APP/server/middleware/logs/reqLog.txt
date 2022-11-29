@@ -15918,3 +15918,7 @@
 20221129	12:06:03	a85e1c58-eda7-4262-a824-4de6d8a2ab9e	POST	http://localhost:3000	/logout
 20221129	12:06:06	d3d97ad7-a379-445f-8e3c-fbae4e34c244	OPTIONS	http://localhost:3000	/auth
 20221129	12:06:06	bcfa9550-e877-4224-a961-d1d9d540849f	POST	http://localhost:3000	/auth
+20221129	14:05:04	25824a92-a269-4550-bc67-b01c0fb5ed6e	OPTIONS	http://localhost:3000	/logout
+20221129	14:05:04	41870933-477d-4915-afc2-753d9fb2c30c	POST	http://localhost:3000	/logout
+20221129	14:05:06	32971690-affc-45b2-b0b2-48d7d3e7eb73	OPTIONS	http://localhost:3000	/auth
+20221129	14:05:06	b6965e13-cc19-44e7-8b69-decce93f9d6b	POST	http://localhost:3000	/auth
