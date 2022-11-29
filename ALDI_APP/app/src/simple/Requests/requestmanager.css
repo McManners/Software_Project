@@ -1,15 +1,47 @@
-#create-request-main {
-    background: linear-gradient(45deg, #FFB428 0%,
-    #FA8214 45%, #FA8214 100%);
-    height: 100vh;
-    width: 100vw;
+.manager-request-main {
+    min-height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    background-color: transparent;
+    padding: 25px 0;
 }
-#request-manager-container {
-    width: 50%;
-    height: 50%;
+.manager-request-container {
+    width: 90%;
+    max-height: 90%;
+}
+.open-request-close-button {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+}
+.manager-request-body {
+    border: 2px solid black;
+    position: relative;
+    background-color: white;
+    display: flex;
+    float: left;
+    width: 100%;
+    flex-direction: column;
+    justify-content: stretch; 
+}
+.manager-scroll-container {
+    height: 100%;
+}
+.manager-requests-body-container {
+    border: 1px solid red;
+    position: relative;
+    flex-grow: 1;
+}
+.manager-table-open-request-left {
+    width: 100%;
+    padding: 25px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.manager-table-open-request-container {
+    display: flex;
+    flex-direction: row;
 }
 .cal-container {
     display: flex;
@@ -18,54 +50,23 @@
     flex-grow: 1;
     width: 100%;
 }
-
-#create-ticket-button:hover {
-    background-color: orange;
-    box-shadow:0px 0px 0px 3px darkblue inset;
-}
-#pending-request-body {
-    border: 2px solid black;
-    position: relative;
-    z-index: 1;
-    background-color: white;
+.manager-pending-request-item {
     display: flex;
-    float: left;
-    width: 100%;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: stretch;
-}
-.pending-request-item {
-    display: grid;
+    align-items: stretch;
     margin: 5px;
-    grid-template-columns: repeat(2, 1fr);
     padding: 20px;
     border: 2px solid black;
 }
 .pending-request-item-data {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
     width: 100%;
 }
 .bold {
     font-weight: bold;
-}
-#request-note-input {
-    margin: 10px 0;
-    resize: none;
-    border: none;
-    line-height: 1.5em;
-    height: 3em;       /* height is 2x line-height, so two lines will display */
-    overflow: hidden;  /* prevents extra lines from being visible */
-}
-#request-note-input:focus {
-    outline: none;
-}
-.pending-textbox {
-    width: 100%;
-    border: 2px solid black;
-    text-align: left;
-    padding: 5px 10px;
-    background-color: lightgray;
 }
 #pending-buttons {
     position: relative;
@@ -108,4 +109,116 @@
 .pending-request-item-data {
     text-align: left;
     padding: 10px;
+}
+
+.manager-request-table {
+    border: 1px solid purple;
+    flex-grow: 1;
+    width: 100%;
+    max-height: 90%;
+}
+.manager-request-table td {
+    padding: 5px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+.manager-request-table-row {
+    cursor: pointer;
+}
+.manager-request-open-request-row {
+    cursor: default;
+}
+.manager-request-table tr:nth-child(even), th {
+    background-color: #eae9e9;
+}
+.manager-request-disputed-days {
+    text-align: center;
+}
+.manager-request-note-input {
+    width: 100%;
+    resize: none;
+    border: 1px solid #dcdcdc;
+    padding: 0 5px;
+    line-height: 1.5em;
+    height: 3em;       /* height is 2x line-height, so two lines will display */
+    overflow: hidden;  /* prevents extra lines from being visible */
+}
+.manager-request-note-input:focus {
+    outline: none;
+}
+.manager-request-response-type {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.manager-request-response-type-button-selected {
+    padding: 3px 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    flex-grow: 1;
+    margin: 0 1px;
+}
+.manager-request-submit-response-button {
+    background-color: darkblue;
+    color: white;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin: 25px;
+}
+.manager-request-submit-response-button:hover {
+    background-color: orange;
+    box-shadow:0px 0px 0px 3px darkblue inset;
+}
+
+.manager-filter-input {
+    width: 100%;
+    border-radius: 5px;
+    border-color: lightgray;
+    outline: none;
+}
+.manager-request-table th {
+    padding: 0 10px;
+}
+.manager-request-table tbody {
+    overflow: auto;
+    height: auto;
+}
+
+.manager-filter-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 2px 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+.manager-filter-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.manager-filter-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.manager-filter-dropdown-content div {
+    color: black;
+    padding: 2px 2px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+.manager-filter-dropdown-content div:hover {
+    background-color: gray;
+}
+.manager-filter-dropdown:hover .manager-filter-dropdown-content {
+    display: block;
+}
+.manager-filter-dropdown-content div {
+    background-color: #f1f1f1
 }

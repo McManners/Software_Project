@@ -15,21 +15,26 @@ const handleRefreshToken = async (req, res) => {
     const foundEmployee_Type = await db.Employee_Type.findByPk(foundEmployee.employee_type_id);
     if (!foundEmployee_Type) return res.status(404).json({ 'message': `Cant find emplyee type by pk ${foundEmployee.employee_type_id}` }); // Unauthorized
     const employee_type = foundEmployee_Type.employee_type;
+    const first_name = foundEmployee.first_name;
+    const last_name = foundEmployee.last_name;
+
     // evaluate jwt
     jwt.verify(
         refresh_token,
         process.env.REFRESH_TOKEN_SECRET,
         (err, decoded) => {
-            if (err || foundAccount.email !== decoded.email) return res.sendStatus(403);
+            if (err || foundAccount.eid !== decoded.eid) return res.sendStatus(403);
             const access_token = jwt.sign(
                 {
-                    "email": decoded.email,
-                    "employee_type": decoded.employee_type
+                    "eid": decoded.eid,
+                    "employee_type": decoded.employee_type,
+                    "first_name": decoded.first_name,
+                    "last_name": decoded.last_name
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '10s' } // set longer
+                { expiresIn: '1hr' } // set longer
             );
-            res.json({ access_token, employee_type });
+            res.json({ access_token, employee_type, first_name, last_name });
         }
     );
 }

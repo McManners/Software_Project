@@ -1,23 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './requestmanager.css';
 import axios from 'axios';
-import CalendarTest from './CalendarTest';
+import Calendar from './Calendar';
+import useAuth from '../useAuth';
+import useAxiosPrivate from '../../simple/useAxiosPrivate';
+import useLogout from '../useLogout';
 
 const RequestManager = () => {
     const navigate = useNavigate();
-    const [requestNote, setRequestNote] = useState("test");
+    const location = useLocation();
+    const { auth } = useAuth();
+    const [requestNote, setRequestNote] = useState("");
     // const [availablePTO, setAvailablePTO] = useState({ vacation: 0, sick: 0, personal: 0 });
     const [availablePTO, setAvailablePTO] = useState({ vacation: 2, sick: 0, personal: 0 });
     const [errMsg, setErrMsg] = useState("");
     const [selectedType, setSelectedType] = useState(-1);
     const date = new Date();
     const errRef = useRef();
-    const testRef = useRef();
+    const [tickets, setTickets] = useState([]);
+    const [responseType, setResponseType] = useState(null);
+    const axiosPrivate = useAxiosPrivate();
 
-    useEffect(() => {
-        setErrMsg("");
-    }, [selectedType]);
+    // useEffect(() => {
+    //     setErrMsg("");
+    // }, [selectedType]);
 
     // useEffect(() => {
     //     axios({
@@ -39,25 +46,43 @@ const RequestManager = () => {
     const [selectedDays, setSelectedDays] = useState([]);
     const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
     const [selectedYear, setSelectedYear] = useState(date.getFullYear());
-    const handleDayClickParent = event => {
-        console.log(selectedDays)
-        if (!selectedDays.includes(event.target.id)) {
-            console.log(event.target.parentElement);
-            console.log("clicked");
-            setSelectedDays(prev => [...prev, event.target.id]);
-            event.target.parentElement.style.backgroundColor = "#f0fff0";
-            
-        } else {
-            setSelectedDays(prev => prev.filter(e => e !== event.target.id));
-            event.target.parentElement.style.backgroundColor = "transparent";
-        }
-        
-    }
 
     const handleRequestNoteChange = event => {
         console.log("blur triggered");
         setRequestNote(event.target.value);
     }
+
+    useEffect(() => {
+        // https://github.com/gitdagray/react_persist_login/blob/main/src/components/Users.js
+        let isMounted = true;
+        const controller = new AbortController();
+
+        const getTickets = async () => {
+            // https://flaviocopes.com/axios-send-authorization-header
+            try {
+                const response = await axiosPrivate.get('ticket/get/leader', {
+                    access_token: auth.access_token
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${auth.access_token}`
+                    }
+                });
+                console.log(response.data);
+                isMounted && setTickets(response.data.tickets) && setRequestsState(response.data.tickets);
+            } catch (err) {
+                console.log(err);
+                // logout();
+                navigate('/login', { state: { from: location }, replace: true });
+            }
+        }
+        getTickets();
+        
+        return () => {
+            isMounted = false;
+            controller.abort();
+        }
+    }, []);
 
     const createTicket = async event => {
         event.preventDefault();
@@ -175,56 +200,6 @@ const RequestManager = () => {
             to: { month: 1, day: 1, year: date.getFullYear() }
         });
 
-    const dateDay = (type) => {
-        let days = [];
-        const thirty_one = [1, 3, 5, 7, 8, 10, 12];
-        const thirty = [4, 6, 9, 11];
-        const month = (type === "from") ? selectedDate.from.month : selectedDate.to.month;
-        const year = (type === "from") ? selectedDate.from.year : selectedDate.to.year;
-        for (let i = 1; i <= (thirty_one.includes(month) ? 31 : (thirty.includes(month) ? 30 : (year % 4 === 0) ? 29 : 28)); i++) {
-            days.push(i);
-        }
-
-        return (
-            <select disabled={errMsg !== ""} type="dropdown" id={ (type === "from") ? "date-from-day" : "date-to-day" } onChange={handleDayChange}>
-                {days.map((day, key) => {
-                    return (
-                        <option key={key} value={day}>{day}</option>
-                    )
-                })}
-            </select>
-        )
-    }
-    const dateMonth = (type) => {
-        return (
-            <select disabled={errMsg !== ""} type="dropdown" id={ (type === "from") ? "date-from-month" : "date-to-month" } onChange={handleMonthChange}>
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-            </select>
-        )
-    }
-    const dateYear = (type) => {
-        let date = new Date();
-        const current_year = date.getFullYear();
-
-        return (
-            <select disabled={errMsg !== ""} type="dropdown" id={ (type = "from") ? "date-from-year" : "date-to-year" } onChange={handleYearChange}>
-                <option value={current_year}>{current_year}</option>
-                <option value={current_year + 1}>{current_year + 1}</option>
-                <option value={current_year + 2}>{current_year + 2}</option>
-            </select>
-        )
-    }
     const renderSelectedDays = () => {
         let days = "";
         selectedDays.forEach(e => {
@@ -232,42 +207,230 @@ const RequestManager = () => {
         })
         return (
             <div>
-                Selected Days: {days}
+                Select conflicting days: <div style={{color: 'red', fontWeight: 'bold'}}>{days}</div>
             </div>
         )
     }
-    const GetForm = () => {
+
+    const [requestsState, setRequestsState] = useState([]);
+    const [openRequestID, setOpenRequestID] = useState(null);
+    const handleOpenRequestClick = event => {
+        console.log(event.target.id);
+        console.log(event.currentTarget.id);
+        if (openRequestID === event.currentTarget.id)
+            setOpenRequestID(null)
+        else
+            setOpenRequestID(event.currentTarget.id);
+    }
+    const handleOpenRequestClose = () => {
+        setOpenRequestID(null);
+    }
+    const getTimeRemaining = (d) => {
+        const date = new Date();
+        const dateCreated = new Date(d.split(".",1)[0]);
+        const time_difference = date.getTime() - dateCreated.getTime();
+        const result = time_difference / (1000 * 60 * 60 * 24);
+        return result;
+    }
+    const handleResponseTypeClick = event => {
+        event.preventDefault();
+
+        setResponseType(event.target.value);
+    }
+
+    const GetTable = () => {
+        console.log("<GetTable />");
+        let rows = [];
+        tickets.map(e => {
+            console.log('requestid: ' + e.requestID);
+            console.log(e.createdAt);
+            const t = getTimeRemaining(e.createdAt);
+            rows.push(
+                    <tr key={e.ticket_id} id={parseInt(e.ticket_id)} onClick={handleOpenRequestClick} className='manager-request-table-row'>
+                        <td>{e.ticket_id}</td>
+                        <td>{e.eid}</td>
+                        <td>{`${e.employeeData.first_name} ${e.employeeData.last_name}`}</td>
+                        <td>{e.pto_type_id}</td>
+                        <td>{e.createdAt.split("T",1)[0]}</td>
+                        <td>{!(t > 7) ? 
+                                (`${t} days`) : 
+                                    ((t % 7) === 0) ? 
+                                        ((t / 7) > 1) ? 
+                                            (`${t / 7} weeks`) : 
+                                                (`${t / 7} week`) :
+                                        (`${(t / 7).toFixed(0)} ${((t / 7).toFixed(0) > 1) ? 'weeks,' : 'week,'} ${((t % 7) > 1) ? `${(t % 7).toFixed(0)} days` : `${(t % 7).toFixed(0)} day`}`)}
+                        </td>
+                    </tr>
+            )
+            if (Number(openRequestID) === e.ticket_id) {
+                console.log("open request is " + e.ticket_id);
+                rows.push(
+                    <tr key={openRequestID + 'requestID'} className='manager-request-open-request-row'>
+                        <OpenRequestID />
+                    </tr>
+                )
+            }
+        });
         return (
-            <div>
-                <div className='pending-request-item'>
-                    <div>hey</div>
-                    <div className='cal-container'>
-                        <CalendarTest 
-                            setSelectedDays={setSelectedDays} 
-                            selectedDays={selectedDays} 
-                            setSelectedMonth={setSelectedMonth}
-                            selectedMonth={selectedMonth}
-                            setSelectedYear={setSelectedYear}
-                            selectedYear={selectedYear}
-                        />
+                <table className='manager-request-table'>
+                    <thead>
+                        <tr>
+                            <th>
+                                Ticket ID
+                            </th>
+                            <th>
+                                Employee ID
+                            </th>
+                            <th>
+                                Employee Name
+                            </th>
+                            <th>
+                                PTO Type
+                            </th>
+                            <th>
+                                Submit Date {filterDropdown('submitDate')}
+                            </th>
+                            <th>
+                                Time Remaining {filterDropdown('timeRemaining')}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {rows}
+                    </tbody>
+                </table>
+        )
+    }
+    const OpenRequestID = () => {
+        return (
+                <td align='center' colSpan='6'>
+                    <div className='manager-table-open-request-container'>
+                        <div className='manager-table-open-request-left'>
+                            <div className='manager-request-disputed-days'>
+                                {renderSelectedDays()}
+                                <textarea rows="2" className="manager-request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
+                            </div>
+                            <div className='manager-request-response-type'>
+                                <button 
+                                    type='button' 
+                                    value='approve'
+                                    style={{backgroundColor: '#76ff7a', padding: responseType === 'approve' ? '10px' : '3px 5px'}} 
+                                    onClick={handleResponseTypeClick}
+                                    className='manager-request-response-type-button-selected'
+                                >Approve</button>
+                                <button 
+                                    type='button' 
+                                    value='more'
+                                    style={{backgroundColor: '#fff700', padding: responseType === 'more' ? '10px' : '5px'}} 
+                                    onClick={handleResponseTypeClick}
+                                    className='manager-request-response-type-button-selected'
+                                >Request More Information</button>
+                                <button 
+                                    type='button' 
+                                    value='deny'
+                                    style={{backgroundColor: '#ff4040', padding: responseType === 'deny' ? '10px' : '5px'}}
+                                    onClick={handleResponseTypeClick}
+                                    className='manager-request-response-type-button-selected'
+                                >Deny</button>
+                            </div>
+                            <button type='button' className='manager-request-submit-response-button'>Submit Response</button>
+                            <button type="button" className="open-request-close-button" onClick={handleOpenRequestClose}>Close</button>
+                        </div>
+                        <div className='cal-container'>
+                            <Calendar 
+                                setSelectedDays={setSelectedDays} 
+                                selectedDays={selectedDays} 
+                                setSelectedMonth={setSelectedMonth}
+                                selectedMonth={selectedMonth}
+                                setSelectedYear={setSelectedYear}
+                                selectedYear={selectedYear}
+                                calendarType="Manager"
+                            />
+                        </div>
                     </div>
+                </td>
+        )
+    }
+    const filterNavRef = useRef();
+    const filterDropdown = (type) => {
+        
+        return (
+            <div className='manager-filter-dropdown'>
+                <button type='button' id={`manager-filter-${type}`} className='manager-filter-button'>Filter</button>
+                <div className='manager-filter-dropdown-content' id={`manager-filter-${type}`}>
+                    {tickets.map((e, index) => {
+                        return (
+                            <div key={index} 
+                                id={type === 'name' ? e.name : type === 'type' ? e.type : type === 'submitDate' ? e.submitDate : e.timeRemaining} 
+                                onClick={filterRequests}
+                            >
+                                {type == 'name' ? e.name : type == 'type' ? e.type : type === 'submitDate' ? e.submitDate : e.timeRemaining}
+                            </div>
+                        )
+                        })}
                 </div>
             </div>
         )
     }
+    const resetRequestTable = event => {
+        event.preventDefault();
+        setRequestsState(tickets);
+    }
+    const filterRequests = event => {
+        setRequestsState(tickets);
+        console.log(event.target.parentElement);
+        console.log(event.target.parentElement.id);
+        console.log(event.target.id);
+        if (event.target.parentElement.id == 'manager-filter-name') {
+            setRequestsState(prev => prev.filter(e => e.name === event.target.id))
+        } else if (event.target.parentElement.id == 'manager-filter-type') {
+            setRequestsState(prev => prev.filter(e => e.type === event.target.id))
+        } else if (event.target.parentElement.id == 'manager-filter-timeRemaining') {
+            setRequestsState(prev => prev.filter(e => e.timeRemaining === event.target.id))
+        } else if (event.target.parentElement.id == 'manager-filter-submitDate') {
+            setRequestsState(prev => prev.filter(e => e.submitDate === event.target.id))
+        }
+    }
+    const [filterNamePlaceholder, setFilterNamePlaceholder] = useState('Filter by name...');
+    const [filterTypePlaceholder, setFilterTypePlaceholder] = useState('Filter by name...');
+    const [filterTimeRemainingPlaceholder, setFilterTimeRemainingPlaceholder] = useState('Filter by name...');
+
+    const filter = () => {
+        console.log(filterNavRef.current.style.width);
+        if (filterNavRef.current.style.width === "0px") {
+            filterNavRef.current.style.width = "10%";
+        } else {
+            filterNavRef.current.style.width = "0px";
+        }
+    }
+    const GetForm = () => {
+        return (
+            <div className='manager-pending-request-item'>
+                <div className='manager-requests-body-container'>
+                    <div className='manager-request-body-header'>
+                        <button type='button' id='manager-reset-table-button' onClick={resetRequestTable}>Reset Table</button>
+                    </div>
+                    
+                    <GetTable />
+                </div>
+                
+            </div>
+        )
+    }
 
 
-
+    console.log(tickets);
     return (
-        <div id='create-request-main'>
-            <div id='create-request-container'>
-                <div id='pending-button' className='pending-button-non-current' onClick={() => navigate('/request/pending')}>Pending</div>
-                <div id='complete-button' className='pending-button-non-current' onClick={() => navigate('/request/complete')}>Complete</div>
+        <div className='manager-request-main'>
+            <div className='manager-request-container'>
+                <div id='pending-button' className='pending-button-non-current' onClick={() => navigate('/dashboard/pending')}>Pending</div>
+                <div id='complete-button' className='pending-button-non-current' onClick={() => navigate('/dashboard/complete')}>Complete</div>
                 <div id='create-new-button' className='pending-button-current'>Create New</div>
                 
-                <div id='pending-request-body'>          
-                    
-                    <GetForm />
+                <div className='manager-request-body'>          
+                    <div className='manager-scroll-container'>
+                        {tickets?.length > 0 ? <GetForm /> : <div>Loading...</div>}
+                    </div>
                 </div>
             </div>   
         </div>

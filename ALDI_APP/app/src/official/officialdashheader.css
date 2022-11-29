@@ -1,0 +1,10 @@
+.official-dash-header {
+    height: 15%;
+    background-color: blue;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 10%;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+}

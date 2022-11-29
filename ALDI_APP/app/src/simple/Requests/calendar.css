@@ -9,6 +9,7 @@
 .grid-container {
     min-width: 50%;
     aspect-ratio: 7/6;
+    background-color: white;
     min-height: 50%;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -23,11 +24,6 @@
     font-size: 0.75rem;
     font-weight: lighter;
 }
-.grid-week {
-    width: 100%;
-    border: 1px solid blue;
-    aspect-ratio: 7/1;
-}
 .day {
     border: 1px solid orange;
     aspect-ratio: 1/1;
@@ -39,14 +35,17 @@
     position: absolute;
     height: 100%;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-.day:hover {
+.valid-day:hover {
     cursor: pointer;
 }
 .disabled-day:hover {
     cursor: auto;
 }
-
 :root {
     --ratio-percent: 100%;
 }
@@ -65,21 +64,12 @@
     height: 100%;
     display: grid;
 }
-
-.aaspect-ratio {
-    content: "";
-    display: inline-block;
-    width: 1px;
-    height: 0;
-    padding-bottom: 100%;
-}
 .day-header {
     text-align: left;
     left: 2px;
     position: relative;
     top: -4px;
     font-weight: lighter;
-    pointer-events: none;
 }
 .day-event {
     position: relative;
@@ -101,4 +91,11 @@ IconBxsLeftArrow, IconBxsRightArrow {
     -moz-user-select: none;    
     -ms-user-select: none;      
     user-select: none;
+}
+
+.selected-day {
+    box-shadow: inset 0px 0px 30px 0px green
+}
+.denied-day {
+    box-shadow: inset 0px 0px 30px 0px red;
 }

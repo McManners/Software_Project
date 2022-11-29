@@ -1,0 +1,23 @@
+.navbar {
+    transition: 0.5s;
+    padding-top: 50px;
+    position: relative;
+    width: 200px;
+    z-index: 0;
+    text-align: right;
+    background-color: red;
+}
+.navbar button {
+    width: 90%;
+    margin-right: 10px;
+}
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vh;
+}
+.dashboard-outlet {
+    position: relative;
+    z-index: 1;
+    flex-grow: 1;
+}

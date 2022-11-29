@@ -1,58 +1,65 @@
 const db = require('../models/index');
 
-const getAllForRefreshToken = async (req, res) => {
-    console.log(req.email);
-    console.log("hey");
-    console.log("ticket controller req: " + req);
-    const refresh_token = req?.cookies?.jwt;
-    if (!refresh_token) return res.sendStatus(401);
-    // console.log(req);
-    // console.log(req?.cookies);
-    // use refresh token to find tickets, works as auth
-    const account = await db.Account.findOne({ where: { refresh_token: refresh_token }});
-    if (!account) return res.sendStatus(401); // unauthorized
-    const tickets = await db.Ticket.findAll({ where: { eid: account.eid } });
+const getAll = async (req, res) => {
+    const eid = req.eid;
+    if (!eid) return res.sendStatus(401);
+    const employee = await db.Employee.findOne({ where: { eid: eid }});
+    if (!employee) return res.sendStatus(401); // unauthorized
+    // const tickets = await db.Ticket.findAll({ where: { eid: account.eid } });
+    const tickets = await employee.getEmployeeTickets();
 
     res.status(201).json({ tickets });
 }
+const getAllLeaderTickets = async (req, res) => {
+    const eid = req.eid;
+    console.log("getAllLeaderTickets eid: " + eid);
+    if (!eid) return res.sendStatus(401);
+    const account = await db.Employee.findOne({ where: { eid: eid } });
+    if (!account) return res.sendStatus(401);
+    console.log(account);
+    const tickets = await account.getLeaderTickets();
+    res.status(201).json({ tickets });
+}
 
-const createTicketForRefreshToken = async (req, res) => {
-    // create for refresh token because account must be authorized, otherwise it cant create ticket
-    const refresh_token = req?.cookies?.jwt;
-    if (!refresh_token) return res.sendStatus(401);
-    console.log("create ticket request:" + req);
-    console.log("create ticket request cookies: " + req?.cookies);
-    const date_from = req?.body?.date_from;
-    const date_to = req?.body?.date_to;
-    const request_note = req?.body?.request_note;
+const createTicket = async (req, res) => {
+    const eid = req.body.eid;
     console.log(req.body);
-    const account = await db.Account.findOne({ where: { refresh_token: refresh_token }});
+    if (!eid) return res.sendStatus(401);
+    const date = req.body.date;
+    // const pto_type_id = req.body.pto_type_id;
+    const request_note = req.body.request_note;
+    console.log(req.body);
+    const account = await db.Account.findOne({ where: { eid: eid }});
     if (!account) return res.sendStatus(401); // unauthorized
-    
+    const leader_id = await account.Employee.leader_id;
+
     try {
-        const new_ticket = new db.Ticket({ 
-                                            eid: account.eid, 
-                                            leader_id: account.leader_id, 
-                                            date_from: date_from,
-                                            date_to: date_to,
-                                            request_note: request_note
-                                        });
-        console.log(new_ticket);
-        new_ticket.save();
-        
-        res.status(201).json({ 'success': `New ticket created for ${account.email}!` });
+        const new_ticket = await db.Ticket.create({ 
+            eid: eid, 
+            leader_id: leader_id,
+            // pto_type_id: pto_type_id, 
+            request_note: request_note 
+        });
+        const ticket_id = new_ticket.ticket_id;
+        date.forEach(ticket_date => createTicketDateRange(ticket_id, ticket_date));
+
+        res.status(201).json({ 'success': `New ticket created for EID: ${eid}!` });
     } catch (err) {
         console.log(err);
         res.status(500).json({ 'message': err });
     }
 
 }
+const createTicketDateRange = async (ticket_id, date) => {
+    try {
+        await db.Ticket_Date_Range.create({
+            ticket_id: ticket_id,
+            start_date: date
+        });
+        return;
+    } catch (err) {
+        console.log(err);
+    }
+}
 
-// const getById = async (req, res) => {
-//     console.log(req);
-//     let tickets = await db.Ticket.findAll({ where: { eid: req.query.eid }});
-//     // tickets = JSON.stringify(tickets);
-//     res.json({ tickets });
-// }
-
-module.exports = { getAllForRefreshToken, createTicketForRefreshToken }
+module.exports = { getAll, createTicket, getAllLeaderTickets }

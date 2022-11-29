@@ -1,25 +1,23 @@
 import { Link, useNavigate } from 'react-router-dom';
+import './dashboard.css';
 
 const DashHeader = () => {
     const navigate = useNavigate();
 
     const content = (
-        <header style={{ backgroundColor: "orange" }}>
+        <div className='dashboard-header'>
             <div>
-                <h1>headies</h1>
-                <Link to="/dashboard">
-                    <h1>ALDI</h1>
-                </Link>
+                <h1>ALDI</h1>
                 <nav>
                     <button type="button" onClick={() => navigate('./dashboard')}>Home</button>
-                    <button type="button" onClick={() => navigate('./request/pending')}>Requests</button>
-                    <button type="button" onClick={() => navigate('./dashboard')}>Filler</button>
-                    <button type="button" onClick={() => navigate('./dashboard')}>Filler</button>
-                    <button type="button" onClick={() => navigate('./dashboard')}>Filler</button>
+                    <button type="button" onClick={() => navigate('/dashboard/pending')}>Pending</button>
+                    <button type="button" onClick={() => navigate('./dashboard/complete')}>Complete</button>
+                    <button type="button" onClick={() => navigate('./dashboard/create')}>Create</button>
+                    <button type="button" onClick={() => navigate('./dashboard/manager')}>Manager</button>
                         
                 </nav>
             </div>
-        </header>
+        </div>
     )
     
     return content;

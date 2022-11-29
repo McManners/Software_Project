@@ -27,24 +27,27 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: "account"
   });
-//   Account.associate = function (models) {
-//     Account.hasOne(models.Employee, {
-//         onDelete: 'CASCADE',
-//         onUpdate: 'CASCADE',
-//         foreignKey: {
-//           name: 'eid',
-//           type: DataTypes.INTEGER,
-//           allowNull: false,
-//         },
-//         sourceKey: 'eid'
-//       });
-//     };
+  Account.associate = function (models) {
+    Account.hasOne(models.Employee, {
+        foreignKey: {
+          name: 'eid',
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+        sourceKey: 'eid'
+      });
+    };
 
-//   // Add a custom `addScopes` function to call after initializing all models in `index.js`
-//   Account.addScopes = function (models) {
-//     Account.addScope('defaultScope', {
-//       include: models.Employee
-//     });
-// }
+  // Add a custom `addScopes` function to call after initializing all models in `index.js`
+  Account.addScopes = function (models) {
+    Account.addScope('defaultScope', {
+      include: [
+        { 
+            model: models.Employee
+        }
+      ],
+      attributes: { exclude: ['updatedAt', 'createdAt'] }
+    });
+}
   return Account;
 };

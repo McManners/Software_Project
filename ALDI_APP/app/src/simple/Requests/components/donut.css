@@ -1,0 +1,76 @@
+body {
+    background: #072237;
+  }
+  h3 {
+    color: #ffffff;
+  }
+  .donut {
+    position: relative;
+    width: 100px;
+    height: 100px;
+  }
+  .ring {
+    -webkit-animation: load 6s 1 forwards;
+    animation: load 6s 1 forwards;
+  }
+  .circle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    border: 2px solid black;
+    margin-left: -10px;
+    margin-top: -10px;
+    background: #FF1251;
+    border-radius: 50%;
+    transform: scale(0.8);
+    -webkit-animation: pulse 1.2s 3;
+    animation: pulse 1.2s 3;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+  }
+  @-webkit-keyframes pulse {
+    0% {
+      transform: scale(0.8);
+    }
+    20% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(0.8);
+    }
+    100% {
+      transform: scale(0.8);
+    }
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(0.8);
+    }
+    20% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(0.8);
+    }
+    100% {
+      transform: scale(0.8);
+    }
+  }
+  @-webkit-keyframes load {
+    80% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes load {
+    80% {
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }

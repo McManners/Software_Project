@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './createrequest.css';
 import axios from 'axios';
-import CalendarTest from './CalendarTest';
+import Calendar from './Calendar';
 
 const CreateRequest = () => {
     const navigate = useNavigate();

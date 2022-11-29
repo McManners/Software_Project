@@ -26,5 +26,11 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: "employee_type"
   });
+  
+  Employee_Type.addScopes = function (models) {
+    Employee_Type.addScope('defaultScope', {
+      attributes: { exclude: ['updatedAt', 'createdAt'] }
+    });
+  };
   return Employee_Type;
 };

@@ -1,19 +1,13 @@
 'use strict';
 
-/**
- * NOTE: EMPLOYEE.EMAIL is NOT equal to ACCOUNT.EMAIL, they can be DIFFERENT...maybe...
- */
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const db = {};
-console.log("test");
 // const sequelize = new Sequelize( "dynaF2020", "dynaF2020", "b0mbsAway", { dialect: 'mysql' });
 // const sequelize = new Sequelize("mysql:45.55.136.114", { database: "dynaF2020", username: "dynaF2020", password: "b0mbsAway", dialect: 'mysql' })
 const sequelize = new Sequelize("mysql:localhost", { database: "aldi_new", username: "root", password: "", dialext: "mysql" });
-console.log("hey how yall doing from index.js model")
 /**
  * Import and attach all of the model definitions within this 'models' directory to the sequelize instance.
  * https://stackoverflow.com/questions/55896380/sequelize-js-include-unexpected-element-has-to-be-either-a-model-an-associati 

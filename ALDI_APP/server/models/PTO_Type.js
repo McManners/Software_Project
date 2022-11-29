@@ -24,5 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: 'pto_type'
   });
+  
+  PTO_Type.addScopes = function (models) {
+    PTO_Type.addScope('defaultScope', {
+      attributes: { exclude: ['updatedAt', 'createdAt'] }
+    });
+  };
   return PTO_Type;
 };

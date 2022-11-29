@@ -55,3 +55,8 @@ so that the employee will know what day(s) are unavailable to request off. I wan
 they CAN request off these other days, just not this specific day in the range of days.
 
 Fix employee email to be a unique sql data column
+
+-------
+Add client ID on auth and add to JWT cookie!!!!!!!!!!!
+
+Only get Leader tickets of their current employees, instead of all tickets where they are listed as leader
