@@ -6,8 +6,8 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const db = {};
 // const sequelize = new Sequelize( "dynaF2020", "dynaF2020", "b0mbsAway", { dialect: 'mysql' });
-// const sequelize = new Sequelize("mysql:45.55.136.114", { database: "dynaF2020", username: "dynaF2020", password: "b0mbsAway", dialect: 'mysql' })
-const sequelize = new Sequelize("mysql:localhost", { database: "aldi_new", username: "root", password: "", dialext: "mysql" });
+const sequelize = new Sequelize("mysql:45.55.136.114", { database: "dynaF2020", username: "dynaF2020", password: "b0mbsAway", dialect: 'mysql' })
+// const sequelize = new Sequelize("mysql:localhost", { database: "aldi_new", username: "root", password: "", dialext: "mysql" });
 /**
  * Import and attach all of the model definitions within this 'models' directory to the sequelize instance.
  * https://stackoverflow.com/questions/55896380/sequelize-js-include-unexpected-element-has-to-be-either-a-model-an-associati 

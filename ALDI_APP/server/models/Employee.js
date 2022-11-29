@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Employee',
     underscored: true,
     freezeTableName: true,
-    tableName: 'employee',
+    tableName: 'employee_new_fix',
     timestamps: true
   });
 

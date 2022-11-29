@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Employee_Type',
     underscored: true,
     freezeTableName: true,
-    tableName: "employee_type"
+    tableName: "employee_type_new_fix"
   });
   
   Employee_Type.addScopes = function (models) {
