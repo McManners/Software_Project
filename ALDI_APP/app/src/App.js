@@ -19,18 +19,48 @@ import PendingRequests from './simple/Requests/PendingRequests';
 import CompleteRequests from './simple/Requests/CompleteRequests';
 import CreateRequest from './simple/Requests/CreateRequest';
 
-import CalendarTest from './simple/Requests/CalendarTest';
+import Calendar from './simple/Requests/Calendar';
 import CreateRequestWithCalendar from './simple/Requests/CreateRequestWithCalendar';
 import RequestManager from './simple/Requests/RequestManager';
 import ManagerCalendar from './simple/Requests/ManagerCalendar';
 import RequestDashboard from './simple/Requests/Dashboard/Dashboard';
 import RequestWelcome from './simple/Requests/Dashboard/DashboardWelcome';
 
+import OfficialHome from './official/OfficialHome';
+import OfficialLogin from './official/OfficialLogin';
+import OfficialRequest from './official/OfficialRequest';
+import OfficialStats from './official/OfficialStats';
+import OfficialDashboard from './official/OfficialDashboard';
+import OfficialPublic from './official/OfficialPublic';
+
 function App() {
 
     return (
         <Routes>
+
+            
+
             <Route path='/' element={<Layout />}>
+
+            <Route path='official' element={<Layout />}>
+                <Route index element={<OfficialPublic />}/>
+                <Route path='login' element={<OfficialLogin />}/>
+                <Route element={<RememberLogin />}>
+                    <Route element={<Status />}>
+                        <Route element={<RequireAuth allowedEmployeeType={["Employee", "Manager"]}/>}>
+                            <Route path='dashboard' element={<OfficialDashboard />}>
+                                <Route index element={<OfficialHome />}/>
+                                <Route path='stats' element={<OfficialStats />}/>
+                                <Route path='request' element={<OfficialRequest />}/>
+                            </Route>
+                        </Route>
+                    </Route>
+                </Route>
+            </Route>
+
+
+
+
                 <Route index element={<Public />} />
                 <Route path='login' element={<Login />} />
                 <Route path="register" element={<Register />} />
@@ -55,7 +85,7 @@ function App() {
                                 
                                 <Route path="pending" element={<PendingRequests />}/>
                                 <Route path="complete" element={<CompleteRequests />}/>
-                                <Route path="calendartest" element={<CalendarTest />}/>
+                                <Route path="calendartest" element={<Calendar />}/>
                                 <Route path="create" element={<CreateRequestWithCalendar />}/>
                                 <Route path="manager" element={<RequestManager />}/>
                                 <Route path="manager/calendar" element={<ManagerCalendar />}/>

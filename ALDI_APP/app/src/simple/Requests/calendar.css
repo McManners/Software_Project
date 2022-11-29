@@ -6,10 +6,6 @@
     align-items: center;
     flex-direction: column;
 }
-#root {
-    background: linear-gradient(45deg, #FFB428 0%,
-    #FA8214 45%, #FA8214 100%);
-}
 .grid-container {
     min-width: 50%;
     aspect-ratio: 7/6;
@@ -95,4 +91,11 @@ IconBxsLeftArrow, IconBxsRightArrow {
     -moz-user-select: none;    
     -ms-user-select: none;      
     user-select: none;
+}
+
+.selected-day {
+    box-shadow: inset 0px 0px 30px 0px green
+}
+.denied-day {
+    box-shadow: inset 0px 0px 30px 0px red;
 }

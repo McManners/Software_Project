@@ -5,10 +5,6 @@
     background-color: transparent;
     padding: 25px 0;
 }
-#root {
-    background: linear-gradient(45deg, #FFB428 0%,
-    #FA8214 45%, #FA8214 100%);
-}
 .manager-request-container {
     width: 90%;
     max-height: 90%;

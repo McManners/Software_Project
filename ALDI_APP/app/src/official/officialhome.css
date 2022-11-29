@@ -1,0 +1,198 @@
+.homepage-main {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border: 1px solid black;
+    
+    background: linear-gradient(45deg, #FFB428 0%,
+    #FA8214 45%, #FA8214 100%);
+}
+.homepage-content {
+    border: 1px solid black;
+    font-family: 'DM Sans', sans-serif;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.homepage-introduction {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.test-container{
+    background-color: white;
+    margin: 10px 0;
+}
+
+.date-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.date-p {
+    font-size: 18px;
+    line-height: 32px;
+    font-weight: 50;
+    margin: 0;
+}
+.notification-header{
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 700;
+    opacity: 0.9;
+    margin: 0;
+}
+.notification-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+.notification-section {
+    background-color: white;
+}
+.notification-section .date-header {
+    position: sticky;
+    top: 0;
+}
+.notify-container {
+    border-top: 2px solid #e9ebf0;
+    padding: 16px;
+    display: flex;
+    align-items: flex-start;
+}
+.notify-container:hover {
+    background-color: #E9EEF4;
+}
+
+.not-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.not-header .message-alert {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+.notify-content {
+    padding-left: 16px;
+    width: 100%;
+}
+
+.notification-content-message {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 8px 0;
+    opacity: 0.7;
+}
+.cards.jsGridView {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    aspect-ratio: 3/2;
+}
+.cards.jsGridView .card-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+.cards.jsGridView .card-wrapper div {
+    margin: 10px 0;
+}
+
+.cards.jsListView . {
+    order: 3;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+.cards.jsListView .card-content-header p {
+    text-align: left;
+    overflow: hidden;
+}
+.cards.jsListView .card-header > span {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    font-size: 12px;
+}
+
+.card {
+    border-radius: 30px;
+    padding: 16px;
+    border: black;
+}
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.card-header span {
+    color: #4a4a4a;
+    opacity: 0.7;
+    font-size: 14px;
+    line-height: 16px;
+}
+.card-content-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+.card-content-header p {
+    margin: 0;
+}
+.card-wrapper {
+    cursor: pointer;
+    padding: 8px;
+    border-style: solid;
+    border-width: thin;
+    background-color: white;
+}
+
+.card-wrapper:hover {
+    background-color: #E9EEF4;
+}
+
+.card-info-header {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    opacity: 0.7;
+}
+.card-picture {
+    line-height: 24px;
+    opacity: 0.7;
+}
+
+@media screen and (max-width: 520px) {
+    .cards.jsGridView .card-wrapper {
+        width: 100%;
+    }
+    .homepage-introduction {
+        padding: 24px 16px 0 16px;
+    }
+    .date-header p {
+        font-size: 10px;
+    }
+
+    .cards.jsListView .card-header > span {
+        font-size: 10px;
+    }
+    .cards.jsListView .card > * {
+        margin-right: 10px;
+    }
+}
+
+.hr-style{
+    border-top: 1px solid black;
+}

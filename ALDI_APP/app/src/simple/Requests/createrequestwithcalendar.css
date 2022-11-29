@@ -147,6 +147,7 @@
     width: 75%; height: 75%;
     border-radius: 50%;
     border: 2px solid black;
+    aspect-ratio: 1;
 }
 .create-calendar-donut-item {
     padding: 10px;

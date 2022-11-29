@@ -4,7 +4,7 @@ import IconBxsLeftArrow from './Icons/IconBxsLeftArrow.tsx';
 import IconBxsRightArrow from './Icons/IconBxsRightArrow.tsx';
 import IconHalloween from './Icons/IconHalloween.tsx';
 
-const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMonth, setSelectedYear, selectedYear, calendarType}) => {
+const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMonth, setSelectedYear, selectedYear, calendarType}) => {
     const monthEnum = {
         JANUARY: { days: 31, day: 'January', firstDayOfMonth: 1},
         FEBRUARY: { days: 28, day: 'February', firstDayOfMonth: 1},
@@ -20,6 +20,7 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
         DECEMBER: { days: 31, day: 'December', firstDayOfMonth: 1}
     }
     const setStartOfMonth = () => {
+        console.log("setting start of month");
         if (selectedYear >= 2022) {
             monthEnum.JANUARY.firstDayOfMonth = 6;
             for (let i = 1; i < Object.entries(monthEnum).length; i++) {
@@ -31,10 +32,12 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
             }
         }
     }
-    // useEffect(() => {
-    //     console.log("use effecting");
-    //     setStartOfMonth();
-    // }, [])
+
+    /*style={
+        selectedDays.includes(`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`) ?
+        {backgroundColor: '#f0fff0'} : {}
+    }*/
+
     const handleMonthChangeDecrease = () => {
         if (selectedMonth === 0) {
             setSelectedMonth(11);
@@ -50,23 +53,17 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
             setSelectedMonth(prev => prev + 1);
         }
     }
-    const calendarTypeColor = (calendarType === "Manager") ? "#ff2800" : "#f0fff0"
     const handleDayClick = event => {
         if (!selectedDays.includes(event.target.id)) {
             setSelectedDays(prev => [...prev, event.target.id]);
-            console.log(calendarTypeColor)
-            // event.target.parentElement.style.backgroundColor = calendarTypeColor;
-            
-            // .currentTarget instead of target to get the listeners element!
-            // https://stackoverflow.com/questions/36599473/react-click-on-the-parent-element
         } else {
             setSelectedDays(prev => prev.filter(e => e !== event.target.id));
-            // event.target.parentElement.style.backgroundColor = "transparent";
         }
     }
     
     const employeeDaysTest = ['2022-10-09', '2022-10-11']
     const renderMonth = (currMonth) => {
+        console.log("rendering month");
         setStartOfMonth();
         const first_day = Object.entries(monthEnum)[selectedMonth][1].firstDayOfMonth;
         const prev_month_days = Object.entries(monthEnum)[selectedMonth === 0 ? 11 : selectedMonth - 1][1].days;
@@ -77,15 +74,11 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
             for (let i = 1; i < currMonth + 1; i++) {
                 month.push(
                     <div className={
-                        employeeDaysTest.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`)) ? 
-                        'day valid-day aspect-ratio' : 'day disabled-day aspect-ratio'
-                    } key={`${selectedMonth + 1}${(i < 10 ? `0${i}` : i)}${selectedYear}`} 
-                        style={
-                            selectedDays.includes(`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`) ?
-                            {backgroundColor: calendarTypeColor} : 
+                        selectedDays.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`)) ?
+                            'day valid-day denied-day' :
                                 employeeDaysTest.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`)) ? 
-                                    {backgroundColor: '#f0fff0'} : {}
-                        }>
+                                    'day valid-day aspect-ratio selected-day' : 'day disabled-day aspect-ratio'
+                    } key={`${selectedMonth + 1}${(i < 10 ? `0${i}` : i)}${selectedYear}`}>
                             <div>
                                 <div className='day-header'>{i}</div>
                             </div>
@@ -101,11 +94,9 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
             console.log("this calendar is not for manager");
             for (let i = 1; i < currMonth + 1; i++) {
                 month.push(
-                    <div className='day valid-day aspect-ratio' key={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`} 
-                        style={
-                            selectedDays.includes(`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`) ?
-                            {backgroundColor: '#f0fff0'} : {}
-                        }>
+                    <div className={selectedDays.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`)) ? 
+                            'day aspect-ratio selected-day' : 'day aspect-ratio'}
+                        key={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`}>
                         <div>
                             <div className='day-header'>{i}</div>
                         </div>
@@ -181,4 +172,4 @@ const CalendarTest = ({setSelectedDays, selectedDays, setSelectedMonth, selected
     )
 }
 
-export default CalendarTest;
+export default Calendar;

@@ -4,7 +4,7 @@ const RequestDashHeader = () => {
     const navigate = useNavigate();
 
     const content = (
-        <header style={{ backgroundColor: "orange" }}>
+        <header style={{ backgroundColor: "blue" }}>
             <div>
                 <h1>headies</h1>
                 <Link to="/request/dashboard">

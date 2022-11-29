@@ -1,11 +1,8 @@
-.dashboard-nav {
-    border: 1px solid black;
-    height: 400px;
-    width: 200px;
+
+.dashboard-header h1 {
+    color: black;
+    font-size: 2rem;
 }
-#root {
-    display: flex;
-}
-.dashboard-nav-content {
-    width: auto;
+.dashboard-header {
+    background-color: navy;
 }

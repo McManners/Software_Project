@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CalendarTest from './CalendarTest';
+import Calendar from './Calendar';
 import './managercalendar.css';
 
 const ManagerCalendar = () => {

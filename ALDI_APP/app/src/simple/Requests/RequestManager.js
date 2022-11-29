@@ -1,14 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './requestmanager.css';
 import axios from 'axios';
-import CalendarTest from './CalendarTest';
+import Calendar from './Calendar';
 import useAuth from '../useAuth';
+import useAxiosPrivate from '../../simple/useAxiosPrivate';
+import useLogout from '../useLogout';
 
 const RequestManager = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { auth } = useAuth();
-    const [requestNote, setRequestNote] = useState("test");
+    const [requestNote, setRequestNote] = useState("");
     // const [availablePTO, setAvailablePTO] = useState({ vacation: 0, sick: 0, personal: 0 });
     const [availablePTO, setAvailablePTO] = useState({ vacation: 2, sick: 0, personal: 0 });
     const [errMsg, setErrMsg] = useState("");
@@ -17,10 +20,11 @@ const RequestManager = () => {
     const errRef = useRef();
     const [tickets, setTickets] = useState([]);
     const [responseType, setResponseType] = useState(null);
+    const axiosPrivate = useAxiosPrivate();
 
-    useEffect(() => {
-        setErrMsg("");
-    }, [selectedType]);
+    // useEffect(() => {
+    //     setErrMsg("");
+    // }, [selectedType]);
 
     // useEffect(() => {
     //     axios({
@@ -49,25 +53,35 @@ const RequestManager = () => {
     }
 
     useEffect(() => {
-        axios({
-            method: 'GET',
-            url: 'http://localhost:3001/ticket/get/leader',
-            withCredentials: true,
-            headers: {
-                'Authorization': `Bearer ${auth.access_token}`
-            },
-            data: {
-                access_token: auth.access_token
+        // https://github.com/gitdagray/react_persist_login/blob/main/src/components/Users.js
+        let isMounted = true;
+        const controller = new AbortController();
+
+        const getTickets = async () => {
+            // https://flaviocopes.com/axios-send-authorization-header
+            try {
+                const response = await axiosPrivate.get('ticket/get/leader', {
+                    access_token: auth.access_token
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${auth.access_token}`
+                    }
+                });
+                console.log(response.data);
+                isMounted && setTickets(response.data.tickets) && setRequestsState(response.data.tickets);
+            } catch (err) {
+                console.log(err);
+                // logout();
+                navigate('/login', { state: { from: location }, replace: true });
             }
-        })
-        .then(function(res) {
-            console.log(res.data.tickets);
-            setTickets(res.data.tickets);
-            setRequestsState(res.data.tickets);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        }
+        getTickets();
+        
+        return () => {
+            isMounted = false;
+            controller.abort();
+        }
     }, []);
 
     const createTicket = async event => {
@@ -198,7 +212,7 @@ const RequestManager = () => {
         )
     }
 
-    const [requestsState, setRequestsState] = useState(tickets);
+    const [requestsState, setRequestsState] = useState([]);
     const [openRequestID, setOpenRequestID] = useState(null);
     const handleOpenRequestClick = event => {
         console.log(event.target.id);
@@ -206,12 +220,11 @@ const RequestManager = () => {
         if (openRequestID === event.currentTarget.id)
             setOpenRequestID(null)
         else
-        setOpenRequestID(event.currentTarget.id);
+            setOpenRequestID(event.currentTarget.id);
     }
     const handleOpenRequestClose = () => {
         setOpenRequestID(null);
     }
-    console.log(auth);
     const getTimeRemaining = (d) => {
         const date = new Date();
         const dateCreated = new Date(d.split(".",1)[0]);
@@ -228,7 +241,7 @@ const RequestManager = () => {
     const GetTable = () => {
         console.log("<GetTable />");
         let rows = [];
-        requestsState.map(e => {
+        tickets.map(e => {
             console.log('requestid: ' + e.requestID);
             console.log(e.createdAt);
             const t = getTimeRemaining(e.createdAt);
@@ -324,7 +337,7 @@ const RequestManager = () => {
                             <button type="button" className="open-request-close-button" onClick={handleOpenRequestClose}>Close</button>
                         </div>
                         <div className='cal-container'>
-                            <CalendarTest 
+                            <Calendar 
                                 setSelectedDays={setSelectedDays} 
                                 selectedDays={selectedDays} 
                                 setSelectedMonth={setSelectedMonth}
@@ -345,7 +358,7 @@ const RequestManager = () => {
             <div className='manager-filter-dropdown'>
                 <button type='button' id={`manager-filter-${type}`} className='manager-filter-button'>Filter</button>
                 <div className='manager-filter-dropdown-content' id={`manager-filter-${type}`}>
-                    {requestsState.map((e, index) => {
+                    {tickets.map((e, index) => {
                         return (
                             <div key={index} 
                                 id={type === 'name' ? e.name : type === 'type' ? e.type : type === 'submitDate' ? e.submitDate : e.timeRemaining} 
@@ -406,7 +419,7 @@ const RequestManager = () => {
     }
 
 
-
+    console.log(tickets);
     return (
         <div className='manager-request-main'>
             <div className='manager-request-container'>
@@ -415,8 +428,8 @@ const RequestManager = () => {
                 <div id='create-new-button' className='pending-button-current'>Create New</div>
                 
                 <div className='manager-request-body'>          
-                    <div className='manager-scroll-container' key={'hey'}>
-                        <GetForm key={'render-test'}/>
+                    <div className='manager-scroll-container'>
+                        {tickets?.length > 0 ? <GetForm /> : <div>Loading...</div>}
                     </div>
                 </div>
             </div>   

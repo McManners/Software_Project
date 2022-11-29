@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './createrequestwithcalendar.css';
 import axios from 'axios';
-import CalendarTest from './CalendarTest';
+import Calendar from './Calendar';
 
 const CreateRequestWithCalendar = () => {
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ const CreateRequestWithCalendar = () => {
     const [selectedDays, setSelectedDays] = useState([]);
     const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
     const [selectedYear, setSelectedYear] = useState(date.getFullYear());
-    // These are passed to <CalendarTest/> as props
+    // These are passed to <Calendar/> as props
     const [selectedPTOType, setSelectedPTOType] = useState(0);
 
     const handleRequestNoteChange = event => {
@@ -118,7 +118,7 @@ const CreateRequestWithCalendar = () => {
         return (
             <div className='create-calendar-req-cont'>
                     <div className='create-calendar-cal-container'>
-                        <CalendarTest 
+                        <Calendar 
                             setSelectedDays={setSelectedDays} 
                             selectedDays={selectedDays} 
                             setSelectedMonth={setSelectedMonth}

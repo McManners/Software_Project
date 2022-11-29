@@ -15,6 +15,8 @@ const handleLogin = async (req, res) => {
     if (!foundEmployee_Type) return res.status(404).json({ 'message': `Cant find emplyee type by pk ${foundEmployee.employee_type_id}` }); // Unauthorized
     // console.log(foundAccount);
     const employee_type = await foundEmployee_Type.employee_type;
+    const first_name = await foundEmployee.first_name;
+    const last_name = await foundEmployee.last_name;
     // evaluate password
     const match = await bcrypt.compare(password, foundAccount.password);
     if (match) {
@@ -22,7 +24,9 @@ const handleLogin = async (req, res) => {
         const access_token = jwt.sign(
             {
                 "eid": foundAccount.eid,
-                "employee_type": foundEmployee_Type.employee_type
+                "employee_type": foundEmployee_Type.employee_type,
+                "first_name": first_name,
+                "last_name": last_name
             },
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: '1hr' } // 5min/15min whatever
@@ -40,7 +44,7 @@ const handleLogin = async (req, res) => {
         // if cookie is set to httpOnly, its not available to javascript
         res.cookie('jwt', refresh_token, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
         res.cookie('logged', true, { httpOnly: false, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
-        res.json( { access_token, employee_type }); // store in memory not cookie
+        res.json( { access_token, employee_type, first_name, last_name }); // store in memory not cookie
     } else {
         res.sendStatus(401);
     }
