@@ -1,8 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# client
-client
-
 ALDI_APP/node_modules
 
 # server
@@ -11,4 +8,3 @@ ALDI_APP/server/middleware/logs
 
 #app
 ALDI_APP/app/node_modules
-ALDI_APP/app/package-lock.json
