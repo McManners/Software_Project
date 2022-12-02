@@ -1,0 +1,59 @@
+"DatabaseName","ParentSchema","ParentTable","ColumnName","ColumnOrder","DataType","ColumnSize","ConstraintType","ChildSchema","ChildTable","ChildColumn"
+,"dynaF2020","account","account_id","1","int",NULL,"PRIMARY KEY",NULL,NULL,NULL
+,"dynaF2020","account","eid","2","int",NULL,"FOREIGN KEY","dynaF2020","employee_fix","eid"
+,"dynaF2020","account","email","3","varchar","255",NULL,NULL,NULL,NULL
+,"dynaF2020","account","password","4","varchar","255",NULL,NULL,NULL,NULL
+,"dynaF2020","account","refresh_token","5","varchar","255",NULL,NULL,NULL,NULL
+,"dynaF2020","account","created_at","6","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","account","updated_at","7","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","employee_fix","eid","1","int",NULL,"PRIMARY KEY",NULL,NULL,NULL
+,"dynaF2020","employee_fix","first_name","2","varchar","255",NULL,NULL,NULL,NULL
+,"dynaF2020","employee_fix","last_name","3","varchar","255",NULL,NULL,NULL,NULL
+,"dynaF2020","employee_fix","email","4","varchar","255",NULL,NULL,NULL,NULL
+,"dynaF2020","employee_fix","hire_date","5","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","employee_fix","leader_id","6","int",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","employee_fix","employee_type_id","7","int",NULL,"FOREIGN KEY","dynaF2020","employee_type_fix","employee_type_id"
+,"dynaF2020","employee_fix","created_at","8","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","employee_fix","updated_at","9","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","employee_type_fix","employee_type_id","1","int",NULL,"PRIMARY KEY",NULL,NULL,NULL
+,"dynaF2020","employee_type_fix","employee_type_fix","2","varchar","255",NULL,NULL,NULL,NULL
+,"dynaF2020","employee_type_fix","default_vacation_days","3","int",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","employee_type_fix","default_personal_days","4","int",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","employee_type_fix","default_sick_days","5","int",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","employee_type_fix","created_at","6","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","employee_type_fix","updated_at","7","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","pto_balance","pto_balance_id","1","int",NULL,"PRIMARY KEY",NULL,NULL,NULL
+,"dynaF2020","pto_balance","eid","2","int",NULL,"FOREIGN KEY","dynaF2020","employee_fix","eid"
+,"dynaF2020","pto_balance","vacation_available","3","int",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","pto_balance","personal_available","4","int",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","pto_balance","sick_available","5","int",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","pto_balance","created_at","6","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","pto_balance","updated_at","7","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","pto_type","pto_type_id","1","int",NULL,"PRIMARY KEY",NULL,NULL,NULL
+,"dynaF2020","pto_type","pto_type","2","varchar","255",NULL,NULL,NULL,NULL
+,"dynaF2020","pto_type","created_at","3","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","pto_type","updated_at","4","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket","ticket_id","1","int",NULL,"PRIMARY KEY",NULL,NULL,NULL
+,"dynaF2020","ticket","eid","2","int",NULL,"FOREIGN KEY","dynaF2020","employee_fix","eid"
+,"dynaF2020","ticket","leader_id","3","int",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket","pto_type_id","4","int",NULL,"FOREIGN KEY","dynaF2020","pto_type","pto_type_id"
+,"dynaF2020","ticket","date_from","5","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket","date_to","6","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket","status","7","tinyint",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket","request_note","8","text","65535",NULL,NULL,NULL,NULL
+,"dynaF2020","ticket","response_note","9","text","65535",NULL,NULL,NULL,NULL
+,"dynaF2020","ticket","created_at","10","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket","updated_at","11","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket_date_range","ticket_date_range_id","1","int",NULL,"PRIMARY KEY",NULL,NULL,NULL
+,"dynaF2020","ticket_date_range","ticket_id","2","int",NULL,"FOREIGN KEY","dynaF2020","ticket","ticket_id"
+,"dynaF2020","ticket_date_range","start_date","3","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket_date_range","end_date","4","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket_date_range","created_at","5","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket_date_range","updated_at","6","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket_response","ticket_response_id","1","int",NULL,"PRIMARY KEY",NULL,NULL,NULL
+,"dynaF2020","ticket_response","ticket_id","2","int",NULL,"FOREIGN KEY","dynaF2020","ticket","ticket_id"
+,"dynaF2020","ticket_response","leader_id","3","int",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket_response","response_type","4","int",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket_response","response","5","int",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket_response","created_at","6","datetime",NULL,NULL,NULL,NULL,NULL
+,"dynaF2020","ticket_response","updated_at","7","datetime",NULL,NULL,NULL,NULL,NULL

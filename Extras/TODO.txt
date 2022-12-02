@@ -1,0 +1,55 @@
+[X] Register account
+[X] Validate register form
+[X] Validate email
+[X] Validate employee id
+[X] Validate password
+[ ] Password requirements
+[X] Get account
+[X] Delete account
+[X] Update account
+[X] Get employee
+[X] Update employee
+[X] Create employee
+[X] Delete employee
+
+[X] Create ticket
+[ ] Create ticket date range
+
+[X] User authentication
+[ ] Role identification (employee/manager permissions)
+[X] Route protection
+
+[X] Create refresh token
+
+[X] Protect API with cookie credentials (using refresh token value in JWT cookie)
+
+[ ] Get tickets for all employees (probably shouldnt want this)
+[ ] Get tickets for all MY (manager) employees
+[X] Get tickets by refresh token
+
+[X] Get and update state with current user using refresh token (currently in state), instead of refresh token only.
+[ ] Account create send email confirmation
+[ ] Account create send to create success component, instead of new page
+[ ] Account reset password
+[ ] Account create confirm email with link
+[ ] Account security -> authenticate with code
+[ ] Login max fail attempt
+
+TODO: 
+I want to simplify javascript code for React.
+I want to create comments to explain the code to others to help them understand the code.
+
+
+User Stories:
+
+As an employee, I want to request off for a date range but exclude a day, 
+for example: I want October 8, October 9, October 10, October 12 off. 
+I do not want October 11 off.
+I want to submit a single request for this range and exclude one day. As opposed to two requests.
+so that I can make less effort.
+But, I also want to link this range of four days off, 1 day on, 5 total days, together,
+so that if I cannot get October 12 off, I do not want October 8, October 9, October 10 off.
+
+As a manager, I want to select a specific day from a range of days that the employee cannot request off,
+so that the employee will know what day(s) are unavailable to request off. I want the employee to know that 
+they CAN request off these other days, just not this specific day in the range of days.

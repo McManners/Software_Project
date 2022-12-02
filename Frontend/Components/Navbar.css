@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.navbar{
+    background-color: #00005F;
+    height: 70px;
+}
+a {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    height: 48px;
+    padding: 0 0.25rem;
+    font-weight: 500;
+    color: white;
+    border-color: black;
+    text-decoration: none;
+    transition: 0.15s ease;
+}
+
+.navbar {
+    position: relative;
+    height: 80px;
+    width: 100%;
+    transition: 0.5s ease;
+
+}
+
+.navbar .nav {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    float: right;
+    margin-right: 5%;
+}
+
+.navbar .nav .item {
+    list-style: none;
+    display: inline-block;
+    font-size: 18px;
+    padding: 5px;
+    font-weight: 300;
+    line-height: 80px;
+    margin-right: 20px;
+    transition: 0.5s ease;
+}
+
+
+
+
+
+.scrolled.navbar .nav .item .contact {
+    display: inline-block;
+    background-color: #001E78;
+    line-height: 30px;
+    padding: 5px;
+    border-radius: 2px;
+    border-color: black;
+    transition: 0.5s ease;
+}
+
+.NavbarPicture{
+    float: left;
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 5%;
+    width: 10px;
+    height: 10px;
+    background-color: #001E78;
+    transition: 0.5s ease;
+
+}
