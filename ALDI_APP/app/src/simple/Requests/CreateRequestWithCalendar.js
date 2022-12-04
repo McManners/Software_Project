@@ -88,7 +88,7 @@ const CreateRequestWithCalendar = () => {
                     <h5>Vacation Remaining</h5>
                     <div className="create-calendar-donut"
                         style={{background: 
-                            "conic-gradient(green 0deg 160deg, red 160deg 360deg"
+                            "conic-gradient(white 0deg 160deg, blue 160deg 360deg"
                             }}>
                         <div className="create-calendar-hole">8</div>
                     </div>
@@ -97,7 +97,7 @@ const CreateRequestWithCalendar = () => {
                     <h5>Vacation Remaining</h5>
                     <div className="create-calendar-donut"
                         style={{background: 
-                            "conic-gradient(green 0deg 160deg, red 160deg 360deg"
+                            "conic-gradient(white 0deg 160deg, blue 160deg 360deg"
                             }}>
                         <div className="create-calendar-hole">5</div>
                     </div>
@@ -106,7 +106,7 @@ const CreateRequestWithCalendar = () => {
                     <h5>Vacation Remaining</h5>
                     <div className="create-calendar-donut"
                         style={{background: 
-                            `conic-gradient(green 0deg ${360 / 7}deg, red ${360 / 7}deg 360deg`
+                            `conic-gradient(white 0deg ${360 / 7}deg, blue ${360 / 7}deg 360deg`
                             }}>
                         <div className="create-calendar-hole">7</div>
                     </div>
@@ -160,16 +160,32 @@ const CreateRequestWithCalendar = () => {
 
 
     return (
-        <div id='create-calendar-request-main'>
-            <div id='create-calendar-request-container'>
-                <div id='create-calendar-request-pending-button' className='create-calendar-request-pending-button-non-current' onClick={() => navigate('/dashboard/pending')}>Pending</div>
-                <div id='create-calendar-request-complete-button' className='create-calendar-request-pending-button-non-current' onClick={() => navigate('/dashboard/complete')}>Complete</div>
-                <div id='create-calendar-request-create-new-button' className='create-calendar-request-pending-button-current'>Create New</div>
-                
-                <div id='create-calendar-request-pending-body'>
-                    <GetForm />
+        <div>
+            <body className="calendar-container-body">
+                <div className="calendar-container-11">
+                                {/*<div id='create-calendar-request-pending-button' className='create-calendar-request-pending-button-non-current' onClick={() => navigate('/dashboard/pending')}>Pending</div>*/}
+                                {/*<div id='create-calendar-request-complete-button' className='create-calendar-request-pending-button-non-current' onClick={() => navigate('/dashboard/complete')}>Complete</div>*/}
+                                {/*<div id='create-calendar-request-create-new-button' className='create-calendar-request-pending-button-current'>Create New</div>*/}
+                                <div id='create-calendar-request-pending-body'>
+                                    <GetForm />
+                                </div>
                 </div>
-            </div>   
+            </body>
+
+
+
+
+
+        {/*<div id='create-calendar-request-main'>*/}
+        {/*    <div id='create-calendar-request-container'>*/}
+        {/*        <div id='create-calendar-request-pending-button' className='create-calendar-request-pending-button-non-current' onClick={() => navigate('/dashboard/pending')}>Pending</div>*/}
+        {/*        <div id='create-calendar-request-complete-button' className='create-calendar-request-pending-button-non-current' onClick={() => navigate('/dashboard/complete')}>Complete</div>*/}
+        {/*        <div id='create-calendar-request-create-new-button' className='create-calendar-request-pending-button-current'>Create New</div>*/}
+        {/*        <div id='create-calendar-request-pending-body'>*/}
+        {/*            <GetForm />*/}
+        {/*        </div>*/}
+        {/*    </div>   */}
+        {/*</div>*/}
         </div>
     )
 }

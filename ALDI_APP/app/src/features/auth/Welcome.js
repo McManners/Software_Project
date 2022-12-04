@@ -31,7 +31,7 @@ const Welcome = () => {
         <section className="welcome">
             <p>{today}</p>
             <h1>Welcome!</h1>
-            <h2>{auth.email}</h2>
+            <h2>{auth.first_name}</h2>
 
             {/* <button type='button' onClick={getTickets}>Get Tickets</button> */}
             <p><Link to="/dashboard/requests">View PTO Requests</Link></p>

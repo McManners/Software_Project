@@ -3,7 +3,6 @@ import useAuth from '../simple/useAuth';
 import OfficialDashFooter from './OfficialDashFooter';
 import OfficialDashheader from './OfficialDashHeader';
 import NavBar from './OfficialNavBar';
-import './styles.css';
 
 const OfficialDashboard = () => {
     const { auth } = useAuth();
@@ -13,7 +12,6 @@ const OfficialDashboard = () => {
         <>
             <OfficialDashheader />
             <Outlet />
-            <OfficialDashFooter />
             {/* Note that DashHeader is above children in Outlet. So it will always be above the contents
             {/* <div className="dash-container">
                 {/* Wrapped in div so we can have different styles for logged in user/protected. All children will be in this

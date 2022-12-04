@@ -12,7 +12,7 @@ const DashHeader = () => {
                     <button type="button" onClick={() => navigate('./dashboard')}>Home</button>
                     <button type="button" onClick={() => navigate('/dashboard/pending')}>Pending</button>
                     <button type="button" onClick={() => navigate('./dashboard/complete')}>Complete</button>
-                    <button type="button" onClick={() => navigate('./dashboard/create')}>Create</button>
+                    <button type="button" onClick={() => navigate('./create')}>Create</button>
                     <button type="button" onClick={() => navigate('./dashboard/manager')}>Manager</button>
                         
                 </nav>

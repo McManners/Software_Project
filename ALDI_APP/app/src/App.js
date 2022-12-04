@@ -31,30 +31,38 @@ import OfficialLogin from './official/OfficialLogin';
 import OfficialRequest from './official/OfficialRequest';
 import OfficialStats from './official/OfficialStats';
 import OfficialDashboard from './official/OfficialDashboard';
+import OfficialManagerHome from "./official/OfficialManagerHome";
 import OfficialPublic from './official/OfficialPublic';
 
 function App() {
 
     return (
         <Routes>
-
-            
-
             <Route path='/' element={<Layout />}>
-
             <Route path='official' element={<Layout />}>
                 <Route index element={<OfficialPublic />}/>
                 <Route path='login' element={<OfficialLogin />}/>
+                <Route path="register" element={<Register />} />
                 <Route element={<RememberLogin />}>
                     <Route element={<Status />}>
-                        <Route element={<RequireAuth allowedEmployeeType={["Employee", "Manager"]}/>}>
+                        <Route element={<RequireAuth allowedEmployeeType={["Employee","Manager"]}/>}>
                             <Route path='dashboard' element={<OfficialDashboard />}>
+                                <Route path="create" element={<CreateRequestWithCalendar />}/>
                                 <Route index element={<OfficialHome />}/>
                                 <Route path='stats' element={<OfficialStats />}/>
                                 <Route path='request' element={<OfficialRequest />}/>
+                                <Route path="manager" element={<RequestManager />}/>
                             </Route>
                         </Route>
-                    </Route>
+                        <Route element={<RequireAuth allowedEmployeeType={["Manager"]}/>}>
+                                <Route path="create" element={<CreateRequestWithCalendar />}/>
+                                <Route index element={<OfficialHome />}/>
+                                <Route path="pending" element={<PendingRequests />}/>
+                                <Route path='stats' element={<OfficialStats />}/>
+                                <Route path='request' element={<OfficialRequest />}/>
+                                <Route path="manager" element={<RequestManager />}/>
+                        </Route>
+                        </Route>
                 </Route>
             </Route>
 
@@ -82,7 +90,6 @@ function App() {
                                 <Route index element={<Welcome />} />
                                 <Route path="requests" element={<Requests />}/>
                                 <Route path="newticket" element={<NewTicket />}/>
-                                
                                 <Route path="pending" element={<PendingRequests />}/>
                                 <Route path="complete" element={<CompleteRequests />}/>
                                 <Route path="calendartest" element={<Calendar />}/>

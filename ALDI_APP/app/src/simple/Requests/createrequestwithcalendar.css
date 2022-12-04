@@ -1,13 +1,31 @@
+.calendar-container-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.calendar-container-11{
+    background-color: white;
+    margin: auto;
+    width: 100%;
+    height: 70%;
+    position: fixed;
+    bottom: 0;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.
+
 #create-calendar-request-main {
+    position: absolute;
+    float: bottom;
     height: auto;
-    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 #create-calendar-request-container {
-    width: 90%;
-    max-height: 90%;
 }
 .create-calendar-cal-container {
     display: flex;
@@ -29,21 +47,19 @@
     box-shadow:0px 0px 0px 3px darkblue inset;
 }
 #create-calendar-request-pending-body {
-    border: 2px solid black;
+    border: 1px solid black;
     position: relative;
     z-index: 1;
     background-color: white;
     display: flex;
     float: left;
     width: 100%;
-    height: 100%;
     flex-direction: column;
     justify-content: stretch;
 }
 .create-calendar-req-cont {
     display: grid;
     grid-template-columns: 50% auto;
-    padding: 10px;
 }
 .create-calendar-request-item {
     display: flex;
@@ -52,7 +68,7 @@
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
-    border: 2px solid black;
+    border-style: outset ;
 }
 .create-calendar-request-pending-item-data {
     display: flex;
@@ -63,7 +79,6 @@
     font-weight: bold;
 }
 #create-calendar-request-note-input {
-    margin: 10px 0;
     resize: none;
     border: none;
     line-height: 1.5em;
@@ -75,7 +90,7 @@
 }
 .create-calendar-request-pending-textbox {
     width: 100%;
-    border: 2px solid black;
+    border-style: outset;
     text-align: left;
     padding: 5px 10px;
     background-color: lightgray;
@@ -85,10 +100,8 @@
     z-index: 1;
 }
 .create-calendar-request-pending-button-current {
-    border: 2px solid black;
     padding: 8px;
     border-radius: 5px 5px 0 0;
-    border-bottom: none;
     pointer-events: none;
     color: black;
     font-weight: bold;
@@ -99,7 +112,6 @@
     bottom: -2px;
 }
 .create-calendar-request-pending-button-non-current {
-    border: 2px solid black;
     padding: 8px;
     border-radius: 5px 5px 0 0;
     border-bottom: none;
@@ -158,7 +170,7 @@
 }
 .create-calendar-stats {
     aspect-ratio: 3/1;
-    border: 1px solid black;
+    border-style: outset;
     height: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);

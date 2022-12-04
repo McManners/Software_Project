@@ -5,7 +5,7 @@ const NavBar = () => {
     const { auth } = useAuth();
 
     return (
-        <div style={{backgroundColor: 'blue'}}>
+        <div style={{backgroundColor: 'green'}}>
             <div>ALDI NavBar</div>
             <div></div>
         </div>

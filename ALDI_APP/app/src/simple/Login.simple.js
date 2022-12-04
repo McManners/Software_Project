@@ -18,10 +18,7 @@ const Login = () => {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [errMsg, setErrMsg] = React.useState("");
-    
 
-    
-    
     
     const from = location.state?.from?.pathName || "/dashboard";
 

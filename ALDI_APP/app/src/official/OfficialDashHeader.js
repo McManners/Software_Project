@@ -8,14 +8,29 @@ const OfficialDashheader = () => {
 
     const signOut = async () => {
         await logout();
-        navigate('/official');
+        navigate('/official/login');
     }
 
     return (
-        <header className='official-dash-header'>
-            ALDI
-            <div><button type='button' onClick={() => signOut()}>Logout</button></div>
-        </header>
+        <div>
+            <nav>
+                <div className="navbar-wrapper">
+                <a href="./">
+                    <img src={require('./AL_BLR_LA_MC_RGB.png')} className="logo"/>
+                </a>
+                    <ul className="navbar-home-links">
+                        <li>
+                            <a href="#">My Actions</a>
+                            <ul className="dropdown-menu-items">
+                                <li><a href="./">Dashboard</a></li>
+                                <li><a href="./create">View Alerts</a> </li>
+                            </ul>
+                        </li>
+                        <li><a href="#" className="options" onClick={() => signOut()} >Log out</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     )
 }
 
