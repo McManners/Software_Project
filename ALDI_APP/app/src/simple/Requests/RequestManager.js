@@ -18,7 +18,7 @@ const RequestManager = () => {
     const [selectedType, setSelectedType] = useState(-1);
     const date = new Date();
     const errRef = useRef();
-    const [tickets, setTickets] = useState([]);
+    const [tickets, setTickets] = useState(null);
     const [responseType, setResponseType] = useState(null);
     const axiosPrivate = useAxiosPrivate();
 
@@ -83,6 +83,24 @@ const RequestManager = () => {
             controller.abort();
         }
     }, []);
+
+    const approveRequest = async () => {
+        // https://flaviocopes.com/axios-send-authorization-header
+        try {
+            const response = await axiosPrivate.post('/pto/create', {
+                access_token: auth.access_token,
+                ticket_id: openRequestID
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${auth.access_token}`
+                }
+            });
+        } catch (err) {
+            console.log(err);
+            if (err.status === 403) navigate('/login', { state: { from: location }, replace: true });
+        }
+    }
 
     const createTicket = async event => {
         event.preventDefault();
@@ -237,6 +255,14 @@ const RequestManager = () => {
 
         setResponseType(event.target.value);
     }
+    const handleManagerSubmit = event => {
+        event.preventDefault();
+        if (responseType === 'approve') {
+            approveRequest();
+        } else {
+            console.log("submitted");
+        }
+    }
 
     const GetTable = () => {
         console.log("<GetTable />");
@@ -250,7 +276,7 @@ const RequestManager = () => {
                         <td>{e.ticket_id}</td>
                         <td>{e.eid}</td>
                         <td>{`${e.employeeData.first_name} ${e.employeeData.last_name}`}</td>
-                        <td>{e.pto_type_id}</td>
+                        <td>{e.PTO_Type.pto_type}</td>
                         <td>{e.createdAt.split("T",1)[0]}</td>
                         <td>{!(t > 7) ? 
                                 (`${t} days`) : 
@@ -333,7 +359,7 @@ const RequestManager = () => {
                                     className='manager-request-response-type-button-selected'
                                 >Deny</button>
                             </div>
-                            <button type='button' className='manager-request-submit-response-button'>Submit Response</button>
+                            <button type='button' className='manager-request-submit-response-button' onClick={handleManagerSubmit}>Submit Response</button>
                             <button type="button" className="open-request-close-button" onClick={handleOpenRequestClose}>Close</button>
                         </div>
                         <div className='cal-container'>
@@ -423,13 +449,9 @@ const RequestManager = () => {
     return (
         <div className='manager-request-main'>
             <div className='manager-request-container'>
-                <div id='pending-button' className='pending-button-non-current' onClick={() => navigate('/dashboard/pending')}>Pending</div>
-                <div id='complete-button' className='pending-button-non-current' onClick={() => navigate('/dashboard/complete')}>Complete</div>
-                <div id='create-new-button' className='pending-button-current'>Create New</div>
-                
                 <div className='manager-request-body'>          
                     <div className='manager-scroll-container'>
-                        {tickets?.length > 0 ? <GetForm /> : <div>Loading...</div>}
+                        {tickets !== null ? <GetForm /> : <div>Loading...</div>}
                     </div>
                 </div>
             </div>   

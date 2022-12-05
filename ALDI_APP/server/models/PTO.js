@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class PTO_Type extends Model {
+  class PTO extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,25 +13,23 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  PTO_Type.init({
-    pto_type_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
-    pto_type: { type: DataTypes.STRING, allowNull: false }
+  PTO.init({
+    pto_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
+    eid: { type: DataTypes.INTEGER, allowNull: false },
+    ticket_id: { type: DataTypes.INTEGER, allowNull: false }
   }, {
     sequelize,
-    modelName: 'PTO_Type',
+    modelName: 'PTO',
     underscored: true,
     timestamps: true,
     freezeTableName: true,
-    tableName: 'pto_type'
+    tableName: 'pto'
   });
   
-  PTO_Type.addScopes = function (models) {
-    PTO_Type.addScope('defaultScope', {
+  PTO.addScopes = function (models) {
+    PTO.addScope('defaultScope', {
       attributes: { exclude: ['updatedAt', 'createdAt'] }
     });
-    PTO_Type.addScope('ptoName', {
-        attributes: { exclude: ['pto_type_id', 'createdAt', 'updatedAt'] }
-    });
   };
-  return PTO_Type;
+  return PTO;
 };

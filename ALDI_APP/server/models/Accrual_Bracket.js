@@ -32,7 +32,13 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: "accrual_bracket"
   });
-  
+  Accrual_Bracket.associate = function (models) {
+    Accrual_Bracket.belongsTo(models.PTO_Balance, {
+      foreignKey: {
+        name: 'accrual_bracket_id'
+      },
+    });
+  }
   Accrual_Bracket.addScopes = function (models) {
     Accrual_Bracket.addScope('defaultScope', {
       attributes: { exclude: ['updatedAt', 'createdAt'] }

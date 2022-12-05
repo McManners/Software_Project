@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './createrequestwithcalendar.css';
 import axios from 'axios';
 import Calendar from './Calendar';
+import useAxiosPrivate from '../useAxiosPrivate';
+import useAuth from '../useAuth';
 
 const CreateRequestWithCalendar = () => {
     const navigate = useNavigate();
@@ -10,61 +12,73 @@ const CreateRequestWithCalendar = () => {
     const [errMsg, setErrMsg] = useState("");
     const date = new Date();
     const errRef = useRef();
-
-    // useEffect(() => {
-    //     axios({
-    //         method: 'GET',
-    //         url: 'http://localhost:3001/pto',
-    //         withCredentials: true,
-    //     })
-    //     .then(res => {
-    //         setAvailablePTO({
-    //             vacation: res.data.foundPTO.vacation_available,
-    //             sick: res.data.foundPTO.sick_available,
-    //             personal: res.data.foundPTO.personal_available
-    //         })
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     })
-    // }, []);
+    const axiosPrivate = useAxiosPrivate();
     const [selectedDays, setSelectedDays] = useState([]);
     const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
     const [selectedYear, setSelectedYear] = useState(date.getFullYear());
     // These are passed to <Calendar/> as props
     const [selectedPTOType, setSelectedPTOType] = useState(0);
+    const { auth } = useAuth();
+    const location = useLocation();
+    const [ptoBalance, setPTOBalance] = useState(null);
 
     const handleRequestNoteChange = event => {
         console.log("blur triggered");
         setRequestNote(event.target.value);
     }
+    useEffect(() => {
+        // https://github.com/gitdagray/react_persist_login/blob/main/src/components/Users.js
+        let isMounted = true;
+        const controller = new AbortController();
 
-    const createTicket = async event => {
-        event.preventDefault();
-        
-        console.log("clicked");
-        axios({
-            method: 'POST',
-            url: 'http://localhost:3001/ticket/create',
-            withCredentials: true,
-            data: {
-                eid: 1,
+        const getPTOBalance = async () => {
+            // https://flaviocopes.com/axios-send-authorization-header
+            try {
+                const response = await axiosPrivate.get('ptobalance', {
+                    access_token: auth.access_token
+                },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${auth.access_token}`
+                    }
+                });
+                console.log(response.data);
+                isMounted && setPTOBalance(response.data);
+            } catch (err) {
+                console.log(err);
+                // logout();
+                navigate('/login', { state: { from: location }, replace: true });
+            }
+        }
+        getPTOBalance();
+        console.log("hey")
+        return () => {
+            isMounted = false;
+            controller.abort();
+        }
+    }, []);
+
+    const createTicket = async () => {
+        // https://flaviocopes.com/axios-send-authorization-header
+        try {
+            const response = await axiosPrivate.post('/ticket/create', {
+                access_token: auth.access_token,
                 date: selectedDays,
                 pto_type_id: selectedPTOType,
                 request_note: requestNote
-            }
-        })
-        /*
-            https://stackoverflow.com/questions/62964902/axios-post-extracting-data-from-response
-        */
-        .then(function(res) {
-            console.log(res);
-            // navigate("/dashboard/requests", { replace: true });
-        })
-        .catch(err => {
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${auth.access_token}`
+                }
+            });
+        } catch (err) {
             console.log(err);
-        });
-    };
+            if (err.status === 403) navigate('/login', { state: { from: location }, replace: true });
+        }
+    }
+
+    
     const handlePTOSelect = event => {
         event.preventDefault();
         console.log(event.target.value);
@@ -87,28 +101,28 @@ const CreateRequestWithCalendar = () => {
                 <div className='create-calendar-donut-item'>
                     <h5>Vacation Remaining</h5>
                     <div className="create-calendar-donut"
-                        style={{background: 
-                            "conic-gradient(green 0deg 160deg, red 160deg 360deg"
-                            }}>
-                        <div className="create-calendar-hole">8</div>
+                        style={{background: `conic-gradient(red 0deg ${ptoBalance.personal_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken}deg, green ${ptoBalance.personal_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken}deg 360deg`
+                            }}
+                        >
+                        <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken}</div>
                     </div>
                 </div>
                 <div className='create-calendar-donut-item'>
                     <h5>Vacation Remaining</h5>
                     <div className="create-calendar-donut"
-                        style={{background: 
-                            "conic-gradient(green 0deg 160deg, red 160deg 360deg"
-                            }}>
-                        <div className="create-calendar-hole">5</div>
+                        style={{background: `conic-gradient(green 0deg ${ptoBalance.vacation_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken}deg, red ${ptoBalance.vacation_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken}deg 360deg`
+                    }}
+                    >
+                        <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken}</div>
                     </div>
                 </div>
                 <div className='create-calendar-donut-item'>
-                    <h5>Vacation Remaining</h5>
+                    <h5>Sick Remaining</h5>
                     <div className="create-calendar-donut"
-                        style={{background: 
-                            `conic-gradient(green 0deg ${360 / 7}deg, red ${360 / 7}deg 360deg`
-                            }}>
-                        <div className="create-calendar-hole">7</div>
+                        style={{background: `conic-gradient(red 0deg ${ptoBalance.sick_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.sick_per_year - ptoBalance.sick_taken}deg, green ${ptoBalance.sick_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.sick_per_year - ptoBalance.sick_taken}deg 360deg`
+                    }}
+                    >
+                        <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.sick_per_year - ptoBalance.sick_taken}</div>
                     </div>
                 </div>
             </div>
@@ -132,8 +146,8 @@ const CreateRequestWithCalendar = () => {
                     
                     <div>
                         <label htmlFor="create-calendar-request-type">Request Type: </label>
-                        <select type="dropdown" id="create-calendar-request-type" onChange={handlePTOSelect} defaultValue='DEFAULT'>
-                            <option value="DEFAULT" disabled hidden>Choose a type ...</option>
+                        <select type="dropdown" id="create-calendar-request-type" onChange={handlePTOSelect} defaultValue={selectedPTOType}>
+                            <option value={0} disabled hidden>Choose a type ...</option>
                             <option value={1}>Vacation</option>
                             <option value={2}>Personal</option>
                             <option value={3}>Sick</option>
@@ -158,16 +172,12 @@ const CreateRequestWithCalendar = () => {
     }
 
 
-
+    console.log(ptoBalance);
     return (
         <div id='create-calendar-request-main'>
             <div id='create-calendar-request-container'>
-                <div id='create-calendar-request-pending-button' className='create-calendar-request-pending-button-non-current' onClick={() => navigate('/dashboard/pending')}>Pending</div>
-                <div id='create-calendar-request-complete-button' className='create-calendar-request-pending-button-non-current' onClick={() => navigate('/dashboard/complete')}>Complete</div>
-                <div id='create-calendar-request-create-new-button' className='create-calendar-request-pending-button-current'>Create New</div>
-                
                 <div id='create-calendar-request-pending-body'>
-                    <GetForm />
+                    {(ptoBalance !== null && ptoBalance !== undefined) ? <GetForm /> : <div>Loading...</div>}
                 </div>
             </div>   
         </div>

@@ -55,33 +55,6 @@ const Login = () => {
         localStorage.setItem("remember", remember);
     }, [remember])
 
-    const handleRefresh = event => {
-        event.preventDefault();
-        const url = 'http://localhost:3001/refresh';
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        };
-        fetch(url, requestOptions)
-        .then(response => console.log(response))
-        .catch (error => console.log("Refresh Error: " + error))
-    };
-    const handleLogout = event => {
-        event.preventDefault();
-        const url = 'http://localhost:3001/logout';
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        };
-        fetch(url, requestOptions)
-        .then(response => console.log(response))
-        .then(() => {
-            console.log("logging out auth");
-            setAuth({});
-            navigate('/');
-        })
-        .catch(err => console.log("Logout error: " + err));
-    }
     const handleSubmit = async event => {
         event.preventDefault();
 
