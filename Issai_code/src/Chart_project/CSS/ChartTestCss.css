@@ -1,0 +1,28 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+#main{
+    padding: 1rem;
+    background-color: #fff;
+    /*border: 2px solid #fff;*/
+    color: #000;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#Charts{
+    padding: 1rem;
+    border: 2px solid #000;
+    background-color: #fff;
+}
+
+#BalanceTitle{
+    text-align:left;
+    position:absolute;
+    color: #fff;
+    top:5px;
+    /*left:15%;*/
+    border-bottom:solid 1px #fff; /* u need this */
+    padding-bottom:3px; /* ...and this */
+    width: 98%;
+
+}
