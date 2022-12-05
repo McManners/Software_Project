@@ -14,12 +14,10 @@ body .sign-in-page{
     background: rgb(2,0,36);
     background: linear-gradient(45deg, #FFB428 0%,
     #FA8214 45%, #FA8214 100%);
-    background-repeat: repeat-y;
     display: flex;
     align-items: center;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
-    min-height: 100%;
     max-width: 100%;
     padding-top: 100px;
     padding-bottom: 175px;
@@ -36,7 +34,7 @@ body .sign-in-page{
     height: 10px;
     width: 770px;
     max-width: 100%;
-    min-height: 400px;
+    min-height: 470px;
     border-radius: 10px;
 }
 .overlay-left{
@@ -244,19 +242,12 @@ a:hover {
     align-items: center;
     margin-bottom: 24px;
 }
-.date-p {
-    font-size: 18px;
-    line-height: 32px;
-    font-weight: 50;
-    margin: 0;
-}
-.notification-header{
-    font-size: 20px;
+.date-header p {
+    font-size: 24px;
     line-height: 32px;
     font-weight: 700;
     opacity: 0.9;
     margin: 0;
-    padding-left: 17px;
 }
 .notification-section {
     margin-top: 16vh;
@@ -274,35 +265,35 @@ a:hover {
     top: 0;
     padding: 32px 24px 0 24px;
 }
-.notify-container {
+.message-box {
     border-top: 2px solid #e9ebf0;
     padding: 16px;
     display: flex;
     align-items: flex-start;
     width: 100%;
 }
-.notify-container:hover {
+.message-box:hover {
     background-color: #E9EEF4;
 }
 
-.not-header {
+.message-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
 }
-.not-header .message-alert {
+.message-header .name {
     font-size: 16px;
     line-height: 24px;
     font-weight: 700;
     margin: 0;
 }
-.notify-content {
+.message-content {
     padding-left: 16px;
     width: 100%;
 }
 
-.notification-content-message {
+.message-line {
     font-size: 14px;
     line-height: 20px;
     margin: 8px 0;
@@ -310,6 +301,7 @@ a:hover {
 }
 
 .cards.jsGridView {
+
     display: flex;
     flex-wrap: wrap;
 }
@@ -395,7 +387,7 @@ a:hover {
         padding: 24px 16px 0 16px;
     }
     .date-header p {
-        font-size: 10px;
+        font-size: 18px;
     }
 
     .cards.jsListView .card-header > span {
@@ -406,6 +398,4 @@ a:hover {
     }
 }
 
-.hr-style{
-    border-top: 1px solid black;
-}
+
