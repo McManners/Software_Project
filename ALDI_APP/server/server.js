@@ -40,6 +40,7 @@ app.use('/ticket', require('./routes/ticket'));
 app.use('/pto', require('./routes/pto'));
 app.use('/status', require('./routes/status'));
 app.use('/ticketresponse', require('./routes/ticketresponse'));
+app.use('/ptobalance', require('./routes/ptobalance'));
 
 var con = mysql.createConnection({
   host: "45.55.136.114",

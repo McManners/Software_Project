@@ -1,0 +1,23 @@
+
+.request-main .complete-item {
+    padding: 20px;
+}
+.request-main .complete-item-data {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.bold {
+    font-weight: bold;
+}
+.request-main .complete-textbox {
+    width: 100%;
+    border: 2px solid black;
+    text-align: left;
+    padding: 5px 10px;
+    background-color: lightgray;
+}
+.request-main .complete-item-data {
+    text-align: left;
+    padding: 10px;
+}

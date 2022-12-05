@@ -48,6 +48,13 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: 'eid',
         as: 'leaderTickets'
     });
+    Employee.hasOne(models.PTO_Balance, {
+        foreignKey: {
+          name: 'eid',
+        },
+        sourceKey: 'eid',
+        as: 'ptoBalance'
+    });
   }
     // Add a custom `addScopes` function to call after initializing all models in `index.js`
     Employee.addScopes = function (models) {

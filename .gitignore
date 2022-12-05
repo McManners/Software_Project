@@ -1,0 +1,12 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+ALDI_APP/node_modules
+
+# server
+ALDI_APP/server/node_modules
+ALDI_APP/server/middleware/logs
+
+#app
+ALDI_APP/app/node_modules
+
+ALDI_APP/app/src/simple/official

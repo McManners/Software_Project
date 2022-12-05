@@ -32,6 +32,7 @@ import OfficialRequest from './official/OfficialRequest';
 import OfficialStats from './official/OfficialStats';
 import OfficialDashboard from './official/OfficialDashboard';
 import OfficialPublic from './official/OfficialPublic';
+import RequestContainer from './simple/Requests/RequestContainer';
 
 function App() {
 
@@ -52,6 +53,7 @@ function App() {
                                 <Route index element={<OfficialHome />}/>
                                 <Route path='stats' element={<OfficialStats />}/>
                                 <Route path='request' element={<OfficialRequest />}/>
+                                    <Route path="create" element={<CreateRequestWithCalendar />}/>
                             </Route>
                         </Route>
                     </Route>
@@ -75,6 +77,13 @@ function App() {
                                 <Route index element={<Welcome />} />
                                 <Route path="requests" element={<Requests />}/>
                                 <Route path="newticket" element={<NewTicket />}/>
+
+                                <Route element={<RequestContainer />}>
+                                    <Route path="pending" element={<PendingRequests />}/>
+                                    <Route path="complete" element={<CompleteRequests />}/>
+                                    <Route path="calendartest" element={<Calendar />}/>
+                                    <Route path="create" element={<CreateRequestWithCalendar />}/>
+                                </Route>
                             </Route>
                         </Route>
                         <Route element={<RequireAuth allowedEmployeeType={["Manager"]}/>}>
@@ -83,12 +92,14 @@ function App() {
                                 <Route path="requests" element={<Requests />}/>
                                 <Route path="newticket" element={<NewTicket />}/>
                                 
-                                <Route path="pending" element={<PendingRequests />}/>
-                                <Route path="complete" element={<CompleteRequests />}/>
-                                <Route path="calendartest" element={<Calendar />}/>
-                                <Route path="create" element={<CreateRequestWithCalendar />}/>
-                                <Route path="manager" element={<RequestManager />}/>
-                                <Route path="manager/calendar" element={<ManagerCalendar />}/>
+                                <Route element={<RequestContainer />}>
+                                    <Route path="pending" element={<PendingRequests />}/>
+                                    <Route path="complete" element={<CompleteRequests />}/>
+                                    <Route path="calendartest" element={<Calendar />}/>
+                                    <Route path="create" element={<CreateRequestWithCalendar />}/>
+                                    <Route path="manager" element={<RequestManager />}/>
+                                    <Route path="manager/calendar" element={<ManagerCalendar />}/>
+                                </Route>
                             </Route>
                         </Route>
                     </Route>

@@ -22,13 +22,12 @@ const getAllLeaderTickets = async (req, res) => {
 }
 
 const createTicket = async (req, res) => {
-    const eid = req.body.eid;
-    console.log(req.body);
+    const eid = req.eid;
     if (!eid) return res.sendStatus(401);
     const date = req.body.date;
     // const pto_type_id = req.body.pto_type_id;
     const request_note = req.body.request_note;
-    console.log(req.body);
+    const pto_type_id = req.body.pto_type_id;
     const account = await db.Account.findOne({ where: { eid: eid }});
     if (!account) return res.sendStatus(401); // unauthorized
     const leader_id = await account.Employee.leader_id;
@@ -37,7 +36,7 @@ const createTicket = async (req, res) => {
         const new_ticket = await db.Ticket.create({ 
             eid: eid, 
             leader_id: leader_id,
-            // pto_type_id: pto_type_id, 
+            pto_type_id: pto_type_id,
             request_note: request_note 
         });
         const ticket_id = new_ticket.ticket_id;
