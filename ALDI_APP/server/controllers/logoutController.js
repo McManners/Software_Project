@@ -5,11 +5,12 @@ const handleLogout = async (req, res) => {
     const cookies = req.cookies;
     console.log(cookies);
     if (!cookies.jwt) return res.status(204) // No content
+    res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
+    res.clearCookie('logged');
     const foundAccount = await db.Account.findOne({ where: { refresh_token: cookies.jwt } });
     foundAccount.refresh_token = "";
     foundAccount.save();
-    res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
-    res.clearCookie('logged');
+    
     res.status(201).json({ message: 'Logged out' });
 }
 

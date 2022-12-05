@@ -8,3 +8,5 @@ ALDI_APP/server/middleware/logs
 
 #app
 ALDI_APP/app/node_modules
+
+ALDI_APP/app/src/simple/official

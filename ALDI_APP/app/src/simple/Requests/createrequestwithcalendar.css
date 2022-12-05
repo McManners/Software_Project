@@ -7,7 +7,6 @@
 }
 #create-calendar-request-container {
     width: 90%;
-    max-height: 90%;
 }
 .create-calendar-cal-container {
     display: flex;

@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Ticket.init({
     ticket_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
     eid: { type: DataTypes.INTEGER, allowNull: false },
-    leader_id: { type: DataTypes.INTEGER, allowNull: true },
-    pto_type_id: { type: DataTypes.DATE, allowNull: true },
+    leader_id: { type: DataTypes.INTEGER, allowNull: false },
+    pto_type_id: { type: DataTypes.DATE, allowNull: false },
     status: { type: DataTypes.BOOLEAN, defaultValue: false },
     request_note: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
     response_note: { type: DataTypes.TEXT, allowNull: false, defaultValue: "" },
@@ -54,12 +54,12 @@ module.exports = (sequelize, DataTypes) => {
         },
         sourceKey: 'leader_id'
     });
-    Ticket.hasOne(models.PTO_Type, {
+    Ticket.hasOne(models.PTO_Type.scope('ptoName'), {
         foreignKey: {
-          name: 'pto_type_id',
-          type: DataTypes.INTEGER,
-          allowNull: false,
+          name: 'pto_type_id'
         },
+        sourceKey: 'pto_type_id',
+        as: 'PTO_Type'
       });
     }
 
@@ -72,9 +72,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             association: 'employeeData',
+        },
+        {
+            association: 'PTO_Type'
         }
+
       ],
-      attributes: { exclude: ['updatedAt'] } // lets include createdAt for now, so we know when the ticket was submitted...
+      attributes: { exclude: ['updatedAt', 'pto_type_id'] } // lets include createdAt for now, so we know when the ticket was submitted...
     });
   };
 

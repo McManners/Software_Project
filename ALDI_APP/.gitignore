@@ -25,9 +25,10 @@ client/yarn-error.log*
 
 # server
 server/node_modules
-server/.env
 
 #app
 app/node_modules
 node_modules
 app/package-lock.json
+
+server/middleware/logs

@@ -1,15 +1,18 @@
 const db = require("../models");
 
-const getPTOByRefreshToken = async (req, res) => {
-    const cookies = req.cookies;
-
-    if (!cookies?.jwt) return res.sendStatus(204);
-    const refresh_token = cookies.jwt;
-    const foundAccount = await db.Account.findOne({ where: { refresh_token: refresh_token }});
-    if (!foundAccount) return res.sendStatus(402) // Unauthorized
-    const foundPTO = await db.PTO_Balance.findOne({ where: { eid: foundAccount.eid }});
-    if (!foundPTO) return res.status(404).json({ "message": "Cannot find PTO entry!" });
-    res.status(201).json({ foundPTO });
+const create = async (req, res) => {
+    console.log(req);
+    const ticket_id = req.body.ticket_id;
+    const ticket = db.Ticket.findOne({ where: { ticket_id: ticket_id } });
+    if (!ticket) return res.status(400).json({ "message": "cant find ticket"});
+    if (ticket.status === 1) return res.status(400).json({ "message": "error, ticket already closed"});
+    ticket.status = 1;
+    ticket.save();
+    await db.PTO.create({
+        eid: ticket.eid,
+        ticket_id: ticket_id
+    });
+    res.status(201);
 }
 
-module.exports = { getPTOByRefreshToken }
+module.exports = { create }
