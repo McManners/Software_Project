@@ -15,17 +15,28 @@ module.exports = (sequelize, DataTypes) => {
   }
   Employee_Type.init({
     employee_type_id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true, allowNull: false },
-    employee_type: { type: DataTypes.INTEGER, allowNull: false },
-    default_vacation_days: { type: DataTypes.INTEGER, allowNull: false },
-    default_personal_days: { type: DataTypes.INTEGER, allowNull: false },
-    default_sick_days: { type: DataTypes.INTEGER, allowNull: false }
+    employee_type: { type: DataTypes.STRING, allowNull: false }
   }, {
     sequelize,
     modelName: 'Employee_Type',
     underscored: true,
     freezeTableName: true,
-    tableName: "employee_type_new_fix"
+    tableName: "employee_type"
   });
+  Employee_Type.associate = function (models) {
+    Employee_Type.hasOne(models.Employee, {
+        foreignKey: 'employee_type_id'
+    });
+    Employee_Type.hasOne(models.PTO_Balance, {
+        foreignKey: 'employee_type_id'
+    });
+    Employee_Type.hasOne(models.PTO_Balance_History, {
+        foreignKey: 'employee_type_id'
+    });
+    Employee_Type.hasOne(models.Accrual_Bracket, {
+        foreignKey: 'employee_type_id'
+    });
+}
   
   Employee_Type.addScopes = function (models) {
     Employee_Type.addScope('defaultScope', {

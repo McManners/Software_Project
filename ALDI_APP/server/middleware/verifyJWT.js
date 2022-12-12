@@ -14,7 +14,7 @@ const verifyJWT = (req, res, next) => {
             console.log(err);
             console.log("---------test");
             if (err) return res.sendStatus(403); // recieved token but something wasnt right.. (tampered etc)
-            req.eid = decoded.eid
+            req.employee_id = decoded.employee_id
             next();
         }
     );

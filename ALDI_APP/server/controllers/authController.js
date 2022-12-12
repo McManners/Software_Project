@@ -9,21 +9,23 @@ const handleLogin = async (req, res) => {
     const foundAccount = await db.Account.findOne({ where: { email: email }});
     if (!foundAccount) return res.sendStatus(401); // Unauthorized
 
-    const foundEmployee = await db.Employee.findByPk(foundAccount.eid);
-    if (!foundEmployee) return res.status(404).json({ 'message': `Cant find employee by account eid ${foundAccount.eid}` }); // Unauthorized
+    const foundEmployee = await db.Employee.findByPk(foundAccount.employee_id);
+    if (!foundEmployee) return res.status(404).json({ 'message': `Cant find employee by account employee_id ${foundAccount.employee_id}` }); // Unauthorized
     const foundEmployee_Type = await db.Employee_Type.findByPk(foundEmployee.employee_type_id);
+    console.log(foundEmployee_Type)
     if (!foundEmployee_Type) return res.status(404).json({ 'message': `Cant find emplyee type by pk ${foundEmployee.employee_type_id}` }); // Unauthorized
     // console.log(foundAccount);
     const employee_type = await foundEmployee_Type.employee_type;
     const first_name = await foundEmployee.first_name;
     const last_name = await foundEmployee.last_name;
     // evaluate password
+    console.log(foundAccount)
     const match = await bcrypt.compare(password, foundAccount.password);
     if (match) {
         // create JWTs
         const access_token = jwt.sign(
             {
-                "eid": foundAccount.eid,
+                "employee_id": foundAccount.employee_id,
                 "employee_type": foundEmployee_Type.employee_type,
                 "first_name": first_name,
                 "last_name": last_name
@@ -33,7 +35,7 @@ const handleLogin = async (req, res) => {
         );
         const refresh_token = jwt.sign(
             { 
-                "eid": foundAccount.eid,
+                "employee_id": foundAccount.employee_id,
             },
             process.env.REFRESH_TOKEN_SECRET,
             { expiresIn: '24hr' } // much longer

@@ -31,7 +31,7 @@ USE `dynaF2020`;
 
 CREATE TABLE `account` (
   `account_id` int(11) NOT NULL,
-  `eid` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `refresh_token` varchar(255) DEFAULT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE `account` (
 -- Dumping data for table `account`
 --
 
-INSERT INTO `account` (`account_id`, `eid`, `email`, `password`, `refresh_token`, `created_at`, `updated_at`) VALUES
+INSERT INTO `account` (`account_id`, `employee_id`, `email`, `password`, `refresh_token`, `created_at`, `updated_at`) VALUES
 (1, 1, 'anthonysalerno97@gmail.com', '$2b$10$63D1TL4PohVULTnfVTpZz.EGYTN2fCVd4buD50ULHhb2pVJbkF60m', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFudGhvbnlzYWxlcm5vOTdAZ21haWwuY29tIiwiaWF0IjoxNjY4MDk2MDE0LCJleHAiOjE2NjgwOTYwMjV9.v-j2LczsGJuLD2Sdqe93Qv2PMjGp3nQMjaLlEpjWRBM', '2022-11-07 16:48:16', '2022-11-10 16:00:14');
 
 -- --------------------------------------------------------
@@ -53,7 +53,7 @@ INSERT INTO `account` (`account_id`, `eid`, `email`, `password`, `refresh_token`
 --
 
 CREATE TABLE `employee_fix` (
-  `eid` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `employee_fix` (
 -- Dumping data for table `employee_fix`
 --
 
-INSERT INTO `employee_fix` (`eid`, `first_name`, `last_name`, `email`, `hire_date`, `leader_id`, `employee_type_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `employee_fix` (`employee_id`, `first_name`, `last_name`, `email`, `hire_date`, `leader_id`, `employee_type_id`, `created_at`, `updated_at`) VALUES
 (1, 'Anthony', 'Salerno', 'anthonysalerno97@gmail.com', '2015-07-30 00:00:00', 435690, 1, '2022-11-07 10:46:24', '2022-11-07 10:46:24'),
 (100856, 'Sofie', 'Finch', 'Sofie.Finch@Aldi.us', '2015-07-30 00:00:00', 435690, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (101301, 'Austin', 'Tomlins', 'Austin.Tomlins@Aldi.us', '2014-11-21 00:00:00', 555071, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
@@ -183,7 +183,7 @@ INSERT INTO `employee_fix` (`eid`, `first_name`, `last_name`, `email`, `hire_dat
 (204809, 'Richardo', 'Sutherland', 'Richardo.Sutherland@Aldi.us', '2010-08-25 00:00:00', 161964, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (204926, 'Bryant', 'Lavigne', 'Bryant.Lavigne@Aldi.us', '2013-08-01 00:00:00', 589864, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (205431, 'Farrel', 'Fellos', 'Farrel.Fellos@Aldi.us', '2013-02-05 00:00:00', 861890, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
-(206313, 'Robinson', 'Peidro', 'Robinson.Peidro@Aldi.us', '2019-05-14 00:00:00', 0, 3, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
+(206313, 'Robinson', 'Pemployee_idro', 'Robinson.Pemployee_idro@Aldi.us', '2019-05-14 00:00:00', 0, 3, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (206396, 'Prentice', 'Baxstair', 'Prentice.Baxstair@Aldi.us', '2018-04-10 00:00:00', 0, 3, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (206443, 'Doralyn', 'McNeillie', 'Doralyn.McNeillie@Aldi.us', '2015-01-19 00:00:00', 838216, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (207044, 'Stacy', 'Boone', 'Stacy.Boone@Aldi.us', '2021-03-25 00:00:00', 637652, 2, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
@@ -437,7 +437,7 @@ INSERT INTO `employee_fix` (`eid`, `first_name`, `last_name`, `email`, `hire_dat
 (416341, 'Abe', 'Pirolini', 'Abe.Pirolini@Aldi.us', '2010-03-05 00:00:00', 797119, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (417828, 'Klaus', 'Astbury', 'Klaus.Astbury@Aldi.us', '2017-04-26 00:00:00', 961011, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (418549, 'Ardelia', 'Grimble', 'Ardelia.Grimble@Aldi.us', '2017-06-20 00:00:00', 776084, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29');
-INSERT INTO `employee_fix` (`eid`, `first_name`, `last_name`, `email`, `hire_date`, `leader_id`, `employee_type_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `employee_fix` (`employee_id`, `first_name`, `last_name`, `email`, `hire_date`, `leader_id`, `employee_type_id`, `created_at`, `updated_at`) VALUES
 (419316, 'Lorianna', 'Stuchberry', 'Lorianna.Stuchberry@Aldi.us', '2011-09-11 00:00:00', 780495, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (423348, 'Essie', 'Dighton', 'Essie.Dighton@Aldi.us', '2021-07-15 00:00:00', 967833, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (424513, 'Hagan', 'Lamort', 'Hagan.Lamort@Aldi.us', '2015-05-22 00:00:00', 974163, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
@@ -569,7 +569,7 @@ INSERT INTO `employee_fix` (`eid`, `first_name`, `last_name`, `email`, `hire_dat
 (536168, 'Jewelle', 'Murt', 'Jewelle.Murt@Aldi.us', '2020-07-28 00:00:00', 0, 3, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (537337, 'Obediah', 'Hanington', 'Obediah.Hanington@Aldi.us', '2021-12-16 00:00:00', 548718, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (538906, 'Milka', 'Hrihorovich', 'Milka.Hrihorovich@Aldi.us', '2013-11-21 00:00:00', 467890, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
-(539182, 'Wini', 'Reid', 'Wini.Reid@Aldi.us', '2018-02-17 00:00:00', 811926, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
+(539182, 'Wini', 'Remployee_id', 'Wini.Remployee_id@Aldi.us', '2018-02-17 00:00:00', 811926, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (539557, 'Lacee', 'Sillitoe', 'Lacee.Sillitoe@Aldi.us', '2011-09-12 00:00:00', 838216, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (539564, 'Randall', 'Pickrill', 'Randall.Pickrill@Aldi.us', '2016-02-26 00:00:00', 272208, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (539911, 'Colleen', 'Hadny', 'Colleen.Hadny@Aldi.us', '2012-04-27 00:00:00', 274522, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
@@ -808,7 +808,7 @@ INSERT INTO `employee_fix` (`eid`, `first_name`, `last_name`, `email`, `hire_dat
 (770984, 'Nalani', 'Piotr', 'Nalani.Piotr@Aldi.us', '2014-03-02 00:00:00', 241186, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (771327, 'Tremain', 'Kiljan', 'Tremain.Kiljan@Aldi.us', '2021-10-23 00:00:00', 851926, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (773609, 'Loy', 'Nolli', 'Loy.Nolli@Aldi.us', '2019-08-03 00:00:00', 935573, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29');
-INSERT INTO `employee_fix` (`eid`, `first_name`, `last_name`, `email`, `hire_date`, `leader_id`, `employee_type_id`, `created_at`, `updated_at`) VALUES
+INSERT INTO `employee_fix` (`employee_id`, `first_name`, `last_name`, `email`, `hire_date`, `leader_id`, `employee_type_id`, `created_at`, `updated_at`) VALUES
 (774678, 'Eadith', 'Goeff', 'Eadith.Goeff@Aldi.us', '2017-11-20 00:00:00', 637652, 2, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (774728, 'Connie', 'Kilrow', 'Connie.Kilrow@Aldi.us', '2019-04-03 00:00:00', 0, 3, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (776084, 'Roxy', 'Rape', 'Roxy.Rape@Aldi.us', '2014-12-17 00:00:00', 555149, 2, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
@@ -961,7 +961,7 @@ INSERT INTO `employee_fix` (`eid`, `first_name`, `last_name`, `email`, `hire_dat
 (900474, 'Hetty', 'Harken', 'Hetty.Harken@Aldi.us', '2014-05-03 00:00:00', 0, 3, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (900493, 'Randi', 'Fencott', 'Randi.Fencott@Aldi.us', '2014-11-25 00:00:00', 884392, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (900567, 'Tobey', 'Kynge', 'Tobey.Kynge@Aldi.us', '2012-07-03 00:00:00', 274869, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
-(901232, 'Addy', 'Goodreid', 'Addy.Goodreid@Aldi.us', '2015-12-18 00:00:00', 316968, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
+(901232, 'Addy', 'Goodremployee_id', 'Addy.Goodremployee_id@Aldi.us', '2015-12-18 00:00:00', 316968, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (901491, 'Terrance', 'Bezley', 'Terrance.Bezley@Aldi.us', '2010-06-30 00:00:00', 494333, 2, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (903651, 'Danny', 'Kenington', 'Danny.Kenington@Aldi.us', '2010-03-08 00:00:00', 277438, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (903823, 'Correna', 'Matejic', 'Correna.Matejic@Aldi.us', '2013-07-17 00:00:00', 241186, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
@@ -975,7 +975,7 @@ INSERT INTO `employee_fix` (`eid`, `first_name`, `last_name`, `email`, `hire_dat
 (908912, 'Karl', 'Showalter', 'Karl.Showalter@Aldi.us', '2017-09-30 00:00:00', 495144, 2, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (910786, 'Yulma', 'Lewerenz', 'Yulma.Lewerenz@Aldi.us', '2011-11-11 00:00:00', 721809, 2, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (911524, 'Merola', 'Novis', 'Merola.Novis@Aldi.us', '2012-11-19 00:00:00', 935573, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
-(912033, 'Gallard', 'Schneidau', 'Gallard.Schneidau@Aldi.us', '2018-06-03 00:00:00', 879710, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
+(912033, 'Gallard', 'Schnemployee_idau', 'Gallard.Schnemployee_idau@Aldi.us', '2018-06-03 00:00:00', 879710, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (912132, 'Durant', 'Secretan', 'Durant.Secretan@Aldi.us', '2010-07-11 00:00:00', 239301, 2, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (915167, 'Corilla', 'Szapiro', 'Corilla.Szapiro@Aldi.us', '2014-06-08 00:00:00', 664511, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (915243, 'Hedwiga', 'Deackes', 'Hedwiga.Deackes@Aldi.us', '2010-11-11 00:00:00', 208005, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
@@ -1052,7 +1052,7 @@ INSERT INTO `employee_fix` (`eid`, `first_name`, `last_name`, `email`, `hire_dat
 (974163, 'Zilvia', 'Levis', 'Zilvia.Levis@Aldi.us', '2018-01-21 00:00:00', 936377, 2, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (975411, 'Petronilla', 'Risso', 'Petronilla.Risso@Aldi.us', '2014-03-16 00:00:00', 498869, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (975939, 'Lavinie', 'Trenholme', 'Lavinie.Trenholme@Aldi.us', '2021-10-17 00:00:00', 540034, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
-(977026, 'Reid', 'Elcott', 'Reid.Elcott@Aldi.us', '2018-03-12 00:00:00', 0, 3, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
+(977026, 'Remployee_id', 'Elcott', 'Remployee_id.Elcott@Aldi.us', '2018-03-12 00:00:00', 0, 3, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (978888, 'Jacquie', 'Middlemist', 'Jacquie.Middlemist@Aldi.us', '2021-08-22 00:00:00', 290781, 2, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (980429, 'Philippa', 'Sharland', 'Philippa.Sharland@Aldi.us', '2011-09-08 00:00:00', 351626, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
 (982197, 'Gardiner', 'Torri', 'Gardiner.Torri@Aldi.us', '2016-09-26 00:00:00', 413755, 1, '2022-11-07 15:28:29', '2022-11-07 09:28:29'),
@@ -1104,7 +1104,7 @@ INSERT INTO `employee_type_fix` (`employee_type_id`, `employee_type_fix`, `defau
 
 CREATE TABLE `pto_balance` (
   `pto_balance_id` int(11) NOT NULL,
-  `eid` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `vacation_available` int(11) NOT NULL,
   `personal_available` int(11) NOT NULL,
   `sick_available` int(11) NOT NULL,
@@ -1116,7 +1116,7 @@ CREATE TABLE `pto_balance` (
 -- Dumping data for table `pto_balance`
 --
 
-INSERT INTO `pto_balance` (`pto_balance_id`, `eid`, `vacation_available`, `personal_available`, `sick_available`, `created_at`, `updated_at`) VALUES
+INSERT INTO `pto_balance` (`pto_balance_id`, `employee_id`, `vacation_available`, `personal_available`, `sick_available`, `created_at`, `updated_at`) VALUES
 (1, 1, 10, 9, 8, '2022-11-07 10:54:57', '2022-11-07 10:54:57');
 
 -- --------------------------------------------------------
@@ -1149,7 +1149,7 @@ INSERT INTO `pto_type` (`pto_type_id`, `pto_type`, `created_at`, `updated_at`) V
 
 CREATE TABLE `ticket` (
   `ticket_id` int(11) NOT NULL,
-  `eid` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
   `leader_id` int(11) DEFAULT NULL,
   `pto_type_id` int(11) DEFAULT NULL,
   `date_from` datetime DEFAULT NULL,
@@ -1165,7 +1165,7 @@ CREATE TABLE `ticket` (
 -- Dumping data for table `ticket`
 --
 
-INSERT INTO `ticket` (`ticket_id`, `eid`, `leader_id`, `pto_type_id`, `date_from`, `date_to`, `status`, `request_note`, `response_note`, `created_at`, `updated_at`) VALUES
+INSERT INTO `ticket` (`ticket_id`, `employee_id`, `leader_id`, `pto_type_id`, `date_from`, `date_to`, `status`, `request_note`, `response_note`, `created_at`, `updated_at`) VALUES
 (1, 1, 435690, NULL, '2022-01-01 00:00:00', '2022-02-01 00:00:00', 0, 'test', '', '2022-11-07 16:55:49', '2022-11-07 16:55:49'),
 (2, 1, 435690, NULL, '2022-04-01 00:00:00', '2022-10-01 00:00:00', 0, 'test', '', '2022-11-07 17:02:14', '2022-11-07 17:02:14');
 
@@ -1209,13 +1209,13 @@ CREATE TABLE `ticket_response` (
 --
 ALTER TABLE `account`
   ADD PRIMARY KEY (`account_id`),
-  ADD KEY `FK_AccountEmployee` (`eid`);
+  ADD KEY `FK_AccountEmployee` (`employee_id`);
 
 --
 -- Indexes for table `employee_fix`
 --
 ALTER TABLE `employee_fix`
-  ADD PRIMARY KEY (`eid`),
+  ADD PRIMARY KEY (`employee_id`),
   ADD KEY `FK_EmployeeEmployeeType` (`employee_type_id`);
 
 --
@@ -1229,7 +1229,7 @@ ALTER TABLE `employee_type_fix`
 --
 ALTER TABLE `pto_balance`
   ADD PRIMARY KEY (`pto_balance_id`),
-  ADD KEY `FK_PTOBalanceEmployee` (`eid`);
+  ADD KEY `FK_PTOBalanceEmployee` (`employee_id`);
 
 --
 -- Indexes for table `pto_type`
@@ -1242,7 +1242,7 @@ ALTER TABLE `pto_type`
 --
 ALTER TABLE `ticket`
   ADD PRIMARY KEY (`ticket_id`),
-  ADD KEY `FK_TicketEmployee` (`eid`),
+  ADD KEY `FK_TicketEmployee` (`employee_id`),
   ADD KEY `FK_TicketPTOType` (`pto_type_id`);
 
 --
@@ -1313,7 +1313,7 @@ ALTER TABLE `ticket_response`
 -- Constraints for table `account`
 --
 ALTER TABLE `account`
-  ADD CONSTRAINT `FK_AccountEmployee` FOREIGN KEY (`eid`) REFERENCES `employee_fix` (`eid`);
+  ADD CONSTRAINT `FK_AccountEmployee` FOREIGN KEY (`employee_id`) REFERENCES `employee_fix` (`employee_id`);
 
 --
 -- Constraints for table `employee_fix`
@@ -1325,13 +1325,13 @@ ALTER TABLE `employee_fix`
 -- Constraints for table `pto_balance`
 --
 ALTER TABLE `pto_balance`
-  ADD CONSTRAINT `FK_PTOBalanceEmployee` FOREIGN KEY (`eid`) REFERENCES `employee_fix` (`eid`);
+  ADD CONSTRAINT `FK_PTOBalanceEmployee` FOREIGN KEY (`employee_id`) REFERENCES `employee_fix` (`employee_id`);
 
 --
 -- Constraints for table `ticket`
 --
 ALTER TABLE `ticket`
-  ADD CONSTRAINT `FK_TicketEmployee` FOREIGN KEY (`eid`) REFERENCES `employee_fix` (`eid`),
+  ADD CONSTRAINT `FK_TicketEmployee` FOREIGN KEY (`employee_id`) REFERENCES `employee_fix` (`employee_id`),
   ADD CONSTRAINT `FK_TicketPTOType` FOREIGN KEY (`pto_type_id`) REFERENCES `pto_type` (`pto_type_id`);
 
 --

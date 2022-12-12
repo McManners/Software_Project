@@ -8,6 +8,7 @@ const handleLogout = async (req, res) => {
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
     res.clearCookie('logged');
     const foundAccount = await db.Account.findOne({ where: { refresh_token: cookies.jwt } });
+    if (!foundAccount) return res.status(200);
     foundAccount.refresh_token = "";
     foundAccount.save();
     

@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   PTO.init({
     pto_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
-    eid: { type: DataTypes.INTEGER, allowNull: false },
-    ticket_id: { type: DataTypes.INTEGER, allowNull: false }
+    ticket_id: { type: DataTypes.INTEGER, allowNull: false },
+    pto_type_id: { type: DataTypes.INTEGER, allowNull: true }
   }, {
     sequelize,
     modelName: 'PTO',
@@ -25,11 +25,38 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: 'pto'
   });
-  
+  PTO.associate = function (models) {
+    // PTO.hasOne(models.PTO_Type, {
+    //     foreignKey: { 
+    //         name: 'pto_type_id',
+    //         field: 'pto_type_id'
+    //     },
+    //     sourceKey: 'pto_type_id'
+    // });
+    // PTO.hasOne(models.Employee, {
+    //     foreignKey: { 
+    //         name: 'employee_id',
+    //         field: 'employee_id'
+    //     },
+    //     sourceKey: 'employee_id'
+    // });
+    
+    PTO.hasOne(models.Ticket_History, {
+        foreignKey: { 
+            name: 'ticket_id',
+            field: 'ticket_id'
+        },
+        sourceKey: 'ticket_id'
+    });
+  }
+    
   PTO.addScopes = function (models) {
     PTO.addScope('defaultScope', {
+        include: [
+            models.Ticket_History
+        ],
       attributes: { exclude: ['updatedAt', 'createdAt'] }
     });
-  };
+}
   return PTO;
 };

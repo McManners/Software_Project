@@ -6,7 +6,7 @@ const Register = () => {
     const location = useLocation();
 
     const [email, setEmail] = useState("");
-    const [eid, setEmployee_ID] = useState("");
+    const [employee_id, setEmployee_ID] = useState("");
     const [password, setPassword] = useState("");
     const [confirm_password, setConfirm_Password] = useState("");
 
@@ -31,7 +31,7 @@ const Register = () => {
             url: 'http://localhost:3001/register',
             data: {
                 email: email,
-                eid: eid,
+                employee_id: employee_id,
                 password: password
             },
             withCredentials: true
@@ -63,8 +63,8 @@ const Register = () => {
                     <form onSubmit={createAccount}>
                         <label htmlFor="email">Email</label><br/>
                         <input type="textbox" id="email" value={email} onChange={handleEmailChange} /><br/>
-                        <label htmlFor="eid">Employee ID</label><br/>
-                        <input type="textbox" id="eid" onChange={handleEmployee_IDChange} /><br/>
+                        <label htmlFor="employee_id">Employee ID</label><br/>
+                        <input type="textbox" id="employee_id" onChange={handleEmployee_IDChange} /><br/>
                         <label htmlFor="password">Password</label><br/>
                         <input type="password" id="password" onChange={handlePasswordChange} /><br/>
                         <label htmlFor="confirm_password">Confirm Password</label><br/>

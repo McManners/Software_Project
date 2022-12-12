@@ -19,7 +19,7 @@ const PendingRequest = () => {
         const getTickets = async () => {
             // https://flaviocopes.com/axios-send-authorization-header
             try {
-                const response = await axiosPrivate.get('/ticket', {
+                const response = await axiosPrivate.get('/ticket/pending', {
                     access_token: auth.access_token
                 },
                 {
@@ -27,6 +27,7 @@ const PendingRequest = () => {
                         'Authorization': `Bearer ${auth.access_token}`
                     }
                 });
+                console.log(response.data.tickets)
                 isMounted && setTickets(response.data.tickets);
             } catch (err) {
                 console.log(err);
@@ -43,7 +44,7 @@ const PendingRequest = () => {
     const renderSelectedDays = (ticket) => {
         let days = "";
         ticket.Ticket_Date_Ranges.map(date => {
-            days += (`${date['start_date'].split('T', 1)}, `);
+            days += (`${date['requested_date'].split('T', 1)}, `);
         })
         return (
             <div>
@@ -68,12 +69,14 @@ const PendingRequest = () => {
 
     const GetTable = () => {
         let rows = [];
+        
         tickets.map(e => {
+            
             rows.push(
                     <tr key={e.ticket_id} id={parseInt(e.ticket_id)} className='pending-request-table-row' onClick={handleOpenRequestClick}>
                         <td>{e.ticket_id}</td>
-                        <td>{e['PTO_Type']['pto_type']}</td>
-                        <td>{renderSelectedDays(e)}</td>
+                        <td>{e.pto_type_id === 1 ? "Vacation" : e.pto_type_id === 2 ? "Personal" : "Sick"}</td>
+                        <td>Pending</td>
                         <td>{e.createdAt.split("T",1)[0]}</td>
                     </tr>
             )
@@ -84,27 +87,27 @@ const PendingRequest = () => {
                     </tr>);
         });
         return (
-                <table className='pending-request-table'>
-                    <thead>
-                        <tr>
-                            <th>
-                                Ticket ID
-                            </th>
-                            <th>
-                                Type
-                            </th>
-                            <th>
-                                Requested Dates
-                            </th>
-                            <th>
-                                Submit Date {filterDropdown('submitDate')}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {!(tickets?.length === null) ? rows : <tr><td colSpan={5}>Loading...</td></tr>}
-                    </tbody>
-                </table>
+            <table className='pending-request-table'>
+                <thead>
+                    <tr>
+                        <th>
+                            Ticket ID
+                        </th>
+                        <th>
+                            Type
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Submit Date {filterDropdown('submitDate')}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {!(tickets?.length === null) ? rows : <tr><td colSpan={5}>Loading...</td></tr>}
+                </tbody>
+            </table>
         )
     }
     const OpenRequestID = () => {
@@ -162,21 +165,10 @@ const PendingRequest = () => {
             setRequestsState(prev => prev.filter(e => e.submitDate === event.target.id))
         }
     }
-    const [filterNamePlaceholder, setFilterNamePlaceholder] = useState('Filter by name...');
-    const [filterTypePlaceholder, setFilterTypePlaceholder] = useState('Filter by name...');
-    const [filterTimeRemainingPlaceholder, setFilterTimeRemainingPlaceholder] = useState('Filter by name...');
-
-    const filter = () => {
-        console.log(filterNavRef.current.style.width);
-        if (filterNavRef.current.style.width === "0px") {
-            filterNavRef.current.style.width = "10%";
-        } else {
-            filterNavRef.current.style.width = "0px";
-        }
-    }
+    
 
     return (
-            <GetTable />
+        <GetTable />
     )
 }
 

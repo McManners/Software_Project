@@ -74,7 +74,7 @@ const Requests = () => {
                                 return (
                                     <tr key={key}>
                                         <td>{ticket.ticket_id}</td>
-                                        <td>{ticket.eid}</td>
+                                        <td>{ticket.employee_id}</td>
                                         <td>{ticket.leader_id}</td>
                                         <td>{(ticket.status === true) ? "Open" : "Closed"}</td>
                                         <td>{ticket.request_note}</td>

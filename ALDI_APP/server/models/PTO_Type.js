@@ -24,7 +24,33 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: 'pto_type'
   });
-  
+PTO_Type.associate = function (models) {
+    PTO_Type.hasOne(models.Ticket, {
+        foreignKey: {
+            name: 'pto_type_id',
+            field: 'pto_type_id'
+        },
+        sourceKey: 'pto_type_id'
+    });
+    PTO_Type.hasOne(models.Ticket_History, {
+        foreignKey: {
+            name: 'pto_type_id',
+            field: 'pto_type_id'
+        },
+        sourceKey: 'pto_type_id'
+    });
+    // PTO_Type.hasOne(models.PTO, {
+    //     foreignKey: {
+    //         name: 'pto_type_id'
+    //     }
+    // });
+    // PTO_Type.belongsTo(models.Employee, {
+    //     foreignKey: {
+    //         name: 'pto_type_id'
+    //     },
+    //     });
+    };
+
   PTO_Type.addScopes = function (models) {
     PTO_Type.addScope('defaultScope', {
       attributes: { exclude: ['updatedAt', 'createdAt'] }

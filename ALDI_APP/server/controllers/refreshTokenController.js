@@ -10,8 +10,8 @@ const handleRefreshToken = async (req, res) => {
     // const foundUser = await Account.findOne({ where: { refresh_token: refreshToken } });
     const foundAccount = await db.Account.findOne({ where: { refresh_token: refresh_token } });
     if (!foundAccount) return res.sendStatus(403); // Forbidden
-    const foundEmployee = await db.Employee.findByPk(foundAccount.eid);
-    if (!foundEmployee) return res.status(404).json({ 'message': `Cant find employee by account eid ${foundAccount.eid}` }); // Unauthorized
+    const foundEmployee = await db.Employee.findByPk(foundAccount.employee_id);
+    if (!foundEmployee) return res.status(404).json({ 'message': `Cant find employee by account employee_id ${foundAccount.employee_id}` }); // Unauthorized
     const foundEmployee_Type = await db.Employee_Type.findByPk(foundEmployee.employee_type_id);
     if (!foundEmployee_Type) return res.status(404).json({ 'message': `Cant find emplyee type by pk ${foundEmployee.employee_type_id}` }); // Unauthorized
     const employee_type = foundEmployee_Type.employee_type;
@@ -23,10 +23,10 @@ const handleRefreshToken = async (req, res) => {
         refresh_token,
         process.env.REFRESH_TOKEN_SECRET,
         (err, decoded) => {
-            if (err || foundAccount.eid !== decoded.eid) return res.sendStatus(403);
+            if (err || foundAccount.employee_id !== decoded.employee_id) return res.sendStatus(403);
             const access_token = jwt.sign(
                 {
-                    "eid": decoded.eid,
+                    "employee_id": decoded.employee_id,
                     "employee_type": decoded.employee_type,
                     "first_name": decoded.first_name,
                     "last_name": decoded.last_name

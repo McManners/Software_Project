@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Account.init({
     account_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
-    eid: { type: DataTypes.INTEGER, allowNull: false },
+    employee_id: { type: DataTypes.INTEGER, allowNull: false },
     email: { type: DataTypes.STRING, allowNull: false },
     password: { type: DataTypes.STRING, allowNull: false },
     refresh_token: { type: DataTypes.STRING, allowNull: true },
@@ -30,11 +30,10 @@ module.exports = (sequelize, DataTypes) => {
   Account.associate = function (models) {
     Account.hasOne(models.Employee, {
         foreignKey: {
-          name: 'eid',
-          type: DataTypes.INTEGER,
-          allowNull: false,
+            name: 'employee_id',
+            field: 'employee_id'
         },
-        sourceKey: 'eid'
+        sourceKey: 'employee_id'
       });
     };
 

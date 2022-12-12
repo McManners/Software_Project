@@ -19,7 +19,7 @@ const createTicketResponse = async (req, res) => {
     try {
         const newResponse = new db.Ticket_Response({
             ticket_id: ticket_id,
-            leader_id: foundAccount.eid, // might want response eid...
+            leader_id: foundAccount.employee_id, // might want response employee_id...
             response_type: response_type,
             response: response
         })

@@ -1,10 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import DashHeader from './DashHeader';
 import DashFooter from './DashFooter';
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "../simple/AuthProvider";
-import useLogout from '../simple/useLogout';
 
 const Dashboard = () => {
     return (

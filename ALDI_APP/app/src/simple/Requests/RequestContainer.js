@@ -25,9 +25,14 @@ const RequestContainer = () => {
                 <PendingButton />
                 <CompleteButton />
                 <CreateButton />
-                <div className='request-body'>
+                {window.location.href === 'http://localhost:3000/dashboard/pending' ?
+                <div className='manager-request-body'>
                     <Outlet />
                 </div>
+                :
+                <div className='request-body'>
+                    <Outlet />
+                </div>}
             </div>
         </div>
     )

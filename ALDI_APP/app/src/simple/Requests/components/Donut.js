@@ -1,21 +1,62 @@
 import './donut.css';
 import React, { Component } from 'react';
+import {Chart as ChartJS, ArcElement, Tooltip, Legend,} from "chart.js";
+import {Doughnut} from "react-chartjs-2";
+ChartJS.register(ArcElement,Tooltip, Legend);
 
 class Donut extends Component {
     constructor(props) {
         super(props);
     
-        const { width, height } = this.props;
-    
+        const { labels, dataVal } = this.props;
+    }
+
+    data1 = {
+        labels: this.labels,
+        datasets: [
+            {
+                data: this.dataVal, //  (4/9)
+                backgroundColor: ['#0497b8', '#fff'],
+                borderColor: 'black',
+                borderWidth: 2,
+                cutout: '80%'
+            }
+        ],
+    };
+
+    options = {
+        plugins: {
+            legend: {
+                position: 'top',
+                align: 'center',
+                labels: {
+                    color: "#000"
+                }
+            },
+        }
     }
 
     render() {
         return (
-            <div className="donut">
-                <svg height="100" width="100" viewBox="-10 -10 220 220">
-                    <path className="back" d="M0,100 a100,100 0 1 0 200,0 a100,100 0 1 0 -200,0" fill="#FFFFFF" stroke="#034870" stroke-width="20" stroke-linecap="round" />
-                    <path className="ring" d="M100,0 a100,100 0 0 1 0,200 a100,100 0 0 1 0,-200,0" fill="none" stroke="#FF1251" stroke-width="20" stroke-dasharray="629" stroke-linecap="round" stroke-dashoffset="629" />
-                </svg>
+            <div className='Charts'>
+                <Doughnut type='doughnut' data={this.data1} options={this.options} plugins={[
+                    {
+                        beforeDraw(chart, args, options) {
+                            const {width} = chart;
+                            const {height} = chart;
+                            const {ctx} = chart;
+                            ctx.restore();
+                            const fontSize = (height / 160).toFixed()
+                            ctx.font = `${fontSize}em sans-serif`;
+                            ctx.textBaseline = 'top';
+                            const text = "44%";
+                            const textX = Math.round((width - ctx.measureText(text).width)/2);
+                            const textY = height / 2;
+                            ctx.fillText(text, textX, textY);
+                            ctx.save();
+                        }
+                    }
+                ]}/>
             </div>
         )
     }

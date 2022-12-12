@@ -33,11 +33,21 @@ module.exports = (sequelize, DataTypes) => {
     tableName: "accrual_bracket"
   });
   Accrual_Bracket.associate = function (models) {
-    Accrual_Bracket.belongsTo(models.PTO_Balance, {
-      foreignKey: {
-        name: 'accrual_bracket_id'
-      },
-    });
+    // Accrual_Bracket.hasOne(models.PTO_Balance, {
+    //     foreignKey: {
+    //       name: 'accrual_bracket_id'
+    //     }
+    //   });
+    //   Accrual_Bracket.hasOne(models.PTO_Balance_History, {
+    //     foreignKey: {
+    //       name: 'accrual_bracket_id'
+    //     }
+    //   });
+      // Accrual_Bracket.belongsTo(models.PTO_Balance, {
+    //   foreignKey: {
+    //     name: 'accrual_bracket_id'
+    //   },
+    // });
   }
   Accrual_Bracket.addScopes = function (models) {
     Accrual_Bracket.addScope('defaultScope', {

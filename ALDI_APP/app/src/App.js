@@ -25,6 +25,7 @@ import RequestManager from './simple/Requests/RequestManager';
 import ManagerCalendar from './simple/Requests/ManagerCalendar';
 import RequestDashboard from './simple/Requests/Dashboard/Dashboard';
 import RequestWelcome from './simple/Requests/Dashboard/DashboardWelcome';
+import ManagerContainer from './simple/Requests/ManagerContainer';
 
 import OfficialHome from './official/OfficialHome';
 import OfficialLogin from './official/OfficialLogin';
@@ -95,10 +96,10 @@ function App() {
                                 <Route element={<RequestContainer />}>
                                     <Route path="pending" element={<PendingRequests />}/>
                                     <Route path="complete" element={<CompleteRequests />}/>
-                                    <Route path="calendartest" element={<Calendar />}/>
                                     <Route path="create" element={<CreateRequestWithCalendar />}/>
+                                </Route>
+                                <Route element={<ManagerContainer />}>
                                     <Route path="manager" element={<RequestManager />}/>
-                                    <Route path="manager/calendar" element={<ManagerCalendar />}/>
                                 </Route>
                             </Route>
                         </Route>

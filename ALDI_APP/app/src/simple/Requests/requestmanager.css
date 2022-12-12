@@ -1,36 +1,18 @@
-.manager-request-main {
-    min-height: 100vh;
+.manager-filter-dropdown-header-container {
     display: flex;
-    justify-content: center;
-    background-color: transparent;
-    padding: 25px 0;
+    flex-direction: row;
+    justify-content: end;
 }
-.manager-request-container {
-    width: 90%;
-    max-height: 90%;
+.manager-filter-dropdown-header-container div {
+    flex-grow: 1;
+}
+table {
+    table-layout: fixed;
 }
 .open-request-close-button {
     position: absolute;
     bottom: 5px;
     left: 5px;
-}
-.manager-request-body {
-    border: 2px solid black;
-    position: relative;
-    background-color: white;
-    display: flex;
-    float: left;
-    width: 100%;
-    flex-direction: column;
-    justify-content: stretch; 
-}
-.manager-scroll-container {
-    height: 100%;
-}
-.manager-requests-body-container {
-    border: 1px solid red;
-    position: relative;
-    flex-grow: 1;
 }
 .manager-table-open-request-left {
     width: 100%;
@@ -49,6 +31,7 @@
     align-items: center;
     flex-grow: 1;
     width: 100%;
+    position: relative;
 }
 .manager-pending-request-item {
     display: flex;
@@ -92,6 +75,9 @@
 }
 .manager-request-table tr:nth-child(even), th {
     background-color: #eae9e9;
+}
+.manager-request-table th {
+    min-width: auto;
 }
 .manager-request-disputed-days {
     text-align: center;
@@ -148,13 +134,14 @@
     height: auto;
 }
 
-.manager-filter-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 2px 5px;
+.manager-filter-dropdown-header-container button {
+    background-color: transparent;
+    padding: 2px 0;
+    width: 100%;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    font-weight: lighter;
 }
 .manager-filter-dropdown {
     position: relative;
@@ -165,15 +152,15 @@
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 5px 0;
     z-index: 1;
 }
 .manager-filter-dropdown-content div {
     color: black;
-    padding: 2px 2px;
     cursor: pointer;
     text-decoration: none;
     display: block;
+    border-bottom: 1px solid gray;
 }
 .manager-filter-dropdown-content div:hover {
     background-color: gray;
@@ -183,4 +170,14 @@
 }
 .manager-filter-dropdown-content div {
     background-color: #f1f1f1
+}
+.calendar-open-day-container {
+    position: absolute;
+    height: 92%;
+    bottom: 0;
+    transition: 0.5s;
+    background-color: white;
+    right: 0;
+    width: 0;
+    overflow: hidden;
 }

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './calendar.css';
 import IconBxsLeftArrow from './Icons/IconBxsLeftArrow.tsx';
 import IconBxsRightArrow from './Icons/IconBxsRightArrow.tsx';
 import IconHalloween from './Icons/IconHalloween.tsx';
+import { HiOutlineDotsVertical } from 'react-icons/hi';
 
-const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMonth, setSelectedYear, selectedYear, calendarType}) => {
+const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMonth, setSelectedYear, selectedYear, calendarType, employeeDaysTest, dayRef, pto }) => {
     const monthEnum = {
         JANUARY: { days: 31, day: 'January', firstDayOfMonth: 1},
         FEBRUARY: { days: 28, day: 'February', firstDayOfMonth: 1},
@@ -19,8 +20,21 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
         NOVEMBER: { days: 30, day: 'November', firstDayOfMonth: 1},
         DECEMBER: { days: 31, day: 'December', firstDayOfMonth: 1}
     }
+    const [openDay, setOpenDay] = useState(null);
+    
+    const handleDayRefOpen = event => {
+        event.preventDefault();
+        
+        setOpenDay(event.target.id);
+        dayRef.current.style.width = '75%';
+    }
+    const handleDayRefClose = event => {
+        event.preventDefault();
+        setOpenDay(null)
+        dayRef.current.style.width = '0';
+    }
+
     const setStartOfMonth = () => {
-        console.log("setting start of month");
         if (selectedYear >= 2022) {
             monthEnum.JANUARY.firstDayOfMonth = 6;
             for (let i = 1; i < Object.entries(monthEnum).length; i++) {
@@ -32,11 +46,6 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
             }
         }
     }
-
-    /*style={
-        selectedDays.includes(`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`) ?
-        {backgroundColor: '#f0fff0'} : {}
-    }*/
 
     const handleMonthChangeDecrease = () => {
         if (selectedMonth === 0) {
@@ -61,37 +70,45 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
         }
     }
     
-    const employeeDaysTest = ['2022-10-09', '2022-10-11']
+    let allMonths = [];
+    if (calendarType === "Manager") {
+        employeeDaysTest.forEach(date => {
+            const d = new Date(date);
+            if (!allMonths.includes(d.getMonth())) {
+                allMonths.push(d.getMonth());
+            }
+        })
+    };
     const renderMonth = (currMonth) => {
-        console.log("rendering month");
+        console.log(employeeDaysTest);
         setStartOfMonth();
         const first_day = Object.entries(monthEnum)[selectedMonth][1].firstDayOfMonth;
         const prev_month_days = Object.entries(monthEnum)[selectedMonth === 0 ? 11 : selectedMonth - 1][1].days;
         const total_days_in_month = Object.entries(monthEnum)[selectedMonth][1].days;
         let month = [];
         if (calendarType === "Manager") {
-            console.log("this calendar is for manager");
             for (let i = 1; i < currMonth + 1; i++) {
+                employeeDaysTest.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}T00:00:00.000Z`))
                 month.push(
                     <div className={
-                        selectedDays.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`)) ?
+                        selectedDays.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}T00:00:00.000Z`)) ?
                             'day valid-day denied-day' :
-                                employeeDaysTest.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`)) ? 
+                                employeeDaysTest.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}T00:00:00.000Z`)) ? 
                                     'day valid-day aspect-ratio selected-day' : 'day disabled-day aspect-ratio'
-                    } key={`${selectedMonth + 1}${(i < 10 ? `0${i}` : i)}${selectedYear}`}>
+                    } key={`${selectedMonth + 1}${(i < 10 ? `0${i}` : i)}${selectedYear}T00:00:00.000Z`}>
                             <div>
                                 <div className='day-header'>{i}</div>
                             </div>
                         {
-                            employeeDaysTest.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`)) ? 
-                            <div className='spread' id={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`} onClick={handleDayClick}></div> :
-                            <div className='spread' id={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`}></div>
+                            employeeDaysTest.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}T00:00:00.000Z`)) ? 
+                            <div className='spread' id={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}T00:00:00.000Z`} onClick={handleDayClick}></div> :
+                            <div className='spread' id={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}T00:00:00.000Z`}></div>
                         }
+                        {calendarType === "Manager" ? <HiOutlineDotsVertical className='calendar-open-day' id={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}T00:00:00.000Z`} onClick={handleDayRefOpen} /> : ''}
                     </div>
                 )
             }
         } else {
-            console.log("this calendar is not for manager");
             for (let i = 1; i < currMonth + 1; i++) {
                 month.push(
                     <div className={selectedDays.includes((`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`)) ? 
@@ -100,7 +117,10 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
                         <div>
                             <div className='day-header'>{i}</div>
                         </div>
-                            <div className='spread' id={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`} onClick={handleDayClick}></div>
+                        <div className='spread' id={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}`} onClick={handleDayClick}></div>
+                        
+                        {calendarType === "Manager" ? <HiOutlineDotsVertical className='calendar-open-day' id={`${selectedYear}-${selectedMonth + 1}-${(i < 10 ? `0${i}` : i)}T00:00:00.000Z`} onClick={handleDayRefOpen} /> : ''}
+
                     </div>
                 )
             }
@@ -116,6 +136,8 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
                         // It is absolutely positioned over the entire cell... */}
                         <IconHalloween style={{color: "orange"}} width='50px'height='25px' />
                     </div>
+                    {calendarType === "Manager" ? <HiOutlineDotsVertical className='calendar-open-day' id={`${selectedYear}-10-31T00:00:00.000Z`} onClick={handleDayRefOpen} /> : ''}
+
                 </div> 
             )
         }
@@ -131,7 +153,7 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
             let count = 1;
             for (let end = month.length; end < month_grid_count; end++) {
                 month.push(
-                    <div key={end + "end"} className='day aspect-ratio disabled-day' style={{opacity: '75%', backgroundColor: 'lightgray'}}>
+                    <div key={end + "end"} className='day aspect-ratio disabled-day' style={{opacity: '50%', backgroundColor: '#dcdcdc'}}>
                         <div className='day-header'>{count}</div>
                     </div>
                 );
@@ -140,21 +162,72 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
         }
         
         return (
-            <div className='grid-container'>
+            <div className='calendar-grid-container'>
                 {month}
             </div>
         );
     }
+    const getEmployeeDays = () => {
+        // if (pto.length === 0) return;
+        console.log(pto);
+        console.log(openDay);
+        let employee_id_array = [];
+        return (
+            pto.map((e, index) => {
+                for (let i = 0; i < e.Ticket_History.Ticket_Date_Ranges.length; i++) {
+                    if (e.Ticket_History.Ticket_Date_Ranges[i].requested_date === openDay && !employee_id_array.includes(e.Ticket_History.employee_id)) {
+                        employee_id_array.push(e.Ticket_History.employee_id);
+                        return (
+                            <tr key={index + "pto_table"}>
+                                <td>{e.Ticket_History.Employee.employee_id}</td>
+                                <td>{`${e.Ticket_History.Employee.first_name} ${e.Ticket_History.Employee.last_name}`}</td>
+                            </tr>
+                        );
+                    }
+                }
+            })
+        );
+    }
+    const GetOpenDay = () => {
+        if (calendarType === "Manager") {
+            if (openDay !== null) {
+                return (
+                    <div>
+                        <button type='button' onClick={handleDayRefClose}>Close</button>
+                        <div className='calendar-open-day-content'>
+                            Employees Granted PTO for <u>{new Date(openDay).toDateString()}</u>:
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Employee ID</th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {getEmployeeDays()}
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+                )
+            }
+        } else {
+            return (
+                <div>
+                    <button type='button' onClick={handleDayRefClose}>Close</button>
+                    
+                </div>
+            )
+        }
+    }
+    console.log(allMonths)
     return (
-        // <div className='main'>
-        //     <div className='test'>Total Days: {selectedDays.length}</div>
-            // {renderSelectedDays()}
-            // <button type="button" onClick={() => console.log("selecteddays: " + selectedDays)}>Check Sel Days</button>
             <div className='calendar-container disable-select'>
                 <div className='calendar-header'>
-                    <IconBxsLeftArrow onClick={handleMonthChangeDecrease} width='25px' height='50%' />
+                    <IconBxsLeftArrow onClick={handleMonthChangeDecrease} style={{color: (allMonths.includes((selectedMonth > 0) ? selectedMonth : 11)) ? "red" : "black"}} width='25px' height='50%' />
                     <span style={{ width: '100px' }}>{Object.entries(monthEnum)[selectedMonth][1].day}</span>
-                    <IconBxsRightArrow onClick={handleMonthChangeIncrease} width='25px'height='50%' />
+                    <IconBxsRightArrow onClick={handleMonthChangeIncrease} style={{color: (allMonths.includes((selectedMonth < 11) ? selectedMonth : 0)) ? "red" : "black"}} width='25px'height='50%' />
                 </div>
                 <div className='calendar-day-header-container'>
                     <div className='calendar-day-header'>Sunday</div>
@@ -167,8 +240,10 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
                 </div>
                 {renderMonth(Object.entries(monthEnum)[selectedMonth][1].days)}
                 
+                <div className='calendar-open-day-container' ref={dayRef}>
+                    {calendarType === "Manager" ? <GetOpenDay /> : ''}
+                </div>
             </div>
-        // </div>
     )
 }
 

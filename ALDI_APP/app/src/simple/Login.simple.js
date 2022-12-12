@@ -71,7 +71,6 @@ const Login = () => {
             https://stackoverflow.com/questions/62964902/axios-post-extracting-data-from-response
         */
         .then(function(res) {
-            console.log("auth response is good");
             const access_token = res?.data?.access_token;
             console.log(access_token);
             const employee_type = res?.data?.employee_type;

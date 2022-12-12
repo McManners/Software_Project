@@ -17,13 +17,13 @@ const CreateRequestWithCalendar = () => {
     const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
     const [selectedYear, setSelectedYear] = useState(date.getFullYear());
     // These are passed to <Calendar/> as props
-    const [selectedPTOType, setSelectedPTOType] = useState(0);
+    const [selectedPTOType, setSelectedPTOType] = useState(1);
     const { auth } = useAuth();
     const location = useLocation();
     const [ptoBalance, setPTOBalance] = useState(null);
 
     const handleRequestNoteChange = event => {
-        console.log("blur triggered");
+        event.preventDefault();
         setRequestNote(event.target.value);
     }
     useEffect(() => {
@@ -61,10 +61,11 @@ const CreateRequestWithCalendar = () => {
     const createTicket = async () => {
         // https://flaviocopes.com/axios-send-authorization-header
         try {
+            
             const response = await axiosPrivate.post('/ticket/create', {
                 access_token: auth.access_token,
                 date: selectedDays,
-                pto_type_id: selectedPTOType,
+                pto_type_id: parseInt(selectedPTOType),
                 request_note: requestNote
             },
             {
@@ -72,6 +73,7 @@ const CreateRequestWithCalendar = () => {
                     'Authorization': `Bearer ${auth.access_token}`
                 }
             });
+            if (response.status === 201) navigate('/', { state: { from: location }, replace: true });
         } catch (err) {
             console.log(err);
             if (err.status === 403) navigate('/login', { state: { from: location }, replace: true });
@@ -85,88 +87,95 @@ const CreateRequestWithCalendar = () => {
         setSelectedPTOType(event.target.value);
     }
     const renderSelectedDays = () => {
-        let days = "";
-        selectedDays.forEach(e => {
-            days += (`${e}, `);
-        })
         return (
-            <div>
-                Selected Days: <br/>{days}
+            <div className='create-request-calendar-selected-days'>
+                {selectedDays.map(e => {
+                    return (
+                        <div key={e}>{new Date(e).toDateString()}</div>
+                    );
+                })}
             </div>
         )
     }
+
     const CalendarStats = () => {
         return (
-            <div className='create-calendar-stats'>
-                <div className='create-calendar-donut-item'>
-                    <h5>Vacation Remaining</h5>
-                    <div className="create-calendar-donut"
-                        style={{background: `conic-gradient(red 0deg ${ptoBalance.personal_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken}deg, green ${ptoBalance.personal_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken}deg 360deg`
-                            }}
+            <div className='create-calendar-stats-container'>
+                <div className='create-calendar-right-container-header'>Available Paid Time Off</div>
+                <div className='create-calendar-stats'>
+                    <div className='create-calendar-donut-item'>
+                        <div className="create-calendar-donut"
+                            style={{background: `conic-gradient(red 0deg ${ptoBalance.personal_taken === 0 ? 0 : (360 / ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken) * ptoBalance.personal_taken}deg, green ${ptoBalance.personal_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken}deg 360deg`
+                                }}
+                            >
+                            <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken}</div>
+                        </div>
+                        <div className='stats-header'>Vacation</div>
+                    </div>
+                    <div className='create-calendar-donut-item'>
+                        <div className="create-calendar-donut"
+                            style={{background: `conic-gradient(green 0deg ${ptoBalance.vacation_taken === 0 ? 0 : (360 / ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken) * ptoBalance.vacation_taken}deg, red ${ptoBalance.vacation_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken}deg 360deg`
+                        }}>
+                            <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken}</div>
+                        </div>
+                        <div className='stats-header'>Personal</div>
+                    </div>
+                    <div className='create-calendar-donut-item'>
+                        <div className="create-calendar-donut"
+                            style={{background: `conic-gradient(red 0deg ${ptoBalance.sick_taken === 0 ? 0 : (  360 / ptoBalance.Accrual_Bracket.max_sick - ptoBalance.sick_taken) * ptoBalance.sick_taken}deg, green ${ptoBalance.sick_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.max_sick - ptoBalance.sick_taken}deg 360deg`
+                        }}
                         >
-                        <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken}</div>
-                    </div>
-                </div>
-                <div className='create-calendar-donut-item'>
-                    <h5>Vacation Remaining</h5>
-                    <div className="create-calendar-donut"
-                        style={{background: `conic-gradient(green 0deg ${ptoBalance.vacation_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken}deg, red ${ptoBalance.vacation_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken}deg 360deg`
-                    }}
-                    >
-                        <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken}</div>
-                    </div>
-                </div>
-                <div className='create-calendar-donut-item'>
-                    <h5>Sick Remaining</h5>
-                    <div className="create-calendar-donut"
-                        style={{background: `conic-gradient(red 0deg ${ptoBalance.sick_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.sick_per_year - ptoBalance.sick_taken}deg, green ${ptoBalance.sick_taken === 0 ? 0 : 360 / ptoBalance.Accrual_Bracket.sick_per_year - ptoBalance.sick_taken}deg 360deg`
-                    }}
-                    >
-                        <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.sick_per_year - ptoBalance.sick_taken}</div>
+                            <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.max_sick - ptoBalance.sick_taken}</div>
+                        </div>
+                        <div className='stats-header'>Sick</div>
                     </div>
                 </div>
             </div>
+        )
+    }
+    const getValue = () => {
+        return (
+            requestNote === "" ? 
+                <textarea rows="2" id="create-calendar-request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange}/> :
+                <textarea rows="2" id="create-calendar-request-note-input" defaultValue={requestNote} onBlur={handleRequestNoteChange}/>
         )
     }
     const GetForm = () => {
         return (
             <div className='create-calendar-req-cont'>
-                    <div className='create-calendar-cal-container'>
-                        <Calendar 
-                            setSelectedDays={setSelectedDays} 
-                            selectedDays={selectedDays} 
-                            setSelectedMonth={setSelectedMonth}
-                            selectedMonth={selectedMonth}
-                            setSelectedYear={setSelectedYear}
-                            selectedYear={selectedYear}
-                        />
-                    </div>
+                <div className='create-calendar-cal-container'>
+                    <Calendar 
+                        setSelectedDays={setSelectedDays} 
+                        selectedDays={selectedDays} 
+                        setSelectedMonth={setSelectedMonth}
+                        selectedMonth={selectedMonth}
+                        setSelectedYear={setSelectedYear}
+                        selectedYear={selectedYear}
+                    />
+                </div>
                 <div className='create-calendar-right'>
                     <CalendarStats />
                     
-                    <div>
-                        <label htmlFor="create-calendar-request-type">Request Type: </label>
-                        <select type="dropdown" id="create-calendar-request-type" onChange={handlePTOSelect} defaultValue={selectedPTOType}>
-                            <option value={0} disabled hidden>Choose a type ...</option>
-                            <option value={1}>Vacation</option>
-                            <option value={2}>Personal</option>
-                            <option value={3}>Sick</option>
-                        </select>
-                        <div ref={errRef} style={{color: "red", fontWeight: "bold"}}>{errMsg === "" ? <br /> : errMsg}</div> 
+                    <div className='create-calendar-request-type'>
+                        <div className='create-calendar-right-container-header'>Paid Time Off Type</div>
+                        <div className='create-calendar-select-div'>
+                            <select type="dropdown" onChange={handlePTOSelect} defaultValue={selectedPTOType}>
+                                <option value={1} disabled={(ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken === 0)}>Vacation</option>
+                                <option value={2} disabled={(ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken === 0)}>Personal</option>
+                                <option value={3} disabled={(ptoBalance.Accrual_Bracket.sick_per_year - ptoBalance.sick_taken === 0)}>Sick</option>
+                            </select>
+                        </div>
                     </div>
-                    <div className='create-calendar-request-item'>
+                    <div className='selected-days create-request-item-height'>
+                        <div className='create-calendar-right-container-header'>Selected Days</div>
                         {renderSelectedDays()}
                     </div>
-                    <div className='create-calendar-request-item'>
-                        <div style={{ borderBottom: "2px solid blue", fontSize: "1.5rem", fontWeight: "bold" }}>
-                            <label htmlFor="calendar-request-note-input">Request Note: </label>
-                        </div>
-                        <textarea rows="2" id="create-calendar-request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
+                    <div className='create-calendar-request-item-note'>
+                        <div className='create-calendar-right-container-header'>Request Note</div>
+                        {getValue()}
                     </div>
                     <button type="button" onClick={createTicket} id='create-calendar-ticket-button'>Create Ticket</button>
                 </div>
-                
-                
             </div>
         )
     }
@@ -174,13 +183,7 @@ const CreateRequestWithCalendar = () => {
 
     console.log(ptoBalance);
     return (
-        <div id='create-calendar-request-main'>
-            <div id='create-calendar-request-container'>
-                <div id='create-calendar-request-pending-body'>
-                    {(ptoBalance !== null && ptoBalance !== undefined) ? <GetForm /> : <div>Loading...</div>}
-                </div>
-            </div>   
-        </div>
+        (ptoBalance !== null && ptoBalance !== undefined) ? <GetForm /> : <div>Loading...</div>
     )
 }
 

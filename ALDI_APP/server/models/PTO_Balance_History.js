@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class PTO_Balance extends Model {
+  class PTO_Balance_History extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  PTO_Balance.init({
+  PTO_Balance_History.init({
     pto_balance_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
     employee_id: { type: DataTypes.INTEGER, allowNull: false },
     employee_type_id: { type: DataTypes.INTEGER, allowNull: false },
@@ -24,20 +24,20 @@ module.exports = (sequelize, DataTypes) => {
   }, 
   {
     sequelize,
-    modelName: 'PTO_Balance',
+    modelName: 'PTO_Balance_History',
     underscored: true,
     freezeTableName: true,
-    tableName: 'pto_balance'
+    tableName: 'pto_balance_history'
   });
-  PTO_Balance.associate = function (models) {
-    PTO_Balance.hasOne(models.Accrual_Bracket, {
+  PTO_Balance_History.associate = function (models) {
+    PTO_Balance_History.hasOne(models.Accrual_Bracket, {
         foreignKey: {
             name: 'accrual_bracket_id',
             field: 'accrual_bracket_id'
         },
         sourceKey: 'accrual_bracket_id'
       });
-      PTO_Balance.hasOne(models.Employee, {
+      PTO_Balance_History.hasOne(models.Employee, {
         foreignKey: {
             name: 'employee_id',
             field: 'employee_id'
@@ -45,16 +45,15 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: 'employee_id'
       });
     };
-    
-  PTO_Balance.addScopes = function (models) {
-    PTO_Balance.addScope('defaultScope', {
-        include: [
-            {
-                model: models.Accrual_Bracket
-            }
-        ],
-        attributes: { exclude: ['accrual_bracket_id', 'updatedAt'] }
-      });
-  };
-  return PTO_Balance;
+    PTO_Balance_History.addScopes = function (models) {
+        PTO_Balance_History.addScope('defaultScope', {
+            include: [
+                {
+                    model: models.Accrual_Bracket
+                }
+            ],
+            attributes: { exclude: ['updatedAt'] }
+        });
+    };
+  return PTO_Balance_History;
 };

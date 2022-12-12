@@ -1,18 +1,54 @@
 const db = require("../models");
 
 const create = async (req, res) => {
-    console.log(req);
+    const status = req.body.status;
     const ticket_id = req.body.ticket_id;
-    const ticket = db.Ticket.findOne({ where: { ticket_id: ticket_id } });
+    const ticket = await db.Ticket.findOne({ where: { ticket_id: ticket_id } });
+    console.log("date ranges: " + ticket.Ticket_Date_Ranges.length);
     if (!ticket) return res.status(400).json({ "message": "cant find ticket"});
-    if (ticket.status === 1) return res.status(400).json({ "message": "error, ticket already closed"});
-    ticket.status = 1;
+    // if (ticket.status === "APPROVED" || ticket.status === "DENIED") return res.status(401).json({ "message": "Error, ticket already closed"});
+    // ticket.status = "APPROVED";
     ticket.save();
-    await db.PTO.create({
-        eid: ticket.eid,
-        ticket_id: ticket_id
-    });
+    const pto_balance = await db.PTO_Balance.findOne({ where: { employee_id: ticket.employee_id }});
+    const vacation_taken = pto_balance.vacation_taken;
+    const personal_taken = pto_balance.personal_taken;
+    const sick_taken = pto_balance.sick_taken;
+    console.log("V:" + vacation_taken + " P:" + personal_taken + " S:" + sick_taken);
+    const days_taken = ticket.Ticket_Date_Ranges.length;
+    (ticket.pto_type_id === 1) ? 
+        (pto_balance.vacation_taken = vacation_taken + days_taken)
+        : (ticket.pto_type_id === 2) ? 
+            (pto_balance.personal_taken = personal_taken + days_taken)
+                : (pto_balance.sick_taken = sick_taken + days_taken);
+    pto_balance.save();
+    console.log(pto_balance);
+
+    // if (status === "APPROVED") {
+    //     await db.PTO.create({
+    //         employee_id: ticket.employee_id,
+    //         ticket_id: ticket_id,
+    //         pto_type_id: ticket.pto_type_id
+    //     });
+    // };
+    // await db.Ticket_History.create({
+    //     ticket_id: 999990,
+    //     employee_id: ticket.employee_id,
+    //     leader_id: ticket.leader_id,
+    //     request_note: ticket.request_note,
+    //     response_note: ticket.response_note,
+    //     submit_date: ticket.submit_date,
+    //     status: status,
+    //     pto_type_id: ticket.pto_type_id
+    // })
+    // ticket.delete();
     res.status(201);
 }
+const getAllForLeader = async (req, res) => {
+    console.log('pto get all for leader')
+    const leader_id = req.employee_id;
+    const ptos = await db.PTO.findAll({ include: [db.Ticket_History]});
+    console.log(ptos)
+    res.status(201).json(ptos);
+}
 
-module.exports = { create }
+module.exports = { create, getAllForLeader }

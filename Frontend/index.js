@@ -21,7 +21,7 @@ const router = createBrowserRouter([
                             <img src="./Components/ASG_SER_MC_RGB.png"/>
                             <h3>Sign In</h3>
                             <span>Employee ID</span>
-                            <input type="EmployeeID" placeholder="Employee ID"/>
+                            <input type="Employeemployee_id" placeholder="Employee ID"/>
                             <span>Password</span>
                             <input type="password" placeholder="Password"/>
                             <Link to="/homepage">
