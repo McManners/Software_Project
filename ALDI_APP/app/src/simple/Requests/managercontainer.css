@@ -1,24 +1,26 @@
 .manager-request-main {
-    background: linear-gradient(45deg, #FFB428 0%,
-    #FA8214 45%, #FA8214 100%);
+    background-color: rgb(233, 234, 236);
     width: 100%;    
     display: flex;
     align-self: stretch;
     align-items: stretch;
     justify-content: center;
     flex-grow: 1;
+    overflow-y: overlay;
+    padding: 15px 0;
 }
 .manager-request-container {
     width: 90%;
-    max-height: 90%;
 }
 .manager-request-body {
-    border: 2px solid slategrey;
+    border: 1px solid rgb(213, 215, 219);
     position: relative;
     background-color: white;
     display: flex;
     float: left;
     width: 100%;
+    min-height: 100%;
     flex-direction: column;
-    justify-content: stretch; 
+    justify-content: stretch;
+    box-sizing: border-box;
 }

@@ -32,6 +32,15 @@
 .bold {
     font-weight: bold;
 }
+.pending-requests-requested-days {
+    display: grid;
+    grid-auto-flow: column;
+    text-align: left;
+    font-weight: 450;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, auto);
+    font-weight: lighter;
+}
 .pending-textbox {
     width: 100%;
     border: 2px solid black;
@@ -45,21 +54,61 @@
 }
 
 .pending-request-table {
-    border: 1px solid purple;
     flex-grow: 1;
-    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid rgb(213, 215, 219);
+}
+.pending-request-table th {
+    height: 3em;
+    font-weight: 500;
+}
+.pending-request-table th:not(:first-child) {
+    border-left: 1px solid rgb(213, 215, 219);
 }
 .pending-request-table td {
     padding: 5px;
     font-size: 1.1rem;
     text-align: center;
+    font-weight: lighter;
 }
 .pending-request-table-row {
     cursor: pointer;
+    border-bottom: 1px solid rgb(213, 215, 219);
 }
 .pending-request-open-request-row {
     cursor: default;
 }
 .pending-request-table tr:nth-child(even), th {
-    background-color: #eae9e9;
+    background-color: rgb(233, 234, 236);
+}
+.request-container .manager-request-body {
+    padding: 15px;
+}
+.pending-open-request-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 15px;
+    grid-template-areas: 
+        "leader requested-days"
+        "request-note ."
+        "response-note .";
+    column-gap: 15px;
+    box-sizing: border-box;
+
+}
+.pending-request-textarea {
+    height: 4em;
+    width: 100%;
+    resize: none;
+    box-sizing: border-box;
+    font-weight: lighter;
+}
+.pending-open-request-data {
+    background-color: white;
+    border: 1px solid rgb(213, 215, 219);
+    box-sizing: border-box;
+}
+.pending-open-request-data-element {
+    margin: 10px;
+    box-sizing: border-box;
 }

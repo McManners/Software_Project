@@ -4,5 +4,61 @@
     font-size: 2rem;
 }
 .dashboard-header {
-    background-color: navy;
+    background-color: white;
+    border-bottom: 1px solid rgb(213, 215, 219);
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px 0 50px;
+}
+.aldi-header {
+    font-size: 2rem;
+    font-weight: bold;
+    color: navy;
+}
+.user-header {
+    font-size: 1rem;
+    font-weight: 500;
+}
+.user-icon {
+    margin-right: 5px;
+    position: relative;
+    top: -2px;
+}
+.header-dropdown-icon {
+    margin-left: 5px;
+}
+
+.header-dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+.header-dropdown-content {
+    text-align: left;
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    z-index: 1;
+    border-radius: 5px;
+    cursor: auto;
+    border: 1px solid rgb(213, 215, 219);
+}
+.header-dropdown-content div:nth-child(2n) {
+    display: block;
+    border-top: 1px solid rgb(213, 215, 219);
+}
+.header-dropdown-content div span:hover {
+    text-decoration: underline;
+}
+.header-dropdown-content div span {
+    cursor: pointer;
+}
+.header-dropdown-content div {
+    padding: 5px 0 5px 10px;
 }

@@ -279,6 +279,7 @@ const RequestManager = () => {
     }
     
     const filterDropdown = (typeFilter) => {
+        if (tickets === []) return;
         if (tickets !== null) {
             let filter = { 'name': [], 'employee_id': [], 'date': [], 'type': [] };
             let names = tickets.map(ticket => {
@@ -358,16 +359,8 @@ const RequestManager = () => {
     }
     const GetForm = () => {
         return (
-            // <div className='manager-pending-request-item'>
-                <div className='manager-requests-body-container'>
-                    <div className='manager-request-body-header'>
-                        <button type='button' id='manager-reset-table-button' onClick={resetRequestTable}>Reset Table</button>
-                    </div>
-                    
+            
                     <GetTable />
-                </div>
-                
-            // </div>
         )
     }
 

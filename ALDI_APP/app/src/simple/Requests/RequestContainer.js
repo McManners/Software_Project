@@ -6,24 +6,24 @@ const RequestContainer = () => {
     console.log(window.location.href);
     const PendingButton = () => {
         if (window.location.href === 'http://localhost:3000/dashboard/pending')
-            return (<div className='request-button-current'>Pending</div>)
-        return (<div className='request-button-non-current' onClick={() => navigate('/dashboard/pending')}>Pending</div>)
+            return (<span className='request-button-current'>Pending</span>)
+        return (<span className='request-button-non-current' onClick={() => navigate('/dashboard/pending')}>Pending</span>)
     }
-    const CompleteButton = () => {
-        if (window.location.href === 'http://localhost:3000/dashboard/complete')
-            return (<div className='request-button-current'>Completed</div>)
-        return (<div className='request-button-non-current' onClick={() => navigate('/dashboard/complete')}>Complete</div>)
+    const ClosedButton = () => {
+        if (window.location.href === 'http://localhost:3000/dashboard/closed')
+            return (<span className='request-button-current'>Closed</span>)
+        return (<span className='request-button-non-current' onClick={() => navigate('/dashboard/closed')}>Closed</span>)
     }
     const CreateButton = () => {
         if (window.location.href === 'http://localhost:3000/dashboard/create')
-            return (<div className='request-button-current'>Create</div>)
-        return (<div className='request-button-non-current' onClick={() => navigate('/dashboard/create')}>Create</div>)
+            return (<span className='request-button-current'>Create</span>)
+        return (<span className='request-button-non-current' onClick={() => navigate('/dashboard/create')}>Create</span>)
     }
     return (
         <div className='request-main'>
             <div className='request-container'>
                 <PendingButton />
-                <CompleteButton />
+                <ClosedButton />
                 <CreateButton />
                 {window.location.href === 'http://localhost:3000/dashboard/pending' ?
                 <div className='manager-request-body'>

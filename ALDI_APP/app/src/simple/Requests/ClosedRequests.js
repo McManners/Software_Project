@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './completerequest.css';
+import './closedrequests.css';
 
-const CompleteRequests = () => {
+const ClosedRequests = () => {
     const navigate = useNavigate();
 
     return (
@@ -28,4 +28,4 @@ const CompleteRequests = () => {
     )
 }
 
-export default CompleteRequests;
+export default ClosedRequests;

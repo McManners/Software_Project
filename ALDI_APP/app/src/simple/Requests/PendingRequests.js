@@ -41,35 +41,38 @@ const PendingRequest = () => {
             controller.abort();
         }
     }, []);
-    const renderSelectedDays = (ticket) => {
-        let days = "";
-        ticket.Ticket_Date_Ranges.map(date => {
-            days += (`${date['requested_date'].split('T', 1)}, `);
-        })
+    const renderRequestedDays = (ticket) => {
         return (
-            <div>
-                {days.slice(0, -2)}
+            <div className='pending-requests-requested-days'>
+                {ticket.Ticket_Date_Ranges.map(e => {
+                    return (
+                        <div key={ticket.id + e.requested_date}>{new Date(e.requested_date).toDateString()}</div>
+                    );
+                })}
             </div>
         )
     }
-
     const [requestsState, setRequestsState] = useState([]);
     const [openRequestID, setOpenRequestID] = useState([]);
     const handleOpenRequestClick = event => {
-        const id = event.currentTarget.id;
+        const id = Number(event.currentTarget.id);
         console.log(id);
+        console.log(openRequestID);
         if (openRequestID.includes(id))
             setOpenRequestID(prev => prev.filter(e => e !== id));
         else
             setOpenRequestID(prev => [...prev, id]);
     }
-    const handleOpenRequestClose = () => {
-        setOpenRequestID([]);
+    const handleOpenRequestClose = event => {
+        const id = Number(event.currentTarget.id);
+        console.log(id);
+        console.log(openRequestID);
+        setOpenRequestID(prev => prev.filter(e => e !== id));
     }
 
     const GetTable = () => {
         let rows = [];
-        
+        console.log(openRequestID);
         tickets.map(e => {
             
             rows.push(
@@ -77,13 +80,14 @@ const PendingRequest = () => {
                         <td>{e.ticket_id}</td>
                         <td>{e.pto_type_id === 1 ? "Vacation" : e.pto_type_id === 2 ? "Personal" : "Sick"}</td>
                         <td>Pending</td>
-                        <td>{e.createdAt.split("T",1)[0]}</td>
+                        {/* <td>{e.createdAt.split("T",1)[0]}</td> */}
+                        <td>{new Date(e.createdAt).toDateString()}</td>
                     </tr>
             )
-            if (Number(openRequestID) === e.ticket_id)
+            if (openRequestID.includes(e.ticket_id))
                 rows.push(
-                    <tr>
-                        <OpenRequestID />
+                    <tr key={'open_req_' + e.ticket_id}>
+                        <OpenRequestID ticket={e}/>
                     </tr>);
         });
         return (
@@ -105,22 +109,45 @@ const PendingRequest = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {!(tickets?.length === null) ? rows : <tr><td colSpan={5}>Loading...</td></tr>}
+                    {!(tickets?.length === null) ? rows : <tr><td colSpan={4}>Loading...</td></tr>}
                 </tbody>
             </table>
         )
     }
-    const OpenRequestID = () => {
+    const OpenRequestID = ({ ticket }) => {
         return (
-                <td align='center' colSpan='6'>
-                    <div className='manager-table-open-request-container'>
-                        <div className='manager-table-open-request-left'>
-                            <div className='manager-request-disputed-days'>
-                                Requested Days: 
+                <td align='center' colSpan='4'>
+                    <div className='pending-open-request-container'>
+                        <div className='pending-open-request-data' style={{gridArea: 'leader'}}>
+                            <div className='create-calendar-right-container-header' style={{padding: '5px 0 5px 5px'}}>Leader Name</div>
+                            <div style={{textAlign: 'left', padding: '5px 15px'}}>
+                                {ticket.Leader.first_name + ' ' + ticket.Leader.last_name}
                             </div>
-                            
-                            <button type="button" className="open-request-close-button" onClick={handleOpenRequestClose}>Close</button>
                         </div>
+                        <div className='pending-open-request-data' style={{gridArea: 'request-note'}}>
+                            <div className='create-calendar-right-container-header' style={{padding: '5px 0 5px 5px'}}>Request Note</div>
+                            <div className='pending-open-request-data-element'>
+                                <textarea className='pending-request-textarea' value={ticket.request_note} disabled />
+                            </div>
+                         </div>
+                        {ticket.status === "NEED_MORE_INFORMATION" ? 
+                            (
+                                <div className='pending-open-request-data' style={{gridArea: 'response-note'}}>
+                                    <div className='create-calendar-right-container-header'>Response Note</div>
+                                    <div className='pending-open-request-data-element'>
+                                        <textarea className='pending-request-textarea' value={ticket.response_note} disabled />
+                                    </div>
+                                </div>
+                            ) :
+                            (
+                                ''
+                            )
+                        }
+                        <div className='pending-open-request-data' style={{gridArea: 'requested-days'}}>
+                            <div className='create-calendar-right-container-header' style={{padding: '5px 0 5px 5px'}}>Requested Days</div>
+                            {renderRequestedDays(ticket)}
+                        </div>
+                        <button type="button" className="open-request-close-button" id={ticket.ticket_id} onClick={handleOpenRequestClose}>Close</button>
                     </div>
                 </td>
         )

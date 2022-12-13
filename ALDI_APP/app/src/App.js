@@ -16,15 +16,12 @@ import ManagerRequests from './simple/ManagerRequests';
 
 import Stats from './simple/official/Stats';
 import PendingRequests from './simple/Requests/PendingRequests';
-import CompleteRequests from './simple/Requests/CompleteRequests';
+import ClosedRequests from './simple/Requests/ClosedRequests';
 import CreateRequest from './simple/Requests/CreateRequest';
 
 import Calendar from './simple/Requests/Calendar';
 import CreateRequestWithCalendar from './simple/Requests/CreateRequestWithCalendar';
 import RequestManager from './simple/Requests/RequestManager';
-import ManagerCalendar from './simple/Requests/ManagerCalendar';
-import RequestDashboard from './simple/Requests/Dashboard/Dashboard';
-import RequestWelcome from './simple/Requests/Dashboard/DashboardWelcome';
 import ManagerContainer from './simple/Requests/ManagerContainer';
 
 import OfficialHome from './official/OfficialHome';
@@ -81,7 +78,7 @@ function App() {
 
                                 <Route element={<RequestContainer />}>
                                     <Route path="pending" element={<PendingRequests />}/>
-                                    <Route path="complete" element={<CompleteRequests />}/>
+                                    <Route path="closed" element={<ClosedRequests />}/>
                                     <Route path="calendartest" element={<Calendar />}/>
                                     <Route path="create" element={<CreateRequestWithCalendar />}/>
                                 </Route>
@@ -95,7 +92,7 @@ function App() {
                                 
                                 <Route element={<RequestContainer />}>
                                     <Route path="pending" element={<PendingRequests />}/>
-                                    <Route path="complete" element={<CompleteRequests />}/>
+                                    <Route path="closed" element={<ClosedRequests />}/>
                                     <Route path="create" element={<CreateRequestWithCalendar />}/>
                                 </Route>
                                 <Route element={<ManagerContainer />}>

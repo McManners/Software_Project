@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     flex-grow: 1;
+    overflow-y: overlay;
 }
 .request-container {
     width: 90%;
@@ -17,8 +18,8 @@
     background-color: white;
     width: 100%;
     top: 39px;
-    bottom: 0;
     padding: 15px;
+    box-sizing: border-box;
 }
 .request-button-current {
     border: 1px solid rgb(213, 215, 219);
@@ -32,6 +33,7 @@
     float: left;
     z-index: 3;
     bottom: -2px;
+    max-height: 38px;
 }
 .request-button-non-current {
     border: none;
@@ -45,6 +47,7 @@
     bottom: -2px;
     background-color: rgb(233, 234, 236);
     cursor: pointer;
+    max-height: 38px;
 }
 .request-button-non-current:hover {
     background-color: #dcdcdc;

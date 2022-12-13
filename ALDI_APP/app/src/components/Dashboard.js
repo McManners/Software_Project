@@ -1,21 +1,14 @@
 import { Outlet } from 'react-router-dom';
+import useAuth from '../simple/useAuth';
 import DashHeader from './DashHeader';
-import DashFooter from './DashFooter';
 
 const Dashboard = () => {
+    const { auth } = useAuth();
+    console.log(auth);
     return (
         <>
-            <DashHeader />
+            <DashHeader name={`${auth.first_name} ${auth.last_name}`}/>
             <Outlet />
-            <DashFooter />
-            {/* Note that DashHeader is above children in Outlet. So it will always be above the contents
-            {/* <div className="dash-container">
-                {/* Wrapped in div so we can have different styles for logged in user/protected. All children will be in this
-                <h1>Hey from dashboard</h1>
-                <br /><br />
-                <button onClick={logout}>Sign Out</button>
-            </div>
-            {/* Header and footer will be shown when protected page auth is validated */}
         </>
     )
 }

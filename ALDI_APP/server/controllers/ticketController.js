@@ -1,5 +1,6 @@
 const db = require('../models/index');
 const { Op } = require("sequelize");
+const { REPL_MODE_SLOPPY } = require('repl');
 
 const getAllClosed = async (req, res) => {
     console.log('getting all closed tickets');

@@ -67,6 +67,14 @@ module.exports = (sequelize, DataTypes) => {
         },
         sourceKey: 'employee_id'
     });
+    Ticket.hasOne(models.Employee, {
+      foreignKey: {
+        name: 'employee_id',
+        field: 'employee_id'
+      },
+      sourceKey: 'leader_id',
+      as: 'Leader'
+  });
     // Ticket.hasOne(models.Employee, {
     //     foreignKey: {
     //       name: 'leader_id',
@@ -86,8 +94,15 @@ module.exports = (sequelize, DataTypes) => {
   Ticket.addScopes = function (models) {
     Ticket.addScope('defaultScope', {
       include: [
-          models.Ticket_Date_Range,
-          models.Employee
+        {
+          model: models.Ticket_Date_Range
+        },
+        {
+          model: models.Employee
+        },
+        {
+          association: this.associations.Leader
+        }
       ],
       attributes: { exclude: ['updatedAt', 'created_at'] } // lets include createdAt for now, so we know when the ticket was submitted...
     });
