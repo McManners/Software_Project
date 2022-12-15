@@ -144,7 +144,7 @@ const denyTicket = async (req, res) => {
             pto_type_id: ticket.pto_type_id,
             employee_id: ticket.employee_id
         });
-        ticket.delete();
+        ticket.destroy();
     } catch (err) {
         console.log(err);
         res.status(500).json({ "message": err});

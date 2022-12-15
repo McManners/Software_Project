@@ -7,7 +7,7 @@ const create = async (req, res) => {
     console.log("date ranges: " + ticket.Ticket_Date_Ranges.length);
     if (!ticket) return res.status(400).json({ "message": "cant find ticket"});
     // if (ticket.status === "APPROVED" || ticket.status === "DENIED") return res.status(401).json({ "message": "Error, ticket already closed"});
-    // ticket.status = "APPROVED";
+    ticket.status = "APPROVED";
     ticket.save();
     const pto_balance = await db.PTO_Balance.findOne({ where: { employee_id: ticket.employee_id }});
     const vacation_taken = pto_balance.vacation_taken;
@@ -30,17 +30,17 @@ const create = async (req, res) => {
     //         pto_type_id: ticket.pto_type_id
     //     });
     // };
-    // await db.Ticket_History.create({
-    //     ticket_id: 999990,
-    //     employee_id: ticket.employee_id,
-    //     leader_id: ticket.leader_id,
-    //     request_note: ticket.request_note,
-    //     response_note: ticket.response_note,
-    //     submit_date: ticket.submit_date,
-    //     status: status,
-    //     pto_type_id: ticket.pto_type_id
-    // })
-    // ticket.delete();
+    await db.Ticket_History.create({
+        ticket_id: ticket.ticket_id,
+        employee_id: ticket.employee_id,
+        leader_id: req.employee_id,
+        request_note: ticket.request_note,
+        response_note: ticket.response_note,
+        submit_date: ticket.submit_date,
+        status: "APPROVED",
+        pto_type_id: ticket.pto_type_id
+    })
+    ticket.destroy();
     res.status(201);
 }
 const getAllForLeader = async (req, res) => {

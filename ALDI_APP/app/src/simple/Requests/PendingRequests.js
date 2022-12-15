@@ -140,7 +140,7 @@ const PendingRequest = () => {
                         <div className='pending-open-request-data' style={{gridArea: 'leader', alignSelf: 'flex-start'}}>
                             <div className='pending-open-container-header' style={{padding: '5px 0 5px 5px'}}>Leader Name</div>
                             <div style={{textAlign: 'left', padding: '5px 15px'}}>
-                                {ticket.Leader.first_name + ' ' + ticket.Leader.last_name}
+                                {ticket.Leader?.first_name + ' ' + ticket.Leader?.last_name}
                             </div>
                         </div>
                         <div className='pending-open-request-data' style={{gridArea: 'request-note'}}>
@@ -149,7 +149,7 @@ const PendingRequest = () => {
                                 <textarea className='pending-request-textarea' value={ticket.request_note} disabled />
                             </div>
                          </div>
-                        {ticket.status === "NEED_MORE_INFORMATION" ? 
+                        {ticket.status === "NEED MORE INFORMATION" ? 
                             (
                                 <div className='pending-open-request-data' style={{gridArea: 'response-note'}}>
                                     <div className='pending-open-container-header'>Response Note</div>

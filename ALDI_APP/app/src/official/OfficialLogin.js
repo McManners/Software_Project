@@ -15,10 +15,6 @@ const OfficialLogin = () => {
     const [password, setPassword] = React.useState("");
     const [errMsg, setErrMsg] = React.useState("");
     
-
-    
-    
-    
     const from = location.state?.from?.pathName || "/official/dashboard";
 
     if (location.state?.from?.pathName === "/official/dashboard") {
@@ -97,29 +93,29 @@ const OfficialLogin = () => {
 
     return (
         <div>
-            <div className="sign-in-page">
-                <div className="container">
-                    <div className="form-container sign-in-container">
-                    <div ref={errRef} style={{color: "red", fontWeight: "bold"}}>{errMsg}</div>
-                        <form onSubmit={handleSubmit}>
-                            <label id='email-label' htmlFor='email'>Employee Email:</label><br />
+            <body className="sign-in-page">
+                <div className="official-login-container">
+                        <div className="left-side-login-picture">
+                        </div>
+                        <form className="login-form-styles" onSubmit={handleSubmit}>
+                            <div ref={errRef} style={{color: "red", fontWeight: "bold"}}>{errMsg}</div>
+                            <h4 className="login-page-header">Login</h4>
+                            <p>Enter Your Credentials</p>
+                                <label id='email-label' htmlFor='email'>Employee Email:</label><br />
                             {/*https://stackoverflow.com/questions/37609049/how-to-correctly-catch-change-focusout-event-on-text-input-in-react-js*/}
-
-                            <input type='email' id='email-input' name='email-input' ref={emailRef} /*onBlur={handleEmailChange} value={email}*/ onChange={handleEmailChange} value={email} /><br />
-                            <label id='password-label' htmlFor='password-input'>Password:</label><br />
-                            <input type='password' id='password-input' name='password-input' onChange={handlePasswordChange} value={password}/><br />
-                            <label htmlFor='remember-me-input'>Remember Me: </label>
-                            <input type='checkbox' name='remember-me-input' id='remember-me-input'/><br />
-                            <button type='submit' name='submit' id='login-button'>Submit</button>
+                                <input type='email' id='email-input' name='email-input' ref={emailRef} /*onBlur={handleEmailChange} value={email}*/ onChange={handleEmailChange} value={email} /><br />
+                                <label id='password-label' htmlFor='password-input'>Password:</label><br />
+                                <input type='password' id='password-input' name='password-input' onChange={handlePasswordChange} value={password}/><br />
+                            <div className="remember-info-styles">
+                                <label className="remember-style"><input type='checkbox' name='remember-me-input' id='remember-me-input'/>Remember Me</label>
+                                {/*<input type='checkbox' name='remember-me-input' id='remember-me-input'/><label>Remember Me</label>*/}
+                                <a href="$" className="forgotPasswordStyles">Forgot Password?</a>
+                            </div>
+                            <button type='submit' className="continue-button" name='submit' id='login-button'>Submit</button>
+                            <p>Not a member? Sign up <a href="./register" className="discrete">here.</a></p>
                         </form>
                     </div>
-                    <div className="overlay-container">
-                        <div className="picture-align">
-                            <img className="imgLogo2" src="https://miro.medium.com/max/828/1*JLM_9XM6yqsWaMfMTSTEAg.jpeg"/>
-                        </div>
-                    </div>
-                </div>
-                </div>
+            </body>
         </div>
     )
 }

@@ -1,82 +1,95 @@
+@import"https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js";
 
+
+*{
+    padding: 0;
+    box-sizing: border-box;
+}
 .sign-in-page{
     background: #FF7801;
     background: rgb(2,0,36);
     background: linear-gradient(45deg, #FFB428 0%,
     #FA8214 45%, #FA8214 100%);
     background-repeat: repeat-y;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
     font-family: 'Montserrat', sans-serif;
-    min-height: 100%;
-    max-width: 100%;
-    padding-top: 100px;
-    padding-bottom: 175px;
-    padding-left: -100px;
-    padding-right: 50px;
+    height: 100vh;
+    width: 100vw;
 }
 
-.container {
-    background-color: #FFFFFF;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25),
-    0 10px 10px rgba(0,0,0,0.22);
-    position: relative;
-    overflow: hidden;
-    height: 10px;
-    width: 770px;
-    max-width: 100%;
-    min-height: 400px;
+.official-login-container {
+    background-color: white;
+    box-shadow: 0 14px 21px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    flex-direction: row;
+    margin: auto auto auto auto;
+    display: flex;
     border-radius: 10px;
+
 }
-.overlay-left{
-    padding-bottom: 10px;
+.left-side-login-picture{
+    background-image: url("https://miro.medium.com/max/828/1*JLM_9XM6yqsWaMfMTSTEAg.jpeg");
+    padding: 10px 10px 10px 10px;
+    width: 400px;
+    left: 10px;
+    position: center;
+    height: auto;
+    background-size: cover;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+
 }
-.form-container {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    transition: all 0.6s ease-in-out;
-}
+
 form {
     background-color: #FFFFFF;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100%;
-    text-align: center;
-}
-.sign-in-container {
-    width: 50%;
-}
-.overlay-container {
-    position: absolute;
-    left: 50%;
-    width: 50%;
+    padding: 40px 30px;
+    width: 300px;
+    align-items: flex-start;
     overflow: hidden;
-    justify-content: center;
-
 }
-.picture-align {
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: #FFFFFF;
-    position: relative;
-    left: -100%;
+.remember-info-styles{
+}
+
+form input {
+    border: none;
+    background-color: white;
+    box-sizing: border-box;
+    border-bottom: solid 1px black ;
+    width: 100%;
+}
+
+form p{
+    padding-bottom: 10px;
+    font-size: 14px;
 }
 .continue-button{
-    border-radius: 20px;
+    border-radius: 1px;
     border: 1px solid #00005F;
     background-color: #00005F;
-    color: #FFFFFF;
+    color: white;
+    cursor: pointer;
+    width: 100%;
     font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
+.login-page-header{
+    font-size: 22px;
+    font-weight: 700;
+}
 
+.left-side-login-picture img {
+    height: 40px;
+    margin: 20px;
+}
+.remember-info-styles{
+}
+.remember-info-styles a {
+    font-size: 10px;
+}
+/*Stats Page*/
 .stats-page-body{
     background: #FF7801;
     background: rgb(2,0,36);
@@ -91,82 +104,7 @@ form {
     margin: 0;
     text-decoration: none;
 }
-.sidebar-picture {
-    background-color: #001E78;
-    top: 0;
-    left: 0;
-    padding-left: 15px;
-    overflow: hidden;
 
-}
-a:hover {
-    text-decoration: none;
-}
-
-.sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 170px;
-    background-color: #001E78;
-    overflow-y: auto;
-    height: 100vh;
-    border-right: 1px solid darkblue;
-    margin-top: 60px;
-    -webkit-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    overflow-x: hidden;
-    z-index: 2;
-}
-
-.sidebar ul li.active a{
-    border-bottom: 2px solid #01A9F0;
-    border-top: 2px solid #01A9F0;
-    text-decoration: none;
-    list-style: none;
-
-}
-
-.sidebar ul{
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-
-}
-.sidebar span{
-    text-decoration: none;
-
-}
-
-.sidebar > ul > li {
-    margin: 15px 0;
-    text-decoration: none;
-
-}
-
-.sidebar ul li a {
-    color: #787DA5;
-    width: 100%;
-    display: inline-block;
-    width: 260px;
-    height: 37px;
-    position: relative;
-}
-
-.sidebar ul li:hover a span{
-    color: #01A9F0;
-}
-
-.sidebar ul li.active a span{
-    color: white;
-}
-
-.stats-container{
-    padding-left: 200px;
-    padding-top: 80px;
-    padding-right: 25px;
-}
 .container-stats-1{
     border: 1px solid black;
     margin-bottom: 1em;

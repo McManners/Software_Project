@@ -112,7 +112,7 @@ const CreateRequestWithCalendar = (props) => {
                             >
                             <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken}</div>
                         </div>
-                        <div className='stats-header'>Vacation</div>
+                        <div className='stats-header'>Personal</div>
                     </div>
                     <div className='create-calendar-donut-item'>
                         <div className="create-calendar-donut"
@@ -120,7 +120,7 @@ const CreateRequestWithCalendar = (props) => {
                         }}>
                             <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken}</div>
                         </div>
-                        <div className='stats-header'>Personal</div>
+                        <div className='stats-header'>Vacation</div>
                     </div>
                     <div className='create-calendar-donut-item'>
                         <div className="create-calendar-donut"

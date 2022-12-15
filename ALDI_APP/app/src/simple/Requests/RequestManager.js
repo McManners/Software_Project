@@ -22,7 +22,7 @@ const RequestManager = () => {
     const [selectedDays, setSelectedDays] = useState([]);
     const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
     const [selectedYear, setSelectedYear] = useState(date.getFullYear());
-    
+    const [changed, setChanged] = useState(0);
     const [openDay, setOpenDay] = useState(null);
 
     const handleResponseNoteChange = event => {
@@ -282,7 +282,7 @@ const RequestManager = () => {
                 </td>
         )
     }
-    
+    const pto_type = ['', 'Vacation', 'Personal', 'Sick'];
     const filterDropdown = (typeFilter) => {
         if (tickets === []) return;
         if (tickets !== null) {
@@ -307,8 +307,8 @@ const RequestManager = () => {
             filter.date = filterDates;
             let filterTypes = [];
             tickets.forEach(e => {
-                if (!filterTypes.includes(e.pto_type_id)) {
-                    if (e.pto_type_id !== null) filterTypes.push(e.pto_type_id)
+                if (!filterTypes.includes(pto_type[e.pto_type_id])) {
+                    if (pto_type[e.pto_type_id] !== null) filterTypes.push(pto_type[e.pto_type_id])
                 }
             });
             filter.type = filterTypes;
@@ -355,7 +355,7 @@ const RequestManager = () => {
         if (event.target.parentElement.id === 'manager-filter-name-child') {
             setRequestsState(prev => prev.filter(e => `${e.Employee.first_name} ${e.Employee.last_name}` === value))
         } else if (event.target.parentElement.id === 'manager-filter-type-child') {
-            setRequestsState(prev => prev.filter(e => e.pto_type_id === value))
+            setRequestsState(prev => prev.filter(e => pto_type[e.pto_type_id] === value))
         } else if (event.target.parentElement.id === 'manager-filter-employee_id-child') {
             setRequestsState(x.filter(e => e.employee_id === value))
         } else if (event.target.parentElement.id === 'manager-filter-date-child') {
