@@ -9,34 +9,43 @@
 .calendar-grid-container {
     min-width: 50%;
     aspect-ratio: 7/6;
-    background-color: white;
     min-height: 50%;
     display: grid;
     border: 1px solid rgb(213, 215, 219);
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
+    
+    column-gap: 1px;
+    background-color: rgb(213, 215, 219);
 }
 .calendar-grid-container .day:nth-child(7n+0), .calendar-grid-container .day:nth-child(7n+1) {
-    background-color: #dcdcdc;
-    opacity: 50%;
+    opacity: 75%;
     pointer-events: none;
+}
+.calendar-grid-container .day:not(:nth-child(7n+1)) {
 }
 .calendar-day-header-container {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    max-height: min-content;
+    border-width: 0 1px;
+    border-color: rgb(234, 236, 239);
+    border-style: solid;;
+}
+.calendar-day-header-container div:not(:first-child) {
+    border-left: 1px solid rgb(213, 215, 219);
 }
 .calendar-day-header {
-    border: 1px solid rgb(213, 215, 219);
     position: relative;
     font-size: 0.9rem;
-    font-weight: lighter;
+    font-weight: 350;
 }
 .day {
-    outline: 1px solid rgb(213, 215, 219);
     aspect-ratio: 1/1;
     display: flex;
     flex-direction: column;
     position: relative;
+    background-color: white;
 }
 .spread {
     position: absolute;
@@ -60,6 +69,9 @@
 .valid-day:hover {
     cursor: pointer;
 }
+.disabled-day {
+    opacity: 75%;
+}
 .disabled-day:hover {
     pointer-events: none;
 }
@@ -74,10 +86,10 @@
     height: 100%;
 }
 .calendar-container {
-    --main-width: 100%;
     flex-grow: 1;
     height: 100%;
-    display: grid;
+    display: flex;
+    flex-direction: column;
 }
 .day-header {
     text-align: left;
@@ -121,4 +133,8 @@ IconBxsLeftArrow, IconBxsRightArrow {
 }
 .denied-day {
     box-shadow: inset 0px 0px 30px 0px red;
+}
+
+.manager-calender-open-day-icon:hover {
+    color: black;
 }

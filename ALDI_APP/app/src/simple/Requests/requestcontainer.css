@@ -52,3 +52,9 @@
 .request-button-non-current:hover {
     background-color: #dcdcdc;
 }
+.pending-request-notification {
+    fill: red;
+    position: relative;
+    top: -2px;
+    left: -2px;
+}

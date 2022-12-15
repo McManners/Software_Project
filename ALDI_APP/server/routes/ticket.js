@@ -9,5 +9,7 @@ router.get('/pending', ticketController.getAllPending);
 router.post('/create', ticketController.createTicket);
 router.get('/get/leader', ticketController.getAllLeaderTickets);
 router.post('/response', ticketController.createResponse)
+router.post('/requestmore', ticketController.requestMoreInformationTicket);
+router.post('/deny', ticketController.denyTicket);
 
 module.exports = router;

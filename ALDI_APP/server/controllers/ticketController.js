@@ -27,14 +27,12 @@ const getAllPending = async (req, res) => {
 const getAllLeaderTickets = async (req, res) => {
     console.log('getting all leader tickets');
     const employee_id = req.employee_id;
-    console.log("getAllLeaderTickets employee_id: " + employee_id);
     if (!employee_id) return res.sendStatus(401);
     const account = await db.Employee.findOne({ where: { employee_id: employee_id } });
     if (!account || account.employee_type_id === 0) return res.sendStatus(401);
     // const tickets = await account.getLeaderTickets({ order: [['ticket_id', 'ASC']] });
     const tickets = await db.Ticket.findAll({ where: { leader_id: req.employee_id } });
-    console.log('got tickets');
-    console.log(tickets);
+    console.log('got tickets for leader employee_id: ' + employee_id);
     res.status(201).json({ tickets });
 }
 
@@ -88,4 +86,71 @@ const createTicketDateRange = async (ticket_id, date) => {
     }
 }
 
-module.exports = { getAllClosed, createTicket, getAllLeaderTickets, createResponse, getAllPending }
+const requestMoreInformationTicket = async (req, res) => {
+    console.log("requesting more info ticketcontroller");
+    const leader_id = req.employee_id;
+    const ticket_id = req.body.ticket_id;
+    const response_note = req.body.response_note;
+    const invalid_dates = req.body.invalid_dates;
+
+    const ticket = await db.Ticket.findOne({ where: { ticket_id: ticket_id } });
+    if (!ticket) return res.status(401).json({ "message": "Error, cannot find ticket_id " + ticket_id });
+    // Move ticket to ticket history
+    try {
+        await db.Ticket_History.create({
+            ticket_id: ticket.ticket_id,
+            leader_id: ticket.leader_id,
+            employee_id: ticket.employee_id,
+            request_note: ticket.request_note,
+            response_note: ticket.response_note,
+            submit_date: ticket.submit_date,
+            status: ticket.status,
+            pto_type_id: ticket.pto_type_id,
+            employee_id: ticket.employee_id
+        });
+        
+        await ticket.set({
+            leader_id: leader_id,
+            response_note: response_note,
+            status: "NEED MORE INFORMATION",
+            submit_date: new Date().toISOString()
+        });
+        ticket.save();
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ "message": err});
+    }
+    console.log("Updated request more ticket.")
+    res.status(200).json(ticket);
+}
+
+const denyTicket = async (req, res) => {
+    const leader_id = req.employee_id;
+    const ticket_id = req.body.ticket_id;
+    const response_note = req.body.response_note;
+    const invalid_dates = req.body.invalid_dates;
+
+    const ticket = await db.Ticket.findOne({ where: { ticket_id: ticket_id } });
+    if (!ticket) return res.status(401).json({ "message": "Error, cannot find ticket_id " + ticket_id });
+    // Move ticket to ticket history
+    try {
+        await db.Ticket_History.create({
+            ticket_id: ticket.ticket_id,
+            leader_id: ticket.leader_id,
+            request_note: ticket.request_note,
+            response_note: ticket.response_note,
+            submit_date: ticket.submit_date,
+            status: ticket.status,
+            pto_type_id: ticket.pto_type_id,
+            employee_id: ticket.employee_id
+        });
+        ticket.delete();
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ "message": err});
+    }
+
+    res.status(200).json({ "message": "Ticket denied" });
+}
+
+module.exports = { getAllClosed, createTicket, getAllLeaderTickets, createResponse, getAllPending, requestMoreInformationTicket, denyTicket }

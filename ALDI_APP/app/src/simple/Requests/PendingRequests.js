@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './pendingrequest.css';
 import useAuth from '../useAuth';
 import useAxiosPrivate from '../../simple/useAxiosPrivate';
+import CreateRequestWithCalendar from './CreateRequestWithCalendar';
 
 const PendingRequest = () => {
     const navigate = useNavigate();
@@ -74,21 +75,39 @@ const PendingRequest = () => {
         let rows = [];
         console.log(openRequestID);
         tickets.map(e => {
-            
-            rows.push(
+            const date = new Date(e.createdAt).toDateString().split(" ");
+            if (e.status === "NEED MORE INFORMATION") {
+                if (openRequestID.includes(e.ticket_id)) {
+                    rows.unshift(
+                        <tr key={'open_req_' + e.ticket_id}>
+                            <OpenRequestID ticket={e}/>
+                        </tr>);
+                }
+                rows.unshift(
                     <tr key={e.ticket_id} id={parseInt(e.ticket_id)} className='pending-request-table-row' onClick={handleOpenRequestClick}>
                         <td>{e.ticket_id}</td>
                         <td>{e.pto_type_id === 1 ? "Vacation" : e.pto_type_id === 2 ? "Personal" : "Sick"}</td>
-                        <td>Pending</td>
+                        <td>Needs Attention</td>
                         {/* <td>{e.createdAt.split("T",1)[0]}</td> */}
-                        <td>{new Date(e.createdAt).toDateString()}</td>
+                        <td>{`${date[1]} ${date[2]}, ${date[3]}`}</td>
                     </tr>
-            )
-            if (openRequestID.includes(e.ticket_id))
+                )}
+            else {
                 rows.push(
-                    <tr key={'open_req_' + e.ticket_id}>
-                        <OpenRequestID ticket={e}/>
-                    </tr>);
+                        <tr key={e.ticket_id} id={parseInt(e.ticket_id)} className='pending-request-table-row' onClick={handleOpenRequestClick}>
+                            <td>{e.ticket_id}</td>
+                            <td>{e.pto_type_id === 1 ? "Vacation" : e.pto_type_id === 2 ? "Personal" : "Sick"}</td>
+                            <td>Pending Review</td>
+                            {/* <td>{e.createdAt.split("T",1)[0]}</td> */}
+                            <td>{`${date[1]} ${date[2]}, ${date[3]}`}</td>
+                        </tr>
+                )
+                if (openRequestID.includes(e.ticket_id))
+                    rows.push(
+                        <tr key={'open_req_' + e.ticket_id}>
+                            <OpenRequestID ticket={e}/>
+                        </tr>);
+            }
         });
         return (
             <table className='pending-request-table'>
@@ -117,15 +136,15 @@ const PendingRequest = () => {
     const OpenRequestID = ({ ticket }) => {
         return (
                 <td align='center' colSpan='4'>
-                    <div className='pending-open-request-container'>
-                        <div className='pending-open-request-data' style={{gridArea: 'leader'}}>
-                            <div className='create-calendar-right-container-header' style={{padding: '5px 0 5px 5px'}}>Leader Name</div>
+                    <div className='pending-open-request-container2'>
+                        <div className='pending-open-request-data' style={{gridArea: 'leader', alignSelf: 'flex-start'}}>
+                            <div className='pending-open-container-header' style={{padding: '5px 0 5px 5px'}}>Leader Name</div>
                             <div style={{textAlign: 'left', padding: '5px 15px'}}>
                                 {ticket.Leader.first_name + ' ' + ticket.Leader.last_name}
                             </div>
                         </div>
                         <div className='pending-open-request-data' style={{gridArea: 'request-note'}}>
-                            <div className='create-calendar-right-container-header' style={{padding: '5px 0 5px 5px'}}>Request Note</div>
+                            <div className='pending-open-container-header' style={{padding: '5px 0 5px 5px'}}>Request Note</div>
                             <div className='pending-open-request-data-element'>
                                 <textarea className='pending-request-textarea' value={ticket.request_note} disabled />
                             </div>
@@ -133,7 +152,7 @@ const PendingRequest = () => {
                         {ticket.status === "NEED_MORE_INFORMATION" ? 
                             (
                                 <div className='pending-open-request-data' style={{gridArea: 'response-note'}}>
-                                    <div className='create-calendar-right-container-header'>Response Note</div>
+                                    <div className='pending-open-container-header'>Response Note</div>
                                     <div className='pending-open-request-data-element'>
                                         <textarea className='pending-request-textarea' value={ticket.response_note} disabled />
                                     </div>
@@ -144,11 +163,12 @@ const PendingRequest = () => {
                             )
                         }
                         <div className='pending-open-request-data' style={{gridArea: 'requested-days'}}>
-                            <div className='create-calendar-right-container-header' style={{padding: '5px 0 5px 5px'}}>Requested Days</div>
+                            <div className='pending-open-container-header' style={{padding: '5px 0 5px 5px'}}>Requested Days</div>
                             {renderRequestedDays(ticket)}
                         </div>
                         <button type="button" className="open-request-close-button" id={ticket.ticket_id} onClick={handleOpenRequestClose}>Close</button>
                     </div>
+                    {ticket.status !== 'PENDING' ? <CreateRequestWithCalendar /> : ''}
                 </td>
         )
     }
@@ -195,7 +215,7 @@ const PendingRequest = () => {
     
 
     return (
-        <GetTable />
+        tickets.length === 0 ? <h3>You currently have no pending tickets</h3> : <GetTable />
     )
 }
 

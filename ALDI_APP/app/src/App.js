@@ -94,9 +94,9 @@ function App() {
                                     <Route path="pending" element={<PendingRequests />}/>
                                     <Route path="closed" element={<ClosedRequests />}/>
                                     <Route path="create" element={<CreateRequestWithCalendar />}/>
+                                    <Route path="manager" element={<RequestManager />}/>
                                 </Route>
                                 <Route element={<ManagerContainer />}>
-                                    <Route path="manager" element={<RequestManager />}/>
                                 </Route>
                             </Route>
                         </Route>

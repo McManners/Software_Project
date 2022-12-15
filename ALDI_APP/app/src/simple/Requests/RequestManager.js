@@ -12,7 +12,7 @@ const RequestManager = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { auth } = useAuth();
-    const [requestNote, setRequestNote] = useState("");
+    const [responseNote, setResponseNote] = useState("");
     const date = new Date();
     const [tickets, setTickets] = useState(null);
     const [requestsState, setRequestsState] = useState(null);
@@ -25,8 +25,10 @@ const RequestManager = () => {
     
     const [openDay, setOpenDay] = useState(null);
 
-    const handleRequestNoteChange = event => {
-        setRequestNote(event.target.value);
+    const handleResponseNoteChange = event => {
+        event.preventDefault();
+
+        setResponseNote(event.target.value);
     }
 
     useEffect(() => {
@@ -100,18 +102,21 @@ const RequestManager = () => {
 
 
     const sendResponseClick = async () => {
+        const url = responseType === "APPROVE" ? '/pto/create' : responseType === "DENY" ? '/ticket/deny' : '/ticket/requestmore'
         // https://flaviocopes.com/axios-send-authorization-header
         try {
-            const response = await axiosPrivate.post('/pto/create', {
+            const response = await axiosPrivate.post(url, {
                 access_token: auth.access_token,
                 ticket_id: openRequestID.ticket_id,
-                status: responseType
+                response_note: responseNote,
+                invalid_dates: []
             },
             {
                 headers: {
                     'Authorization': `Bearer ${auth.access_token}`
                 }
             });
+            console.log(response);
         } catch (err) {
             console.log(err);
             if (err.status === 403) navigate('/login', { state: { from: location }, replace: true });
@@ -161,7 +166,7 @@ const RequestManager = () => {
 
     const GetTable = () => {
         let rows = [];
-        requestsState.map((e) => {
+        requestsState.forEach((e) => {
             if (e.status === "PENDING") {
                 const t = getTimeRemaining(e.createdAt);
                 rows.push(
@@ -169,7 +174,7 @@ const RequestManager = () => {
                             <td>{e.ticket_id}</td>
                             <td>{e.employee_id}</td>
                             <td>{`${e.Employee.first_name} ${e.Employee.last_name}`}</td>
-                            <td>{e.pto_type_id}</td>
+                            <td>{e.pto_type_id === 1 ? 'Vacation' : e.pto_type_id === 2 ? 'Personal' : 'Sick'}</td>
                             <td>{e.createdAt.split("T",1)[0]}</td>
                             <td>{!(t > 7) ? 
                                     (`${t} days`) : 
@@ -227,7 +232,7 @@ const RequestManager = () => {
                         <div className='manager-table-open-request-left'>
                             <div className='manager-request-disputed-days'>
                                 {renderSelectedDays()}
-                                <textarea rows="2" className="manager-request-note-input" placeholder="Add an optional note..." onBlur={handleRequestNoteChange} />
+                                <textarea rows="2" className="manager-request-note-input" placeholder="Add an optional note..." onBlur={handleResponseNoteChange} />
                             </div>
                             <div className='manager-request-response-type'>
                                 <button 
@@ -347,13 +352,13 @@ const RequestManager = () => {
     const filterRequests = (event, value) => {
         setFiltered(prev => [...prev, event.target.parentElement.id.split("-")[2]]);
         let x = tickets;
-        if (event.target.parentElement.id == 'manager-filter-name-child') {
+        if (event.target.parentElement.id === 'manager-filter-name-child') {
             setRequestsState(prev => prev.filter(e => `${e.Employee.first_name} ${e.Employee.last_name}` === value))
-        } else if (event.target.parentElement.id == 'manager-filter-type-child') {
+        } else if (event.target.parentElement.id === 'manager-filter-type-child') {
             setRequestsState(prev => prev.filter(e => e.pto_type_id === value))
-        } else if (event.target.parentElement.id == 'manager-filter-employee_id-child') {
+        } else if (event.target.parentElement.id === 'manager-filter-employee_id-child') {
             setRequestsState(x.filter(e => e.employee_id === value))
-        } else if (event.target.parentElement.id == 'manager-filter-date-child') {
+        } else if (event.target.parentElement.id === 'manager-filter-date-child') {
             setRequestsState(x.filter(e => e.createdAt.split("T", 1)[0] === value));
         }
     }

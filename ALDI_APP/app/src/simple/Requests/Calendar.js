@@ -24,7 +24,7 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
     
     const handleDayRefOpen = event => {
         event.preventDefault();
-        
+        console.log("opened");
         setOpenDay(event.target.id);
         dayRef.current.style.width = '75%';
     }
@@ -145,7 +145,7 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
         if (month.length < month_grid_count) {
             for (let beg = 0; beg < first_day; beg++) {
                 month.unshift(
-                        <div key={beg + "beg"} className='day aspect-ratio disabled-day' style={{opacity: '75%', backgroundColor: 'lightgray'}}>
+                        <div key={beg + "beg"} className='day aspect-ratio disabled-day'>
                             <div className='day-header'>{prev_month_days - beg}</div>
                         </div>
                 );
@@ -153,7 +153,7 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
             let count = 1;
             for (let end = month.length; end < month_grid_count; end++) {
                 month.push(
-                    <div key={end + "end"} className='day aspect-ratio disabled-day' style={{opacity: '50%', backgroundColor: '#dcdcdc'}}>
+                    <div key={end + "end"} className='day aspect-ratio disabled-day'>
                         <div className='day-header'>{count}</div>
                     </div>
                 );
@@ -204,7 +204,7 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {getEmployeeDays()}
+                                    {/* {getEmployeeDays()} */}
                                 </tbody>
                             </table>
                             

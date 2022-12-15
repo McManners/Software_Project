@@ -57,6 +57,7 @@
     flex-grow: 1;
     border-collapse: collapse;
     border: 1px solid rgb(213, 215, 219);
+    width: 100%;
 }
 .pending-request-table th {
     height: 3em;
@@ -67,7 +68,6 @@
 }
 .pending-request-table td {
     padding: 5px;
-    font-size: 1.1rem;
     text-align: center;
     font-weight: lighter;
 }
@@ -86,15 +86,27 @@
 }
 .pending-open-request-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 2fr;
     row-gap: 15px;
     grid-template-areas: 
-        "leader requested-days"
-        "request-note ."
-        "response-note .";
+        "leader request-note requested-days"
+        "response-note . .";
     column-gap: 15px;
     box-sizing: border-box;
 
+}
+.pending-open-request-container2 {
+    display: flex;
+    flex-direction: row;
+}
+.pending-open-container-header {
+    border-left: 5px solid rgb(213, 215, 219);
+    border-bottom: 1px solid rgb(213, 215, 219);
+    text-align: left;
+    padding-left: 10px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 10px 0 10px 10px;
 }
 .pending-request-textarea {
     height: 4em;

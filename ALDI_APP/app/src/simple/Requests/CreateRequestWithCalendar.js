@@ -6,14 +6,16 @@ import Calendar from './Calendar';
 import useAxiosPrivate from '../useAxiosPrivate';
 import useAuth from '../useAuth';
 
-const CreateRequestWithCalendar = () => {
+const CreateRequestWithCalendar = (props) => {
+    console.log(props.selectedDays);
+    
     const navigate = useNavigate();
     const [requestNote, setRequestNote] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const date = new Date();
     const errRef = useRef();
     const axiosPrivate = useAxiosPrivate();
-    const [selectedDays, setSelectedDays] = useState([]);
+    const [selectedDays, setSelectedDays] = useState(props.selectedDays === undefined ? [] : props.selectedDays);
     const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
     const [selectedYear, setSelectedYear] = useState(date.getFullYear());
     // These are passed to <Calendar/> as props

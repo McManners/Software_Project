@@ -82,6 +82,7 @@
     border: 1px solid rgb(213, 215, 219);
     padding: 15px;
     column-gap: 5px;
+    background-color: white;
 }
 .create-calendar-request-item-note {
     display: flex;
