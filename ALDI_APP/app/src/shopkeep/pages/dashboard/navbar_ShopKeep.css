@@ -1,0 +1,128 @@
+.NavBar_ShopKeep {
+    box-sizing: border-box;
+    transition: 200ms;
+    position: relative;
+    background-color: rgb(20,18,23);
+    width: 0;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+.NavBar_ShopKeep * {
+    overflow: hidden;
+    font-family: Lato, sans-serif;
+}
+.NavBar_Container_ShopKeep {
+    width: 64px;
+    min-width: 260px;
+    transition: 200ms;
+}
+.NavBar_Header_ShopKeep {
+    color: orange;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.NavBar_Active_ShopKeep {
+    background-color: rgb(63,50,245) !important;
+}
+.NavBar_Button_ShopKeep {
+    padding: 10px;
+    line-height: 20px;
+    margin-bottom: 6px;
+    font-family: Lato, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    user-select: none;
+    white-space: nowrap;
+    border-radius: 6px;
+    box-sizing: border-box;
+    border-color: rgb(0,0,54);
+    border-style: none;
+    outline: none;
+    background-color: rgb(20,18,23);
+    text-align: left;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+}
+.NavBar_Button_ShopKeep > span {
+    line-height: 20px;
+    margin-left: 12px;
+}
+.NavBar_Inactive_ShopKeep:hover, .NavBar_Inner_Button:hover {
+    background-color: rgb(47,49,55) !important;
+}
+.NavBar_Button_Wrapper {
+    padding: 6px 12px;
+}
+
+.NavBar_Inner_Container {
+    flex-grow: 1;
+    border-left: 1px solid rgb(47, 49, 55);
+}
+.NavBar_Inner_Header {
+    height: 54px;
+    padding: 12px;
+    border-bottom: 1px solid rgb(47, 49, 55);
+    text-align: left;
+}
+.NavBar_Inner_Header:hover {
+    background-color: rgb(35, 36, 41);
+}
+.NavBar_Inner_Header > span {
+    font-size: 15px;
+    color: rgb(188, 196, 202);
+    line-height: 30px;
+    cursor: pointer;
+    font-weight: 400;
+}
+.NavBar_Inner_Button {
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    line-height: 19.2px;
+    user-select: none;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border-color: rgb(0,0,54);
+    border-style: none;
+    outline: none;
+    background-color: rgb(20,18,23);
+    text-align: left;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    border-radius: 6px;
+}
+.NavBar_Inner_Button > span {
+    line-height: 19.2px;
+    font-size: 15px;
+    color: white;
+    user-select: none;
+}
+.NavBar_Inner_Button:hover {
+}
+.NavBar_Button_Icon_Wrapper {
+    width: 20px;
+    max-width: 20px;
+    min-width: 20px;
+    height: 20px;
+    max-height: 20px;
+    min-height: 20px;
+}
+.NavBar_Inner_Buttons_Container {
+    padding: 10px;  
+}

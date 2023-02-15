@@ -1,0 +1,22 @@
+.QuestionIcon_Container {
+    position: relative;
+    margin-left: 5px;
+}
+.QuestionIcon_Tooltip {
+    position: absolute;
+    width: 275px;
+    height: auto;
+    bottom: 20px;
+    background-color: white;
+    border: 1px solid rgb(213, 215, 219);
+    border-radius: 10px;
+    padding: 14px;
+    left: -122px;
+    box-shadow: rgb(0, 0, 0, 0.3) 1px 5px 5px -1px;
+    display: none;
+}
+
+.QuestionIcon:hover + .QuestionIcon_Tooltip {
+    display: block;
+    color: red;
+}

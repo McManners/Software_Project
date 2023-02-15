@@ -9,7 +9,7 @@ const handleRefreshToken = async (req, res) => {
 
     // const foundUser = await Account.findOne({ where: { refresh_token: refreshToken } });
     const foundAccount = await db.Account.findOne({ where: { refresh_token: refresh_token } });
-    if (!foundAccount) return res.sendStatus(403); // Forbidden
+    if (!foundAccount) return res.status(403).json({ "message": `cant find account for refresh token: ${refresh_token}`}); // Forbidden
     const foundEmployee = await db.Employee.findByPk(foundAccount.employee_id);
     if (!foundEmployee) return res.status(404).json({ 'message': `Cant find employee by account employee_id ${foundAccount.employee_id}` }); // Unauthorized
     const foundEmployee_Type = await db.Employee_Type.findByPk(foundEmployee.employee_type_id);
@@ -23,7 +23,7 @@ const handleRefreshToken = async (req, res) => {
         refresh_token,
         process.env.REFRESH_TOKEN_SECRET,
         (err, decoded) => {
-            if (err || foundAccount.employee_id !== decoded.employee_id) return res.sendStatus(403);
+            if (err || foundAccount.employee_id !== Number(decoded.employee_id)) return res.sendStatus(403);
             const access_token = jwt.sign(
                 {
                     "employee_id": decoded.employee_id,

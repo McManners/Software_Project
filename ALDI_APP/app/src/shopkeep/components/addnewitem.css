@@ -1,0 +1,246 @@
+.AddNewItem_Dialog {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.AddNewItem_Dialog_Backdrop {
+    opacity: 0.5;
+    z-index: 98;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.AddNewItem_Dialog_Container {
+    position: relative;
+    background-color: white;
+    transform: translate(0, 0);
+    width: 600px;
+    margin: 154px auto;
+    z-index: 99;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 5px 15px 0;
+    border: 0.8px solid rgba(0, 0, 0, 0.2);
+    background-clip: padding-box;
+}
+.AddNewItem_Dialog_Close_Icon {
+    text-shadow: white 0 0 0;
+}
+.AddNewItem_Dialog_Close_Button {
+    background-color: transparent;
+    border: none;
+    color: rgb(0, 0, 0);
+    opacity: 0.3;
+}
+.AddNewItem_Dialog_Close_Button:hover {
+    color: #000000;
+    opacity: 0.6;
+}
+.AddNewItem_Type_Spacer {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-top: 4.5em;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0 15px;
+    color: rgb(82, 94, 113);
+    font-family: "Lato Light";
+}
+.AddNewItem_Type_Spacer::before {
+    content: '- ';
+}
+.AddNewItem_Type_Spacer::after {
+    content: ' -';
+}
+.AddNewItem_Dialog_Content {
+    margin: 15px 15px 0 15px;
+    display: flex;
+    flex-direction: row;
+}
+.AddNewItem_Dialog_Content_Button_Wrapper, .AddNewItem_Dialog_Content_Description, .AddNewItem_Dialog_Content_Header {
+    text-align: center;
+}
+.AddNewItem_Dialog_Content_Left, .AddNewItem_Dialog_Content_Right {
+    flex-grow: 1;
+    padding: 0 15px;
+}
+.AddNewItem_Dialog_Buttons button:hover {
+    background-color: rgb(69,114,143);
+}
+.AddNewItem_Dialog_Buttons button {
+    color: white;
+    background-color: rgb(0,187,225);
+    font-size: 0.75rem;
+    padding: 6px 0;
+    min-width: 125px;
+    border-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.AddNewItem_Dialog_Buttons {
+    text-align: left;
+    box-sizing: border-box;
+    padding: 0 10px 10px 10px;
+}
+.AddNewItem_Dialog_Button {
+    border: 1px solid rgb(0, 187, 225);
+    background-color: white;
+    color: rgb(0, 187, 225);
+    width: 120px;
+    height: 36px;
+    border-radius: 4px;
+}
+.AddNewItem_Dialog_Header {
+    height: 48px;
+    background-color: rgb(69, 114, 143);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 15px;
+    align-items: center;
+    font-size: 14px;
+}
+.AddNewItem_Dialog_Header > h4 {
+    color: white;
+    font-family: Lato, sans-serif;
+    font-weight: 300;
+    font-size: 1.3em;
+    margin: 0;
+}
+.AddNewItem_Dialog_Content_Header {
+    margin: 10px 0 21px;
+    color: rgb(82, 94, 113);
+    font-size: 21px;
+    font-weight: 500;
+    font-family: Lato;
+}
+.AddNewItem_Dialog_Content_Description {
+    color: rgb(82, 94, 113);
+    font-size: 16px;
+    font-weight: 300;
+    font-family: "Lato Light";
+    margin-bottom: 16px;
+}
+
+.AddNewItem_Image {
+    background-position: 50% 20px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 120px;
+    margin: 2em auto 0px;
+}
+.AddNewItem_Image_Basic {
+    background-image: url(../imgs/hero-items-new-item-modal-basic-cropped.svg);
+    width: 120px;
+} 
+.AddNewItem_Image_Variants {
+    background-image: url(../imgs/hero-items-new-item-modal-variants.svg);
+}
+
+.NewBasicItem_Input {
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    border: 1px solid rgb(221, 223, 225);
+    border-radius: 4px;
+    color: rgb(82, 94, 113);
+    box-shadow: rgba(0, 0, 0, 0.075) 0 1px 1px 0 inset;
+    font-weight: 200;
+    font-size: 14px;
+    font-family: Lato, sans-serif;
+    background-color: white;
+    width: 100%;
+    font-size: 16px;
+    padding: 6px 12px;
+    outline: none;
+    height: 39px;
+    margin-bottom: 20px;
+}
+.NewBasicItem_Input:focus {
+    border-color: rgb(102, 175, 233);
+    box-shadow: 0 0 8px 0 rgb(102 175 233 / 60%);
+    outline: 0;
+}
+.NewBasicItem_Label {
+    margin-bottom: 10px;
+    color: rgb(82, 94, 113);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: Lato, sans-serif;
+}
+.NewBasicItem_Label_Wrapper {
+    text-align: left;
+}
+
+.NewBasicItem_Dialog_Content {
+    margin: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.NewBasicItem_Footer_More_Wrapper {
+    flex-grow: 1;
+    text-align: left;
+}
+.NewBasicItem_Footer_More_Button {
+    color: rgb(27, 40, 56);
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    font-size: 14px;
+    padding: 0;
+}
+.NewBasicItem_Footer_Cancel_Button {
+    background-color: white;
+    color: rgb(0, 187, 225);
+    margin-right: 10px;
+    border: 1px solid rgb(0, 187, 225);
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+}
+.NewBasicItem_Footer_Cancel_Button:hover {
+    color: rgb(0, 145, 174);
+}
+.NewBasicItem_Footer_Save_Button {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    background: rgb(0, 187, 225);
+    color: white;
+}
+.NewBasicItem_Footer_Save_Button:hover {
+    background-color: rgb(0, 145, 174);
+    border-color: rgb(173, 173, 173);
+    color: white;
+}
+.NewBasicItem_Footer_Container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #e5e7ea;
+}
+.NewBasicItem_Dialog_Content_Left, .NewBasicItem_Dialog_Content_Right {
+    flex-grow: 1;
+}
+.NewBasicItem_Dialog_Content_Left {
+    margin-right: 20px;
+}
+.NewBasicItem_Footer_Button_Container {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+}

@@ -4,16 +4,16 @@ const { json } = require('sequelize');
 const db = require('../models/index');
 
 const handleLogin = async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) return res.status(400).json({ 'message': 'Email and password are required' });
-    const foundAccount = await db.Account.findOne({ where: { email: email }});
+    const { employee_id, password } = req.body;
+    if (!employee_id || !password) return res.status(400).json({ 'message': 'Employee ID and password are required' });
+    const foundAccount = await db.Account.findOne({ where: { employee_id: employee_id }});
     if (!foundAccount) return res.sendStatus(401); // Unauthorized
 
-    const foundEmployee = await db.Employee.findByPk(foundAccount.employee_id);
-    if (!foundEmployee) return res.status(404).json({ 'message': `Cant find employee by account employee_id ${foundAccount.employee_id}` }); // Unauthorized
+    const foundEmployee = await db.Employee.findByPk(employee_id);
+    if (!foundEmployee) return res.status(404).json({ 'message': `Cant find employee by employee_id ${employee_id}` }); // Unauthorized
     const foundEmployee_Type = await db.Employee_Type.findByPk(foundEmployee.employee_type_id);
     console.log(foundEmployee_Type)
-    if (!foundEmployee_Type) return res.status(404).json({ 'message': `Cant find emplyee type by pk ${foundEmployee.employee_type_id}` }); // Unauthorized
+    if (!foundEmployee_Type) return res.status(404).json({ 'message': `Cant find employee type by pk ${foundEmployee.employee_type_id}` }); // Unauthorized
     // console.log(foundAccount);
     const employee_type = await foundEmployee_Type.employee_type;
     const first_name = await foundEmployee.first_name;
@@ -35,7 +35,7 @@ const handleLogin = async (req, res) => {
         );
         const refresh_token = jwt.sign(
             { 
-                "employee_id": foundAccount.employee_id,
+                "employee_id": employee_id,
             },
             process.env.REFRESH_TOKEN_SECRET,
             { expiresIn: '24hr' } // much longer

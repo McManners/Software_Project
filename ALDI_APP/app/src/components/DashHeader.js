@@ -2,12 +2,17 @@ import './dashboard.css';
 import { BsPersonCircle, BsCaretDownFill } from 'react-icons/bs';
 import useAuth from '../simple/useAuth';
 import { IconContext } from 'react-icons/lib';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import useLogout from '../simple/useLogout';
 import { useNavigate } from 'react-router-dom';
+import aldi_logo from '../official/AL_BLR_LA_MC_RGB.png';
+import { BiMenu } from 'react-icons/bi';
+import { AiFillQuestionCircle } from 'react-icons/ai';
 
-const DashHeader = ({ name }) => {
+const DashHeader = ({ name, setSupportOpen, setNavOpen }) => {
+    const dialogRef = useRef();
     const { auth } = useAuth();
+    console.log(name)
     console.log(auth);
     const [dropdown, setDropdown] = useState(false);
     const logout = useLogout();
@@ -20,7 +25,18 @@ const DashHeader = ({ name }) => {
     
     return (
         <div className='dashboard-header'>
+            <div>
+                <IconContext.Provider value={{ style: { verticalAlign: 'middle' },  size: '1.5em' }}>
+                    <BiMenu className='dashboard-header-hamburger' onClick={() => setNavOpen(prev => !prev)} />
+                </IconContext.Provider>
+            </div>
             <div className='aldi-header'>ALDI</div>
+            <div style={{flexGrow: '1'}}></div>
+            <div className='header-support'>
+                <IconContext.Provider value={{ style: { verticalAlign: 'middle' },  size: '1.1em' }}>
+                    <AiFillQuestionCircle onClick={() => setSupportOpen(true)} className='support-icon' />
+                </IconContext.Provider>
+            </div>
             <div className='header-dropdown' onClick={() => setDropdown(prev => !prev)}>
                 <div className='user-header' key={'hey'}>
                     <IconContext.Provider value={{ style: { verticalAlign: 'middle' },  size: '1.2em' }}>
@@ -40,12 +56,3 @@ const DashHeader = ({ name }) => {
     )
 }
 export default DashHeader;
-
-{/* <nav>
-                <button type="button" onClick={() => navigate('./')}>Home</button>
-                <button type="button" onClick={() => navigate('./pending')}>Pending</button>
-                <button type="button" onClick={() => navigate('./closed')}>Complete</button>
-                <button type="button" onClick={() => navigate('./create')}>Create</button>
-                <button type="button" onClick={() => navigate('./manager')}>Manager</button>
-                <button type="button" onClick={signOut}>Logout</button>
-            </nav> */}

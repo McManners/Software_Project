@@ -41,18 +41,19 @@ app.use('/pto', require('./routes/pto'));
 app.use('/status', require('./routes/status'));
 app.use('/ticketresponse', require('./routes/ticketresponse'));
 app.use('/ptobalance', require('./routes/ptobalance'));
+app.use('/manager', require('./routes/manager'));
 
-var con = mysql.createConnection({
-  host: "45.55.136.114",
-  user: "dynaF2020",
-  password: "b0mbsAway",
-  database: "dynaF2020"
-});
+// var con = mysql.createConnection({
+//   host: "45.55.136.114",
+//   user: "dynaF2020",
+//   password: "b0mbsAway",
+//   database: "dynaF2020"
+// });
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
+// con.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+// });
 
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles.css';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../simple/useAuth';
 import DateAndTime from './DateAndTime';
@@ -11,10 +10,23 @@ const OfficialHome = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const handleCardClick = (goto) => {
+    const StatPage = async ()=> {
+        navigate('/official/dashboard/stats')
+    }
 
+    const CreatePTO = async()=> {
+        navigate('/official/dashboard/create')
+    }
+
+    const handleCardClick = (goto) => {
         console.log("card clicked: " + goto);
         navigate(`/official/${goto}`);
+    }
+    const ViewPending = async() => {
+        navigate('/official/pending')
+    }
+    const viewAllEmployeesTimeOff = async() => {
+        navigate('/official/manager')
     }
 
     return (
@@ -23,36 +35,47 @@ const OfficialHome = () => {
             <div className="homepage-container">
                 <div className="homepage-content">
                     <div className="homepage-introduction">
-                        <h2>Welcome Back, {`${auth.first_name} ${auth.last_name}`}</h2>
+                        <br/>
+                        <br/>
+                        <h2 className="date-header">Welcome Back, {auth.first_name}</h2>
                         <div className="test-container">
                             <div className="date-header">
-                                <p className="date-p">{new Date().toLocaleDateString()}</p>
-                                <button className="calendar-button"><img src="https://cdn-icons-png.flaticon.com/512/3217/3217869.png" height={30} width={30} /> </button>
+                                <p className="date-p"><DateAndTime/></p>
+                                <button className="calendar-button"onClick={() => CreatePTO()}>
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3217/3217869.png"
+                                         height={30} width={30} /> </button>
                             </div>
                         </div>
-                        <br/><br/>                                               <br/><br/>
+                        <br/>                                               <br/><br/>
                         <div className="cards jsGridView">
-                            <div className="card-wrapper">
+                            <div className="card-wrapper" onClick={() => CreatePTO()}>
                                 <div className="card">
                                     <div className="card-header">
                                     </div>
                                     <div className="card-content-header">
                                         <p className="card-info-header">Request Time Off</p>
-                                        <Link to="/statsPage">
                                             <img src="https://cdn-icons-png.flaticon.com/512/2370/2370264.png" height={50} width={50} className="card-picture" />
-                                        </Link>
+                                                <br/><br/><br/>
                                     </div>
                                 </div>
                             </div>
-                            <div className="card-wrapper">
+                            <div className="card-wrapper" onClick={() => StatPage()}>
                                 <div className="card">
                                     <div className="card-header">
                                     </div>
                                     <div className="card-content-header">
-                                        <p className="card-info-header">View Time Off Balance</p>
-                                        <Link to="/statsPage">
+                                          <p className="card-info-header">View Time Off Balance</p>
                                             <img src="https://cdn-icons-png.flaticon.com/512/2117/2117251.png" height={50} width={50} className="card-picture" />
-                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card-wrapper" onClick={() => viewAllEmployeesTimeOff()}>
+                                <div className="card">
+                                    <div className="card-header">
+                                    </div>
+                                    <div className="card-content-header">
+                                        <p className="card-info-header">View All Time Off Tickets</p>
+                                        <img src="https://cdn-icons-png.flaticon.com/512/7174/7174337.png" height={50} width={50} className="card-picture" />
                                     </div>
                                 </div>
                             </div>
@@ -61,25 +84,18 @@ const OfficialHome = () => {
                                     <div className="card-header">
                                     </div>
                                     <div className="card-content-header">
-                                        <p className="card-info-header"></p>
+                                        <p className="card-info-header">Settings</p>
+                                        <img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png" height={50} width={50} className="card-picture" />
                                     </div>
                                 </div>
                             </div>
-                            <div className="card-wrapper">
+                            <div className="card-wrapper"  onClick={() => ViewPending()}>
                                 <div className="card">
                                     <div className="card-header">
                                     </div>
                                     <div className="card-content-header">
-                                        <p className="card-info-header"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card-wrapper">
-                                <div className="card">
-                                    <div className="card-header">
-                                    </div>
-                                    <div className="card-content-header">
-                                        <p className="card-info-header"></p>
+                                        <p className="card-info-header">View Pending Days Off</p>
+                                        <img src="https://cdn-icons-png.flaticon.com/512/2516/2516759.png" height={50} width={50} className="card-picture" />
                                     </div>
                                 </div>
                             </div>

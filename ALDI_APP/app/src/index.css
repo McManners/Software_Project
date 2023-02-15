@@ -15,11 +15,7 @@ code {
 #root {
     text-align: center;
     min-height: 100vh;
-    background: linear-gradient(45deg, #FFB428 0%,
-    #FA8214 45%, #FA8214 100%);
-}
-#root DashFooter {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+    background-color: rgb(233, 234, 236);
+    display: flex;
+    flex-direction: column;
 }

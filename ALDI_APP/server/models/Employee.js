@@ -105,6 +105,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         as: 'account'
     });
+    Employee.hasMany(models.Employee, {
+        foreignKey: {
+          name: 'leader_id',
+        },
+        sourceKey: 'employee_id',
+        as: 'leaderEmployees'
+    });
   }
     // Add a custom `addScopes` function to call after initializing all models in `index.js`
     Employee.addScopes = function (models) {

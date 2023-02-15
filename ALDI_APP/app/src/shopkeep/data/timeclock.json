@@ -1,0 +1,576 @@
+[
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Monday",
+    "Time In": "1/2/2023 10:37",
+    "Time Out": "1/2/2023 16:08",
+    "Hours": 5.53
+  },
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Tuesday",
+    "Time In": "1/3/2023 15:58",
+    "Time Out": "1/3/2023 20:06",
+    "Hours": 4.13
+  },
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Wednesday",
+    "Time In": "1/4/2023 16:00",
+    "Time Out": "1/4/2023 20:02",
+    "Hours": 4.03
+  },
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Saturday",
+    "Time In": "1/7/2023 10:51",
+    "Time Out": "1/7/2023 16:07",
+    "Hours": 5.27
+  },
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Sunday",
+    "Time In": "1/8/2023 11:31",
+    "Time Out": "1/8/2023 18:05",
+    "Hours": 6.57
+  },
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Friday",
+    "Time In": "1/13/2023 16:03",
+    "Time Out": "1/13/2023 20:04",
+    "Hours": 4.02
+  },
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Saturday",
+    "Time In": "1/14/2023 11:02",
+    "Time Out": "1/14/2023 20:00",
+    "Hours": 8.95
+  },
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Sunday",
+    "Time In": "1/15/2023 11:38",
+    "Time Out": "1/15/2023 18:10",
+    "Hours": 6.54
+  },
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Monday",
+    "Time In": "1/16/2023 10:30",
+    "Time Out": "1/16/2023 15:52",
+    "Hours": 5.37
+  },
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Saturday",
+    "Time In": "1/21/2023 11:00",
+    "Time Out": "1/21/2023 15:45",
+    "Hours": 4.75
+  },
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Saturday",
+    "Time In": "1/21/2023 16:02",
+    "Time Out": "1/21/2023 20:06",
+    "Hours": 4.06
+  },
+  {
+    "Employee Name": "Gianna Davis",
+    "Day": "Sunday",
+    "Time In": "1/22/2023 11:29",
+    "Time Out": "1/22/2023 18:06",
+    "Hours": 6.62
+  },
+  {
+    "Employee Name": "Zachary Katula",
+    "Day": "Monday",
+    "Time In": "1/2/2023 10:42",
+    "Time Out": "1/2/2023 16:08",
+    "Hours": 5.44
+  },
+  {
+    "Employee Name": "Zachary Katula",
+    "Day": "Tuesday",
+    "Time In": "1/3/2023 17:01",
+    "Time Out": "1/3/2023 20:06",
+    "Hours": 3.07
+  },
+  {
+    "Employee Name": "Zachary Katula",
+    "Day": "Wednesday",
+    "Time In": "1/4/2023 10:34",
+    "Time Out": "1/4/2023 20:02",
+    "Hours": 9.46
+  },
+  {
+    "Employee Name": "Madelyne  Koehler",
+    "Day": "Monday",
+    "Time In": "1/2/2023 16:05",
+    "Time Out": "1/2/2023 20:17",
+    "Hours": 4.19
+  },
+  {
+    "Employee Name": "Savannah  Morse",
+    "Day": "Saturday",
+    "Time In": "1/7/2023 10:59",
+    "Time Out": "1/7/2023 16:06",
+    "Hours": 5.13
+  },
+  {
+    "Employee Name": "Savannah  Morse",
+    "Day": "Sunday",
+    "Time In": "1/8/2023 11:49",
+    "Time Out": "1/8/2023 18:02",
+    "Hours": 6.23
+  },
+  {
+    "Employee Name": "Savannah  Morse",
+    "Day": "Monday",
+    "Time In": "1/9/2023 16:01",
+    "Time Out": "1/9/2023 20:04",
+    "Hours": 4.05
+  },
+  {
+    "Employee Name": "Savannah  Morse",
+    "Day": "Sunday",
+    "Time In": "1/15/2023 11:49",
+    "Time Out": "1/15/2023 18:11",
+    "Hours": 6.36
+  },
+  {
+    "Employee Name": "Savannah  Morse",
+    "Day": "Sunday",
+    "Time In": "1/22/2023 11:47",
+    "Time Out": "1/22/2023 18:01",
+    "Hours": 6.23
+  },
+  {
+    "Employee Name": "Sierra Morse",
+    "Day": "Tuesday",
+    "Time In": "1/3/2023 10:43",
+    "Time Out": "1/3/2023 16:01",
+    "Hours": 5.29
+  },
+  {
+    "Employee Name": "Sierra Morse",
+    "Day": "Thursday",
+    "Time In": "1/5/2023 10:46",
+    "Time Out": "1/5/2023 19:56",
+    "Hours": 9.16
+  },
+  {
+    "Employee Name": "Sierra Morse",
+    "Day": "Sunday",
+    "Time In": "1/8/2023 11:48",
+    "Time Out": "1/8/2023 18:03",
+    "Hours": 6.24
+  },
+  {
+    "Employee Name": "Sierra Morse",
+    "Day": "Wednesday",
+    "Time In": "1/18/2023 16:02",
+    "Time Out": "1/18/2023 20:07",
+    "Hours": 4.08
+  },
+  {
+    "Employee Name": "Sierra Morse",
+    "Day": "Sunday",
+    "Time In": "1/22/2023 11:47",
+    "Time Out": "1/22/2023 18:02",
+    "Hours": 6.24
+  },
+  {
+    "Employee Name": "Sierra Morse",
+    "Day": "Wednesday",
+    "Time In": "1/25/2023 16:01",
+    "Time Out": "1/25/2023 20:09",
+    "Hours": 4.14
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Thursday",
+    "Time In": "1/5/2023 10:42",
+    "Time Out": "1/5/2023 11:42",
+    "Hours": 1
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Friday",
+    "Time In": "1/6/2023 10:43",
+    "Time Out": "1/6/2023 15:59",
+    "Hours": 5.27
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Monday",
+    "Time In": "1/9/2023 10:42",
+    "Time Out": "1/9/2023 16:02",
+    "Hours": 5.34
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Tuesday",
+    "Time In": "1/10/2023 10:43",
+    "Time Out": "1/10/2023 20:10",
+    "Hours": 9.45
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Wednesday",
+    "Time In": "1/11/2023 10:42",
+    "Time Out": "1/11/2023 20:09",
+    "Hours": 9.46
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Thursday",
+    "Time In": "1/12/2023 10:43",
+    "Time Out": "1/12/2023 15:59",
+    "Hours": 5.27
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Friday",
+    "Time In": "1/13/2023 10:42",
+    "Time Out": "1/13/2023 16:03",
+    "Hours": 5.35
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Monday",
+    "Time In": "1/16/2023 10:29",
+    "Time Out": "1/16/2023 15:55",
+    "Hours": 5.43
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Tuesday",
+    "Time In": "1/17/2023 10:43",
+    "Time Out": "1/17/2023 16:03",
+    "Hours": 5.34
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Wednesday",
+    "Time In": "1/18/2023 10:42",
+    "Time Out": "1/18/2023 15:59",
+    "Hours": 5.28
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Thursday",
+    "Time In": "1/19/2023 10:42",
+    "Time Out": "1/19/2023 15:59",
+    "Hours": 5.27
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Friday",
+    "Time In": "1/20/2023 10:42",
+    "Time Out": "1/20/2023 16:00",
+    "Hours": 5.29
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Monday",
+    "Time In": "1/23/2023 10:42",
+    "Time Out": "1/23/2023 16:02",
+    "Hours": 5.34
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Tuesday",
+    "Time In": "1/24/2023 10:42",
+    "Time Out": "1/24/2023 20:04",
+    "Hours": 9.37
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Wednesday",
+    "Time In": "1/25/2023 10:43",
+    "Time Out": "1/25/2023 16:00",
+    "Hours": 5.28
+  },
+  {
+    "Employee Name": "Myah Nodal",
+    "Day": "Thursday",
+    "Time In": "1/26/2023 10:42",
+    "Time Out": "1/26/2023 16:00",
+    "Hours": 5.3
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Friday",
+    "Time In": "1/6/2023 15:57",
+    "Time Out": "1/6/2023 20:26",
+    "Hours": 4.48
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Saturday",
+    "Time In": "1/7/2023 16:48",
+    "Time Out": "1/7/2023 20:25",
+    "Hours": 3.61
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Wednesday",
+    "Time In": "1/11/2023 16:22",
+    "Time Out": "1/11/2023 21:04",
+    "Hours": 4.7
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Saturday",
+    "Time In": "1/14/2023 10:53",
+    "Time Out": "1/14/2023 16:24",
+    "Hours": 5.51
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Monday",
+    "Time In": "1/16/2023 16:00",
+    "Time Out": "1/16/2023 20:33",
+    "Hours": 4.55
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Tuesday",
+    "Time In": "1/17/2023 16:03",
+    "Time Out": "1/17/2023 20:24",
+    "Hours": 4.36
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Thursday",
+    "Time In": "1/19/2023 17:41",
+    "Time Out": "1/19/2023 20:21",
+    "Hours": 2.66
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Friday",
+    "Time In": "1/20/2023 15:57",
+    "Time Out": "1/20/2023 20:30",
+    "Hours": 4.55
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Saturday",
+    "Time In": "1/21/2023 10:55",
+    "Time Out": "1/21/2023 11:00",
+    "Hours": 0.09
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Saturday",
+    "Time In": "1/21/2023 11:00",
+    "Time Out": "1/21/2023 16:10",
+    "Hours": 5.16
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Monday",
+    "Time In": "1/23/2023 16:54",
+    "Time Out": "1/23/2023 20:35",
+    "Hours": 3.68
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Wednesday",
+    "Time In": "1/25/2023 16:21",
+    "Time Out": "1/25/2023 20:49",
+    "Hours": 4.48
+  },
+  {
+    "Employee Name": "Anthony Salerno",
+    "Day": "Thursday",
+    "Time In": "1/26/2023 20:47",
+    "Time Out": "1/26/2023 20:48",
+    "Hours": 0
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Monday",
+    "Time In": "1/2/2023 16:06",
+    "Time Out": "1/2/2023 20:17",
+    "Hours": 4.19
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Friday",
+    "Time In": "1/6/2023 15:55",
+    "Time Out": "1/6/2023 20:26",
+    "Hours": 4.51
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Saturday",
+    "Time In": "1/7/2023 10:48",
+    "Time Out": "1/7/2023 16:10",
+    "Hours": 5.38
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Monday",
+    "Time In": "1/9/2023 15:58",
+    "Time Out": "1/9/2023 20:26",
+    "Hours": 4.46
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Tuesday",
+    "Time In": "1/10/2023 10:54",
+    "Time Out": "1/10/2023 16:09",
+    "Hours": 5.26
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Wednesday",
+    "Time In": "1/11/2023 11:02",
+    "Time Out": "1/11/2023 16:21",
+    "Hours": 5.31
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Saturday",
+    "Time In": "1/14/2023 10:55",
+    "Time Out": "1/14/2023 16:18",
+    "Hours": 5.38
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Monday",
+    "Time In": "1/16/2023 15:54",
+    "Time Out": "1/16/2023 20:30",
+    "Hours": 4.59
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Tuesday",
+    "Time In": "1/17/2023 16:02",
+    "Time Out": "1/17/2023 20:24",
+    "Hours": 4.36
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Friday",
+    "Time In": "1/20/2023 15:56",
+    "Time Out": "1/20/2023 20:30",
+    "Hours": 4.57
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Saturday",
+    "Time In": "1/21/2023 10:55",
+    "Time Out": "1/21/2023 16:08",
+    "Hours": 5.21
+  },
+  {
+    "Employee Name": "Isabella Salerno",
+    "Day": "Monday",
+    "Time In": "1/23/2023 16:01",
+    "Time Out": "1/23/2023 20:35",
+    "Hours": 4.56
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Tuesday",
+    "Time In": "1/3/2023 10:19",
+    "Time Out": "1/3/2023 17:03",
+    "Hours": 6.73
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Thursday",
+    "Time In": "1/5/2023 10:26",
+    "Time Out": "1/5/2023 20:00",
+    "Hours": 9.57
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Friday",
+    "Time In": "1/6/2023 10:34",
+    "Time Out": "1/6/2023 15:57",
+    "Hours": 5.38
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Thursday",
+    "Time In": "1/12/2023 10:24",
+    "Time Out": "1/12/2023 20:01",
+    "Hours": 9.62
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Friday",
+    "Time In": "1/13/2023 10:32",
+    "Time Out": "1/13/2023 20:04",
+    "Hours": 9.53
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Saturday",
+    "Time In": "1/14/2023 16:04",
+    "Time Out": "1/14/2023 20:00",
+    "Hours": 3.93
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Tuesday",
+    "Time In": "1/17/2023 10:33",
+    "Time Out": "1/17/2023 16:03",
+    "Hours": 5.5
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Wednesday",
+    "Time In": "1/18/2023 10:38",
+    "Time Out": "1/18/2023 15:59",
+    "Hours": 5.35
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Thursday",
+    "Time In": "1/19/2023 10:38",
+    "Time Out": "1/19/2023 20:03",
+    "Hours": 9.42
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Friday",
+    "Time In": "1/20/2023 10:27",
+    "Time Out": "1/20/2023 15:58",
+    "Hours": 5.51
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Saturday",
+    "Time In": "1/21/2023 16:02",
+    "Time Out": "1/21/2023 20:01",
+    "Hours": 3.99
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Tuesday",
+    "Time In": "1/24/2023 10:28",
+    "Time Out": "1/24/2023 20:07",
+    "Hours": 9.64
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Wednesday",
+    "Time In": "1/25/2023 10:28",
+    "Time Out": "1/25/2023 16:02",
+    "Hours": 5.56
+  },
+  {
+    "Employee Name": "Ben Toschak",
+    "Day": "Thursday",
+    "Time In": "1/26/2023 9:33",
+    "Time Out": "1/26/2023 20:07",
+    "Hours": 10.57
+  }
+]

@@ -6,7 +6,11 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.1",
+    "bootstrap": "^5.2.3",
+    "canvasjs": "^1.8.3",
     "chart.js": "^4.0.1",
+    "date-info": "^1.1.1",
     "igniteui-react-charts": "^18.1.2",
     "react": "^18.2.0",
     "react-calendar": "^3.9.0",
@@ -15,6 +19,8 @@
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.4.5",
     "react-scripts": "^5.0.1",
+    "semantic-ui-css": "^2.5.0",
+    "semantic-ui-react": "^2.1.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -40,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-numeric-separator": "^7.18.6"
   }
 }

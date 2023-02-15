@@ -1,0 +1,176 @@
+.DeleteItemModal_Dialog {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.DeleteItemModal_Dialog_Backdrop {
+    opacity: 0.5;
+    z-index: 98;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.DeleteItemModal_Dialog_Container {
+    position: relative;
+    background-color: white;
+    transform: translate(0, 0);
+    width: 600px;
+    margin: 154px auto;
+    z-index: 99;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 5px 15px 0;
+    border: 0.8px solid rgba(0, 0, 0, 0.2);
+    background-clip: padding-box;
+}
+.DeleteItemModal_Dialog_Close_Icon {
+    text-shadow: white 0 0 0;
+}
+.DeleteItemModal_Dialog_Close_Button {
+    background-color: transparent;
+    border: none;
+    color: rgb(0, 0, 0);
+    opacity: 0.3;
+}
+.DeleteItemModal_Dialog_Close_Button:hover {
+    color: #000000;
+    opacity: 0.6;
+}
+.DeleteItemModal_Type_Spacer {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-top: 4.5em;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0 15px;
+    color: rgb(82, 94, 113);
+    font-family: "Lato Light";
+}
+.DeleteItemModal_Type_Spacer::before {
+    content: '- ';
+}
+.DeleteItemModal_Type_Spacer::after {
+    content: ' -';
+}
+.DeleteItemModal_Dialog_Content {
+    margin: 15px 15px 0 15px;
+    display: flex;
+    flex-direction: row;
+}
+.DeleteItemModal_Dialog_Buttons button {
+    color: white;
+    background-color: rgb(0,187,225);
+    font-size: 0.75rem;
+    padding: 6px 0;
+    min-width: 125px;
+    border-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.DeleteItemModal_Dialog_Buttons {
+    text-align: left;
+    box-sizing: border-box;
+    padding: 0 10px 10px 10px;
+}
+.DeleteItemModal_Dialog_Button {
+    border: 1px solid rgb(0, 187, 225);
+    background-color: white;
+    color: rgb(0, 187, 225);
+    width: 120px;
+    height: 36px;
+    border-radius: 4px;
+}
+.DeleteItemModal_Dialog_Header {
+    height: 48px;
+    background-color: rgb(246, 77, 84);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 15px;
+    align-items: center;
+    font-size: 14px;
+}
+.DeleteItemModal_Dialog_Header > h4 {
+    color: white;
+    font-family: Lato, sans-serif;
+    font-weight: 300;
+    font-size: 1.3em;
+    margin: 0;
+}
+.DeleteItemModal_Text {
+    color: rgb(82, 94, 113);
+    font-size: 14px;
+    font-weight: 300;
+    font-family: "Lato Light";
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.DeleteItemModal_Buttons_Wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: row;
+}
+.DeleteItemModal_Dialog_Content {
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.DeleteItemModal_Cancel_Button {
+    background-color: white;
+    color: rgb(0, 187, 225);
+    margin-right: 5px;
+    border: 1px solid rgb(0, 187, 225);
+    border-radius: 4px;
+    padding: 7px 28px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    min-width: 150px;
+    cursor: pointer;
+}
+.DeleteItemModal_Cancel_Button:hover {
+    color: rgb(0, 145, 174);
+}
+.DeleteItemModal_Continue_Button {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 7px 28px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    min-width: 150px;
+    cursor: pointer;
+    background: rgb(246, 77, 84);
+    color: white;
+}
+.DeleteItemModal_Continue_Button:hover {
+    background-color: rgb(244, 28, 37);
+    border-color: rgb(173, 173, 173);
+    color: white;
+}
+.NewBasicItem_Footer_Container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #e5e7ea;
+}
+.NewBasicItem_Dialog_Content_Left, .NewBasicItem_Dialog_Content_Right {
+    flex-grow: 1;
+}
+.NewBasicItem_Dialog_Content_Left {
+    margin-right: 20px;
+}
+.NewBasicItem_Footer_Button_Container {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+}

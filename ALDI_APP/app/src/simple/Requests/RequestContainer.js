@@ -8,35 +8,33 @@ const RequestContainer = () => {
     console.log(window.location.href);
     const PendingButton = () => {
         if (window.location.href === 'http://localhost:3000/dashboard/pending')
-            return (<span className='request-button-current'>Pending</span>)
-        return (<span className='request-button-non-current' onClick={() => navigate('/dashboard/pending')}>
-            <IconContext.Provider value={{ style: { verticalAlign: 'middle' },  size: '1.3em' }}>
-                <GrCircleAlert className='pending-request-notification'/>
-            </IconContext.Provider>
-                Pending</span>)
+            return (<div className='request-button-current'>Pending</div>)
+        return (<div className='request-button-non-current' onClick={() => navigate('/dashboard/pending')}>Pending</div>)
     }
     const ClosedButton = () => {
         if (window.location.href === 'http://localhost:3000/dashboard/closed')
-            return (<span className='request-button-current'>Closed</span>)
-        return (<span className='request-button-non-current' onClick={() => navigate('/dashboard/closed')}>Closed</span>)
+            return (<div className='request-button-current'>Closed</div>)
+        return (<div className='request-button-non-current' onClick={() => navigate('/dashboard/closed')}>Closed</div>)
     }
     const CreateButton = () => {
         if (window.location.href === 'http://localhost:3000/dashboard/create')
-            return (<span className='request-button-current'>Create</span>)
-        return (<span className='request-button-non-current' onClick={() => navigate('/dashboard/create')}>Create</span>)
+            return (<div className='request-button-current'>Create</div>)
+        return (<div className='request-button-non-current' onClick={() => navigate('/dashboard/create')}>Create</div>)
     }
     const ManageButton = () => {
         if (window.location.href === 'http://localhost:3000/dashboard/manager')
-            return (<span className='request-button-current'>Manage Requests</span>)
-        return (<span className='request-button-non-current' onClick={() => navigate('/dashboard/manager')}>Manage Requests</span>)
+            return (<div className='request-button-current'>Manage Requests</div>)
+        return (<div className='request-button-non-current' onClick={() => navigate('/dashboard/manager')}>Manage Requests</div>)
     }
     return (
         <div className='request-main'>
             <div className='request-container'>
-                <PendingButton />
-                <ClosedButton />
-                <CreateButton />
-                <ManageButton />
+                <div className='req-button-container'>
+                    <PendingButton />
+                    <ClosedButton />
+                    <CreateButton />
+                    <ManageButton />
+                </div>
                 {/* {window.location.href === 'http://localhost:3000/dashboard/pending' ?
                 <div className='manager-request-body'>
                     <Outlet />

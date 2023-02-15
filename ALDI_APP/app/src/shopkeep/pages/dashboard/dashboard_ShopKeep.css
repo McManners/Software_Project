@@ -1,0 +1,202 @@
+.Dashboard_ShopKeep {
+    display: flex;
+    min-height: 100vh;
+    max-height: 100vh;
+    max-width: 100vw;
+    box-sizing: border-box;
+}
+.DashHeader_ShopKeep h1 {
+    color: black;
+    font-size: 2rem;
+}
+.DashHeader_ShopKeep div {
+    margin: 10px;
+}
+.Dashboard_Content_ShopKeep {
+    transition-duration: 250ms;
+    flex-grow: 1;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 54px calc(100% - 54px);
+    position: relative;
+}
+.DashHeader_Support_Icon_ShopKeep {
+    cursor: pointer;
+}
+.DashHeader_Dialog_ShopKeep {
+    position: absolute;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    width: 100%;
+    height: calc(100% - 54px);
+    top: 54px;
+    z-index: 4;
+    margin: 0;
+    box-sizing: border-box;
+}
+.DashHeader_Dialog_Content_ShopKeep {
+    margin: 10px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.DashHeader_Dialog_Content_Left_ShopKeep{
+    flex-grow: 2;
+    margin-right: 5px;
+}
+.DashHeader_Dialog_Content_Right_ShopKeep {
+    flex-grow: 1;
+    font-weight: 300;
+    font-size: 0.7rem;
+    margin-left: 5px;
+    background-color: rgb(233, 234, 236);
+    border: 1px solid rgb(213, 215, 219);
+}
+.DashHeader_Dialog_Buttons_ShopKeep button:hover {
+    background-color: rgb(69,114,143);
+}
+.DashHeader_Dialog_Buttons_ShopKeep button {
+    color: white;
+    background-color: rgb(0,187,225);
+    font-size: 0.75rem;
+    padding: 6px 0;
+    min-width: 125px;
+    border-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.DashHeader_Hamburger_Icon_ShopKeep {
+    cursor: pointer;
+}
+.DashHeader_Dialog_Close_Icon_ShopKeep {
+    cursor: pointer;
+}
+.DashHeader_Dialog_Buttons_ShopKeep {
+    text-align: left;
+    box-sizing: border-box;
+    padding: 0 10px 10px 10px;
+}
+.DashHeader_Dialog_Container_ShopKeep {
+    background-color: white;
+    width: 50%;
+    min-height: 20%;
+    box-shadow: 0 0 2px 0 black;
+    position: relative;
+    transform: translate(-50%, -50%);
+    top: 30%;
+    left: 50%;
+    box-sizing: border-box;
+}
+.DashHeader_Dialog_Header_ShopKeep {
+    padding: 8px 10px;
+    color: white;
+    font-weight: lighter;
+    font-size: 0.9rem;
+    background-color: rgb(69,114,143);
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+}
+.DashHeader_ShopKeep {
+    background-color: white;
+    border-bottom: 1px solid rgb(213, 215, 219);
+    height: 54px;
+    min-height: 54px;
+    max-height: 54px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 25px 0 10px;
+    position: relative;
+    box-sizing: border-box;
+}
+.DashHeader_Title_ShopKeep {
+    margin: 0px;
+    font-size: 1.125rem;
+    line-height: 1.875rem;
+    font-weight: 700;
+    font-family: Lato;
+    color: rgb(70, 74, 81);
+}
+.DashHeader_Title_ShopKeep img {
+    width: 100%;
+    vertical-align: top;
+}
+.DashHeader_User_Header_ShopKeep {
+    font-size: 1rem;
+    font-weight: 500;
+}
+.DashHeader_User_Icon_ShopKeep {
+    margin-right: 5px;
+    position: relative;
+    top: -2px;
+}
+.DashHeader_Dropdown_Icon_ShopKeep {
+    margin-left: 5px;
+}
+
+.DashHeader_Dropdown_ShopKeep {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+.DashHeader_Dropdown_Content_ShopKeep {
+    text-align: left;
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    z-index: 3;
+    border-radius: 5px;
+    cursor: auto;
+    border: 1px solid rgb(213, 215, 219);
+}
+.DashHeader_Dropdown_Content_ShopKeep div:nth-child(2n) {
+    display: block;
+    border-top: 1px solid rgb(213, 215, 219);
+}
+.DashHeader_Dropdown_Content_ShopKeep div span:hover {
+    text-decoration: underline;
+}
+.DashHeader_Dropdown_Content_ShopKeep div span {
+    cursor: pointer;
+}
+.DashHeader_Dropdown_Content_ShopKeep div {
+    padding: 5px 0 5px 10px;
+}
+
+#slider {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: blue;
+    transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+}
+
+.slide-in {
+    animation: slide-in 0.5s forwards;
+    -webkit-animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+    animation: slide-out 0.5s forwards;
+    -webkit-animation: slide-out 0.5s forwards;
+}
+    
+@keyframes slide-in {
+    100% { transform: translateX(0%); }
+}
+
+@-webkit-keyframes slide-in {
+    100% { -webkit-transform: translateX(0%); }
+}
+    
+@keyframes slide-out {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+}
+
+@-webkit-keyframes slide-out {
+    0% { -webkit-transform: translateX(0%); }
+    100% { -webkit-transform: translateX(-100%); }
+}

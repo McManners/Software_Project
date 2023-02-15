@@ -1,0 +1,152 @@
+.FilterItemList {
+    position: absolute;
+    right: 0px;
+    bottom: 0;
+    top: 50px;
+    width: 0;
+    transition: width 0.5s ease;
+    background-color: white;
+    overflow: hidden;
+    z-index: 9999;
+}
+.FilterItemList * {
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    color: rgb(27, 40, 56);
+    white-space: nowrap;
+}
+.FilterItemList_Container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #dddfe1;
+    overflow: scroll;
+}
+.FilterItemList_Filter_Type_Button {
+    width: 100%;
+    height: 37px;
+    padding: 0 15px;
+    font-size: 14px;
+    text-align: left;
+    box-shadow: inset 0 -1px 0 0 #dddfe1;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    background-color: white;
+}
+.FilterItemList_Type_Wrapper {
+    box-shadow: 0 0 0 0 rgb(255 255 255 / 15%);
+    width: 100%;
+}
+.FilterItemList_Open_Collapsible {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+}
+.FilterItemList_Open_Wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    height: 130px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.FilterItemList_Open_Wrapper_Item {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    height: 55px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.FilterItemList_Filter_Select {
+    background-color: #fff;
+    border-color: #dddfe1;
+    color: #525e71;
+    height: 100%;
+    width: 100%;
+    outline: none;
+}
+.FilterItemList_Select_Wrapper {
+    height: 30px;
+    width: 100%;
+}
+.FilterItemList_Input_Search {
+    height: 36px;
+    border: 1px solid #dddfe1;
+    border-radius: 5px;
+    padding: 10px;
+    outline: none;
+    box-shadow: inset 0 1px 3px 0 rgb(0 0 0 / 10%);
+    background-color: white;
+    width: 100%;
+    position: relative;
+}
+.FilterItemList_Input_Search_Wrapper {
+    height: 36px;
+    width: 100%;
+}
+.FilterItemList_Clear_Wrapper {
+    width: 100%;
+}
+.FilterItemList_Clear_Button {
+    height: 21px;
+    border: none;
+    text-decoration: underline;
+    color: #f66;
+    text-align: left;
+    position: relative;
+    float: left;
+    outline: none;
+    background-color: white;
+}
+.FilterItemList_Clear_Button:hover {
+    color: red;
+}
+
+.FilterItemList_Checkbox_Wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0 0 0 8px;
+    height: 36px;
+    cursor: pointer;
+    user-select: none;
+}
+.FilterItemList_Checkbox_Label {
+    color: rgb(27, 40, 56);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 36px;
+    font-family: Lato, sans-serif;
+}
+.FilterItemList_Checkbox_Icon_Wrapper {
+    margin-right: 10px;
+    line-height: 36px;
+    position: relative;
+}
+.FilterItemList_Checkbox_Icon {
+    position: relative;
+    top: -2px;
+}
+.FilterItemList_Checkbox_Dropdown_Container {
+    width: 100%;
+    height: 300px;
+    overflow-y: scroll;
+}
+.FilterItemList_Checkbox_Dropdown_Container > div:nth-child(2n - 1) {
+    background-color: rgb(255, 255, 255);
+}
+.FilterItemList_Checkbox_Dropdown_Container > div:nth-child(2n - 2) {
+    background-color: rgb(250, 250, 250);
+}
+
+.FilterItemList_Checkbox_Checked_Icon {
+    position: absolute;
+    top: 3px;
+    left: 0;
+}

@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './createrequestwithcalendar.css';
-import axios from 'axios';
 import Calendar from './Calendar';
 import useAxiosPrivate from '../useAxiosPrivate';
 import useAuth from '../useAuth';
@@ -16,7 +15,7 @@ const CreateRequestWithCalendar = (props) => {
     const errRef = useRef();
     const axiosPrivate = useAxiosPrivate();
     const [selectedDays, setSelectedDays] = useState(props.selectedDays === undefined ? [] : props.selectedDays);
-    const [selectedMonth, setSelectedMonth] = useState(date.getMonth() - 1);
+    const [selectedMonth, setSelectedMonth] = useState(date.getMonth());
     const [selectedYear, setSelectedYear] = useState(date.getFullYear());
     // These are passed to <Calendar/> as props
     const [selectedPTOType, setSelectedPTOType] = useState(1);
@@ -112,7 +111,7 @@ const CreateRequestWithCalendar = (props) => {
                             >
                             <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.max_personal - ptoBalance.personal_taken}</div>
                         </div>
-                        <div className='stats-header'>Vacation</div>
+                        <div className='stats-header'>Personal</div>
                     </div>
                     <div className='create-calendar-donut-item'>
                         <div className="create-calendar-donut"
@@ -120,7 +119,7 @@ const CreateRequestWithCalendar = (props) => {
                         }}>
                             <div className="create-calendar-hole">{ptoBalance.Accrual_Bracket.max_vacation_per_year - ptoBalance.vacation_taken}</div>
                         </div>
-                        <div className='stats-header'>Personal</div>
+                        <div className='stats-header'>Vacation</div>
                     </div>
                     <div className='create-calendar-donut-item'>
                         <div className="create-calendar-donut"

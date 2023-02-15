@@ -1,0 +1,858 @@
+.Modifiers {
+    display: grid;
+    grid-template-rows: 49px calc(100% - 49px);
+    position: relative;
+}
+.Modifiers_Container {    
+    overflow-y: scroll;
+    height: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    min-width: 100%;
+    position: relative;
+    display: grid;
+    grid-template-areas: 
+        "button1 button2 button3 extra"
+        "content content content content"
+    ;
+    grid-template-columns: auto;
+    grid-template-rows: 38px auto;
+    padding: 14px;
+}
+
+.Modifiers_Content {
+    border: 1px solid #ddd;
+    margin: 14px;
+}
+.Modifiers_Content_Border_Fix {
+    border: 1px solid #ddd;
+    grid-area: content;
+    background-color: white;
+}
+.Modifiers * {
+    font-family: Lato, sans-serif;
+}
+.Modifiers_Grid {
+    background-color: white;
+    display: grid;
+    padding: 20px 20px 0 20px;
+}
+.Modifiers_Base_Sale_Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 28px;
+}
+.Modififers_Base_Sale_Label {
+    font-size: 14px;
+    font-weight: 700;
+    width: 200px;
+    float: left;
+    margin: 0;
+}
+.Modififers_Base_Sale_Value {
+    font-size: 14px;
+}
+.Modififers_Base_Sale_Container {
+    width: 300px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+.Modifiers_Groups_Header_Label {
+    font-size: 14px;
+    font-weight: 700;
+}
+.Modifiers_Groups_Header_Container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    border-width: 1px 0;
+    border-style: solid;
+    background-color: #eee;
+    border-color: #ddd;
+    padding: 16px;
+    margin: 7px -14px;
+    position: relative;
+}
+.Modifiers_Groups_Copy_Import_Select {
+    width: 300px;
+    font-size: 13px;
+    height: 24px;
+    line-height: 24px;
+    user-select: none;
+    box-shadow: rgb(255, 255, 255) 0 0 3px 0 inset, rgba(0, 0, 0, 0.1) 0 1px 1px 0;
+    padding: 0 0 0 8px;
+    text-overflow: ellipsis;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background: linear-gradient(top, #fff 20%, #f6f6f6 50%, #eee 52%, #f4f4f4 100%);
+    outline: none;
+}
+.Modifiers_Show_Checkbox_Label {
+    font-size: 14px;
+    font-weight: 400;
+}
+.Modifiers_Show_Checkbox_Container {
+    width: 300px;
+    text-align: left;
+}
+.Modifiers_Item_Name_Container {
+    padding: 10px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.Modifiers_Item_Name {
+    color: rgb(27, 40, 56);
+    font-size: 25px;
+    font-weight: 300;
+    margin: 10px 0;
+}
+.Modifiers_Group_Input_Text {
+    min-width: 190px;
+    width: 190px;
+}
+.Modifiers_Group_Name {
+    font-size: 14px;
+    font-weight: 300;
+}
+.Modifiers_Group_Name_Container {
+    padding-left: 10px;
+}
+.Modifiers_Button_Icon_Empty_Green {
+    color: rgb(139, 166, 36);
+}
+.Modifiers_Button_Icon {
+    margin-right: 5px;
+}
+.Modifiers_Button_Icon_Empty {
+    background-color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+}
+.Modifiers_Button_Icon_Empty_Red {
+    color: red;
+}
+.Modifiers_Add_Option_Button {
+    background-color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    color: rgb(139, 166, 36);
+    font-weight: 300;
+    font-family: "Lato Light";
+    font-size: 14px;
+}
+.Modifiers_Add_AddOn_Button {
+    background-color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    color: rgb(139, 166, 36);
+    font-weight: 300;
+    font-family: "Lato Light";
+    font-size: 14px;
+}
+.Modifiers_Add_NoOptions_Button {
+    background-color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    color: rgb(139, 166, 36);
+    font-weight: 300;
+    font-family: "Lato Light";
+    font-size: 14px;
+}
+
+.Modifiers input {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.Modifiers_Group_Container {
+    text-align: left;
+}
+.Modifiers_Group_List {
+    list-style: none;
+}
+.Modifiers_AddOn_Container {
+    text-align: left;
+}
+.Modifiers_AddOn_List {
+    list-style: none;
+}
+.Modifiers_NoOptions_Container {
+    text-align: left;
+}
+.Modifiers_NoOptions_List {
+    list-style: none;
+}
+
+.Modifiers_Delete_Button {
+    background-color: white;
+    border: none;
+    color: rgb(160, 43, 43);
+    font-size: 14px;
+    font-weight: 300;
+    height: 26px;
+}
+
+.Modifiers_Group_List_Container {
+    margin: 20px 0 20px 80px;
+    border-bottom: 1px solid #ddd;
+}
+.Modifiers_AddOn_List_Container {
+    margin: 20px 0 20px 80px;
+}
+.Modifiers_NoOptions_List_Container {
+    margin: 20px 0 20px 80px;
+}
+
+.Modifiers_Group_Name_Label {
+    font-size: 14px;
+    font-weight: 300;
+    margin-right: 10px;
+}
+.Modifiers_Group_Name_Input {
+    outline: none;
+    width: 190px;
+    min-width: 190px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.Modifiers_Group_List > li {
+    height: 40px;
+    padding: 0 10px;
+}
+.Modifiers_AddOn_List > li {
+    height: 40px;
+    padding: 0 10px;
+}
+.Modifiers_NoOptions_List > li {
+    height: 40px;
+    padding: 0 10px;
+}
+
+.Modifiers_Group_List_Header {
+    margin-left: 42px;
+    display: flex;
+    flex-direction: row;
+}
+.Modifiers_AddOn_List_Header {
+    margin-left: 42px;
+    display: flex;
+    flex-direction: row;
+}
+.Modifiers_NoOptions_List_Header {
+    margin-left: 42px;
+    display: flex;
+    flex-direction: row;
+}
+
+.Modifiers_Group_List_Header > span:first-child {
+    font-weight: 300;
+    font-size: 14px;
+    margin-right: 15px;
+    width: 154px;
+}
+.Modifiers_Group_List_Header > span:nth-child(2n) {
+    font-weight: 300;
+    font-size: 14px;
+    margin-right: 15px;
+    width: 115px;
+}
+.Modifiers_Group_List_Header > span:nth-child(3n) {
+    font-weight: 300;
+    font-size: 14px;
+    margin-right: 15px;
+    width: 154px;
+}
+.Modifiers_AddOn_List_Header > span:first-child {
+    font-weight: 300;
+    font-size: 14px;
+    margin-right: 15px;
+    width: 154px;
+}
+.Modifiers_AddOn_List_Header > span:nth-child(2n) {
+    font-weight: 300;
+    font-size: 14px;
+    margin-right: 15px;
+    width: 115px;
+}
+.Modifiers_NoOptions_List_Header > span:first-child {
+    font-weight: 300;
+    font-size: 14px;
+    margin-right: 15px;
+    width: 154px;
+}
+.Modifiers_NoOptions_List_Header > span:nth-child(2n) {
+    font-weight: 300;
+    font-size: 14px;
+    margin-right: 15px;
+    width: 150px;
+}
+
+.Modifiers_Option_Name_Input {
+    width: 154px;
+    min-width: 154px;
+    margin-right: 2px;
+}
+.Modifiers_Option_Price_Input {
+    width: 115px;
+    min-width: 115px;
+}
+.Modifiers_Group_Footer {
+    border-top: 1px solid #ddd;
+    padding: 10px 0 5px 0;
+    line-height: 19px;
+}
+.Modifiers_Description {
+    color: #666;
+    font-size: 14px;
+    text-align: left;
+}
+.Modifiers_AddOns_Header, .Modifiers_NoOptions_Header {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+}
+.Modifiers_Submit_Container {
+    padding: 10px 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 -20px;
+}
+.Modifiers_Submit_Button {
+    padding: 7px 28px;
+    background-color: rgb(0, 187, 225);
+    font-size: 14px;
+    font-weight: 400;
+    width: 120px;
+    user-select: none;
+    border: none;
+    border-radius: 4px;
+    color: white;
+}
+.Modifiers_Submit_Button:hover {
+    background-color: rgb(0, 145, 174);
+}
+
+.Modifiers_Groups_Empty_Container {
+    padding: 20px 0 10px;
+    margin-left: 90px;
+    text-align: left;
+}
+.Modifiers_Groups_Empty_List_Item {
+    color: rgb(102, 102, 102);
+    font-size: 14px;;
+}
+.Modifiers_Groups_Empty_Example_Container {
+    padding-left: 10px;
+    text-align: left;
+}
+.Modifiers_Groups_Empty_Example {
+    color: rgb(153, 153, 153);
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.Modifiers_Add_Option_Button_First {
+    background-color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    color: rgb(139, 166, 36);
+    font-weight: 300;
+    font-family: "Lato Light";
+    font-size: 14px;
+    padding: 0;
+}
+.Modifiers_Groups_Copy_Import_Dropdown_Container {
+    width: 300px;
+    max-width: 300px;
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+}
+.Modifiers_Groups_Copy_Import_Select_Dropdown {
+    position: absolute;
+    width: 100%;
+    padding: 0 15px 0 15px;
+    background-clip: padding-box;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.15) 0 4px 5px 0;
+    border: 1px solid #aaa;
+    border-top: 0;
+    border-radius: 0 0 4px 4px;
+}
+.Modifiers_Groups_Copy_Import_Select_Dropdown_Search_Wrapper {
+    padding: 3px 0;
+    line-height: 21px;
+    white-space: nowrap;
+}
+.Modifiers_Show_Checkbox {
+    height: 14px;
+    position: relative;
+    top: -1px;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+.Modifiers_Groups_Copy_Import_Select_Dropdown_Selected {
+    font-size: 13px;
+    padding: 5px;
+    text-align: left;
+    white-space: nowrap;
+    color: rgb(68, 68, 68);
+    box-shadow: 0 0 3px #fff inset, 0 1px 1px rgb(0 0 0 / 10%);
+    height: 24px;
+    color: #444;
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid #aaa;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 8px;
+    width: 300px;
+    box-shadow: rgb(255, 255, 255) 0 1px 0 0 inset;
+    background: linear-gradient(#f6f6f6 50%, #eee 52%);
+    position: relative;
+    float: right;
+}
+.hide {
+    left: -9999px;
+}
+.Modifiers_Groups_Copy_Import_Select_Dropdown_List_Item {
+    border: none;
+    color: rgb(27, 40, 56);
+    text-align: left;
+    outline: none;
+    width: 100%;
+    background-color: white;
+    padding: 5px 6px;
+    font-size: 13px;
+    line-height: 15px;
+    user-select: none;
+    cursor: pointer;
+}
+.Modifiers_Groups_Copy_Import_Select_Dropdown_List_Item:hover {
+    background-color: #3875d7;
+    background-image: linear-gradient(#3875d7 20%, #2a62bc 90%);
+    color: #fff;
+}
+.Modifiers_Groups_Copy_Import_Select_Dropdown_List {
+    list-style: none;
+    margin: 0 0 4px 0;
+    padding: 0;
+}
+.Modifiers_Groups_Copy_Import_Select_Dropdown_Search {
+    width: 100%;
+    border: 1px solid rgb(170, 170, 170);
+    font-family: sans-serif;
+    font-weight: 400;
+    user-select: none;
+    white-space: nowrap;
+    font-size: 1em;
+    margin: 1px 0;
+    padding: 4px 5px;
+    outline: none;
+    height: 24px;
+    line-height: normal;
+    border-radius: 0;
+}
+.Modifiers_Groups_Copy_Import_Select_Dropdown_Scroll_Container {
+    overflow-y: scroll;
+    max-height: 275px;
+}
+.Modifiers_Groups_Copy_Import_Select_Dropdown_Selected_Is_Open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: 0;
+    background-image: linear-gradient(#eee 20%, #fff 80%);
+}
+.Display_Block {
+    display: block;
+}
+.Display_None {
+    display: none;
+}
+
+.Modifiers_Groups_Copy_Import_Select_Dropdown_Selected_Closed {
+    width: 300px;
+}
+
+.modifiers-content-header {
+  height: 60px;
+  font-size: 30px;
+  font-weight: lighter;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  border-bottom: rgb(213, 215, 219) 1px solid;
+}
+#modifier-grid-container {
+  border: rgb(213, 215, 219) 1px solid;
+  padding: 15px;
+  background-color: white;
+}
+.modifier-row-content {
+  padding: 0 25px 0 25px;
+  background-color: white;
+}
+.modifiers-right-header {
+  float: right;
+}
+#track-quantity-content {
+  padding: 15px 10px 15px 10px;
+}
+.modifiers-row-head {
+  /* We need to display flex here to vertically center */
+  background-color: rgb(233, 234, 236);
+  border: rgb(213, 215, 219) 1px solid;
+  border-width: 1px 0 1px 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  padding: 0 15px 0 15px;
+  margin: 0 8px 0 8px;
+}
+.spacer {
+  flex-grow: 1;
+}
+#grid3, #grid5 {
+  
+}
+.modifiers-input-select {
+  width: 30%;
+}
+.modifiers-body-grid {
+  display: grid;
+  grid-auto-rows:auto;
+  grid-row-gap: 15px;
+  background-color: white;
+}
+.modifiers-content-test {
+  font-size: 0.9rem;
+  border-width: 0 1px 1px 1px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-column-gap: 24px;
+  grid-row-gap: 20px;
+}
+.modifiers-content-test label {
+  margin: 0 0 5px 0;
+}
+.modifiers-content-test .form-control {
+  font-weight: lighter;
+}
+.modifiers-column {
+  width: 50%;
+  flex: 1;
+}
+.modifiers-row {
+  margin-bottom: 15px;
+  display: flex;
+}
+.modifiers-container {
+  padding: 15px;
+  background-color: rgb(233, 234, 236);
+}
+#item-header-buttons button {
+  font-size: 0.9rem;
+  padding: 10px 14px 10px 14px;
+}
+
+.add-item-button {
+  background: none;
+  border: none;
+  color: rgb(213, 215, 219);
+}
+.deleteButton {
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  color: white;
+}
+.example {
+  font-size: 0.9rem;
+  color: gray;
+  padding: 0;
+  margin: 20px 0 5px 0;
+}
+.emptyButton-green {
+  background-color: white;
+  border: none;
+  color: green;
+  display: flex;
+  align-items: center;
+}
+.emptyButton {
+  background-color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+.emptyButton-red {
+  background-color: white;
+  border: none;
+  color: red;
+  display: flex;
+  align-items: center;
+}
+.button-plus-icon {
+  margin-right: 5px;
+}
+#base-checked-input {
+  background-color: white;
+  border: none;
+  color: green;
+  display: flex;
+  align-items: center;
+}
+#base-unchecked-input {
+  background-color: white;
+  border: none;
+  color: gray;
+  display: flex;
+  align-items: center;
+}
+
+/* .container-fluid {
+    border: rgb(213, 215, 219) 1px solid;
+    padding: 15px;
+}
+.add-item-button {
+    background: none;
+    border: none;
+    color: rgb(213, 215, 219);
+}
+.hamburger {
+    background: none;
+    border: none;
+    margin-left: 5px;
+}
+#space {
+    flex-grow: 1;
+}
+#outside-container {
+    margin: 0;
+}
+.item-page-header {
+    padding-right: 15px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+.body {
+    border: rgb(213, 215, 219) 1px solid;
+    margin-bottom: 15px;
+    padding: 0;
+}
+.navbar {
+    overflow: hidden;
+    border-bottom: rgb(213, 215, 219) 1px solid;
+    background-color: white;
+}
+#main-content {
+    padding: 5px;
+}
+#wrap {
+    overflow: auto;
+}
+.bar {
+    border-bottom: rgb(213, 215, 219) 1px solid;
+    margin-bottom: 5px;
+}
+.deleteButton {
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    color: white;
+}
+.dark-border {
+    background-color: rgb(233, 234, 236);
+}
+#main {
+    background-color: white;
+}
+.btn-current {
+    border-radius: 5px 5px 0 0;
+    background-color: white;
+    pointer-events: none;
+    border-color: rgb(213, 215, 219);
+    border-bottom: 0;
+}
+#item-header-buttons {
+    position: relative;
+    bottom: -1px;
+}
+.secondary {
+    padding: 6px 12px;
+    position: relative;
+    bottom: -1px;
+    background-color: none;
+    border-radius: 5px 5px 0 0;
+    border-bottom: 1px solid rgb(213, 215, 219);
+}
+#item-name-row {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    font-size: 28px;
+    font-weight:lighter;
+    border-bottom: rgb(213, 215, 219) 1px solid;
+    padding-left: 10px;
+}
+#show-modifiers-input {
+    margin-right: 5px;
+}
+.test .row {
+    margin-top: 10px;
+}
+.gray {
+    background-color: rgb(233, 234, 236);
+    height: 55px;
+    border: rgb(213, 215, 219) 1px 0 1px 0 solid;
+    border-style: solid;
+    border-color: rgb(213, 215, 219);
+    border-width: 1px 0 1px 0;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+.white {
+    background-color: white;
+    height: 50px;
+    font-size: 14px;
+}
+.content {
+    margin: 10px;
+}
+.row {
+    margin: 0;
+}
+#save-button {
+    width: auto;
+    margin: 5px;
+}
+.btn-blue {
+    background-color: rgb(1, 187, 225);
+    color: white;
+}
+.btn-blue:hover {
+    background-color: rgb(0, 133, 160);
+    color: white;
+}
+.right-header {
+    position: relative;
+    float: right;
+    width: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.gray-border {
+    border: rgb(213, 215, 219) 1px solid;
+}
+.options-table-container {
+    margin: 0 125px 0 125px;
+}
+.example {
+    font-size: 0.9rem;
+    color: gray;
+    padding: 0;
+    margin: 20px 0 5px 0;
+}
+.emptyButton-green {
+    background-color: white;
+    border: none;
+    color: green;
+    display: flex;
+    align-items: center;
+}
+#base-checked-input {
+    background-color: white;
+    border: none;
+    color: green;
+    display: flex;
+    align-items: center;
+}
+#base-unchecked-input {
+    background-color: white;
+    border: none;
+    color: gray;
+    display: flex;
+    align-items: center;
+}
+.emptyButton {
+    background-color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+.emptyButton-red {
+    background-color: white;
+    border: none;
+    color: red;
+    display: flex;
+    align-items: center;
+}
+.button-plus-icon {
+    margin-right: 5px;
+}
+.price-input-box {
+    width: 100px;
+}
+.base:checked {
+    color: green;
+}
+.group-container {
+    margin: 20px;
+}
+.base {
+    color: red;
+}
+table {
+    border-collapse: separate;
+}
+.option-content-table-row {
+    margin: 25px;
+}
+#group-container {
+    margin: 20px;
+}
+
+
+.base-radio-input-hide {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: gray;
+}
+.base-radio-input input:checked ~ .checkmark {
+    color: green;
+}
+.checkmark:before {
+    content: attr()
+} */

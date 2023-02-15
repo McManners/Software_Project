@@ -1,6 +1,7 @@
 const db = require("../models");
 
 const create = async (req, res) => {
+    console.log('creating pto');
     const status = req.body.status;
     const ticket_id = req.body.ticket_id;
     const ticket = await db.Ticket.findOne({ where: { ticket_id: ticket_id } });
@@ -8,7 +9,7 @@ const create = async (req, res) => {
     if (!ticket) return res.status(400).json({ "message": "cant find ticket"});
     // if (ticket.status === "APPROVED" || ticket.status === "DENIED") return res.status(401).json({ "message": "Error, ticket already closed"});
     // ticket.status = "APPROVED";
-    ticket.save();
+    // ticket.save();
     const pto_balance = await db.PTO_Balance.findOne({ where: { employee_id: ticket.employee_id }});
     const vacation_taken = pto_balance.vacation_taken;
     const personal_taken = pto_balance.personal_taken;
@@ -23,24 +24,18 @@ const create = async (req, res) => {
     pto_balance.save();
     console.log(pto_balance);
 
-    // if (status === "APPROVED") {
-    //     await db.PTO.create({
-    //         employee_id: ticket.employee_id,
-    //         ticket_id: ticket_id,
-    //         pto_type_id: ticket.pto_type_id
-    //     });
-    // };
-    // await db.Ticket_History.create({
-    //     ticket_id: 999990,
-    //     employee_id: ticket.employee_id,
-    //     leader_id: ticket.leader_id,
-    //     request_note: ticket.request_note,
-    //     response_note: ticket.response_note,
-    //     submit_date: ticket.submit_date,
-    //     status: status,
-    //     pto_type_id: ticket.pto_type_id
-    // })
-    // ticket.delete();
+    await db.Ticket_History.create({
+        ticket_id: ticket.ticket_id,
+        employee_id: ticket.employee_id,
+        leader_id: ticket.leader_id,
+        request_note: ticket.request_note,
+        response_note: ticket.response_note,
+        submit_date: ticket.submit_date,
+        status: 'APPROVED',
+        pto_type_id: ticket.pto_type_id
+    })
+    console.log('create pto destroying ticket')
+    ticket.destroy();
     res.status(201);
 }
 const getAllForLeader = async (req, res) => {

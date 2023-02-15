@@ -10,7 +10,7 @@ const db = {};
 
 const logStream = fs.createWriteStream('./sql.log', {'flags': 'a'});
 const date = new Date();
-const sequelize = new Sequelize("mysql:localhost", { database: "aldi_update", username: "root", password: "", dialext: "mysql", 
+const sequelize = new Sequelize("mysql:localhost", { database: "aldi_update2", username: "root", password: "", dialext: "mysql", 
     logging: msg => logStream.write(`\n[${date.toDateString()} - ${date.toLocaleTimeString()}] - ${msg}`),
   }); 
 /**

@@ -1,0 +1,54 @@
+.ButtonTabs_Container {
+    background-color: rgb(233, 234, 236);
+    position: relative;
+}
+.ButtonTabs_Current {
+    color: #555555;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px 4px 0 0;
+    border-bottom: white;
+    pointer-events: none;
+    background-color: white;
+    position: relative;
+    float: left;
+    height: 38px;
+    min-height: 38px;
+    max-height: 38px;
+    bottom: -1px;
+    padding: 0;
+}
+.ButtonTabs_Modifiers, .ButtonTabs_General {
+    margin-right: 2px;
+}
+.ButtonTabs_General {
+    grid-area: button1;
+}
+.ButtonTabs_Modifiers {
+    grid-area: button2;
+}
+.ButtonTabs_LabelPrinting {
+    grid-area: button3;
+}
+.ButtonTabs_Not_Current {
+    color: rgb(55, 62, 74);
+    font-size: 14px;
+    border: none;
+    border-radius: 4px 4px 0 0;
+    float: left;
+    position: relative;
+    background-color: rgb(233, 234, 236);
+    cursor: pointer;
+    min-height: 37px;
+    max-height: 37px;
+    bottom: -1px;
+    padding: 0;
+}
+.ButtonTabs_Span_Text {
+    padding: 10px 15px;
+    white-space: nowrap;
+    color: inherit;
+}
+.ButtonTabs_Not_Current:hover {
+    background-color: rgb(238, 238, 238);
+}

@@ -1,0 +1,67 @@
+.App {
+    background: linear-gradient(45deg, #FFB428 0%,
+    #FA8214 45%, #FA8214 100%);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#form-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 100%
+}
+#form-left, #form-right {
+    flex: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#aldi_logo {
+    height: 80px;
+    width: 80px;
+}
+#form-right {
+    background: url('https://miro.medium.com/max/828/1*JLM_9XM6yqsWaMfMTSTEAg.jpeg');
+    background-position: 70%;
+    border-radius: 0 15px 15px 0;
+}
+#building {
+    position: absolute;
+    left: 50%;
+    width: 50%;
+    overflow: hidden;
+    justify-content: center;
+
+}
+form label {
+    font-size: 0.8rem;
+}
+#email-label, #password-label {
+    position: relative;
+    bottom: -5px;
+}
+form input {
+    border: 1px solid gray;
+    border-radius: 3px;
+
+}
+#login-button {
+    background-color: darkblue;
+    color: white;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin: 10px 0 0 0;
+}
+.login-form {
+
+    width: 45%;
+    height: 50%;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: white;
+}

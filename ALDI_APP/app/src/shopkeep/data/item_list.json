@@ -1,0 +1,583 @@
+[
+  {
+    "Item": "Huge Italian Beef",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -242,
+    "Total Value": 0
+  },
+  {
+    "Item": "Beef Sausage Combo",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -228,
+    "Total Value": 0
+  },
+  {
+    "Item": "6” French Rolls",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -12,
+    "Total Value": 0
+  },
+  {
+    "Item": "Beef catering per Pound",
+    "Margin": "53.57%",
+    "Markup": "115.38%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Chicago Pizza Puff - Beef",
+    "Margin": "79.08%",
+    "Markup": "378.13%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "12 oz Can",
+    "Margin": "66.67%",
+    "Markup": "200.0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Fresh Cut Fries - Large",
+    "Margin": "67.05%",
+    "Markup": "203.48%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Fresh Cut Fries - Regular",
+    "Margin": "65.59%",
+    "Markup": "190.63%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Chicago Pizza Puff - Pepperoni",
+    "Margin": "76.03%",
+    "Markup": "317.27%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Chili Cheese Dog",
+    "Margin": "71.05%",
+    "Markup": "245.39%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Cheese Dog",
+    "Margin": "70.72%",
+    "Markup": "241.48%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Italian Beef Sandwich",
+    "Margin": "65.46%",
+    "Markup": "189.49%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Maxwell Street Polish",
+    "Margin": "54.3%",
+    "Markup": "118.84%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Chicago Polish",
+    "Margin": "70.55%",
+    "Markup": "239.52%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Corn Dog",
+    "Margin": "70.98%",
+    "Markup": "244.62%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Chili Dog",
+    "Margin": "72.21%",
+    "Markup": "259.85%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Cup of Cheese",
+    "Margin": "72.0%",
+    "Markup": "257.14%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Cup of Chili Sauce",
+    "Margin": "82.67%",
+    "Markup": "476.92%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Chicago Style Hot Dog",
+    "Margin": "68.96%",
+    "Markup": "222.13%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Tom Tom Tamale",
+    "Margin": "74.21%",
+    "Markup": "287.78%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Double Dog",
+    "Margin": "66.55%",
+    "Markup": "198.98%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Italian Sausage",
+    "Margin": "64.61%",
+    "Markup": "182.55%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Test",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Jumbo Dog - HUGE",
+    "Margin": "67.74%",
+    "Markup": "210.0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Waubonsee Hot Dog",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -79,
+    "Total Value": 0
+  },
+  {
+    "Item": "Waubonsee Chips",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -22,
+    "Total Value": 0
+  },
+  {
+    "Item": "Waubonsee Gatorade",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -13,
+    "Total Value": 0
+  },
+  {
+    "Item": "Waubonsee Pop",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -21,
+    "Total Value": 0
+  },
+  {
+    "Item": "Waubonsee Water",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -5,
+    "Total Value": 0
+  },
+  {
+    "Item": "Waubonsee Nachos",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -12,
+    "Total Value": 0
+  },
+  {
+    "Item": "Waubonsee Dog Deal",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": 0,
+    "Total Value": 0
+  },
+  {
+    "Item": "Candy",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": 0,
+    "Total Value": 0
+  },
+  {
+    "Item": "Motorcycle Dog",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -167,
+    "Total Value": 0
+  },
+  {
+    "Item": "Motorcycle Pop",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -80,
+    "Total Value": 0
+  },
+  {
+    "Item": "Motorcycle Gatorade",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -14,
+    "Total Value": 0
+  },
+  {
+    "Item": "Motorcycle Ice Cream",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -23,
+    "Total Value": 0
+  },
+  {
+    "Item": "Motorcycle Jumbo",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -27,
+    "Total Value": 0
+  },
+  {
+    "Item": "Motorcycle Chips",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -30,
+    "Total Value": 0
+  },
+  {
+    "Item": "Motorcycle Polish",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -31,
+    "Total Value": 0
+  },
+  {
+    "Item": "Motorcycle Water",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -12,
+    "Total Value": 0
+  },
+  {
+    "Item": "Island Oasis Fruit Drink",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Chicken Strips - 5 Piece",
+    "Margin": "74.42%",
+    "Markup": "291.0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Chicken Strips - 3 Piece",
+    "Margin": "74.87%",
+    "Markup": "298.0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Nachos with Cheese",
+    "Margin": "79.96%",
+    "Markup": "399.0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Green River Bottle",
+    "Margin": "66.59%",
+    "Markup": "199.33%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Dasani Water",
+    "Margin": "79.9%",
+    "Markup": "397.5%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Monster",
+    "Margin": "68.37%",
+    "Markup": "216.2%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "2 DOG DEAL- 2 Dogs Fries & 12oz Can -",
+    "Margin": "74.86%",
+    "Markup": "297.75%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Septran 6/07/22",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": 0,
+    "Total Value": 0
+  },
+  {
+    "Item": "Cookies",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -12,
+    "Total Value": 0
+  },
+  {
+    "Item": "Cookie",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -4,
+    "Total Value": 0
+  },
+  {
+    "Item": "New Dog",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": 0,
+    "Total Value": 0
+  },
+  {
+    "Item": "Hot Dog Bus Lunch",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -1,
+    "Total Value": 0
+  },
+  {
+    "Item": "School Bus Lunch",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": -1,
+    "Total Value": 0
+  },
+  {
+    "Item": "Island Oasis Fruit Drinks",
+    "Margin": "0.0%",
+    "Markup": "0.0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Buddig",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Gatorade",
+    "Margin": "74.92%",
+    "Markup": "298.67%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Hot Dog Hat",
+    "Margin": "50.0%",
+    "Markup": "100.0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Green River Ice Cream Float",
+    "Margin": "55.47%",
+    "Markup": "124.57%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Root Beer Float",
+    "Margin": "74.55%",
+    "Markup": "293.0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Minute Maid Lemonade",
+    "Margin": "64.0%",
+    "Markup": "177.78%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Brisk Lemon Iced Tea",
+    "Margin": "64.0%",
+    "Markup": "177.78%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Pick-Up Order",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "BOGO",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Catering - Hot Dogs",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Broccoli & Cheddar Soup",
+    "Margin": "62.41%",
+    "Markup": "166.0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Bowl of Chili",
+    "Margin": "49.87%",
+    "Markup": "99.5%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "2 DOG DEAL -  2nd Dog",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Free Hot Dog",
+    "Margin": "0%",
+    "Markup": "-100.0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Salerno’s Red Hots Gift Card",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Take-Out",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Dine-In",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Hot Dog Special - Add Dasani Water Add $0.49",
+    "Margin": "100.0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Hot Dog Special - Fresh Cut Fries",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Cup of Ketchup",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Hot Dog Special - Fresh Cut Fries",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Barq’s Root Beer  Can",
+    "Margin": "68.0%",
+    "Markup": "212.5%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Fanta Orange Can",
+    "Margin": "68.0%",
+    "Markup": "212.5%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Sprite Can",
+    "Margin": "68.0%",
+    "Markup": "212.5%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Diet Coke Can",
+    "Margin": "68.0%",
+    "Markup": "212.5%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Shipping",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Misc Non-Taxable",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  },
+  {
+    "Item": "Misc Taxable",
+    "Margin": "0%",
+    "Markup": "0%",
+    "Quantity": "",
+    "Total Value": 0
+  }
+]

@@ -6,9 +6,6 @@
 .manager-filter-dropdown-header-container div {
     flex-grow: 1;
 }
-table {
-    table-layout: fixed;
-}
 .manager-request-table tbody {
     font-weight: lighter;
 }
@@ -45,6 +42,12 @@ table {
     padding: 20px;
     border: 2px solid black;
 }
+.manager-request-table thead tr th {
+    border-bottom: 1px solid rgb(213, 215, 219);
+    height: 3em;
+    font-weight: 500;
+    background-color: white;
+}
 .pending-request-item-data {
     display: flex;
     justify-content: space-between;
@@ -58,17 +61,24 @@ table {
     text-align: left;
     padding: 10px;
 }
-
+.manager-th-filter-search {
+    outline: none;
+    border: 1px solid rgb(213, 215, 219);
+    border-radius: 5px;
+    font-size: 0.8em;
+    box-sizing: border-box;
+    
+}
+.xtest {
+    height: 100%;
+    overflow-y: scroll;
+}
 .manager-request-table {
     border: 1px solid rgb(213, 215, 219);
     flex-grow: 1;
     border-collapse: collapse;
     width: 100%;
-    max-height: 90%;
-}
-.manager-request-table th {
-    height: 3em;
-    font-weight: 500;
+    max-height: 100%;
 }
 .manager-request-table th:not(:first-child) {
     border-left: 1px solid rgb(213, 215, 219);
@@ -84,11 +94,12 @@ table {
 .manager-request-open-request-row {
     cursor: default;
 }
-.manager-request-table tr:nth-child(even), th {
+.manager-request-table tr:nth-child(even) {
     background-color: #eae9e9;
 }
-.manager-request-table th {
-    min-width: auto;
+.manager-request-table thead {
+    position: sticky;
+    top: -1px;
 }
 .manager-request-disputed-days {
     text-align: center;
@@ -137,14 +148,6 @@ table {
     border-color: lightgray;
     outline: none;
 }
-.manager-request-table th {
-    padding: 0 10px;
-}
-.manager-request-table tbody {
-    overflow: auto;
-    height: auto;
-}
-
 .manager-filter-dropdown-header-container button {
     background-color: transparent;
     padding: 2px 0;
@@ -157,6 +160,21 @@ table {
 .manager-filter-dropdown {
     position: relative;
     display: inline-block;
+}
+.manager-filter-header-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+}
+.order-up {
+    position: relative;
+    bottom: -10px;
+    color: red;
+}
+.order-down {
+    position: relative;
+    top: -5px;
 }
 .manager-filter-dropdown-content {
     display: none;
@@ -191,4 +209,59 @@ table {
     right: 0;
     width: 0;
     overflow: hidden;
+}
+.manager-filter-tab {
+    text-align: left;
+    position: absolute;
+    border: 1px solid black;
+    width: 30%;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid rgb(213, 215, 219);
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+}
+.manager-filter-tab-button {
+    padding: 5px 15px;
+    border-bottom: 1px solid rgb(213, 215, 219);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+.manager-filter-employee-search {
+    outline: none;
+    border: none;
+    padding: 5px 15px;
+    border-bottom: 1px solid rgb(213, 215, 219);
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: 6px;
+}
+.manager-filter-employee-search-icon {
+    position: absolute;
+    transform: translateY(25%);
+    margin-left: 4px;
+}
+.manager-filter-select-buttons button {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-weight: lighter;
+    padding: 2px 0;
+    color: slategrey;
+}
+.manager-filter-select-buttons {
+    border-bottom: 1px solid rgb(213, 215, 219);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.manager-filter-content {
+    height: 0;
+    overflow: hidden;
+    transition-duration: 500ms;
 }

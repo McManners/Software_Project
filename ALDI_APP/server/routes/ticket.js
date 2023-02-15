@@ -8,7 +8,7 @@ router.get('/closed', ticketController.getAllClosed);
 router.get('/pending', ticketController.getAllPending);
 router.post('/create', ticketController.createTicket);
 router.get('/get/leader', ticketController.getAllLeaderTickets);
-router.post('/response', ticketController.createResponse)
+router.get('/get/leader/closed', ticketController.getLeaderClosedTickets);
 router.post('/requestmore', ticketController.requestMoreInformationTicket);
 router.post('/deny', ticketController.denyTicket);
 

@@ -54,10 +54,11 @@
 }
 
 .pending-request-table {
-    flex-grow: 1;
-    border-collapse: collapse;
     border: 1px solid rgb(213, 215, 219);
     width: 100%;
+    border-collapse: collapse;
+    width: 100%;
+    max-height: 100%;
 }
 .pending-request-table th {
     height: 3em;
@@ -68,17 +69,26 @@
 }
 .pending-request-table td {
     padding: 5px;
+    font-size: 1.1rem;
     text-align: center;
-    font-weight: lighter;
 }
 .pending-request-table-row {
     cursor: pointer;
-    border-bottom: 1px solid rgb(213, 215, 219);
 }
 .pending-request-open-request-row {
     cursor: default;
 }
-.pending-request-table tr:nth-child(even), th {
+.pending-request-table tr:nth-child(even) {
+    background-color: #eae9e9;
+}
+.pending-request-table thead {
+    position: sticky;
+    top: -1px;
+}
+.pending-request-open-request-row {
+    cursor: default;
+}
+.pending-request-table tr:nth-child(even), .pending-request-table th {
     background-color: rgb(233, 234, 236);
 }
 .request-container .manager-request-body {

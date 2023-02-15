@@ -57,3 +57,13 @@ async function getEmployee(employee_id) {
     if (!employee) throw 'Employee not found';
     return employee;
 }
+
+const getLeaderEmployees = async (req, res) => {
+    console.log(`getting leader ID ${req.employee_id} employees`);
+    const leader = await db.Employee.findByPk(435690);
+    const leaderEmployees = await leader.getLeaderEmployees();
+
+    return res.status(200).json(leaderEmployees);
+}
+
+module.exports = { getLeaderEmployees };

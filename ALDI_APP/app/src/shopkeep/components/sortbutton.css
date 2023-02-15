@@ -1,0 +1,19 @@
+.SortButton {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    position: relative;
+    padding: 0;
+}
+.SortButton_Arrow_Up {
+    position: relative;
+    vertical-align: middle;
+    bottom: 1px;
+}
+.SortButton_Arrow_Down {
+    position: absolute;
+    vertical-align: middle;
+    left: 0;
+    bottom: -1px;
+}

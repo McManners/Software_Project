@@ -1,0 +1,24 @@
+.request-manager input.checked {
+    background-color: #007a7e;
+    position: relative;
+}
+.request-manager input.checked::before {
+    content: "2714";
+    font-size: 1.5em;
+    color: #fff;
+    position: absolute;
+    right: 1px;
+    top: -5px;
+}
+.checkbox-wrapper input[type="checkbox"]:disabled {
+    border-color: #c0c0c0;
+    background-color: #c0c0c0;
+}
+  
+.checkbox-wrapper input[type="checkbox"]:disabled + span {
+    color: #c0c0c0;
+}
+  
+.checkbox-wrapper input[type="checkbox"]:focus {
+    box-shadow: 0 0 20px #007a7e;
+}

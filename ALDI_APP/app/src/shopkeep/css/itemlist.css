@@ -1,0 +1,520 @@
+.ItemList {
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 2px 0;
+    background-color: rgb(233, 234, 236);
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 49px calc(100% - 49px);
+    height: 100%;
+    position: relative;
+}
+.ItemList_Container {
+    margin: 14px;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: calc(100% - 50px) 50px;
+    box-shadow: 0 0 2px rgb(0 0 0 / 10%);
+}
+.ItemList_Table > thead > tr > td:hover {
+    background-color: #e4e6e8;
+}
+.ItemList_Table > thead > tr > td {
+    cursor: pointer;
+    transition: background-color .5s;
+}
+.ItemList_Table_Header_Search_Wrapper {
+    display: flex;
+    flex-direction: row;
+}
+.ItemList_Table_Header_Search_Filter_Button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    color: #babfc6;
+    margin-left: 2px;
+}
+.ItemList_Table_Header_Search_Filter_Button:hover {
+    color: #1b2838;
+}
+.ItemList_Table_Header_Title_Not_Item {
+    text-align: right;
+    user-select: none;
+}
+.ItemList_Table_Header_Title_Item {
+    text-align: left;
+    user-select: none;
+}
+.ItemList_PageOptions_Page_Buttons_Container {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.ItemList_PageOptions_Page_Button {
+    border: none;
+    margin: 0 5px;
+    background-color: white;
+    outline: none;
+    user-select: none;
+    color: rgb(82, 94, 113);
+    width: 18px;
+}
+.ItemList_PageOptions_Page_Button_Disabled {
+    border: none;
+    margin: 0 5px;
+    background-color: white;
+    outline: none;
+    user-select: none;
+    color: rgba(0, 0, 0, 0.38);
+    cursor: none;
+    width: 18px;
+}
+.ItemList_PageOptions_CurrentPage {
+    font-size: 14px;
+    font-weight: 300;
+    font-family: Lato, sans-serif;
+    color: rgba(0, 0, 0, 0.54);
+    margin: 0 8px;
+}
+.ItemList_Header_AddNewItem_Button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgb(125, 134, 149);
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    padding: 0 14px;
+}
+.ItemList_Header_AddNewItem_Button:hover {
+    color: rgb(27, 40, 56);
+}
+.ItemList_Header_Button {
+    margin-right: 21px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 300;
+}
+.ItemList_Header_Button_Disabled {
+    cursor: none;
+    pointer-events: none;
+}
+.ItemList_Table > thead > tr {
+    background-color: rgb(242, 243, 244);
+}
+
+.ItemList_Table > thead > tr > td:last-child {
+    border-right: none;
+}
+.ItemList_Table_Header_Title {
+    text-align: left;
+}
+.ItemList_Table_Header_Title > div {
+    color: rgb(27, 40, 56);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: Lato;
+}
+.ItemList_Table_Header_Input {
+    border: 1px solid #dddfe1;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px 0 rgb(0 0 0 / 10%);
+    height: 100%;
+    width: 100%;
+    caret-color: #009fd4;
+    color: #525e71;
+    font-family: Lato,sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 4px 10px;
+    height: 20px;
+}
+.ItemList_Table_PageOptions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    padding: 0 21px;
+    border-bottom: 1px solid rgb(221, 223, 225);
+    border-top: 1px solid rgb(221, 223, 225);
+}
+.ItemList_Table_PageOptions_Container {
+    user-select: none !important;
+    width: 100%;
+    position: relative;
+    text-align: left;
+}
+.ItemList_Table_PageOptions_Title {
+    color: rgba(0, 0, 0, 0.54);
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 14px;
+}
+.ItemList_Table_PageOptions_Button {
+    background-color: rgb(240, 240, 240);
+    border: none;
+    outline: none;
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: 200;
+    color: rgba(0, 0, 0, 0.54);
+    cursor: pointer;
+}
+.ItemList_Table_PageOptions_Button--selected {
+    font-weight: 600;
+}
+.ItemList_Table_PageOptions_Summary {
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.54);
+    margin-right: 30px;
+}
+
+.ItemList_Table_Content > tbody > tr:nth-child(odd) {
+    background: rgb(250, 250, 250);
+}
+.ItemList_ItemName_Button {
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    position: relative;
+    float: left;
+    margin-left: 39px;
+    color: rgb(82, 94, 113);
+    user-select: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.ItemList_ItemDetails {
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    position: relative;
+    float: right;
+    color: rgb(82, 94, 113);
+    user-select: none;
+}
+.ItemList_Table_Body_Data_Container {
+    white-space: nowrap;
+}
+.PageLayout_Header_Button_Container {
+    display: flex;
+    flex-direction: row;
+}
+
+.ItemList_Header_AddNewItem_Text::before {
+    content:'+ ';
+}
+
+
+
+.ItemList_Test {
+    height: 100%;
+    overflow-x: scroll;
+    display: flex;
+    flex-direction: column;
+    overflow-y: clip;
+}
+.ItemList_Table_Content > thead {
+    position: fixed;
+    z-index: 20;
+    width: 100%;
+}
+.xtest {
+    height: calc(100% - 40px);
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    overflow-y: overlay;
+}
+.ItemList_Table_Content {
+    min-width: 100%;
+    border-collapse: collapse;
+}
+.ItemList_Table_Content_Body_Cell_Item_Col {
+    height: 42px;
+    line-height: 42px;
+    padding: 0 20px;
+    min-width: 305px;
+    max-width: 305px;
+    border-bottom: 1px solid rgb(221, 223, 225);
+}
+.ItemList_Table_Header_Col:hover, .ItemList_Table_Header_Item_Col:hover {
+    background-color: #e4e6e8;
+}
+.ItemList_Table_Content_Body_Cell {
+    height: 42px;
+    line-height: 42px;
+    padding: 0 20px;
+    flex-grow: 1;
+    border-bottom: 1px solid rgb(221, 223, 225);
+    min-width: 140px;
+}
+.ItemList_Table_Content_Row {
+    display: flex;
+}
+.ItemList_Table_Content_Row > div:last-child {
+    padding: 0 35px 0 20px;
+}
+.ItemList_Table_Content_Container > div:nth-child(odd) {
+    background: rgb(250, 250, 250);
+}
+.ItemList_Table_Content_Container {
+    flex-grow: 1;
+}
+.ItemList_Table_Header_Col, .ItemList_Table_Header_Item_Col {
+    padding: 0 21px;
+    display: block;
+    height: 60px;
+    border: 1px solid rgb(221, 223, 225);
+    min-width: 140px;
+    flex-grow: 1;
+    cursor: pointer;
+    background-color: rgb(242, 243, 244);
+    transition: background-color .5s;
+    position: relative;
+}
+.ItemList_Table:not(.hidden):first-child {
+    border-left: none;
+}
+.ItemList_Table:not(.hidden):last-child {
+    border-right: none;
+}
+.hidden {
+    display: none;
+}
+.ItemList_Table_Header_Grid {
+    display: grid;
+    grid-template: 
+    "top sort-icon" fit-content(20px)
+    "bottom bottom" minmax(0, min-content)/1fr 20px;
+    height: 100%;
+    width: 100%;
+}
+.ItemList_Table_Header_Wrapper {
+    height: 100%;
+    width: 100%;
+}
+.ItemList_Table_Header_Title_Item {
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+.ItemList_Table_Header_Title_Not_Item {
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.ItemList_Table_Header_Title_Item > span {
+    white-space: nowrap;
+    user-select: none;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    font-family: Lato, sans-serif;
+    font-weight: 400;
+    color: rgb(27, 40, 56);
+}
+.ItemList_Table_Header_Title_Not_Item > span {
+    white-space: nowrap;
+    user-select: none;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    font-family: Lato, sans-serif;
+    font-weight: 400;
+    color: rgb(27, 40, 56);
+}
+.ItemList_Table_Header_Sort_Icon_Wrapper {
+    align-items: center;
+    display: flex;
+    grid-area: sort-icon;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+    user-select: none;
+}
+.ItemList_Table_Header_Input_Wrapper {
+    grid-area: input;
+    height: 20px;
+}
+.ItemList_Table_Header_Filter_Icon_Wrapper {
+    align-self: center;
+    grid-area: icon;
+    justify-self: center;
+}
+.ItemList_Table_Header_Item_Wrapper {
+    grid-area: bottom;
+}
+.ItemList_Table_Header_Item_Bottom {
+    display: grid;
+    grid-template: "input icon" 20px/1fr 20px;
+    height: 20px;
+}
+.ItemList_Table_Header_Item_Col {
+    padding: 0 21px;
+    height: 60px;
+    border: 1px solid rgb(221, 223, 225);
+    min-width: 305px;
+    max-width: 305px;
+}
+.ItemList_Table_ItemName_Column {
+    width: 305px;
+    max-width: 305px;
+    border-left: none;
+}
+.ItemList_Table_Container_Scroll {
+    height: 100%;
+    position: relative;
+    top: 40px;
+    overflow-x: visible;
+    flex-grow: 1;
+}
+.ItemList_Table {
+    border-collapse: collapse;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 0;
+}
+.ItemList_Header_Control_Buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    height: 40px;
+    padding: 0 21px;
+}
+.ItemList_Header_Container {
+    height: 40px;
+    z-index: 10;
+    position: fixed;
+}
+
+.ItemList_Filter_Search_Dropdown {
+    width: 300px;
+    height: 130px;
+}
+
+.ItemList_Input_Search {
+    height: 36px;
+    border: 1px solid #dddfe1;
+    border-radius: 5px;
+    padding: 10px;
+    outline: none;
+    box-shadow: inset 0 1px 3px 0 rgb(0 0 0 / 10%);
+    background-color: white;
+    width: 100%;
+    position: relative;
+}
+.ItemList_Input_Search_Wrapper {
+    height: 36px;
+    width: 100%;
+}
+.ItemList_Clear_Wrapper {
+    width: 100%;
+}
+.ItemList_Clear_Button {
+    height: 21px;
+    border: none;
+    padding: 0;
+    text-decoration: underline;
+    color: #f66;
+    text-align: left;
+    position: relative;
+    float: left;
+    outline: none;
+    background-color: white;
+}
+.ItemList_Clear_Button:hover {
+    color: red;
+}
+
+.ItemList_Filter_Search_Dropdown {
+    position: absolute;
+    right: 0px;
+    bottom: 0;
+    top: 50px;
+    width: 0;
+    transition: width 0.5s ease;
+    background-color: white;
+    overflow: hidden;
+    z-index: 9999;
+}
+.ItemList_Filter_Type_Button {
+    width: 100%;
+    height: 37px;
+    padding: 0 15px;
+    font-size: 14px;
+    text-align: left;
+    box-shadow: inset 0 -1px 0 0 #dddfe1;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    background-color: white;
+}
+.ItemList_Header_Filter_Dropdown_Wrapper {
+    width: 300px;
+    height: 130px;
+    position: absolute;
+    background-color: white;
+    overflow: hidden;
+    z-index: 9999;
+    border: 1px solid #dddfe1;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 15%);
+    top: 60px;
+}
+.ItemList_Open_Collapsible {
+    overflow: hidden;
+}
+.ItemList_Open_Wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    height: 130px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.ItemList_Open_Wrapper_Item {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    height: 55px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.ItemList_Filter_Select {
+    background-color: #fff;
+    border: none;
+    color: #525e71;
+    height: 30px;
+    width: 100%;
+    outline: none;
+    line-height: normal;
+    font-family: Lato, sans-serif;
+}
+.ItemList_Select_Wrapper {
+    border: 1px solid #dddfe1;
+}
+.ItemList_Table_Header_Sort_Icon_Wrapper {
+    display: flex;
+    align-items: flex-end;
+}

@@ -1,0 +1,287 @@
+.ItemList {
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 2px 0;
+    background-color: rgb(233, 234, 236);
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 49px calc(100% - 49px);
+    height: 100%;
+    position: relative;
+}
+.ItemList_Container {
+    margin: 14px;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: calc(100% - 50px) 50px;
+    box-shadow: 0 0 2px rgb(0 0 0 / 10%);
+}
+.ItemList_Header_Control_Buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 300;
+    height: 40px;
+    padding: 0 21px;
+}
+.ItemList_Header_Container {
+    height: 50px;
+    border-bottom: 1px solid rgb(221, 223, 225);
+    z-index: 10;
+}
+.ItemList_Table > thead > tr > td:hover {
+    background-color: #e4e6e8;
+}
+.ItemList_Table > thead > tr > td {
+    cursor: pointer;
+    transition: background-color .5s;
+}
+.ItemList_Table_Header_Search_Wrapper {
+    display: flex;
+    flex-direction: row;
+}
+.ItemList_Table_Header_Search_Filter_Button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    color: #babfc6;
+    margin-left: 2px;
+}
+.ItemList_Table_Header_Search_Filter_Button:hover {
+    color: #1b2838;
+}
+.ItemList_Table_Header_Title_Not_Item {
+    text-align: right;
+    user-select: none;
+}
+.ItemList_Table_Header_Title_Item {
+    text-align: left;
+    user-select: none;
+}
+.ItemList_PageOptions_Page_Buttons_Container {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.ItemList_PageOptions_Page_Button {
+    border: none;
+    margin: 0 5px;
+    background-color: white;
+    outline: none;
+    user-select: none;
+    color: rgb(82, 94, 113);
+    width: 18px;
+}
+.ItemList_PageOptions_Page_Button_Disabled {
+    border: none;
+    margin: 0 5px;
+    background-color: white;
+    outline: none;
+    user-select: none;
+    color: rgba(0, 0, 0, 0.38);
+    cursor: none;
+    width: 18px;
+}
+.ItemList_PageOptions_CurrentPage {
+    font-size: 14px;
+    font-weight: 300;
+    font-family: Lato, sans-serif;
+    color: rgba(0, 0, 0, 0.54);
+    margin: 0 8px;
+}
+.ItemList_Header_AddNewItem_Button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgb(125, 134, 149);
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    padding: 0 14px;
+}
+.ItemList_Header_AddNewItem_Button:hover {
+    color: rgb(27, 40, 56);
+}
+.ItemList_Header_Button {
+    margin-right: 21px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 300;
+}
+.ItemList_Header_Button_Disabled {
+    cursor: none;
+    pointer-events: none;
+}
+.ItemList_Table_Container_Scroll {
+    overflow-y: clip;
+    height: calc(100% - 50px);
+}
+.ItemList_Table {
+    width: 100%;
+    border-collapse: collapse;
+    height: 60px;
+}
+.ItemList_Table > thead > tr {
+    background-color: rgb(242, 243, 244);
+}
+.ItemList_Table_Header_Col {
+    padding: 0 21px;
+    height: 60px;
+    border: 1px solid rgb(221, 223, 225);
+    min-width: 140px;
+}
+.ItemList_Table_Header_Item_Col {
+    padding: 0 21px;
+    height: 60px;
+    border: 1px solid rgb(221, 223, 225);
+    min-width: 305px;
+    max-width: 305px;
+}
+.ItemList_Table_ItemName_Column {
+    width: 305px;
+    max-width: 305px;
+    border-left: none;
+}
+.ItemList_Table > thead > tr > td:last-child {
+    border-right: none;
+}
+.ItemList_Table_Header_Title {
+    text-align: left;
+}
+.ItemList_Table_Header_Title > div {
+    color: rgb(27, 40, 56);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: Lato;
+}
+.ItemList_Table_Header_Input {
+    height: 24px;
+    font-size: 12px;
+    font-family: Lato;
+    font-weight: 300;
+    width: 100%;
+    padding: 10px 4px;
+    border: 1px solid rgb(221, 223, 225);
+    border-radius: 5px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 1px 3px 0px inset;
+}
+.ItemList_Table_PageOptions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    padding: 0 21px;
+    border-bottom: 1px solid rgb(221, 223, 225);
+    border-top: 1px solid rgb(221, 223, 225);
+}
+.ItemList_Table_PageOptions_Container {
+    user-select: none !important;
+    width: 100%;
+    position: relative;
+    text-align: left;
+}
+.ItemList_Table_PageOptions_Title {
+    color: rgba(0, 0, 0, 0.54);
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 14px;
+}
+.ItemList_Table_PageOptions_Button {
+    background-color: rgb(240, 240, 240);
+    border: none;
+    outline: none;
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: 200;
+    color: rgba(0, 0, 0, 0.54);
+    cursor: pointer;
+}
+.ItemList_Table_PageOptions_Button--selected {
+    font-weight: 600;
+}
+.ItemList_Table_PageOptions_Summary {
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.54);
+    margin-right: 30px;
+}
+.ItemList_Table_Content {
+    min-width: 100%;
+    border-collapse: collapse;
+}
+.ItemList_Table_Content_Body_Cell_Item_Col {
+    height: 42px;
+    line-height: 42px;
+    padding: 0 20px;
+    width: 305px;
+    border-bottom: 1px solid rgb(221, 223, 225);
+}
+.ItemList_Table_Content_Body_Cell {
+    height: 42px;
+    line-height: 42px;
+    padding: 0 20px;
+    min-width: 140px;
+    border-bottom: 1px solid rgb(221, 223, 225);
+}
+.ItemList_Table_Content > tbody > tr:nth-child(odd) {
+    background: rgb(250, 250, 250);
+}
+.ItemList_ItemName_Button {
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    position: relative;
+    float: left;
+    margin-left: 39px;
+    color: rgb(82, 94, 113);
+    user-select: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.ItemList_ItemDetails {
+    font-family: Lato, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    position: relative;
+    float: right;
+    color: rgb(82, 94, 113);
+    user-select: none;
+}
+.ItemList_Table_Body_Data_Container {
+    white-space: nowrap;
+}
+.PageLayout_Header_Button_Container {
+    display: flex;
+    flex-direction: row;
+}
+
+.ItemList_Header_AddNewItem_Text::before {
+    content:'+ ';
+}
+
+
+
+.ItemList_Test {
+    border: 1px solid red;
+    height: 100%;
+    overflow-x: scroll;
+    overflow-y: clip;
+}
+.ItemList_Table_Content > thead {
+    position: fixed;
+    z-index: 20;
+    width: 100%;
+}
+.xtest {
+    height: calc(100% - 60px);
+}

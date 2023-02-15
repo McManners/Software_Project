@@ -40,14 +40,14 @@
     font-size: 0.9rem;
     font-weight: 350;
 }
-.day {
+.calendar-container .day {
     aspect-ratio: 1/1;
     display: flex;
     flex-direction: column;
     position: relative;
     background-color: white;
 }
-.spread {
+.calendar-container > .spread {
     position: absolute;
     height: 100%;
     width: 100%;

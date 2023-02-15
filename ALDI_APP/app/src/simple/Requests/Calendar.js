@@ -221,7 +221,7 @@ const Calendar = ({setSelectedDays, selectedDays, setSelectedMonth, selectedMont
             )
         }
     }
-    console.log(allMonths)
+    console.log(selectedMonth)
     return (
             <div className='calendar-container disable-select'>
                 <div className='calendar-header'>

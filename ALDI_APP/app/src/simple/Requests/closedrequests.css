@@ -21,3 +21,35 @@
     text-align: left;
     padding: 10px;
 }
+.closed-request-table {
+    border: 1px solid rgb(213, 215, 219);
+    width: 100%;
+    border-collapse: collapse;
+    width: 100%;
+    max-height: 100%;
+}
+.closed-request-table th {
+    height: 3em;
+    font-weight: 500;
+}
+.closed-request-table th:not(:first-child) {
+    border-left: 1px solid rgb(213, 215, 219);
+}
+.closed-request-table td {
+    padding: 5px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+.closed-request-table-row {
+    cursor: pointer;
+}
+.closed-request-open-request-row {
+    cursor: default;
+}
+.closed-request-table tr:nth-child(even) {
+    background-color: #eae9e9;
+}
+.closed-request-table thead {
+    position: sticky;
+    top: -1px;
+}

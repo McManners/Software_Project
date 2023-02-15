@@ -1,0 +1,17 @@
+.Game_Container {
+    background-color: lightcoral;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Game_Main {
+    height: 75%;
+    width: 75%;
+    background-color: white;
+    border: 5px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

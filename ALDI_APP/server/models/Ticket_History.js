@@ -38,7 +38,6 @@ module.exports = (sequelize, DataTypes) => {
         field: 'ticket_id'
       },
       sourceKey: 'ticket_id'
-
     });
     // Ticket_History.hasOne(models.Employee, {
     //     foreignKey: {
@@ -82,8 +81,14 @@ module.exports = (sequelize, DataTypes) => {
             models.Ticket_Date_Range,
             models.Employee
         ],
-      attributes: { exclude: ['updatedAt'] } // lets include createdAt for now, so we know when the ticket was submitted...
-    });
+        attributes: { exclude: ['updatedAt'] }
+    }), // lets include createdAt for now, so we know when the ticket was submitted...
+    Ticket_History.addScope('ticketHistories', {
+        include: [
+            models.Ticket_Date_Range
+        ],
+        attributes: { exclude: ['updatedAt', 'ticket_id', 'ticket_history_id', 'pto_type_id', 'employee_id'] } // lets include createdAt for now, so we know when the ticket was submitted...
+    })
   };
 
   return Ticket_History;
