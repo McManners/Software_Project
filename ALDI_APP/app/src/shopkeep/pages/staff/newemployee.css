@@ -1,0 +1,172 @@
+.NewEmployee {
+    background-color: rgb(233, 234, 236);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow-y: scroll;
+    padding: 0 14px;
+}
+.NewEmployee * {
+    font-family: "Lato", sans-serif;
+}
+.NewEmployee_Content_Container {
+    background-color: transparent;
+}
+.NewEmployee_Header {
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 -14px 14px -14px;
+    padding: 0 0 0 14px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.07);
+}
+.NewEmployee_Header_Title {
+    color: #373E4A;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 35px;
+    padding: 4px;
+    letter-spacing: -0.72px;
+}
+.NewEmployee_Panel {
+    border: 1px solid rgb(221, 221, 221);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+.NewEmployee_Content_Container .NewEmployee_Panel:not(:first-child) {
+    margin-top: 20px;
+}
+.NewEmployee_Panel_Header {
+    padding: 10px 20px 10px 10px;
+    background-color: transparent;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    text-align: left;
+}
+.NewEmployee_Panel_Header_Title {
+    font-size: 18px;
+    font-weight: 400;
+    color: #333333;
+    line-height: 25px;
+    letter-spacing: -0.72px;
+}
+.NewEmployee_Panel_Container {
+    padding: 10px 10px 0 10px;
+    background-color: transparent;
+    width: 100%;
+
+}
+.NewEmployee_Panel_Flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    background-color: transparent;
+}
+.NewEmployee_Panel_Flex_Row {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.NewEmployee_Panel_Flex_Row_Item {
+    flex: 0 1 49%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.NewEmployee_Panel_Flex_Row_Item_Input_Label_Wrapper {
+    line-height: 14px;
+    background-color: transparent;
+    width: 100%;
+    text-align: left;
+}
+.NewEmployee_Panel_Flex_Row_Item_Input_Label {
+    color: rgb(82, 94, 113);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 14px;
+    margin-bottom: 12px;
+    margin-top: 5px;
+}
+.NewEmployee_Panel_Flex_Row_Item_Input_Label::after {
+    content: "*";
+    color: rgb(0, 187, 225);
+    cursor: default;
+    font-family: "Lato", sans-serif;
+    font-size: 14px;
+    line-height: 14px;
+}
+.NewEmployee_Panel_Flex_Row_Item_Input_Wrapper {
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 1px solid #dddfe1;
+    display: flex;
+    width: 100%;
+    box-shadow: inset 0 1px 3px 0 rgba(0,0,0,.1);
+}
+.NewEmployee_Panel_Flex_Row_Item_Input {
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    margin: 0 10px;
+    min-height: 34px;
+    width: 100%;
+    padding: 1px 2px;
+    color: rgb(27, 40, 56);
+    font-weight: 400;
+    font-size: 14px;
+    outline: none;
+}
+.NewEmployee_Footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+}
+.NewEmployee_Footer_Container {
+    text-align: right;
+    padding-right: 20px;
+}
+.NewEmployee_Footer_Button_Cancel {
+    border: 1px solid rgb(0, 187, 225);
+    background-color: white;
+    color: rgb(0, 187, 225);
+    margin-right: 10px;
+    width: 140px;
+    height: 40px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 7px 28px;
+}
+.NewEmployee_Footer_Button_Save {
+    width: 140px;
+    height: 40px;
+    background: rgb(0, 187, 225);
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: rgba(0, 145, 174) 0 2px 0 0;
+    position: relative;
+    font-size: 14px;
+    font-weight: 400;
+    float: right;
+    padding: 7px 28px;
+}
+.NewEmployee_Footer_Button_Cancel:hover {
+    color: rgb(0, 145, 174);
+}
+.NewEmployee_Footer_Button_Save:hover {
+    background-color: rgb(0, 145, 174);
+    color: white;
+}

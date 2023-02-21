@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import AddNewItemDialog from '../components/AddNewItem';
 import FilterItemList from '../components/FilterItemList';
 import '../css/itemlist.css';
@@ -9,77 +8,7 @@ import { AiOutlineVerticalLeft, AiOutlineLeft, AiOutlineRight, AiOutlineVertical
 import SortButton from '../components/SortButton';
 import axios from 'axios';
 
-// let initialItems = require('../data/stock_items.json');
-const x = [
-    {
-      "Item UUID": "20074875-570C-43C2-BBDC-B39C2985585D",
-      "Name": "Beef Sausage Combo",
-      "Department": "general",
-      "Category": "general",
-      "UPC": "",
-      "Store Code (SKU)": 400000000718,
-      "Price": 8.79,
-      "Discountable": true,
-      "Taxable": true,
-      "Tracking Inventory": true,
-      "Cost": 1,
-      "Assigned Cost": 1,
-      "Quantity": -228,
-      "Reorder Trigger": 0,
-      "Recommended Order": 0,
-      "Last Sold Date": "2023-01-18 12:32:09",
-      "Supplier": "not tracked",
-      "Liability Item": false,
-      "Liability Redemption Tender": "",
-      "Tax Group or Rate": ""
-    },
-    {
-      "Item UUID": "CBE8ECDC-05C1-4670-A9D8-24A899EC99FA",
-      "Name": "Huge Italian Beef",
-      "Department": "general",
-      "Category": "general",
-      "UPC": "",
-      "Store Code (SKU)": 400000000725,
-      "Price": 9.99,
-      "Discountable": true,
-      "Taxable": true,
-      "Tracking Inventory": true,
-      "Cost": 1,
-      "Assigned Cost": 1,
-      "Quantity": -242,
-      "Reorder Trigger": 0,
-      "Recommended Order": 0,
-      "Last Sold Date": "2023-01-22 12:04:46",
-      "Liability Item": false,
-      "Liability Redemption Tender": "",
-      "Tax Group or Rate": ""
-    },
-    {
-      "Item UUID": "8CDAF64D-9CCC-47AF-98F6-243A112BEFE4",
-      "Name": "6” French Rolls",
-      "Department": "general",
-      "Category": "general",
-      "UPC": "",
-      "Store Code (SKU)": 400000000909,
-      "Price": 1,
-      "Discountable": true,
-      "Taxable": true,
-      "Tracking Inventory": true,
-      "Cost": 1,
-      "Assigned Cost": 1,
-      "Quantity": -12,
-      "Reorder Trigger": 0,
-      "Recommended Order": 0,
-      "Last Sold Date": "2022-12-22 13:56:50",
-      "Supplier": "not tracked",
-      "Liability Item": false,
-      "Liability Redemption Tender": "",
-      "Tax Group or Rate": ""
-    }
-];
-
 const ItemList = () => {
-    const navigate = useNavigate();
     const [addNewItemOpen, setAddNewItemOpen] = useState(false);
     const [addBasicItemOpen, setAddBasicItemOpen] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -101,6 +30,9 @@ const ItemList = () => {
             setInitialItems(res.data);
             setItems(res.data);
         })
+        .catch(function (err) {
+            console.log(err.message);
+        });
     }, []);
     useEffect(() => {
         console.log(sortType['Type'])
@@ -396,7 +328,7 @@ const ItemList = () => {
                                     </div>
                                     <div className='ItemList_Table_Content_Body_Cell_Item_Col' style={(showHideValue.includes('Item')) ? {display: 'block'} : {display: 'none'}}>
                                         <div className='ItemList_Table_Body_Data_Container'>
-                                            <button className='ItemList_ItemName_Button' onClick={() => navigate(`/salerno/edit/${item['itemUUID']}`)}>{item['name']}</button>
+                                            <a href={`/salerno/edit/${item['itemUUID']}`} className='ItemList_ItemName_Button'>{item['name']}</a>
                                         </div>
                                     </div>
                                     <div className='ItemList_Table_Content_Body_Cell' style={(showHideValue.includes('Margin')) ? {display: 'block', width: `calc(100% / ${showHideValue.length}`} : {display: 'none'}}>

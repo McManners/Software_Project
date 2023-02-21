@@ -1,0 +1,102 @@
+.EmployeeList {
+    background-color: rgb(233, 234, 236);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow-y: scroll;
+    padding: 0 14px;
+}
+.EmployeeList * {
+    font-family: "Lato", sans-serif;
+}
+.EmployeeList_Container {
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 14px;
+    padding: 20px;
+}
+.EmployeeList_Header {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 -14px 14px -14px;
+    padding: 0 0 0 14px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.07);
+}
+.EmployeeList_Header_Title {
+    color: #373E4A;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 35px;
+    padding: 4px;
+    letter-spacing: -0.72px;
+}
+.EmployeeList_Header_AddStaff_Button_Wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.EmployeeList_Header_AddStaff_Button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(125, 134, 149);
+    font-size: 14px;
+    padding: 0 14px;
+}
+.EmployeeList_Header_AddStaff_Button::before {
+    content: "+";
+    font-size: 14px;
+    margin-right: 3px;
+    cursor: pointer;
+}
+.EmployeeList_Header_AddStaff_Button:hover {
+    color: rgb(27, 40, 56);
+}
+.EmployeeList_Table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+.EmployeeList_Table thead th {
+    font-size: 14px;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    vertical-align: bottom;
+    white-space: nowrap;
+    line-height: 20px;
+    padding: 8px;
+    font-family: "Lato", sans-serif;
+    background-color: transparent;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    text-align: left;
+}
+.EmployeeList_Table tbody tr {
+    color: rgb(99, 116, 98);
+    cursor: pointer;
+    background-color: white;
+}
+.EmployeeList_Table tbody tr:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 187, 225);
+}
+.EmployeeList_Table tbody tr td {
+    padding: 8px;
+    background-color: inherit;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    font-size: 12px;
+    font-weight: 300;
+    vertical-align: top;
+    font-family: "Lato Light", sans-serif;
+    color: inherit;
+}
+.EmployeeList_Table_Cell_Centered {
+    text-align: center;
+}
+.EmployeeList_Table_Cell_Left {
+    text-align: left;
+}

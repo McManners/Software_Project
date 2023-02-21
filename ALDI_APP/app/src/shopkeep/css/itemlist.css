@@ -399,8 +399,7 @@
 }
 .ItemList_Header_Container {
     height: 40px;
-    z-index: 10;
-    position: fixed;
+    position: absolute;
 }
 
 .ItemList_Filter_Search_Dropdown {

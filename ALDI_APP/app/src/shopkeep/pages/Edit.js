@@ -167,12 +167,12 @@ export default function Edit() {
                                 Delete
                             </button>
                             <div style={{flexGrow: '1'}}></div>
-                            <button type='button' className='EditItem_Submit_Footer_Button_Cancel' onClick={() => navigate('/salerno/itemlist')}>
+                            <a href="/salerno/items" className='EditItem_Submit_Footer_Button_Cancel'>
                                 Cancel
-                            </button>
-                            <button type='button' className='EditItem_Submit_Footer_Button_Save'>
+                            </a>
+                            <a href="/salerno/items" className='EditItem_Submit_Footer_Button_Save'>
                                 Save and close
-                            </button>
+                            </a>
                     </div>
                 </div>
             </div>

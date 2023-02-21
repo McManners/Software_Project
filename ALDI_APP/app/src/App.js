@@ -25,23 +25,26 @@ import Dashboard_ShopKeep from './shopkeep/pages/dashboard/Dashboard_ShopKeep';
 import Edit from './shopkeep/pages/Edit';
 import Modifiers from './shopkeep/pages/Modifiers';
 import TimeClock from './shopkeep/pages/TimeClock';
+import NewEmployee from './shopkeep/pages/staff/NewEmployee';
+import EmployeeList from './shopkeep/pages/staff/EmployeeList';
+import EditEmployee from './shopkeep/pages/staff/EditEmployee';
 
 
 function App() {
 
     return (
         <Routes>
-
-            <Route path='/game' element={<Game />} />
-
             <Route path="salerno" element={<Dashboard_ShopKeep />}>
                 <Route element={<PageLayout />}>
-                    <Route path='itemlist' element={<ItemList />} />
-                    <Route path='edit/:uuid' element={<Edit />} />
+                    <Route path='items' element={<ItemList />} />
+                    <Route path='items/:uuid/edit' element={<Edit />} />
                     {/* <Route path='edit/new' element={<Edit />} /> */}
-                    <Route path='modifiers/:uuid' element={<Modifiers />} />
+                    <Route path='items/modifiers/:uuid' element={<Modifiers />} />
 
-                    <Route path='staff/timeclock' element={<TimeClock />} />
+                    <Route path='employees' element={<EmployeeList />} />
+                    <Route path='employees/timeclock' element={<TimeClock />} />
+                    <Route path='employees/new' element={<NewEmployee />} />
+                    <Route path='employees/:id/edit' element={<EditEmployee />} />
                 </Route>
             </Route>
 
