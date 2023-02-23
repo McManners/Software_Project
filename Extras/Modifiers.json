@@ -1,0 +1,43 @@
+{
+  "name": "Italian Beef Modifier",
+  "description": "Modifiers for Italian Beef",
+  "itemId": 1,
+  "groups": [
+    {
+      "name": "Gravy",
+      "groupOptions": [
+        {
+          "name": "Dry",
+          "price": 0
+        },
+        {
+          "name": "Wet",
+          "price": 0
+        },
+        {
+          "name": "Soaked",
+          "price": 0
+        }
+      ]
+    }
+  ],
+  "addons": [
+    {
+      "name": "Mozzarella Cheese",
+      "price": 1.00
+    },
+    {
+      "name": "Cheddar Cheese",
+      "price": 1.00
+    },
+    {
+      "name": "Hot Giardinera",
+      "price": 0.75
+    },
+    {
+      "name": "Sweet Peppers",
+      "price": 0.75
+    }
+  ],
+  "noOptions": []
+}

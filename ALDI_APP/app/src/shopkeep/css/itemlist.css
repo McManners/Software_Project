@@ -191,6 +191,10 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+    text-decoration: none;
+}
+.ItemList_ItemName_Button:hover {
+    color: rgb(82, 94, 113);
 }
 .ItemList_ItemDetails {
     font-family: Lato, sans-serif;

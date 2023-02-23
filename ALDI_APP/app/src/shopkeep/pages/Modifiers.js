@@ -7,7 +7,7 @@ import { BsPlusSquareFill } from 'react-icons/bs';
 import { RiDeleteBinFill } from 'react-icons/ri';
 import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti';
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im';
-
+import axios from 'axios';
 import ButtonTabs from "../components/ButtonTabs";
 import { useParams } from "react-router-dom";
 import FilterButton from "../container/FilterButton";
@@ -30,106 +30,119 @@ export default function Modifiers() {
         ]
     }
 
-    const [modifiers, setModifiers] = useState(
-        {
-            "Groups":
-                [
-                    {
-                        "ID": 1,
-                        "Name": "Gravy",
-                        "Options": [
-                            {
-                                "ID": 1,
-                                "Name": "Dry",
-                                "Price": 0
-                            },
-                            {
-                                "ID": 2,
-                                "Name": "Wet",
-                                "Price": 0
-                            },
-                            {
-                                "ID": 3,
-                                "Name": "Soaked",
-                                "Price": 0
-                            }
-                        ]
-                    },
-                    {
-                        "ID": 2,
-                        "Name": "Group 2",
-                        "Options": [
-                            {
-                                "ID": 4,
-                                "Name": "Name 1",
-                                "Price": 10
-                            }
-                        ]
-                    }
-                ],
-            "Add Ons":
-                [
-                    {
-                        "ID": 1,
-                        "Name": "Mozzarella",
-                        "Price": 1.5
-                    },
-                    {
-                        "ID": 2,
-                        "Name": "Cheddar",
-                        "Price": 1.5
-                    },
-                    {
-                        "ID": 3,
-                        "Name": "Sweet Peppers",
-                        "Price": 1.25
-                    },
-                    {
-                        "ID": 4,
-                        "Name": "Hot Peppers",
-                        "Price": 1.25
-                    }
-                ],
-            "No Options":
-                [
-                    {
-                        "ID": 1,
-                        "Name": "Mozzarella",
-                        "Price": 1.5
-                    },
-                    {
-                        "ID": 2,
-                        "Name": "Cheddar",
-                        "Price": 1.5
-                    },
-                    {
-                        "ID": 3,
-                        "Name": "Sweet Peppers",
-                        "Price": 1.25
-                    },
-                    {
-                        "ID": 4,
-                        "Name": "Hot Peppers",
-                        "Price": 1.25
-                    }
-                ]
-        }
-    );
+    // const [modifiers, setModifiers] = useState(
+    //     {
+    //         "Groups":
+    //             [
+    //                 {
+    //                     "ID": 1,
+    //                     "Name": "Gravy",
+    //                     "Options": [
+    //                         {
+    //                             "ID": 1,
+    //                             "Name": "Dry",
+    //                             "Price": 0
+    //                         },
+    //                         {
+    //                             "ID": 2,
+    //                             "Name": "Wet",
+    //                             "Price": 0
+    //                         },
+    //                         {
+    //                             "ID": 3,
+    //                             "Name": "Soaked",
+    //                             "Price": 0
+    //                         }
+    //                     ]
+    //                 },
+    //                 {
+    //                     "ID": 2,
+    //                     "Name": "Group 2",
+    //                     "Options": [
+    //                         {
+    //                             "ID": 4,
+    //                             "Name": "Name 1",
+    //                             "Price": 10
+    //                         }
+    //                     ]
+    //                 }
+    //             ],
+    //         "Add Ons":
+    //             [
+    //                 {
+    //                     "ID": 1,
+    //                     "Name": "Mozzarella",
+    //                     "Price": 1.5
+    //                 },
+    //                 {
+    //                     "ID": 2,
+    //                     "Name": "Cheddar",
+    //                     "Price": 1.5
+    //                 },
+    //                 {
+    //                     "ID": 3,
+    //                     "Name": "Sweet Peppers",
+    //                     "Price": 1.25
+    //                 },
+    //                 {
+    //                     "ID": 4,
+    //                     "Name": "Hot Peppers",
+    //                     "Price": 1.25
+    //                 }
+    //             ],
+    //         "No Options":
+    //             [
+    //                 {
+    //                     "ID": 1,
+    //                     "Name": "Mozzarella",
+    //                     "Price": 1.5
+    //                 },
+    //                 {
+    //                     "ID": 2,
+    //                     "Name": "Cheddar",
+    //                     "Price": 1.5
+    //                 },
+    //                 {
+    //                     "ID": 3,
+    //                     "Name": "Sweet Peppers",
+    //                     "Price": 1.25
+    //                 },
+    //                 {
+    //                     "ID": 4,
+    //                     "Name": "Hot Peppers",
+    //                     "Price": 1.25
+    //                 }
+    //             ]
+    //     }
+    // );
 
-
-    const { uuid } = useParams();
+    const [modifiers, setModifiers] = useState(null);
+    const { id } = useParams();
     const [item, setItem] = useState({});
 
+    // useEffect(() => {
+    //     console.log('useeffecting')
+    //     if (uuid !== undefined) {
+    //         stock_items.forEach(item => {
+    //             if (item['Item UUID'] === uuid)
+    //                 setItem(item);
+    //         });
+    //     }
+    //     console.log('done useeffecting')
+    // }, []);
+
     useEffect(() => {
-        console.log('useeffecting')
-        if (uuid !== undefined) {
-            stock_items.forEach(item => {
-                if (item['Item UUID'] === uuid)
-                    setItem(item);
+        if (id !== undefined) {
+            axios.get(`https://localhost:7074/api/modifier/18`)
+            .then(res => {
+                console.log(res.data);
+                setModifiers(res.data);
+            })
+            .catch(function (err) {
+                console.log(err.message);
             });
         }
-        console.log('done useeffecting')
-    }, [])
+    }, []);
 
     const [group, setGroup] = useState(j);
     function updateGroupName(n) {
@@ -200,61 +213,61 @@ export default function Modifiers() {
 
     const handleAddGroup = () => {
         let temp = Object.assign({}, modifiers);
-        temp['Groups'].push(
+        temp['groups'].push(
             {
-                "Name": "New Group",
-                "Options": []
+                "name": "New Group",
+                "groupOptions": []
             }
         )
         setModifiers(temp);
     }
     const handleAddGroupOption = (group) => {
         console.log(group)
-        console.log('adding group option to: ' + group['Name'])
+        console.log('adding group option to: ' + group['name'])
         let temp = Object.assign({}, modifiers);
-        temp['Groups'].find(g => g['Name'] === group['Name'])['Options'].push({ "Name": "New Option", "Price": 0.00 });
+        temp['groups'].find(g => g['name'] === group['name'])['groupOptions'].push({ "name": "New Option", "price": 0.00 });
         setModifiers(temp);
     }
     const handleRemoveGroupOption = (group, option) => {
-        console.log('removing group option for group name: ' + group['Name']);
-        console.log('removing option name: ' + option['Name']);
-        let groupNameToRemove = group['Name'];
-        let optionNameToRemove = option['Name'];
+        console.log('removing group option for group name: ' + group['name']);
+        console.log('removing option name: ' + option['name']);
+        let groupNameToRemove = group['name'];
+        let optionNameToRemove = option['name'];
         let temp = Object.assign({}, modifiers);
-        let targetGroup = temp['Groups'].find(group => group['Name'] === groupNameToRemove)
-        let targetOption = targetGroup['Options'].filter(option => option['Name'] !== optionNameToRemove);
-        temp['Groups'].find(group => group['Name'] === targetGroup['Name'])['Options'] = targetOption;
+        let targetGroup = temp['groups'].find(group => group['name'] === groupNameToRemove)
+        let targetOption = targetGroup['groupOptions'].filter(option => option['name'] !== optionNameToRemove);
+        temp['groups'].find(group => group['name'] === targetGroup['name'])['groupOptions'] = targetOption;
         setModifiers(temp);
     }
     const handleRemoveGroup = (groupInput) => {
-        console.log('removing group by name: ' + group['Name']);
+        console.log('removing group by name: ' + group['name']);
         let temp = Object.assign({}, modifiers);
-        let newGroups = temp['Groups'].filter(group => group['Name'] !== groupInput['Name']);
-        temp['Groups'] = newGroups;
+        let newGroups = temp['groups'].filter(group => group['name'] !== groupInput['name']);
+        temp['groups'] = newGroups;
         setModifiers(temp);
     }
     const handleRemoveAddOn = (addOnInput) => {
         let temp = Object.assign({}, modifiers);
-        let newAddons = temp['Add Ons'].filter(addOn => addOn['Name'] !== addOnInput['Name']);
-        temp['Add Ons'] = newAddons;
+        let newAddons = temp['addons'].filter(addOn => addOn['name'] !== addOnInput['name']);
+        temp['addons'] = newAddons;
         setModifiers(temp);
     }
     const handleRemoveNoOption = (noOptionInput) => {
         let temp = Object.assign({}, modifiers);
-        let newNoOptions = temp['No Options'].filter(noOption => noOption['Name'] !== noOptionInput['Name']);
-        temp['No Options'] = newNoOptions;
+        let newNoOptions = temp['noOptions'].filter(noOption => noOption['name'] !== noOptionInput['name']);
+        temp['noOptions'] = newNoOptions;
         setModifiers(temp);
     }
 
     const handleAddAddOn = () => {
         let temp = Object.assign({}, modifiers);
-        temp['Add Ons'].push({ "Name": "New Option", "Price": 0.00 });
+        temp['addons'].push({ "name": "New Option", "price": 0.00 });
         setModifiers(temp);
     }
     const handleAddNoOption = () => {
         console.log('x')
         let temp = Object.assign({}, modifiers);
-        temp['No Options'].push({ "Name": "New Option", "Price": 0.00 });
+        temp['noOptions'].push({ "name": "New Option", "price": 0.00 });
         setModifiers(temp);
     }
 
@@ -293,7 +306,7 @@ export default function Modifiers() {
     }
 
     const GroupContent = () => {
-        if (modifiers['Groups'].length === 0) {
+        if (modifiers === null || modifiers['groups'].length === 0) {
             return (
                 <div className='Modifiers_Groups_Empty_Container'>
                     <ul className='Modifiers_Groups_Empty_List'>
@@ -316,13 +329,13 @@ export default function Modifiers() {
         return (
             <div>
                 {
-                modifiers['Groups'].map((group, index) => {
+                modifiers['groups'].map((group, index) => {
                     return (
                         <div key={group + index}>
                             <div className='Modifiers_Group_Container'>
                                 <div className='Modifiers_Group_Name_Container'>
                                     <span className='Modifiers_Group_Name_Label'>Group Name</span>
-                                    <input type='text' className='Modifiers_Group_Name_Input' defaultValue={group['Name']}/>
+                                    <input type='text' className='Modifiers_Group_Name_Input' defaultValue={group['name']}/>
                                     <button type='button' className='Modifiers_Delete_Button' onClick={() => handleRemoveGroup(group)}>
                                         <IconContext.Provider value={{ style: { verticalAlign: 'top' },  size: '1.25em' }}>
                                             <RiDeleteBinFill />
@@ -339,10 +352,10 @@ export default function Modifiers() {
                                     
                                     <ul className='Modifiers_Group_List'>
                                     {
-                                        group['Options'].map((option, index) => (
+                                        group['groupOptions'].map((option, index) => (
                                                 <li key={option + index}>
-                                                    <input type='text' className='Modifiers_Option_Name_Input' defaultValue={option['Name']} onChange={SetGroupOptionName} />
-                                                    <input type='text' className='Modifiers_Option_Price_Input' defaultValue={option['Price']} />
+                                                    <input type='text' className='Modifiers_Option_Name_Input' defaultValue={option['name']} onChange={SetGroupOptionName} />
+                                                    <input type='text' className='Modifiers_Option_Price_Input' defaultValue={option['price']} />
                                                     <button type='button' className='Modifiers_Delete_Button' onClick={() => handleRemoveGroupOption(group, option)}>
                                                         <IconContext.Provider value={{ style: { verticalAlign: 'top' },  size: '1.5em' }}>
                                                             <RiDeleteBinFill />
@@ -380,7 +393,7 @@ export default function Modifiers() {
         }
         
     const NoOptions = () => {
-        if (modifiers['No Options'].length === 0) {
+        if (modifiers === null || modifiers['noOptions'].length === 0) {
             return (
                 <div className='Modifiers_Groups_Empty_Container'>
                     <ul className='Modifiers_Groups_Empty_List'>
@@ -409,10 +422,10 @@ export default function Modifiers() {
                     </div>
                     <ul className='Modifiers_NoOptions_List'>
                         {
-                            modifiers['No Options'].map((noOption, index) => (
+                            modifiers['noOptions'].map((noOption, index) => (
                                 <li key={noOption + index}>
-                                    <input type='text' className='Modifiers_Option_Name_Input' defaultValue= {noOption['Name']} onChange={SetGroupOptionName} />
-                                    <input type='text' className='Modifiers_Option_Price_Input' defaultValue={noOption['Price']} />
+                                    <input type='text' className='Modifiers_Option_Name_Input' defaultValue= {noOption['name']} onChange={SetGroupOptionName} />
+                                    <input type='text' className='Modifiers_Option_Price_Input' defaultValue={noOption['price']} />
                                     <button type='button' className='Modifiers_Delete_Button' onClick={() => handleRemoveNoOption(noOption)}>
                                         <IconContext.Provider value={{ style: { verticalAlign: 'top' },  size: '1.5em' }}>
                                             <RiDeleteBinFill />
@@ -444,7 +457,7 @@ export default function Modifiers() {
         copyInputRef.current.focus();
       }, [copyGroupDropdownOpen === false]);
     const AddOns = () => {
-        if (modifiers['Add Ons'].length === 0) {
+        if (modifiers === null || modifiers['addons'].length === 0) {
             return (
                 <div className='Modifiers_Groups_Empty_Container'>
                     <ul className='Modifiers_Groups_Empty_List'>
@@ -473,10 +486,10 @@ export default function Modifiers() {
                     </div>
                     <ul className='Modifiers_AddOn_List'>
                         {
-                            modifiers['Add Ons'].map((addOn, index) => (
+                            modifiers['addons'].map((addOn, index) => (
                                 <li key={addOn + index}>
-                                    <input type='text' className='Modifiers_Option_Name_Input' defaultValue= {addOn['Name']} onChange={SetGroupOptionName} />
-                                    <input type='text' className='Modifiers_Option_Price_Input' defaultValue={addOn['Price']} />
+                                    <input type='text' className='Modifiers_Option_Name_Input' defaultValue= {addOn['name']} onChange={SetGroupOptionName} />
+                                    <input type='text' className='Modifiers_Option_Price_Input' defaultValue={addOn['price']} />
                                     <button type='button' className='Modifiers_Delete_Button' onClick={() => handleRemoveAddOn(addOn)}>
                                         <IconContext.Provider value={{ style: { verticalAlign: 'top' },  size: '1.5em' }}>
                                             <RiDeleteBinFill />
@@ -512,7 +525,7 @@ export default function Modifiers() {
                 <div className='Modifiers_Content_Border_Fix'>    
                     <div className='Modifiers_Content'>    
                         <div className='Modifiers_Item_Name_Container' id='item-name-row'>
-                            <div className='Modifiers_Item_Name'>{item['Name']}</div>
+                            <div className='Modifiers_Item_Name'>item['Name']</div>
                         </div>
                         <div className='Modifiers_Grid'>
                             <div className='Modifiers_Base_Sale_Header'>

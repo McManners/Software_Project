@@ -328,7 +328,7 @@ const ItemList = () => {
                                     </div>
                                     <div className='ItemList_Table_Content_Body_Cell_Item_Col' style={(showHideValue.includes('Item')) ? {display: 'block'} : {display: 'none'}}>
                                         <div className='ItemList_Table_Body_Data_Container'>
-                                            <a href={`/salerno/edit/${item['itemUUID']}`} className='ItemList_ItemName_Button'>{item['name']}</a>
+                                            <a href={`/salerno/items/${item['id']}/edit`} className='ItemList_ItemName_Button'>{item['name']}</a>
                                         </div>
                                     </div>
                                     <div className='ItemList_Table_Content_Body_Cell' style={(showHideValue.includes('Margin')) ? {display: 'block', width: `calc(100% / ${showHideValue.length}`} : {display: 'none'}}>

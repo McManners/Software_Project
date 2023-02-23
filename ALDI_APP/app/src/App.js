@@ -37,9 +37,9 @@ function App() {
             <Route path="salerno" element={<Dashboard_ShopKeep />}>
                 <Route element={<PageLayout />}>
                     <Route path='items' element={<ItemList />} />
-                    <Route path='items/:uuid/edit' element={<Edit />} />
+                    <Route path='items/:id/edit' element={<Edit />} />
                     {/* <Route path='edit/new' element={<Edit />} /> */}
-                    <Route path='items/modifiers/:uuid' element={<Modifiers />} />
+                    <Route path='items/:id/modifiers' element={<Modifiers />} />
 
                     <Route path='employees' element={<EmployeeList />} />
                     <Route path='employees/timeclock' element={<TimeClock />} />
